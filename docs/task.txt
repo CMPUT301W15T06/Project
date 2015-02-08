@@ -2,22 +2,25 @@ Tianqi Xiao
 
 Expense Claims / Overall 
 Expense Claims / Listing
+
+And consider about some Glossary
 ------------------------------------------------------------------------------------------------------
 
-Jingjiao Ni
-
-Expense Claims / Statuses 
-Expense Items / Listing 
-------------------------------------------------------------------------------------------------------
 
 Han Wang, Xinyi Wu
 
 Expense Claims / Tags
 Expense Claims / Approval
 Expense Claims / Offline
+
+
+Release Planning
 ------------------------------------------------------------------------------------------------------
 
 Jiafeng, Xinyi Pan
 
 Expense Items / Overall
+Expense Items / Listing
 Expense Items / Receipts
+Expense Claims / Statuses
+
