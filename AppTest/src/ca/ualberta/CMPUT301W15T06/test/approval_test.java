@@ -1,21 +1,25 @@
-package cmput301.project.us08_approval.test;
+package ca.ualberta.CMPUT301W15T06.test;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 import junit.framework.TestCase;
-import cmput301.project.us08_approval.ExpenseClaim;
-import cmput301.project.us08_approval.SubmittedClaimList;
+import ca.ualberta.CMPUT301W15T06.Claim;
+import ca.ualberta.CMPUT301W15T06.ClaimList;
 
 public class approval_test extends TestCase{
 	
 	public void testSubmittedClaimList() {
-		ArrayList<ExpenseClaim> null_list = SubmittedClaimList.getExpenseClaimList();
-		assertTrue("null_list should be null", null_list.equals(null));
+
+		ClaimList cList = new ClaimList();
+		ArrayList<Claim> cl = cList.getClaimList();
+		assertTrue("null_list should be null", cl.equals(null));
 		@SuppressWarnings("deprecation")
-		Date d1 = new Date (2012, 3, 27);
-		ExpenseClaim test = new ExpenseClaim("A", d1, "Edmonton");
-		SubmittedClaimList.addSubmittedExpenseClaim(test);
+		String d1 = "2012-03-27";
+//		Date d1 = new Date (2012, 3, 27);
+		Claim test = new Claim("A");
+		test.setBeginDate(d1)
+		cl.addSubmittedExpenseClaim(test);
 		ExpenseClaim ec = SubmittedClaimList.getSubmittedClaim(0);
 		assertFalse("expenseClaim should not be null", ec.equals(null));
 	}
