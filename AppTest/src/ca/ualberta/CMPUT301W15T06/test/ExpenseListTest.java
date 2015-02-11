@@ -36,6 +36,7 @@ public class ExpenseListTest extends TestCase
 		Collection<Expense> expense = expenseList.getExpense();
 		assertTrue("Expense List size", expense.size() == 1);
 		assertTrue("", expense.contains(testExpense));
+		expenseList.deleteExpense(testExpense);
 		expense = expenseList.getExpense();
 		assertTrue("Expense List size", expense.size() == 0);
 		assertFalse("Test expense still contained?", expense.contains(testExpense));	
