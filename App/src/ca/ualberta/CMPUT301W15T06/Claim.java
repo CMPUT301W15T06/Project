@@ -15,7 +15,7 @@ public class Claim {
 	private ArrayList<Destination> destinationList;
 	private String approver;
 	private String comment;	
-	private ArrayList<String> tagList;
+	private ArrayList<Tag> tagList;
 	
 
 	
@@ -107,11 +107,15 @@ public class Claim {
 		return null;
 	}
 	
+	public void addTag(String tagName){
+		
+	}
 	
-	public ArrayList<String> getTagList(){		
+	public ArrayList<Tag> getTagList(){		
 		return null;
 	}	
 
+	
 	
 	
 }

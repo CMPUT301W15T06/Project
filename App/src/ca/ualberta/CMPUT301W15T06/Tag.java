@@ -1,12 +1,17 @@
 package ca.ualberta.CMPUT301W15T06;
 
-import java.util.ArrayList;
+
 
 public class Tag {
-private String name;
+	private String name;
 	
+	public Tag(String name){
+		
+	}
 
-
-
+	public String getname() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -27,7 +27,7 @@ public class ClaimList {
 	}
 	
 
-	public void serCurrentClaim(Claim claim){
+	public void setCurrentClaim(Claim claim){
 
 	}
 	
@@ -35,5 +35,16 @@ public class ClaimList {
 		return null;
 	}
 	
+	public void pushOnline(){	
+	}
+	
+	public Claim pullOnline(){
+		return null;
+		
+	}
+	
+	public Claim searchByTag(String tagName){
+		return null;
+	}
 
 }
