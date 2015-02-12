@@ -1,0 +1,141 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ItemListAcitivity"
+    tools:ignore="HardcodedText" >
+
+    <Button
+        android:id="@+id/deleteClaimButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="deleteClaim"
+        android:text="Delete this Claim" />
+
+    <ListView
+        android:id="@+id/itemListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/descriptTextView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/addItemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/deleteClaimButton"
+        android:layout_alignLeft="@+id/deleteClaimButton"
+        android:layout_alignParentRight="true"
+        android:onClick="addItem"
+        android:text="Add a new Item" />
+
+    <TextView
+        android:id="@+id/unchangeGBPTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/unchangeEURTextView"
+        android:layout_alignLeft="@+id/unchangeUSDTextView"
+        android:text="GBP:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/unchangeEURTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/addItemButton"
+        android:layout_alignRight="@+id/unchangeCADTextView"
+        android:text="EUR:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/valueCADTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/unchangeGBPTextView"
+        android:layout_toLeftOf="@+id/unchangeGBPTextView"
+        android:layout_toRightOf="@+id/unchangeEURTextView"
+        android:text="__CAD__"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/valueUSDTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/unchangeGBPTextView"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/unchangeGBPTextView"
+        android:text="__USD__"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/valueEURTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/unchangeGBPTextView"
+        android:layout_alignBottom="@+id/unchangeGBPTextView"
+        android:layout_alignLeft="@+id/valueCADTextView"
+        android:layout_alignRight="@+id/valueCADTextView"
+        android:text="__EUR__"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/valueGBPTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/valueUSDTextView"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/valueUSDTextView"
+        android:text="__GBP__"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/unchangeCADTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/valueCADTextView"
+        android:layout_alignBottom="@+id/valueCADTextView"
+        android:layout_alignParentLeft="true"
+        android:text="CAD:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/unchangeUSDTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/unchangeGBPTextView"
+        android:layout_alignRight="@+id/itemListView"
+        android:layout_marginRight="90dp"
+        android:text="USD:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/descriptTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/unchangeEURTextView"
+        android:layout_centerVertical="true"
+        android:text="Description"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/descriptTextView"
+        android:text="___Description___"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>
