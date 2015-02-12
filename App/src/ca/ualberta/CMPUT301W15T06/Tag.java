@@ -3,14 +3,17 @@ package ca.ualberta.CMPUT301W15T06;
 import java.util.ArrayList;
 
 public class Tag {
-	private ArrayList<String> tagList;
+private String name;
 	
-	public Tag(){
+	public Tag(String name){
 		
 	}
 	
-	public ArrayList<String> getTagList(){		
+	public void setName(String name){		
+	}
+	
+	public String getName(){		
 		return null;
-	}	
-
+	}
+	
 }
