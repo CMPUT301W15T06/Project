@@ -64,7 +64,11 @@ public class Item{
 		return null;
 	}
 
-	public Recipt getRecipt(){
+	public void setRecipt(Recipt recipt) {
+		
+	}
+	
+	public Recipt getRecipt() {
 		return null;
 	}
 	
