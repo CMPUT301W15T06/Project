@@ -1,0 +1,128 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".AddItemAcitivity"
+    tools:ignore="TextFields,HardcodedText" >
+
+    <Button
+        android:id="@+id/createItemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="finishAddItem"
+        android:text="Create this new Item" />
+
+    <EditText
+        android:id="@+id/createItemNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createItemNameTextView"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/createItemDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createItemNameEditText"
+        android:layout_below="@+id/createItemNameEditText"
+        android:text="Date"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/createItemDateEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createItemDateTextView"
+        android:layout_below="@+id/createItemDateTextView"
+        android:ems="10"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/createItemCategoryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createItemDateEditText"
+        android:layout_below="@+id/createItemDateEditText"
+        android:text="Category"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/createItemCategoryEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/createItemDateEditText"
+        android:layout_below="@+id/createItemCategoryTextView"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/createItemDescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createItemCategoryEditText"
+        android:text="Description"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/createItemDescriptionEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createItemDescriptionTextView"
+        android:layout_below="@+id/createItemDescriptionTextView"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/createItemAmountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createItemDescriptionEditText"
+        android:layout_below="@+id/createItemDescriptionEditText"
+        android:text="Amount"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/createItemAmountEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/createItemDescriptionEditText"
+        android:layout_below="@+id/createItemAmountTextView"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/createItemNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createItemNameEditText"
+        android:layout_alignParentTop="true"
+        android:text="Item Name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/createItemCurrencyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createItemAmountEditText"
+        android:layout_below="@+id/createItemAmountEditText"
+        android:text="Unit of Currency"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/createCurrencySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/createItemButton"
+        android:layout_alignLeft="@+id/createItemCurrencyTextView"
+        android:layout_alignRight="@+id/createItemAmountEditText"
+        android:layout_below="@+id/createItemCurrencyTextView" />
+
+</RelativeLayout>
