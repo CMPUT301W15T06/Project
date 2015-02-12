@@ -6,11 +6,12 @@ public class Tag {
 	private ArrayList<String> tagList;
 	
 	public Tag(){
-		
+		tagList = new ArrayList<String>();	
 	}
 	
 	public ArrayList<String> getTagList(){		
 		return null;
-	}	
+	}
+
 
 }
