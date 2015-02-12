@@ -1,6 +1,6 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
-/*import java.util.Date;
+import java.util.Date;
 
 import junit.framework.TestCase;
 import ca.ualberta.CMPUT301W15T06.Expense;
@@ -85,4 +85,4 @@ public class ExpenseTest extends TestCase {
 		assertFalse("Expense information is not complete", expense.infoComplete());
 	}
 
-}*/
+}
