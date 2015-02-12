@@ -16,14 +16,13 @@ public class Claim {
 	private String approver;
 	private String comment;	
 	private ArrayList<Tag> tagList;
-	
 
 	
 	public Claim(String claimName) {
 		
 	}
 	
-	public void setName(String string){
+	public static void setName(String string){
 		
 	}
 	
@@ -31,7 +30,7 @@ public class Claim {
 		return null;
 	}
 	
-	public void setBeginDate(String beginDate){
+	public static void setBeginDate(String beginDate){
 
 	}
 	
@@ -39,7 +38,7 @@ public class Claim {
 		return null;
 	}
 	
-	public void setEndDate(String endDate){
+	public static void setEndDate(String endDate){
 
 	}
 	
@@ -52,6 +51,7 @@ public class Claim {
 	public void setCurrentItem(Item item) {
 
 	}
+	
 	public Item getCurrentItem() {
 		return null;	
 	}
