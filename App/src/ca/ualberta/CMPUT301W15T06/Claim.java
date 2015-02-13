@@ -16,6 +16,7 @@ public class Claim {
 	private String approver;
 	private String comment;	
 	private ArrayList<Tag> tagList;
+	private boolean editable = false;
 
 	
 	public Claim(String claimName) {
@@ -115,7 +116,9 @@ public class Claim {
 		return null;
 	}	
 
-	
+	public boolean getEdiable(){
+		return editable;
+	}
 	
 	
 }
