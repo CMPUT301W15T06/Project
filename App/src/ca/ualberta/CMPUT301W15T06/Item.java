@@ -72,5 +72,21 @@ public class Item{
 		return null;
 	}
 	
+	public boolean takePhoto(){
+		return false;
+	}
+	public boolean getPhoto(){
+		return false;
+	}
+	public boolean deletePhoto(){
+		return false;
+	}
+	public int photoSize(){
+		return 0;
+	}
+	public void savePhoto(){
+		
+	}
+	
 	
 }
