@@ -43,7 +43,20 @@ public class ClaimListTest extends TestCase {
 	// US02.02.01 test if the list is ordered
 	public void testOrderedList()
 	{
-		
+		ClaimList claimlist =new ClaimList();
+		Claim c1=new Claim("1");
+		c1.setBeginDate("20141005");
+		Claim c2=new Claim("2");
+		c1.setBeginDate("20140905");
+		Claim c3=new Claim("3");
+		c1.setBeginDate("20131105");
+		Claim c4=new Claim("4");
+		c1.setBeginDate("20141004");
+		claimlist.sort();
+		assertTrue("The first one should be c3", claimlist.getClaimList().get(0)==c3);
+		assertTrue("The first one should be c2", claimlist.getClaimList().get(1)==c2);
+		assertTrue("The first one should be c4", claimlist.getClaimList().get(2)==c4);
+		assertTrue("The first one should be c1", claimlist.getClaimList().get(3)==c1);		
 	}
 	
 }
