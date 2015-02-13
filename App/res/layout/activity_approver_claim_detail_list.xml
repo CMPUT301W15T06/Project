@@ -53,7 +53,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/EndDateApprover"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/StartDateApprover"
@@ -65,8 +65,8 @@
         android:id="@+id/DestinationListApprover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1" >
+        android:layout_alignLeft="@+id/EndDateApprover"
+        android:layout_below="@+id/EndDateApprover" >
     </ListView>
 
 </RelativeLayout>
