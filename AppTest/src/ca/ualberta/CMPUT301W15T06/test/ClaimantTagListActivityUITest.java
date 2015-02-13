@@ -6,17 +6,17 @@ import android.widget.EditText;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Intent;
-import ca.ualberta.CMPUT301W15T06.ClaimentTagListActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantTagListActivity;
 
-public class ClaimentTagListActivityUITest extends
-		ActivityInstrumentationTestCase2<ClaimentTagListActivity> {
+public class ClaimantTagListActivityUITest extends
+		ActivityInstrumentationTestCase2<ClaimantTagListActivity> {
 	
 	Instrumentation instrumentation;
 	Activity activity;
 	EditText textInput;
 	
-	public ClaimentTagListActivityUITest() {
-        super(ClaimentTagListActivity.class);
+	public ClaimantTagListActivityUITest() {
+        super(ClaimantTagListActivity.class);
         
 	}
 	

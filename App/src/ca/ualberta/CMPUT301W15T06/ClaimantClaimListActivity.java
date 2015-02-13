@@ -4,18 +4,18 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class ClaimentAddDestinationActivity extends Activity {
+public class ClaimantClaimListActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_claiment_add_destination);
+		setContentView(R.layout.activity_claimant_claim_list);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claiment_add_destination, menu);
+		getMenuInflater().inflate(R.menu.claiment_claim_list, menu);
 		return true;
 	}
 

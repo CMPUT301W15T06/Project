@@ -4,18 +4,18 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class ClaimentClaimListActivity extends Activity {
+public class ClaimantAddItemActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_claiment_claim_list);
+		setContentView(R.layout.activity_claimant_add_item);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claiment_claim_list, menu);
+		getMenuInflater().inflate(R.menu.claiment_add_item, menu);
 		return true;
 	}
 

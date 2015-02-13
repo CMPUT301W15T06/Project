@@ -23,23 +23,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimentAddDestinationActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantAddDestinationActivity"
             android:label="@string/title_activity_claiment_add_destination" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimentApproverInfoActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantApproverInfoActivity"
             android:label="@string/title_activity_claiment_approver_info" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimentDestinationReasonActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantDestinationReasonActivity"
             android:label="@string/title_activity_claiment_destination_reason" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimentReciptActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantReciptActivity"
             android:label="@string/title_activity_claiment_recipt" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimentTagListActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantTagListActivity"
             android:label="@string/title_activity_claiment_tag_list" >
         </activity>
         <activity

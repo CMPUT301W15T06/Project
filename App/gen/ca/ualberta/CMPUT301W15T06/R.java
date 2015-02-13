@@ -31,7 +31,7 @@ public final class R {
         public static final int ApproverEndingDate=0x7f080004;
         public static final int ApproverItemList=0x7f080008;
         public static final int ApproverStartDate=0x7f080002;
-        public static final int Claiment=0x7f080042;
+        public static final int Claimant=0x7f080042;
         public static final int Comments=0x7f080027;
         public static final int D_R_list=0x7f080018;
         public static final int DeleteButton=0x7f080011;
@@ -98,16 +98,16 @@ public final class R {
         public static final int activity_approver_claim_list=0x7f030001;
         public static final int activity_approver_item_list=0x7f030002;
         public static final int activity_approver_recipt_activity=0x7f030003;
-        public static final int activity_claiment_add_claim=0x7f030004;
-        public static final int activity_claiment_add_destination=0x7f030005;
-        public static final int activity_claiment_add_item=0x7f030006;
-        public static final int activity_claiment_approver_info=0x7f030007;
-        public static final int activity_claiment_claim_list=0x7f030008;
-        public static final int activity_claiment_destination_reason=0x7f030009;
-        public static final int activity_claiment_edit_item=0x7f03000a;
-        public static final int activity_claiment_item_list=0x7f03000b;
-        public static final int activity_claiment_recipt=0x7f03000c;
-        public static final int activity_claiment_tag_list=0x7f03000d;
+        public static final int activity_claimant_add_claim=0x7f030004;
+        public static final int activity_claimant_add_destination=0x7f030005;
+        public static final int activity_claimant_add_item=0x7f030006;
+        public static final int activity_claimant_approver_info=0x7f030007;
+        public static final int activity_claimant_claim_list=0x7f030008;
+        public static final int activity_claimant_destination_reason=0x7f030009;
+        public static final int activity_claimant_edit_item=0x7f03000a;
+        public static final int activity_claimant_item_list=0x7f03000b;
+        public static final int activity_claimant_recipt=0x7f03000c;
+        public static final int activity_claimant_tag_list=0x7f03000d;
         public static final int activity_main=0x7f03000e;
     }
     public static final class menu {
