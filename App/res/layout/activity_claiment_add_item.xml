@@ -10,14 +10,14 @@
     tools:ignore="TextFields,HardcodedText" >
 
     <Button
-        android:id="@+id/createItemButton"
+        android:id="@+id/FinishItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:onClick="finishAddItem"
-        android:text="Create this new Item" />
+        android:text="Finish" />
 
     <EditText
         android:id="@+id/createItemNameEditText"
@@ -120,7 +120,7 @@
         android:id="@+id/createCurrencySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/createItemButton"
+        android:layout_above="@+id/FinishItemButton"
         android:layout_alignLeft="@+id/createItemCurrencyTextView"
         android:layout_alignRight="@+id/createItemAmountEditText"
         android:layout_below="@+id/createItemCurrencyTextView" />

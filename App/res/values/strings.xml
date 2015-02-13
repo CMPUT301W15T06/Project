@@ -4,5 +4,14 @@
     <string name="app_name">App</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_claiment_add_destination">ClaimentAddDestination</string>
+    <string name="title_activity_claiment_approver_info">ClaimentApproverInfoActivity</string>
+    <string name="title_activity_claiment_destination_reason">ClaimentDestinationReasonActivity</string>
+    <string name="title_activity_claiment_recipt">ClaimentReciptActivity</string>
+    <string name="title_activity_claiment_tag_list">ClaimentTagListActivity</string>
+    <string name="title_activity_approver_claim_list">ApproverClaimListActivity</string>
+    <string name="title_activity_approver_item_list">ApproverItemListActivity</string>
+    <string name="title_activity_approver_claim_detail_list">ApproverClaimDetailList</string>
+    <string name="title_activity_approver_recipt_activity">Approver_recipt_activity</string>
 
 </resources>

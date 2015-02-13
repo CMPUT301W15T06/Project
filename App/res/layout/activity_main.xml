@@ -9,8 +9,33 @@
     tools:context=".MainActivity" >
 
     <TextView
+        android:id="@+id/role"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="82dp"
+        android:text="You Are"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/Approver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Claiment"
+        android:layout_alignRight="@+id/Claiment"
+        android:layout_below="@+id/role"
+        android:layout_marginTop="105dp"
+        android:text="Approver" />
+
+    <Button
+        android:id="@+id/Claiment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/role"
+        android:layout_marginTop="36dp"
+        android:text="Claiment" />
 
 </RelativeLayout>

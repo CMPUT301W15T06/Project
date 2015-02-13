@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ClaimentAddDestinationActivity" >
+
+    <Button 
+        android:id="@+id/DeleteButton" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_alignParentBottom="true" 
+        android:layout_alignParentLeft="true" 
+        android:layout_alignParentRight="true" 
+        android:text="Add a destination"/>
+    
+    <TextView 
+        android:id="@+id/name" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_alignParentLeft="true" 
+        android:layout_alignParentTop="true" 
+        android:text="Name" 
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    
+    <TextView 
+        android:id="@+id/startingDate" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_alignParentLeft="true" 
+        android:layout_below="@+id/name" 
+        android:text="Large Text" 
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <TextView 
+        android:id="@+id/startDate" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_alignParentLeft="true" 
+        android:layout_below="@+id/startingDate" 
+        android:text="Starting Date" 
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    
+    <TextView 
+        android:id="@+id/tItemName" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_alignParentLeft="true" 
+        android:layout_below="@+id/startDate" 
+        android:text="Large Text" 
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    
+    <TextView 
+        android:id="@+id/NameValue" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_alignParentLeft="true" 
+        android:layout_below="@+id/tItemName" 
+        android:text="Ending Date" 
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    
+    <TextView 
+        android:id="@+id/endingDate" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_alignParentLeft="true" 
+        android:layout_below="@+id/NameValue" 
+        android:text="Large Text" 
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    
+    <ListView 
+        android:id="@+id/D_R_list" 
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_above="@+id/DeleteButton" 
+        android:layout_alignParentLeft="true" 
+        android:layout_below="@+id/endingDate">
+
+    </ListView>
+    
+    
+    
+</RelativeLayout>

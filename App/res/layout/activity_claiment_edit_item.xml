@@ -18,110 +18,122 @@
         android:text="Item Name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/editItemNameEditText"
+    <TextView
+        android:id="@+id/NameInApprover"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/editItemNameTextView"
         android:layout_below="@+id/editItemNameTextView"
-        android:ems="10" />
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/editItemDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editItemNameEditText"
+        android:layout_alignLeft="@+id/NameInApprover"
+        android:layout_below="@+id/NameInApprover"
         android:text="Date"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/editItemDateEditText"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/editItemDateTextView"
         android:layout_below="@+id/editItemDateTextView"
-        android:ems="10"
-        android:inputType="date" />
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/editItemCategoryTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editItemDateEditText"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
         android:text="Category"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/editItemCategoryEditText"
+    <TextView
+        android:id="@+id/ApproverStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/textView2"
         android:layout_below="@+id/editItemCategoryTextView"
-        android:ems="10" />
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/editItemDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editItemCategoryEditText"
+        android:layout_alignLeft="@+id/ApproverStartDate"
+        android:layout_below="@+id/ApproverStartDate"
         android:text="Description"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/editItemDescriptionEditText"
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/editItemDescriptionTextView"
         android:layout_below="@+id/editItemDescriptionTextView"
-        android:ems="10" />
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/editItemAmountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editItemDescriptionEditText"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/textView4"
         android:text="Amount"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/editItemAmountEditText"
+    <TextView
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/textView4"
         android:layout_below="@+id/editItemAmountTextView"
-        android:ems="10"
-        android:inputType="number" />
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/editItemCurrencyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editItemAmountEditText"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_below="@+id/textView5"
         android:text="Unit of Currency"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editItemCurrencyTextView"
+        android:layout_below="@+id/editItemCurrencyTextView"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <Button
-        android:id="@+id/finishEditItemButton"
+        android:id="@+id/finishDeleteItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:onClick="finishEdit"
-        android:text="Edit this Item" />
+        android:text="Delete this Item" />
 
-    <Spinner
-        android:id="@+id/editCurrencySpinner"
+    <Button
+        android:id="@+id/FinishEditItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/finishEditItemButton"
-        android:layout_alignLeft="@+id/editItemCurrencyTextView"
-        android:layout_alignRight="@+id/editItemAmountEditText"
-        android:layout_below="@+id/editItemCurrencyTextView" />
+        android:layout_above="@+id/finishDeleteItemButton"
+        android:layout_alignLeft="@+id/finishDeleteItemButton"
+        android:layout_alignRight="@+id/finishDeleteItemButton"
+        android:text="Edit this Item" />
 
 </RelativeLayout>
