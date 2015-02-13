@@ -74,6 +74,7 @@ public class Claim {
 		
 	}
 	
+	
 	public ArrayList<Item> getItemList() {
 		return null;
 	}
@@ -117,6 +118,36 @@ public class Claim {
 
 	public boolean getEdiable(){
 		return false;
+	}
+
+	public Object getItem(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getItemDate(Item expenseTest1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getItemCategory(Item expenseTest1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getItemAmount(Item expenseTest1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getItemCurrency(Item expenseTest1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getItemDescription(Item expenseTest1) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

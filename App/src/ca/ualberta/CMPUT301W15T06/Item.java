@@ -48,11 +48,11 @@ public class Item{
 		return null;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(double d) {
 	
 	}
 
-	public int getAmount() {
+	public double getAmount() {
 		return 0;
 	}
 
@@ -85,6 +85,55 @@ public class Item{
 		return 0;
 	}
 	public void savePhoto(){
+		
+	}
+
+	public void addFlag() {
+		// TODO Auto-generated method stub
+		
+	}
+	public boolean getFlag() {
+		return false;
+		
+	}
+
+	public void deleteFlag() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean infoComplete() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void addDate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addCategory() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addCurrency() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addAmount() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addDescription() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setIncomplete() {
+		// TODO Auto-generated method stub
 		
 	}
 	
