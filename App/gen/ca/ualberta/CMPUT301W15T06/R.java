@@ -73,6 +73,7 @@ public final class R {
         public static final int createItemDescriptionTextView=0x7f080022;
         public static final int createItemNameEditText=0x7f08001a;
         public static final int createItemNameTextView=0x7f08001b;
+        public static final int deletePhoto=0x7f080045;
         public static final int editItemAmountTextView=0x7f080035;
         public static final int editItemCategoryTextView=0x7f080032;
         public static final int editItemCurrencyTextView=0x7f080037;
@@ -87,6 +88,7 @@ public final class R {
         public static final int startDate=0x7f080014;
         public static final int startingDate=0x7f080013;
         public static final int tItemName=0x7f080015;
+        public static final int takephoto=0x7f080044;
         public static final int textView1=0x7f080005;
         public static final int textView2=0x7f080031;
         public static final int textView4=0x7f080034;
