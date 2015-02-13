@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class Approver_recipt_activity extends Activity {
+public class ApproverReciptActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

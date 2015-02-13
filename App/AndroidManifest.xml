@@ -51,11 +51,11 @@
             android:label="@string/title_activity_approver_item_list" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ApproverClaimDetailList"
+            android:name="ca.ualberta.CMPUT301W15T06.ApproverClaimDetailListActivity"
             android:label="@string/title_activity_approver_claim_detail_list" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.Approver_recipt_activity"
+            android:name="ca.ualberta.CMPUT301W15T06.ApproverReciptActivity"
             android:label="@string/title_activity_approver_recipt_activity" >
         </activity>
     </application>
