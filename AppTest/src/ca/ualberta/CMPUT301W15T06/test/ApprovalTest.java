@@ -6,7 +6,7 @@ import ca.ualberta.CMPUT301W15T06.ClaimList;
 import ca.ualberta.CMPUT301W15T06.Item;
 import ca.ualberta.CMPUT301W15T06.Recipt;
 
-public class approval_test extends TestCase{
+public class ApprovalTest extends TestCase{
 	
 	// test for use case 08.01.01
 	// System promotes claim list and part of details
@@ -202,11 +202,11 @@ public class approval_test extends TestCase{
 		// add new item
 		cList.getClaimList().get(0).addItem(new_item);
 		
-		// get recipt
+		// get receipt
 		Recipt r = cList.getClaimList().get(0).getItemList().get(0).getRecipt();
 		assertTrue("There's no recipt", r.equals(null));
 		
-		// add recipt
+		// add receipt
 		cList.getClaimList().get(0).getItemList().get(0).setRecipt(new Recipt());
 		r = cList.getClaimList().get(0).getItemList().get(0).getRecipt();
 		assertFalse("There exists one recipt", r.equals(null));
@@ -266,6 +266,8 @@ public class approval_test extends TestCase{
 		// check state, it should be set to 'submitted'
 		assertTrue("state should be changed to 'submitted'", cList.getClaimList().get(0).getStatus().equals("submitted"));
 		
+		// check user's roll
+		
 		// change state to "approved"
 		cList.getClaimList().get(0).setStatus("approved");
 		assertTrue("state should be changed to 'approved'", cList.getClaimList().get(0).getStatus().equals("approved"));
@@ -273,5 +275,28 @@ public class approval_test extends TestCase{
 		// set approver name
 		cList.getClaimList().get(0).setApprover("Approver01");
 		assertTrue("Approver name should be 'Approver01'", cList.getClaimList().get(0).getApprover().equals("Approver01"));
+	}
+	
+	// test for use case 08.09.01
+	// refuse claimants' request of changing claim status
+	public void testRefuseClaimantChangingState () {
+		// build a claim list
+		ClaimList cList = new ClaimList();
+
+		// build new claim
+		Claim test = new Claim("A");
+		
+		// set state as "submitted"
+		test.setStatus("submitted");
+		
+		// add claim
+		cList.addClaim(test);
+		// check state, it should be set to 'submitted'
+		assertTrue("state should be changed to 'submitted'", cList.getClaimList().get(0).getStatus().equals("submitted"));
+		
+		// check user's roll
+		
+		// state should not be changed
+		assertTrue("state should be changed to 'submitted'", cList.getClaimList().get(0).getStatus().equals("submitted"));
 	}
 }
