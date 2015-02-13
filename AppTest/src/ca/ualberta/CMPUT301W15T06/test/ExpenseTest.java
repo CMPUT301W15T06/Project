@@ -6,7 +6,6 @@ import java.util.Date;
 
 import android.widget.Spinner;
 import junit.framework.TestCase;
-import ca.ualberta.CMPUT301W15T06.ClaimentAddItemActivity;
 import ca.ualberta.CMPUT301W15T06.Item;
 import ca.ualberta.CMPUT301W15T06.ItemList;
 import ca.ualberta.CMPUT301W15T06.R;

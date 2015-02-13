@@ -38,15 +38,6 @@
         android:text="Date"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/createItemDateEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/createItemDateTextView"
-        android:layout_below="@+id/createItemDateTextView"
-        android:ems="10"
-        android:inputType="date" />
-
     <TextView
         android:id="@+id/createItemCategoryTextView"
         android:layout_width="wrap_content"
@@ -56,47 +47,48 @@
         android:text="Category"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/createItemCategoryEditText"
+    <Spinner
+        android:id="@+id/createCurrencySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/createItemDateEditText"
-        android:layout_below="@+id/createItemCategoryTextView"
-        android:ems="10" />
+        android:layout_above="@+id/FinishItemButton"
+        android:layout_alignLeft="@+id/FinishItemButton"
+        android:layout_alignRight="@+id/createItemAmountEditText" />
+
+    <Spinner
+        android:id="@+id/createItemCategorySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/createItemDescriptionTextView"
+        android:layout_alignLeft="@+id/createItemCategoryTextView"
+        android:layout_below="@+id/createItemCategoryTextView" />
 
     <TextView
-        android:id="@+id/createItemDescriptionTextView"
+        android:id="@+id/createItemCurrencyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/createItemCategoryEditText"
-        android:text="Description"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/createItemDescriptionEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/createItemDescriptionTextView"
-        android:layout_below="@+id/createItemDescriptionTextView"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/createItemAmountTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/createItemDescriptionEditText"
-        android:layout_below="@+id/createItemDescriptionEditText"
-        android:text="Amount"
+        android:layout_above="@+id/createCurrencySpinner"
+        android:layout_alignLeft="@+id/createCurrencySpinner"
+        android:text="Unit of Currency"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/createItemAmountEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/createItemDescriptionEditText"
-        android:layout_below="@+id/createItemAmountTextView"
+        android:layout_above="@+id/createItemCurrencyTextView"
+        android:layout_toRightOf="@+id/createItemNameTextView"
         android:ems="10"
         android:inputType="number" />
+
+    <TextView
+        android:id="@+id/createItemDescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/createItemDescriptionEditText"
+        android:layout_alignLeft="@+id/createItemCategoryTextView"
+        android:text="Description"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/createItemNameTextView"
@@ -107,22 +99,30 @@
         android:text="Item Name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/createItemCurrencyTextView"
+    <EditText
+        android:id="@+id/createItemDateEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/createItemAmountEditText"
-        android:layout_below="@+id/createItemAmountEditText"
-        android:text="Unit of Currency"
+        android:layout_alignLeft="@+id/createItemDateTextView"
+        android:layout_below="@+id/createItemDateTextView"
+        android:ems="10"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/createItemAmountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/createItemCurrencyTextView"
+        android:layout_alignTop="@+id/createItemAmountEditText"
+        android:text="Amount"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Spinner
-        android:id="@+id/createCurrencySpinner"
+    <EditText
+        android:id="@+id/createItemDescriptionEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/FinishItemButton"
-        android:layout_alignLeft="@+id/createItemCurrencyTextView"
-        android:layout_alignRight="@+id/createItemAmountEditText"
-        android:layout_below="@+id/createItemCurrencyTextView" />
+        android:layout_above="@+id/createItemAmountEditText"
+        android:layout_alignLeft="@+id/createItemAmountTextView"
+        android:ems="10" />
 
 </RelativeLayout>

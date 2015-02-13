@@ -7,7 +7,6 @@ import ca.ualberta.CMPUT301W15T06.ItemList;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
@@ -111,8 +110,10 @@ public class ExpenseListTest extends TestCase
 	  As a claimant, I want the entry of an expense item to have minimal 
 	  required navigation in the user interface.
 	  
-	  We could test this use case manually, it just need 2 steps.
-	  (See story board as reference)
+	  We could test this use case manually, it just need 2 steps. 
+	  User choose “claimant” from main page, then long click one of 
+	  claims and select “Item list”
+	  (See story board 4&5 as reference)
 	 */
 	
 	/*
