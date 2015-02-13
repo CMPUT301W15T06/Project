@@ -21,17 +21,26 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<Claim> {
 		// add name
 		String name = "Name";
 		Claim claimantName = new Claim(name);
-		Claim.setName(name);
+		
+		// please access this claim through object name, not through class name
+		// don't use static method here
+		claimantName.setName(name);
 		assertNotSame("The Name is not equal", name, claimantName.getName());
 		// add starting date
 		String beginDate = "2015-02-18";
 		Claim BeginDate = new Claim(beginDate);
-		Claim.setBeginDate(beginDate);
+		
+		// please access this claim through object name, not through class name
+		// don't use static method here
+		claimantName.setBeginDate(beginDate);
 		assertEquals("The begin date is", beginDate, BeginDate.getBeginDate());
 		// add ending date
 		String endDate = "2015-03-08";
 		Claim EndDate = new Claim(endDate);
-		Claim.setEndDate(endDate);
+		
+		// please access this claim through object name, not through class name
+		// don't use static method here
+		claimantName.setEndDate(endDate);
 		assertEquals("The begin date is", endDate, EndDate.getBeginDate());
 	}
 

@@ -23,7 +23,7 @@ public class Claim {
 		
 	}
 	
-	public static void setName(String string){
+	public void setName(String string){
 		
 	}
 	
@@ -31,7 +31,7 @@ public class Claim {
 		return null;
 	}
 	
-	public static void setBeginDate(String beginDate){
+	public void setBeginDate(String beginDate){
 
 	}
 	
@@ -39,7 +39,7 @@ public class Claim {
 		return null;
 	}
 	
-	public static void setEndDate(String endDate){
+	public void setEndDate(String endDate){
 
 	}
 	
