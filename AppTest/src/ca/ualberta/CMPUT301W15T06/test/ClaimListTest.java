@@ -1,35 +1,24 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import junit.framework.TestCase;
 import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimList;
-import android.test.ActivityInstrumentationTestCase2;
 
-public class ClaimListTest extends ActivityInstrumentationTestCase2<ClaimList> {
+public class ClaimListTest extends TestCase {
 
-	public ClaimListTest() {
-		super(ClaimList.class);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
-	//US01.04.01 test if a new claim can be successfully added
-	public void testAddClaim()
+	// US02.01.01 test the display of claim list
+	public void testDisplayList()
 	{
-		String newClaim = "new claim";
-		Claim claim = new Claim(newClaim);
-		assertEquals("new claim is not added", newClaim.equals(claim.getClaim()));	
-	}
-	
-	// test if the claim can be saved and push online
-	public void testPushOnline(){
-		String name = "Travel";
-		Claim claim = new Claim(name);
+		Claim claim = new Claim("new claim");
 		ClaimList claimList = new ClaimList();
 		claimList.addClaim(claim);
-		claimList.pushOnline();
-		assertTrue("Push Online unsuccessfully",claim.equals(claimList.pullOnline()));
+		assertTrue("correctly dispalyed?", claimList.getClaimList()!=null);
+	}
+
+	// US02.02.01 test if the list is ordered
+	public void testOrderedList()
+	{
+		
 	}
 	
 }

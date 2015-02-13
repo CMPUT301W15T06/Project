@@ -92,6 +92,11 @@ public class Claim {
 		return null;
 	}
 	
+	public ArrayList<Item> getClaimDetail() {
+		return null;
+		
+	}
+	
 	public void setApprover(String name){
 		
 	}

@@ -1,47 +1,84 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import junit.framework.TestCase;
 import ca.ualberta.CMPUT301W15T06.Claim;
-import ca.ualberta.CMPUT301W15T06.Item;
-import android.content.Intent;
-import android.test.ActivityInstrumentationTestCase2;
+import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.Destination;
 
-public class ClaimTest extends ActivityInstrumentationTestCase2<Claim> {
+public class ClaimTest extends TestCase {
 
-	public ClaimTest() {
-		super(Claim.class);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-	
 	// US01.01.01 test if the system records the claimant information correctly
 	public void testRecordInfo()
 	{
 		// add name
 		String name = "Name";
-		Claim claimantName = new Claim(name);
+		Claim claim = new Claim(name);
 		
-		// please access this claim through object name, not through class name
-		// don't use static method here
-		claimantName.setName(name);
-		assertNotSame("The Name is not equal", name, claimantName.getName());
+		claim.setName(name);
+		assertNotSame("The Name is not equal", name, claim.getName());
 		// add starting date
 		String beginDate = "2015-02-18";
-		Claim BeginDate = new Claim(beginDate);
-		
-		// please access this claim through object name, not through class name
-		// don't use static method here
-		claimantName.setBeginDate(beginDate);
-		assertEquals("The begin date is", beginDate, BeginDate.getBeginDate());
+		claim.setBeginDate(beginDate);
+		assertEquals("The begin date is", beginDate, claim.getBeginDate());
 		// add ending date
 		String endDate = "2015-03-08";
-		Claim EndDate = new Claim(endDate);
-		
-		// please access this claim through object name, not through class name
-		// don't use static method here
-		claimantName.setEndDate(endDate);
-		assertEquals("The begin date is", endDate, EndDate.getBeginDate());
+		claim.setEndDate(endDate);
+		assertEquals("The begin date is", endDate, claim.getBeginDate());
+	}
+	
+	// US01.02.01 test if the destination and reason added correctly
+	public void testDestinationReason()
+	{
+		Destination destination = new Destination("Edmonton");
+		assertEquals("correct destination?", "Edmonton", destination.getName());
+		destination.setReason("Travel");
+		assertEquals("add reason?", "Travel", destination.getReason());
+		Claim claim = new Claim("claim");
+		claim.addDestination(destination);
+		assertTrue("correctly added?", claim.getDestinationList()!=null);
+	}
+	
+	// US01.03.01 test if the detail of a claim can be displayed correctly
+	public void testDetailClaim()
+	{
+		Claim claim = new Claim("new claim");
+		Destination destination = new Destination("Edmonton");
+		destination.setReason("Travel");
+		claim.addDestination(destination);
+		String beginDate = "2015-02-18";
+		claim.setBeginDate(beginDate);
+		String endDate = "2015-03-08";
+		claim.setEndDate(endDate);
+		assertTrue("correct display claim detail?", claim.getClaimDetail()!=null);
+	}
+	
+	// US01.04.01 test if a new claim can be successfully added
+	public void testEditClaim()
+	{
+		Claim claim = new Claim("new claim");
+		ClaimList claimList = new ClaimList();
+		claimList.addClaim(claim);
+		assertTrue("correctly added?", claimList.getClaimList()!=null);
+	}
+	
+	// US01.05.01 test if a claim can be successfully removed
+	public void testDeleteClaim()
+	{
+		Claim claim = new Claim("new claim");
+		ClaimList claimList = new ClaimList();
+		claimList.addClaim(claim);
+		claimList.remove(claim);
+		assertTrue("correctly removed?", claimList.getClaimList()==null);		
+	}
+	
+	// US01.06.01 test if the claim can be saved and push online
+	public void testSavePushOnline(){
+		String name = "Travel";
+		Claim claim = new Claim(name);
+		ClaimList claimList = new ClaimList();
+		claimList.addClaim(claim);
+		claimList.pushOnline();
+		assertTrue("Push Online unsuccessfully",claim.equals(claimList.pullOnline()));
 	}
 
 }
