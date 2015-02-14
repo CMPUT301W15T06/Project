@@ -24,6 +24,7 @@ governing permissions and limitations under the License.
 
  */
 
+
 package ca.ualberta.CMPUT301W15T06.test;
 
 import android.app.Activity;
@@ -33,7 +34,17 @@ import ca.ualberta.CMPUT301W15T06.ApproverClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimList;
 import ca.ualberta.CMPUT301W15T06.Item;
-
+/*
+ * This class includes tests for 
+ * US08.01.01
+ * US08.02.01
+ * US08.06.01
+ * US08.07.01
+ * US08.08.01
+ * US08.09.01
+ * 
+ * Because these cases are included one activity
+ */
 public class ApproverClaimListActivityTest extends ActivityInstrumentationTestCase2<ApproverClaimListActivity>{
 	
 	Activity activity;
