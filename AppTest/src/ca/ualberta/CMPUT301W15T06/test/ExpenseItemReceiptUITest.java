@@ -23,14 +23,21 @@ public class ExpenseItemReceiptUITest extends
 		activity = getActivity();
 	}
 	
+	//test for photo DISPLAY UI
+	private void displayPhoto() {
+		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverRecieptView));
+	}
+		
+	
+	
 	//test for take photo ui
-	private void takePhoto(String tag) {
+	private void takePhoto() {
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.takephoto));
 		((View) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.takephoto)).performClick();
 	}
 	
 	//test for delete photo ui
-	private void deletePhoto(String tag) {
+	private void deletePhoto() {
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.deletePhoto));
 		((View) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.deletePhoto)).performClick();
 	}
