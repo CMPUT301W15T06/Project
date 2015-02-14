@@ -24,20 +24,20 @@ public class ExpenseItemReceiptUITest extends
 	}
 	
 	//test for photo DISPLAY UI
-	private void displayPhoto() {
+	public void testDisplayPhoto() {
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverRecieptView));
 	}
 		
 	
 	
 	//test for take photo ui
-	private void takePhoto() {
+	public void testTakePhoto() {
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.takephoto));
 		((View) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.takephoto)).performClick();
 	}
 	
 	//test for delete photo ui
-	private void deletePhoto() {
+	public void testDeletePhoto() {
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.deletePhoto));
 		((View) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.deletePhoto)).performClick();
 	}
