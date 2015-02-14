@@ -42,6 +42,7 @@ public final class R {
         public static final int EditName=0x7f08000b;
         public static final int EditReason=0x7f08002c;
         public static final int EditStartingDate=0x7f08000a;
+        public static final int EndDateApprover=0x7f080005;
         public static final int EndingDate=0x7f08000e;
         public static final int FinishButton=0x7f080010;
         public static final int FinishEditItemButton=0x7f08003a;
@@ -59,6 +60,7 @@ public final class R {
         public static final int TagList=0x7f08003f;
         public static final int action_settings=0x7f080043;
         public static final int addItemButton=0x7f08003b;
+        public static final int approverRecieptView=0x7f080009;
         public static final int approvername=0x7f080026;
         public static final int claimListView=0x7f080029;
         public static final int createCurrencySpinner=0x7f08001f;
@@ -82,14 +84,12 @@ public final class R {
         public static final int editItemNameTextView=0x7f08002f;
         public static final int endingDate=0x7f080017;
         public static final int finishDeleteItemButton=0x7f080039;
-        public static final int imageView1=0x7f080009;
         public static final int name=0x7f080012;
         public static final int role=0x7f080040;
         public static final int startDate=0x7f080014;
         public static final int startingDate=0x7f080013;
         public static final int tItemName=0x7f080015;
         public static final int takephoto=0x7f080044;
-        public static final int textView1=0x7f080005;
         public static final int textView2=0x7f080031;
         public static final int textView4=0x7f080034;
         public static final int textView5=0x7f080036;
