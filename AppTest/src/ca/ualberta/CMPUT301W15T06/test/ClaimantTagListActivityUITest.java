@@ -26,26 +26,28 @@ governing permissions and limitations under the License.
 
 package ca.ualberta.CMPUT301W15T06.test;
 
+
+import android.app.Activity;
+import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
-import android.app.Activity;
-import android.app.Instrumentation;
-import android.content.Intent;
 import ca.ualberta.CMPUT301W15T06.ClaimantTagListActivity;
 
 public class ClaimantTagListActivityUITest extends
 		ActivityInstrumentationTestCase2<ClaimantTagListActivity> {
 	
+	
+
 	Instrumentation instrumentation;
 	Activity activity;
 	EditText textInput;
 	
 	public ClaimantTagListActivityUITest() {
-        super(ClaimantTagListActivity.class);
-        
+		super(ClaimantTagListActivity.class);
+		
 	}
-	
+
 	protected void setUp() throws Exception {
 		super.setUp();
 		instrumentation = getInstrumentation();
@@ -54,17 +56,17 @@ public class ClaimantTagListActivityUITest extends
 	}
 	
 
-	//fill in blank
-	private void AddButton(String tag) {
+/*	//fill in blank
+	public void AddButton(){
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton));
 		textInput.setText(tag);
 		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton)).performClick();
-	}
-	
-	//test if add something to list
-	public void testClickAddButton(String tag) {
+	}*/
+
+	//test if add something into tag list
+	public void testClickAddButton() {
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton));
-		textInput.setText(tag);
+//		textInput.setText(tag);
 		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton)).performClick();
 	    assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.TagList));	    
 	}
