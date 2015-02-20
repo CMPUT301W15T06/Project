@@ -40,7 +40,7 @@ public class ClaimantReciptActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claiment_recipt, menu);
+		getMenuInflater().inflate(R.menu.claimant_recipt, menu);
 		return true;
 	}
 

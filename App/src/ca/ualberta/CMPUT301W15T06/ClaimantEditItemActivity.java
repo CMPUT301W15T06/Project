@@ -25,9 +25,14 @@ governing permissions and limitations under the License.
  */
 package ca.ualberta.CMPUT301W15T06;
 
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 public class ClaimantEditItemActivity extends Activity {
 
@@ -40,8 +45,70 @@ public class ClaimantEditItemActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claiment_edit_item, menu);
+		getMenuInflater().inflate(R.menu.claimant_edit_item, menu);
 		return true;
+	}
+	
+	public void onResume(){
+		super.onResume();
+
+		
+		EditText dateView=(EditText) findViewById(R.id.editItemDateEditText);
+		EditText descriptionView=(EditText) findViewById(R.id.editItemDescriptionEditText);
+		EditText amountView=(EditText) findViewById(R.id.editItemAmountEditText);
+		dateView.setText(ClaimListController.getCurrentItem().getDate());
+		descriptionView.setText(ClaimListController.getCurrentItem().getDescription());
+		amountView.setText(String.valueOf(ClaimListController.getCurrentItem().getAmount()));
+		
+		Spinner currency=(Spinner) findViewById(R.id.editCurrencySpinner);
+		ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this,R.array.currency, 
+				android.R.layout.simple_spinner_item);
+		currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		currency.setAdapter(currencyAdapter);
+		currency.setSelection(getCurrencyPosition(ClaimListController.getCurrentItem().getCurrency()));
+		
+		Spinner category=(Spinner) findViewById(R.id.editCategorySpinner);
+		ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,R.array.category, 
+				android.R.layout.simple_spinner_item);
+		categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		category.setAdapter(categoryAdapter);
+		category.setSelection(getCategoryPosition(ClaimListController.getCurrentItem().getCategory()));
+
+
+	}
+	
+	private int getCategoryPosition(String category) {
+		String [] list={"air fare", "ground transport", "vehicle rental", "private automobile", "fuel", "parking",
+				"registration", "accommodation", "meal","supplies"};
+		for (int i=0;i<list.length;i++){
+			if (list[i].equals(category)){
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	//used to check the int  position of the input currency
+	private int getCurrencyPosition(String currency){
+		String [] list={"CAD","USD", "EUR", "GBP","CHF","JPY","CNY"};
+		for (int i=0;i<list.length;i++){
+			if (list[i].equals(currency)){
+				return i;
+			}
+		}
+		return 0;
+	}
+	
+	public void finishEdit(View v){
+		EditText dateView= (EditText) findViewById(R.id.editItemDateEditText);
+		Spinner category= (Spinner ) findViewById(R.id.editCategorySpinner);
+		EditText descriptionView= (EditText) findViewById(R.id.editItemDescriptionEditText);
+		EditText amountView= (EditText) findViewById(R.id.editItemAmountEditText);
+		Spinner currency=(Spinner) findViewById(R.id.editCurrencySpinner);
+		ClaimListController.editItem(dateView.getText().toString(),category.getSelectedItem().toString(),
+				descriptionView.getText().toString(),Double.parseDouble(amountView.getText().toString()),
+				currency.getSelectedItem().toString());
+		finish();
 	}
 
 }

@@ -31,23 +31,27 @@ public class Destination {
 	private String reason;
 	
 	public Destination(String name){
-				
+		this.name=name;
 	}
 	
 	public void setName(String name){
-		
+		this.name=name;
 	}
 	
 	public String getName(){		
-		return null;
+		return name;
 	}
 	
-	public void setReason	(String reason){
-		
+	public void setReason(String reason){
+		this.reason=reason;
 	}
 	
 	public String getReason(){		
-		return null;
+		return reason;
+	}
+	
+	public String toString(){
+		return name+'\n'+reason;
 	}
 
 }

@@ -25,9 +25,17 @@ governing permissions and limitations under the License.
  */
 package ca.ualberta.CMPUT301W15T06;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class ClaimantAddDestinationActivity extends Activity {
 
@@ -40,8 +48,27 @@ public class ClaimantAddDestinationActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claiment_add_destination, menu);
+		getMenuInflater().inflate(R.menu.claimant_add_destination, menu);
 		return true;
+	}
+	
+	public void onResume(){
+		super.onResume();
+		TextView nameView= (TextView) findViewById(R.id.nameValueClaimantClaimDetailTextView);
+		TextView beginView=(TextView) findViewById(R.id.startDateValueClaimantClaimDetailTextView);
+		TextView endView=(TextView) findViewById(R.id.endingDateValueClaimantClaimDetailTextView);
+		nameView.setText(ClaimListController.getCurrentClaim().getName());
+		beginView.setText(ClaimListController.getCurrentClaim().getBeginDate());
+		endView.setText(ClaimListController.getCurrentClaim().getEndDate());
+		ListView listView = (ListView) findViewById(R.id.claimantDetailListView);
+		ArrayList<Destination> list =ClaimListController.getCurrentClaim().getDestinationList();
+		ArrayAdapter<Destination> adapter=new ArrayAdapter<Destination>(this, android.R.layout.simple_list_item_1,list);
+		listView.setAdapter(adapter);
+	}
+	
+	public void addDestination(View v){
+		Intent intent =new Intent(ClaimantAddDestinationActivity.this,ClaimantDestinationReasonActivity.class);
+		startActivity(intent);	
 	}
 
 }

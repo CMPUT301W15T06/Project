@@ -43,77 +43,79 @@ public class Claim {
 
 	
 	public Claim(String claimName) {
-		
+		itemList=new ArrayList<Item>();
+		destinationList=new ArrayList<Destination>();
+		name=claimName;
 	}
 	
-	public void setName(String string){
-		
+	public void setName(String name){
+		this.name=name;
 	}
 	
 	public String getName() {
-		return null;
+		return name;
 	}
 	
 	public void setBeginDate(String beginDate){
-
+		this.beginDate=beginDate;
 	}
 	
 	public String getBeginDate() {
-		return null;
+		return beginDate;
 	}
 	
 	public void setEndDate(String endDate){
-
+		this.endDate=endDate;
 	}
 	
 	public String getEndDate() {
-		return null;
+		return endDate;
 	}
 	
-	
-	
 	public void setCurrentItem(Item item) {
-
+		currentItem=item;
 	}
 	
 	public Item getCurrentItem() {
-		return null;	
+		return currentItem;	
 	}
 	
 	
 	public void setStatus(String status){
-
+		this.status=status;
 	}
 	
 	public String getStatus(){
-		return null;	
+		return status;	
 	}
 
 	public void addItem(Item item) {
-
+		itemList.add(item);
 	}
 	
 	public void removeItem(Item item) {
-
-		
+		itemList.remove(item);
 	}
 	
 	
 	public ArrayList<Item> getItemList() {
-		return null;
+		return itemList;
 	}
 	
 	public void addDestination(Destination destination) {
-
+		destinationList.add(destination);
 	}
 	
 	public void removeDestination(Destination destination) {
-
-		
+		destinationList.remove(destination);	
 	}
 	
-	public ArrayList<Item> getDestinationList() {
-		return null;
+	public ArrayList<Destination> getDestinationList() {
+		return destinationList;
+	}
+	
+	public String toString(){
+		return name+'\n'+beginDate+'\n';
 	}
 	
 	public ArrayList<Item> getClaimDetail() {

@@ -97,7 +97,7 @@ public class ApproverClaimListActivityTest extends ActivityInstrumentationTestCa
 		assertTrue("expense item should not be null", ec.getItemList().get(0).equals(new_item));
 		
 		// test list on UI
-		View v = activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.ApproverClaimList);
+		View v = activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 		// It's an error now because our function returns null
 		assertTrue("This list is not null", v.equals(cList));
 	}
@@ -150,7 +150,7 @@ public class ApproverClaimListActivityTest extends ActivityInstrumentationTestCa
 		}
 		
 		// test list on UI
-		View v = activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.ApproverClaimList);
+		View v = activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 		// It's an error now because our function returns null
 		assertTrue("This list is not null", v.equals(cList));
 	}

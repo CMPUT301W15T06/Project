@@ -8,48 +8,49 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ClaimantDestinationReasonActivity" >
     
-    <EditText 
-        android:id="@+id/EditDestination" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignBottom="@+id/Reason" 
-        android:layout_centerHorizontal="true" 
-        android:layout_marginBottom="52dp" 
-        android:ems="10"/>
+    <EditText
+        android:id="@+id/DestinationEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ReasonTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="52dp"
+        android:ems="10" />
     
-    <EditText 
-        android:id="@+id/EditReason" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignLeft="@+id/EditDestination" 
-        android:layout_centerVertical="true" 
-        android:ems="10"/>
+    <EditText
+        android:id="@+id/ReasonEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/DestinationEditText"
+        android:layout_centerVertical="true"
+        android:ems="10" />
 
     <Button
-        android:id="@+id/FinshButtom"
+        android:id="@+id/FinshButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="70dp"
+        android:onClick="finishAdd"
         android:text="Finish" />
 
     <TextView
-        android:id="@+id/Destination"
+        android:id="@+id/DestinationTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/EditDestination"
-        android:layout_alignLeft="@+id/EditDestination"
+        android:layout_above="@+id/DestinationEditText"
+        android:layout_alignLeft="@+id/DestinationEditText"
         android:text="Destination"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/Reason"
+        android:id="@+id/ReasonTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/EditReason"
-        android:layout_alignLeft="@+id/EditReason"
+        android:layout_above="@+id/ReasonEditText"
+        android:layout_alignLeft="@+id/ReasonEditText"
         android:text="Reason"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 

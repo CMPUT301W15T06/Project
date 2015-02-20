@@ -98,7 +98,7 @@ public class ClaimantAddItemUITest extends
 			item_amount.setText(itemAmount);
 			String item_currency = (String) resultView.getText();
 			((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.FinishItemButton)).performClick();
-		    assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.ApproverClaimList));	    
+		    assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView));	    
 		}
 
 }

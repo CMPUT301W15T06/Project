@@ -25,9 +25,12 @@ governing permissions and limitations under the License.
  */
 package ca.ualberta.CMPUT301W15T06;
 
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
 
 public class ClaimantAddClaimActivity extends Activity {
 
@@ -40,8 +43,16 @@ public class ClaimantAddClaimActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claiment_add_claim, menu);
+		getMenuInflater().inflate(R.menu.claimant_add_claim, menu);
 		return true;
+	}
+	
+	public void finishAdd(View v){
+		EditText nameView= (EditText) findViewById(R.id.createClaimNameEditText);
+		EditText beginView=(EditText) findViewById(R.id.createClaimStartingDateEditText);
+		EditText endView=(EditText) findViewById(R.id.createClaimEndDateEditText);
+		ClaimListController.addClaim(nameView.getText().toString(), beginView.getText().toString(),endView.getText().toString());
+		finish();
 	}
 
 }

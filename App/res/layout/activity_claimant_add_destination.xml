@@ -8,75 +8,77 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ClaimantAddDestinationActivity" >
 
-    <Button 
-        android:id="@+id/DeleteButton" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignParentBottom="true" 
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentRight="true" 
-        android:text="Add a destination"/>
+    <Button
+        android:id="@+id/DeleteClaimantClaimDetailButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="addDestination"
+        android:text="Add a destination" />
     
-    <TextView 
-        android:id="@+id/name" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentTop="true" 
-        android:text="Name" 
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <TextView
+        android:id="@+id/nameClaimantClaimDetailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
     
-    <TextView 
-        android:id="@+id/startingDate" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignParentLeft="true" 
-        android:layout_below="@+id/name" 
-        android:text="Large Text" 
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
-    <TextView 
-        android:id="@+id/startDate" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignParentLeft="true" 
-        android:layout_below="@+id/startingDate" 
-        android:text="Starting Date" 
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <TextView
+        android:id="@+id/nameValueClaimantClaimDetailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/nameClaimantClaimDetailTextView"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/startDateClaimantClaimDetailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/nameValueClaimantClaimDetailTextView"
+        android:text="Starting Date"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
     
-    <TextView 
-        android:id="@+id/tItemName" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignParentLeft="true" 
-        android:layout_below="@+id/startDate" 
-        android:text="Large Text" 
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <TextView
+        android:id="@+id/startDateValueClaimantClaimDetailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/startDateClaimantClaimDetailTextView"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
     
-    <TextView 
-        android:id="@+id/NameValue" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignParentLeft="true" 
-        android:layout_below="@+id/tItemName" 
-        android:text="Ending Date" 
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <TextView
+        android:id="@+id/endingDateClaimantClaimDetailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/startDateValueClaimantClaimDetailTextView"
+        android:text="Ending Date"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
     
-    <TextView 
-        android:id="@+id/endingDate" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignParentLeft="true" 
-        android:layout_below="@+id/NameValue" 
-        android:text="Large Text" 
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <TextView
+        android:id="@+id/endingDateValueClaimantClaimDetailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/endingDateClaimantClaimDetailTextView"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
     
-    <ListView 
-        android:id="@+id/D_R_list" 
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:layout_above="@+id/DeleteButton" 
-        android:layout_alignParentLeft="true" 
-        android:layout_below="@+id/endingDate">
+    <ListView
+        android:id="@+id/claimantDetailListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/DeleteClaimantClaimDetailButton"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/endingDateValueClaimantClaimDetailTextView" >
 
     </ListView>
     

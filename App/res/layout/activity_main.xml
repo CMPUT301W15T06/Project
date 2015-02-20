@@ -9,33 +9,33 @@
     tools:context=".MainActivity" >
 
     <TextView
-        android:id="@+id/role"
+        android:id="@+id/roleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="100dp"
         android:text="You Are"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/Approver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Claimant"
-        android:layout_alignRight="@+id/Claimant"
-        android:layout_below="@+id/role"
-        android:layout_marginTop="105dp"
-        android:text="Approver" />
-
-    <Button
-        android:id="@+id/Claimant"
+        android:id="@+id/claimantButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/role"
-        android:layout_marginTop="36dp"
+        android:layout_centerVertical="true"
+        android:onClick="startClaimant"
         android:text="Claimant" />
+
+    <Button
+        android:id="@+id/approverButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/claimantButton"
+        android:layout_marginTop="35dp"
+        android:text="Approver" />
 
 </RelativeLayout>

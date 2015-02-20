@@ -29,65 +29,60 @@ package ca.ualberta.CMPUT301W15T06;
 
 public class Item{
 
-	private String name;
 	private String date;
 	private String category;
 	private String description;
-	private int amount=0;
+	private double amount=0;
 	private String currency;
 	private Recipt recipt;
 
-	public Item(String itemName) {	
-
+	public Item() {	
 	}
 	
-	public void setName(String name) {
-		
-	}
-
-	public String getName() {
-		return null;
-	}
 
 	public void setDate(String itemDate) {
-
+		date=itemDate;
 	}
 
 	public String getDate() {
-		return null;
+		return date;
 	}
 
 	public void setCategory(String category) {
+		this.category=category;
 	}
 
 	public String getCategory() {
-		return null;
+		return category;
 	}
 
 	public void setDescription(String description) {
-	
+		this.description=description;
 	}
 
 	public String getDescription() {
-		return null;
+		return description;
 	}
 
-	public void setAmount(double d) {
-	
+	public void setAmount(double amount) {
+		this.amount=amount;
 	}
 
 	public double getAmount() {
-		return 0;
+		return amount;
 	}
 
 	public void setCurrency(String currency) {
-
+		this.currency=currency;
 	}
 
 	public String getCurrency() {
-		return null;
+		return currency;
 	}
-
+	
+	public String toString(){
+		return date+'\n'+category+'\n'+description+'\n'+amount+' '+currency;
+	}
 	public void setRecipt(Recipt recipt) {
 		
 	}
@@ -129,31 +124,6 @@ public class Item{
 	public boolean infoComplete() {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	public void addDate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void addCategory() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void addCurrency() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void addAmount() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void addDescription() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void setIncomplete() {

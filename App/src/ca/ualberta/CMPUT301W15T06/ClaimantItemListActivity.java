@@ -25,9 +25,19 @@ governing permissions and limitations under the License.
  */
 package ca.ualberta.CMPUT301W15T06;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ClaimantItemListActivity extends Activity {
 
@@ -40,8 +50,52 @@ public class ClaimantItemListActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claiment_item_list, menu);
+		getMenuInflater().inflate(R.menu.claimant_item_list, menu);
 		return true;
 	}
+	
+	public void onResume(){
+		super.onResume();
+		ListView listView = (ListView) findViewById(R.id.itemListView);
+		final ArrayList<Item> list =ClaimListController.getCurrentClaim().getItemList();
+		ArrayAdapter<Item> adapter=new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1,list);
+		listView.setAdapter(adapter);
+		
+		listView.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				ClaimListController.setCurrentItem(list.get(position));
+				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantItemListActivity.this);
+				builder.setTitle(R.string.title_item_dialog);
+				builder.setItems(R.array.item_dialog_array, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						if (which ==0){
+										
+						}else if (which==1){
+						
+						}else if (which==2){
+							Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantItemDetailActivity.class);
+							startActivity(intent);
+						}
+						
+					}
+				});
+				builder.create();  
+				builder.show();
+				
+			}
+			
+		});
+		
+	}
+	
+	public void addItem(View v){
+		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantAddItemActivity.class);
+		startActivity(intent);		
+	}
 }

@@ -35,28 +35,29 @@ public class ClaimList {
 
 	
 	public ClaimList(){
+		claimList=new ArrayList<Claim>();
 	}
 	
 	public void addClaim(Claim claim){
-
+		claimList.add(claim);
 	}
 
 	public void remove(Claim claim) {
-
+		claimList.remove(claim);
 	}
 	
 	
 	public ArrayList<Claim> getClaimList(){
-		return null;
+		return claimList;
 	}
 	
 
 	public void setCurrentClaim(Claim claim){
-
+		currentClaim=claim;
 	}
 	
 	public Claim getCurrentClaim(){
-		return null;
+		return currentClaim;
 	}
 	
 	public void pushOnline(){	

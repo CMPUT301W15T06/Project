@@ -28,6 +28,8 @@ package ca.ualberta.CMPUT301W15T06;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
 
 public class ClaimantDestinationReasonActivity extends Activity {
 
@@ -40,8 +42,15 @@ public class ClaimantDestinationReasonActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claiment_destination_reason, menu);
+		getMenuInflater().inflate(R.menu.claimant_destination_reason, menu);
 		return true;
+	}
+	
+	public void finishAdd(View v){
+		EditText destinationView= (EditText) findViewById(R.id.DestinationEditText);
+		EditText reasonView=(EditText) findViewById(R.id.ReasonEditText);
+		ClaimListController.addDestination(destinationView.getText().toString(),reasonView.getText().toString());
+		finish();
 	}
 
 }

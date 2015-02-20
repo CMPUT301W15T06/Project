@@ -40,7 +40,7 @@ public class ClaimantApproverInfoActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claiment_approver_info, menu);
+		getMenuInflater().inflate(R.menu.claimant_approver_info, menu);
 		return true;
 	}
 

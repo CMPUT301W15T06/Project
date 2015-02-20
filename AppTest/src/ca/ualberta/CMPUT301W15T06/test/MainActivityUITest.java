@@ -29,19 +29,19 @@ public class MainActivityUITest extends
 	
 	//test button layout
 	 public void testLayout() {
-		 assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.Claimant));
-		 assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.Approver));
+		 assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
+		 assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
 	}
 
 	
 	 //test button activity
 	public void activityTest(){
-		Button view1 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.Claimant);
+		Button view1 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		TouchUtils.clickView(this, view1);
-		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.Claimant)).performClick();
-		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.Approver);
+		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton)).performClick();
+		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
 		TouchUtils.clickView(this, view2);
-		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.Approver)).performClick();
+		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton)).performClick();
 	}
 	
 }

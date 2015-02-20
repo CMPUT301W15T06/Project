@@ -4,14 +4,58 @@
     <string name="app_name">App</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_claiment_add_destination">ClaimentAddDestination</string>
-    <string name="title_activity_claiment_approver_info">ClaimentApproverInfoActivity</string>
-    <string name="title_activity_claiment_destination_reason">ClaimentDestinationReasonActivity</string>
-    <string name="title_activity_claiment_recipt">ClaimentReciptActivity</string>
-    <string name="title_activity_claiment_tag_list">ClaimentTagListActivity</string>
+    <string name="title_activity_claimant_add_destination">Claim detail</string>
+    <string name="title_activity_claimant_approver_info">ClaimantApproverInfoActivity</string>
+    <string name="title_activity_claimant_destination_reason">ClaimantDestinationReasonActivity</string>
+    <string name="title_activity_claimant_recipt">ClaimantReciptActivity</string>
+    <string name="title_activity_claimant_tag_list">ClaimantTagListActivity</string>
     <string name="title_activity_approver_claim_list">ApproverClaimListActivity</string>
     <string name="title_activity_approver_item_list">ApproverItemListActivity</string>
     <string name="title_activity_approver_claim_detail_list">ApproverClaimDetailList</string>
-    <string name="title_activity_approver_recipt_activity">Approver_recipt_activity</string>
+    <string name="title_activity_approver_recipt">Approver_recipt_activity</string>
+    <string name="title_activity_claimant_claim_list">Claimant Claim List</string>
+    <string name="add_new_claim">Add a New Claim</string>
+    <string name="title_activity_claimant_add_claim">add a new claim</string>
+    <string name="title_claim_dialog">Choose what you want to do</string>
+    <string name="title_item_dialog">Choose what you want to do</string>
+
+    <string-array name="claim_dialog_array">
+        <item>Details</item>
+        <item>Item List</item>
+        <item>EUR</item>
+        <item>GBP</item>
+    </string-array>
+    <string-array name="item_dialog_array">
+        <item>Flag this item</item>
+        <item>Photo Recipt</item>
+        <item>Details</item>
+    </string-array>
+    <string-array name="currency">
+        <item>CAD</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>CHF</item>
+        <item>JPY</item>
+        <item>CNY</item>
+    </string-array>
+    <string-array name="category">
+        <item>air fare</item>
+        <item>ground transport</item>
+        <item>vehicle rental</item>
+        <item>private automobile</item>
+        <item>fuel</item>
+        <item>parking</item>
+        <item>registration</item>
+        <item>accommodation</item>
+        <item>meal</item>
+        <item>supplies</item>
+    </string-array>
+
+    <string name="title_activity_claimant_item_list">Item List</string>
+    <string name="title_activity_claimant_add_item">Add an Item</string>
+    <string name="title_activity_claimant_item_detail">Item Detail</string>
+    <string name="title_activity_claimant_edit_item">Edit this Item</string>
 
 </resources>
+
