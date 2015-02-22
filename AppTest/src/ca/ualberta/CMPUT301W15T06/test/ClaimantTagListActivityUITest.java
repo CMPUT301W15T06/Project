@@ -56,20 +56,13 @@ public class ClaimantTagListActivityUITest extends
 	}
 	
 
-/*	//fill in blank
-	public void AddButton(){
+	//fill in blank and click "add" activity under test
+	public void AddButton(String tag){
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton));
 		textInput.setText(tag);
 		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton)).performClick();
-	}*/
-
-	//test if add something into tag list
-	public void testClickAddButton() {
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton));
-//		textInput.setText(tag);
-		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton)).performClick();
-	    assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.TagList));	    
 	}
+
 
 
 }
