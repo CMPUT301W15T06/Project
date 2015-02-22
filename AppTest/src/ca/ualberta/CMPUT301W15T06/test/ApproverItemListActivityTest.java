@@ -27,6 +27,7 @@ governing permissions and limitations under the License.
 package ca.ualberta.CMPUT301W15T06.test;
 
 import android.app.Activity;
+import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 import ca.ualberta.CMPUT301W15T06.ApproverItemListActivity;
@@ -36,10 +37,20 @@ import ca.ualberta.CMPUT301W15T06.Item;
 
 public class ApproverItemListActivityTest extends ActivityInstrumentationTestCase2<ApproverItemListActivity> {
 	
+	Instrumentation instrumentation;
 	Activity activity;
 	
 	public ApproverItemListActivityTest() {
 		super(ApproverItemListActivity.class);
+	}
+	
+	protected void setUp() throws Exception {
+		super.setUp();
+		// Setting the touch mode to true prevents the UI control from taking focus when you click it programmatically in the test method later 
+		setActivityInitialTouchMode(true);
+
+		instrumentation = getInstrumentation();
+		activity = getActivity();
 	}
 	
 	// test for use case 08.04.01
@@ -58,7 +69,7 @@ public class ApproverItemListActivityTest extends ActivityInstrumentationTestCas
 		cList.addClaim(test);
 		
 		// set new expense item
-		Item new_item = new Item("bus");
+		Item new_item = new Item();
 		new_item.setAmount(10);
 		new_item.setCategory("traffic");
 		new_item.setDate("2012-03-27");
@@ -76,5 +87,6 @@ public class ApproverItemListActivityTest extends ActivityInstrumentationTestCas
 		TextView v = (TextView) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.ApproverItemList);
 		assertTrue("This view should be a item list", v.toString().equals(ei));
 	}
+	// There's no button in this activity's layout, so there is no button behavior to be test
 
 }

@@ -28,6 +28,7 @@ governing permissions and limitations under the License.
 package ca.ualberta.CMPUT301W15T06.test;
 
 import android.app.Activity;
+import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import ca.ualberta.CMPUT301W15T06.ApproverClaimListActivity;
@@ -47,12 +48,22 @@ import ca.ualberta.CMPUT301W15T06.Item;
  */
 public class ApproverClaimListActivityTest extends ActivityInstrumentationTestCase2<ApproverClaimListActivity>{
 	
+	Instrumentation instrumentation;
 	Activity activity;
 	
 	public ApproverClaimListActivityTest() {
 		super(ApproverClaimListActivity.class);
 	}
 
+	protected void setUp() throws Exception {
+		super.setUp();
+		// Setting the touch mode to true prevents the UI control from taking focus when you click it programmatically in the test method later 
+		setActivityInitialTouchMode(true);
+
+		instrumentation = getInstrumentation();
+		activity = getActivity();
+	}
+	
 	// test for use case 08.01.01
 	// System promotes claim list and part of details
 	public void testSubmittedClaimList() {
@@ -74,7 +85,7 @@ public class ApproverClaimListActivityTest extends ActivityInstrumentationTestCa
 		test.setStatus("submitted");
 		
 		// set new expense item
-		Item new_item = new Item("bus");
+		Item new_item = new Item();
 		new_item.setAmount(10);
 		new_item.setCategory("traffic");
 		new_item.setDate(d1);
@@ -250,4 +261,6 @@ public class ApproverClaimListActivityTest extends ActivityInstrumentationTestCa
 		// It's an error now because our function returns null
 		assertTrue("state should be changed to 'submitted'", cList.getClaimList().get(0).getStatus().equals("submitted"));
 	}
+	// There's no button in this activity's layout, so there is no button behavior to be test
+
 }

@@ -27,6 +27,7 @@ governing permissions and limitations under the License.
 package ca.ualberta.CMPUT301W15T06.test;
 
 import android.app.Activity;
+import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 import ca.ualberta.CMPUT301W15T06.ApproverClaimDetailListActivity;
@@ -36,10 +37,20 @@ import ca.ualberta.CMPUT301W15T06.Item;
 
 public class ApproverClaimDetailListActivityTest extends ActivityInstrumentationTestCase2<ApproverClaimDetailListActivity>{
 
+	Instrumentation instrumentation;
 	Activity activity;
 	
 	public ApproverClaimDetailListActivityTest() {
 		super(ApproverClaimDetailListActivity.class);
+	}
+	
+	protected void setUp() throws Exception {
+		super.setUp();
+		// Setting the touch mode to true prevents the UI control from taking focus when you click it programmatically in the test method later 
+		setActivityInitialTouchMode(true);
+
+		instrumentation = getInstrumentation();
+		activity = getActivity();
 	}
 	
 	// test for use case 08.03.01
@@ -63,7 +74,7 @@ public class ApproverClaimDetailListActivityTest extends ActivityInstrumentation
 		test.setStatus("submitted");
 		
 		// set new expense item
-		Item new_item = new Item("bus");
+		Item new_item = new Item();
 		new_item.setAmount(10);
 		new_item.setCategory("traffic");
 		new_item.setDate(d1);
@@ -81,7 +92,6 @@ public class ApproverClaimDetailListActivityTest extends ActivityInstrumentation
 		Item ei = ec.getItemList().get(0);
 		// check values saved in expense item
 		// It's an error now because our function returns null
-		assertTrue("name should be 'bus'", ei.getName().equals("bus"));
 		assertTrue("category should be 'traffic'", ei.getCategory().equals("traffic"));
 		assertTrue("date should be 2012-03-27", ei.getDate().equals(d1));
 		assertTrue("description should be 'arrived Edmonton'", ei.getDescription().equals("arrived Edmonton"));
@@ -102,6 +112,6 @@ public class ApproverClaimDetailListActivityTest extends ActivityInstrumentation
 		assertFalse("This view should be a destination list and should not be null", v.toString().equals(null));
 
 	}
-		
+	// There's no button in this activity's layout, so there is no button behavior to be test
 
 }

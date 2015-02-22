@@ -48,8 +48,12 @@ public class ClaimantTagListActivityUITest extends
 		
 	}
 
+	
 	protected void setUp() throws Exception {
 		super.setUp();
+		// Setting the touch mode to true prevents the UI control from taking focus when you click it programmatically in the test method later 
+		setActivityInitialTouchMode(true);
+
 		instrumentation = getInstrumentation();
 		activity = getActivity();
 		textInput = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTag));
