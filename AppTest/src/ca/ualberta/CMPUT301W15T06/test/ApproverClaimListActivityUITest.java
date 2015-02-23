@@ -46,12 +46,12 @@ import ca.ualberta.CMPUT301W15T06.Item;
  * 
  * Because these cases are included one activity
  */
-public class ApproverClaimListActivityTest extends ActivityInstrumentationTestCase2<ApproverClaimListActivity>{
+public class ApproverClaimListActivityUITest extends ActivityInstrumentationTestCase2<ApproverClaimListActivity>{
 	
 	Instrumentation instrumentation;
 	Activity activity;
 	
-	public ApproverClaimListActivityTest() {
+	public ApproverClaimListActivityUITest() {
 		super(ApproverClaimListActivity.class);
 	}
 

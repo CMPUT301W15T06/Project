@@ -6,14 +6,14 @@ import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 
-public class ClaimantClaimListActivityTest extends
+public class ClaimantClaimListActivityUITest extends
 		ActivityInstrumentationTestCase2<ClaimantClaimListActivity> {
 
 	Activity activity;
 	Instrumentation instrumentation;
 	
 
-	public ClaimantClaimListActivityTest() {
+	public ClaimantClaimListActivityUITest() {
 		super(ClaimantClaimListActivity.class);
 	}
 	

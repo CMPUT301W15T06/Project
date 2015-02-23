@@ -25,6 +25,7 @@ public class MainActivityUITest extends
 		super.setUp();
 		instrumentation = getInstrumentation();
 		activity = getActivity();
+		setActivityInitialTouchMode(true);
 	}
 	
 	//test button layout

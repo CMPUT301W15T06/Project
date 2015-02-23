@@ -35,12 +35,12 @@ import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimList;
 import ca.ualberta.CMPUT301W15T06.Item;
 
-public class ApproverClaimDetailListActivityTest extends ActivityInstrumentationTestCase2<ApproverClaimDetailListActivity>{
+public class ApproverClaimDetailListActivityUITest extends ActivityInstrumentationTestCase2<ApproverClaimDetailListActivity>{
 
 	Instrumentation instrumentation;
 	Activity activity;
 	
-	public ApproverClaimDetailListActivityTest() {
+	public ApproverClaimDetailListActivityUITest() {
 		super(ApproverClaimDetailListActivity.class);
 	}
 	

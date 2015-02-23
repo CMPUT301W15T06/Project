@@ -36,12 +36,12 @@ import ca.ualberta.CMPUT301W15T06.ClaimList;
 import ca.ualberta.CMPUT301W15T06.Item;
 import ca.ualberta.CMPUT301W15T06.Recipt;
 
-public class ApproverReciptActivityTest extends ActivityInstrumentationTestCase2<ApproverReciptActivity>{
+public class ApproverReciptActivityUITest extends ActivityInstrumentationTestCase2<ApproverReciptActivity>{
 
 	Instrumentation instrumentation;
 	Activity activity;
 	
-	public ApproverReciptActivityTest() {
+	public ApproverReciptActivityUITest() {
 		super(ApproverReciptActivity.class);
 		// TODO Auto-generated constructor stub
 	}
