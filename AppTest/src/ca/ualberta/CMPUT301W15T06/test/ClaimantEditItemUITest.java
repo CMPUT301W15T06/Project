@@ -9,7 +9,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 import ca.ualberta.CMPUT301W15T06.Claim;
+import ca.ualberta.CMPUT301W15T06.ClaimListController;
 import ca.ualberta.CMPUT301W15T06.ClaimantEditItemActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
 import ca.ualberta.CMPUT301W15T06.Item;
 import ca.ualberta.CMPUT301W15T06.ItemList;
 import android.annotation.SuppressLint;
@@ -371,6 +373,26 @@ public class ClaimantEditItemUITest extends
 			assertTrue("Expense List size", expense.size() == 0);
 			assertFalse("Test expense still contained?", expense.contains(testExpenseDel));	
 		}
+		
+		/*
+		  US05.01.01
+	      As a claimant, I want to list all the expense items for a claim, in order of entry, 
+	      showing for each expense item: the date the expense was incurred, the category, 
+	      the textual description, amount spent, unit of currency, whether there is a photographic 
+	      receipt, and incompleteness indicator.
+		 */
+		
+		public void listItemUITEst() {
+			ArrayList<Item> itemList = null;
+			Claim claim = ClaimListController.getCurrentClaim();
+			for (int i = 0; i<itemList.size();i++) {
+				String item =((ClaimantItemListActivity) activity).claim.toString();
+			}
+			
+		}
+
+
+		
 		
 		
 
