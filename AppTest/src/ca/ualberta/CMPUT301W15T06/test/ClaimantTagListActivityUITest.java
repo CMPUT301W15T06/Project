@@ -60,12 +60,42 @@ public class ClaimantTagListActivityUITest extends
 	}
 	
 
+	//03.01.01
+	public void tagsUITest() {
+		// click button runnable -- click Tags
+		final Button button1 = ((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView));
+		activity.runOnUiThread(new Runnable() {
+		@Override
+		public void run() {
+		button1.performClick();
+		}
+		});
+
+	}
+
+
+
+	//US 03.02.01
 	//fill in blank and click "add" activity under test
 	public void AddButton(String tag){
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton));
 		textInput.setText(tag);
 		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton)).performClick();
 	}
+
+
+	//US 03.03.01
+	public void testFilter() {
+		// click button runnable -- click Filter by tags
+		final Button button1 = ((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView));
+		activity.runOnUiThread(new Runnable() {
+		@Override
+		public void run() {
+		button1.performClick();
+		}
+		});
+	}
+	
 
 
 
