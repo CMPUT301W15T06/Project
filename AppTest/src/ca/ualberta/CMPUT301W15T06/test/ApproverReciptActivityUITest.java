@@ -29,6 +29,7 @@ package ca.ualberta.CMPUT301W15T06.test;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.ViewAsserts;
 import android.view.View;
 import ca.ualberta.CMPUT301W15T06.ApproverReciptActivity;
 import ca.ualberta.CMPUT301W15T06.Claim;
@@ -40,6 +41,7 @@ public class ApproverReciptActivityUITest extends ActivityInstrumentationTestCas
 
 	Instrumentation instrumentation;
 	Activity activity;
+	View v;
 	
 	public ApproverReciptActivityUITest() {
 		super(ApproverReciptActivity.class);
@@ -53,50 +55,15 @@ public class ApproverReciptActivityUITest extends ActivityInstrumentationTestCas
 
 		instrumentation = getInstrumentation();
 		activity = getActivity();
+		v = activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverRecieptView);
 	}
 	
-	// test for use case 08.05.01
-	// system gets photographic receipt for the item
-	public void testRecipt() {
-		// build a claim list
-		ClaimList cList = new ClaimList();
-
-		// build new claim
-		Claim test = new Claim("A");
-		
-		// set state as "submitted"
-		test.setStatus("submitted");
-		
-		// add claim
-		cList.addClaim(test);
-		
-		// set new expense item
-		Item new_item = new Item();
-		new_item.setAmount(10);
-		new_item.setCategory("traffic");
-		new_item.setDate("2012-03-27");
-		new_item.setCurrency("CAD");
-		new_item.setDescription("arrived Edmonton");
-		new_item.setRecipt(null);
-
-		// add new item
-		cList.getClaimList().get(0).addItem(new_item);
-		
-		// get receipt
-		Recipt r = cList.getClaimList().get(0).getItemList().get(0).getRecipt();
-		// It's an error now because our function returns null
-		assertTrue("There's no recipt", r.equals(null));
-		
-		// add receipt
-		cList.getClaimList().get(0).getItemList().get(0).setRecipt(new Recipt());
-		r = cList.getClaimList().get(0).getItemList().get(0).getRecipt();
-		assertFalse("There exists one recipt", r.equals(null));
-		
-		// UI test
-		View v = activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverRecieptView);
-		assertTrue("view is not null", v.equals(null));
+	// test if the receipt could be shown on screen
+	public void testInfoTextView_layout() {
+	    View decorView = activity.getWindow().getDecorView();
+	    ViewAsserts.assertOnScreen(decorView, v);
+	    assertTrue(View.GONE == v.getVisibility());
 	}
+	    
 	// There's no button in this activity's layout, so there is no button behavior to be test
-
-
 }
