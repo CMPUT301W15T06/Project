@@ -58,8 +58,8 @@ public class ExpenseListTest extends TestCase
 		ItemList expenseList = new ItemList();
 		String expenseName = "bus ticket";
 		String expenseName2 = "hotel";
-		Item testExpense = new Item(expenseName);
-		Item testExpense2 = new Item(expenseName2);
+		Item testExpense = new Item();
+		Item testExpense2 = new Item();
 		expenseList.addItem(testExpense);
 		Collection<Item> expense = expenseList.getItem();
 		assertTrue("Expense List size", expense.size() == 1);
@@ -95,7 +95,7 @@ public class ExpenseListTest extends TestCase
 	public void testEditExpense(){
 		// set up expense information
 		Claim claim = new Claim("one");
-		Item testExpenseEdit = new Item("BMW");
+		Item testExpenseEdit = new Item();
 		claim.addItem(testExpenseEdit);	
 		testExpenseEdit.setDate("2015-01-05");
 		testExpenseEdit.setCategory("vehicle rental");
@@ -119,7 +119,7 @@ public class ExpenseListTest extends TestCase
 	public void testDeleteExpense() {
 		ItemList expenseList = new ItemList();
 		String expenseName = "bus ticket";
-		Item testExpenseDel = new Item(expenseName);
+		Item testExpenseDel = new Item();
 		expenseList.addItem(testExpenseDel);
 		Collection<Item> expense = expenseList.getItem();
 		assertTrue("Expense List size", expense.size() == 1);
@@ -136,8 +136,8 @@ public class ExpenseListTest extends TestCase
 	  required navigation in the user interface.
 	  
 	  We could test this use case manually, it just need 2 steps. 
-	  User choose “claimant” from main page, then long click one of 
-	  claims and select “Item list”
+	  User choose Claimant from main page, then long click one of 
+	  claims and select Item list
 	  (See story board 4&5 as reference)
 	 */
 	
@@ -151,7 +151,7 @@ public class ExpenseListTest extends TestCase
 	public void testOrderedExpenseList() throws ParseException {	
 		// sample test data 1
 		String expenseName1 = "BMW";
-		Item expenseTest1 = new Item(expenseName1);
+		Item expenseTest1 = new Item();
 		expenseTest1.setDate("2015-01-05");
 		expenseTest1.setCategory("vehicle rental");
 		expenseTest1.setAmount(3000);
@@ -160,7 +160,7 @@ public class ExpenseListTest extends TestCase
 		
 		// sample test data 2
 		String expenseName2 = "bus ticket";
-		Item expenseTest2 = new Item(expenseName2);
+		Item expenseTest2 = new Item();
 		expenseTest2.setDate("2015-01-01");
 		expenseTest2.setCategory("ground transport");
 		expenseTest2.setAmount(2.99);
@@ -169,7 +169,7 @@ public class ExpenseListTest extends TestCase
 		
 		// sample test data 3
 		String expenseName3 = "fairmont hotel";
-		Item expenseTest3 = new Item(expenseName3);
+		Item expenseTest3 = new Item();
 		expenseTest3.setDate("2015-01-02");
 		expenseTest3.setCategory("accommodation");
 		expenseTest3.setAmount(160);

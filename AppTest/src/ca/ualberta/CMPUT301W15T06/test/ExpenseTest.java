@@ -40,14 +40,14 @@ import ca.ualberta.CMPUT301W15T06.R;
 public class ExpenseTest extends TestCase {
 	public void testExpenseName () {
 		String ExpenseName = "bus ticket";
-	    Item expense = new Item(ExpenseName);
+	    Item expense = new Item();
 		assertTrue("Expense Name is not equal", ExpenseName.equals(expense.getName()));
 	}
 	
 	public void testExpenseDate () {
 		String ExpenseName = "bus ticket";
 		String ExpenseDate = "2015-01-01";
-		Item expense = new Item(ExpenseName);
+		Item expense = new Item();
 		expense.setDate(ExpenseDate);
 		assertTrue("Date is ", ExpenseDate.equals(expense.getDate()));
 	}
@@ -66,7 +66,7 @@ public class ExpenseTest extends TestCase {
 		// add expense
 		ItemList expenseList_ = new ItemList();
 		String expenseName = "fairmont hotel";
-		Item testExpenseCate = new Item(expenseName);
+		Item testExpenseCate = new Item();
 		expenseList_.addItem(testExpenseCate);
 		testExpenseCate.setDate("2015-01-08");
 		testExpenseCate.setCategory("accomodation");
@@ -84,7 +84,7 @@ public class ExpenseTest extends TestCase {
 	public void testAmount () {
 		double ExpenseAmount = 3.00;
 		String ExpenseName = "bus ticket";
-		Item expense = new Item(ExpenseName);
+		Item expense = new Item();
 		expense.setAmount(ExpenseAmount);
 		assertTrue("Amount",ExpenseAmount == expense.getAmount());		
 	}
@@ -101,7 +101,7 @@ public class ExpenseTest extends TestCase {
 		// add expense
 		ItemList expenseList_ = new ItemList();
 		String expenseName = "car fuel";
-		Item testExpenseCurr = new Item(expenseName);
+		Item testExpenseCurr = new Item();
 		expenseList_.addItem(testExpenseCurr);
 		testExpenseCurr.setDate("2015-01-03");
 		testExpenseCurr.setCategory("fuel");
@@ -118,7 +118,7 @@ public class ExpenseTest extends TestCase {
 	public void testDescription() {
 		String ExpenseDes = "lalala";
 		String ExpenseName = "bus ticket";
-		Item expense = new Item(ExpenseName);
+		Item expense = new Item();
 		expense.setDescription(ExpenseDes);
 		assertTrue("Description",ExpenseDes.equals(expense.getDescription()));
 	}
@@ -133,14 +133,14 @@ public class ExpenseTest extends TestCase {
 		// create an expense 
 		ItemList expenseList_ = new ItemList();
 		String expenseName = "BMW";
-		Item testExpenseFlag = new Item(expenseName);
+		Item testExpenseFlag = new Item();
 		expenseList_.addItem(testExpenseFlag);
 		testExpenseFlag.setDate("2015-01-05");
 		testExpenseFlag.setCategory("vehicle rental");
 		testExpenseFlag.setAmount(3000);
 		testExpenseFlag.setCurrency("CNY");
 		testExpenseFlag.setDescription("travel purpose");
-		Item expense = new Item(expenseName);
+		Item expense = new Item();
 		assertTrue("no flag",testExpenseFlag.getFlag());
 		testExpenseFlag.addFlag();
 		assertTrue("has flag", testExpenseFlag.getFlag());		
@@ -148,7 +148,7 @@ public class ExpenseTest extends TestCase {
 	
 	public void testDeleteFlag() {
 		String ExpenseName = "bus ticket";
-		Item expense = new Item(ExpenseName);
+		Item expense = new Item();
 		expense.deleteFlag();
 	}
 	
@@ -157,7 +157,7 @@ public class ExpenseTest extends TestCase {
       As a claimant, I want to view an expense item and its details.
 	 */
 	public void testItemDetail() {
-		Item expenseInfo = new Item("BMW");
+		Item expenseInfo = new Item();
 		expenseInfo.setDate("2015-01-05");
 		expenseInfo.setCategory("vehicle rental");
 		expenseInfo.setAmount(3000);
@@ -171,20 +171,20 @@ public class ExpenseTest extends TestCase {
 	// US05.01.01
 	public void testComplete() {
 		String ExpenseName = "bus ticket";
-		Item expenseC = new Item(ExpenseName);
+		Item expenseC = new Item();
 		assertFalse("Expense information is not complete", expenseC.infoComplete());
-		expenseC.addDate();
-		expenseC.addCategory();
-		expenseC.addAmount();
-		expenseC.addCurrency();
-		expenseC.addDescription();
+		expenseC.getDate();
+		expenseC.getCategory();
+		expenseC.getAmount();
+		expenseC.getCurrency();
+		expenseC.getDescription();
 		assertTrue("Expense information is complete", expenseC.infoComplete());
 	}
 	
 	// US05.01.01
 	public void testMarkIncomplete() {
 		String ExpenseName = "bus ticket";
-		Item expenseI = new Item(ExpenseName);
+		Item expenseI = new Item();
 		expenseI.setIncomplete();
 		assertFalse("Expense information is not complete", expenseI.infoComplete());
 	}

@@ -29,6 +29,7 @@ package ca.ualberta.CMPUT301W15T06;
 
 public class Item{
 
+	private String name;
 	private String date;
 	private String category;
 	private String description;
@@ -129,6 +130,11 @@ public class Item{
 	public void setIncomplete() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	public String getName() {
+		return name;
 	}
 	
 	

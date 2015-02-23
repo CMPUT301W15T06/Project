@@ -35,7 +35,6 @@ public class ClaimantAddItemUITest extends
 		super.setUp();
 		instrumentation = getInstrumentation();
 		activity = getActivity();
-		item_name = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createItemNameEditText));
 		item_date = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createItemDateEditText));
 		item_category = ((Spinner) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createItemCategorySpinner));
 		item_des = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createItemDescriptionEditText));
