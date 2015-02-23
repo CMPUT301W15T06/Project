@@ -95,13 +95,13 @@ public class Item{
 	public boolean takePhoto(){
 		return false;
 	}
-	public boolean getPhoto(){
+	public static boolean getPhoto(){
 		return false;
 	}
 	public boolean deletePhoto(){
 		return false;
 	}
-	public int photoSize(){
+	public static int photoSize(){
 		return 0;
 	}
 	public void savePhoto(){

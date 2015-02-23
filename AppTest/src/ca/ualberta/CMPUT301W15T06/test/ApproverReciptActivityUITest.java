@@ -26,6 +26,8 @@ governing permissions and limitations under the License.
 
 package ca.ualberta.CMPUT301W15T06.test;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
@@ -97,6 +99,13 @@ public class ApproverReciptActivityUITest extends ActivityInstrumentationTestCas
 		assertTrue("view is not null", v.equals(null));
 	}
 	// There's no button in this activity's layout, so there is no button behavior to be test
+	
+	//US06.04.01
+	public void photoSizeUITest() {
+		File photoFile = null;
+		Item.getPhoto();
+		assertTrue("Compressed photo file too large (" + photoFile.length() + ")", Item.photoSize() < 65536);
+	}
 
 
 }

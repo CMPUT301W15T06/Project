@@ -139,6 +139,9 @@ public class ExpenseListTest extends TestCase
 	  User choose Claimant from main page, then long click one of 
 	  claims and select Item list
 	  (See story board 4&5 as reference)
+	  
+	  For minimal required navigation, just need 2 User interface. 
+	  One is main page, another is claim list UI.
 	 */
 	
 	/*
