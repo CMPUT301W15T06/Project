@@ -39,7 +39,7 @@ public class ExpenseClaimStatus extends TestCase {
 	}
 	//US 07.02.01
 	public void testWarning(){
-		Item item = new Item("111");
+		Item item = new Item();
 		Recipt re = new Recipt();
 		item.setAmount(100);
 		assertTrue("exist?", item.getAmount()==100);
@@ -48,7 +48,6 @@ public class ExpenseClaimStatus extends TestCase {
 		item.setCurrency("CNY");
 		item.setDate("2010-10-10");
 		item.setDescription("abcd");
-		item.setName("name");
 		item.setRecipt(re);
 		if (item.getAmount()!=0){
 			if (item.getCategory()!=""){
