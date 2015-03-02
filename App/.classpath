@@ -5,6 +5,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="/Users/jiafengwu/Documents/UA/2014-2015/2015-Winter/CMPUT 301/gson-2.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/njj/c301/project/Project/lib/gson-2.3.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

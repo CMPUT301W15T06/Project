@@ -40,6 +40,27 @@ public class ClaimantEditItemActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_edit_item);
+		
+		EditText dateView=(EditText) findViewById(R.id.editItemDateEditText);
+		EditText descriptionView=(EditText) findViewById(R.id.editItemDescriptionEditText);
+		EditText amountView=(EditText) findViewById(R.id.editItemAmountEditText);
+		dateView.setText(AppSingleton.getInstance().getCurrentItem().getDate());
+		descriptionView.setText(AppSingleton.getInstance().getCurrentItem().getDescription());
+		amountView.setText(String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
+		
+		Spinner currency=(Spinner) findViewById(R.id.editCurrencySpinner);
+		ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this,R.array.currency, 
+				android.R.layout.simple_spinner_item);
+		currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		currency.setAdapter(currencyAdapter);
+		currency.setSelection(getCurrencyPosition(AppSingleton.getInstance().getCurrentItem().getCurrency()));
+		
+		Spinner category=(Spinner) findViewById(R.id.editCategorySpinner);
+		ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,R.array.category, 
+				android.R.layout.simple_spinner_item);
+		categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		category.setAdapter(categoryAdapter);
+		category.setSelection(getCategoryPosition(AppSingleton.getInstance().getCurrentItem().getCategory()));
 	}
 
 	@Override
@@ -49,33 +70,7 @@ public class ClaimantEditItemActivity extends Activity {
 		return true;
 	}
 	
-	public void onResume(){
-		super.onResume();
 
-		
-		EditText dateView=(EditText) findViewById(R.id.editItemDateEditText);
-		EditText descriptionView=(EditText) findViewById(R.id.editItemDescriptionEditText);
-		EditText amountView=(EditText) findViewById(R.id.editItemAmountEditText);
-		dateView.setText(ClaimListController.getCurrentItem().getDate());
-		descriptionView.setText(ClaimListController.getCurrentItem().getDescription());
-		amountView.setText(String.valueOf(ClaimListController.getCurrentItem().getAmount()));
-		
-		Spinner currency=(Spinner) findViewById(R.id.editCurrencySpinner);
-		ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this,R.array.currency, 
-				android.R.layout.simple_spinner_item);
-		currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		currency.setAdapter(currencyAdapter);
-		currency.setSelection(getCurrencyPosition(ClaimListController.getCurrentItem().getCurrency()));
-		
-		Spinner category=(Spinner) findViewById(R.id.editCategorySpinner);
-		ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,R.array.category, 
-				android.R.layout.simple_spinner_item);
-		categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		category.setAdapter(categoryAdapter);
-		category.setSelection(getCategoryPosition(ClaimListController.getCurrentItem().getCategory()));
-
-
-	}
 	
 	private int getCategoryPosition(String category) {
 		String [] list={"air fare", "ground transport", "vehicle rental", "private automobile", "fuel", "parking",
@@ -105,7 +100,9 @@ public class ClaimantEditItemActivity extends Activity {
 		EditText descriptionView= (EditText) findViewById(R.id.editItemDescriptionEditText);
 		EditText amountView= (EditText) findViewById(R.id.editItemAmountEditText);
 		Spinner currency=(Spinner) findViewById(R.id.editCurrencySpinner);
-		ClaimListController.editItem(dateView.getText().toString(),category.getSelectedItem().toString(),
+		
+		ClaimantEditItemController ceic=new ClaimantEditItemController(AppSingleton.getInstance().getCurrentItem());
+		ceic.editItem(dateView.getText().toString(),category.getSelectedItem().toString(),
 				descriptionView.getText().toString(),Double.parseDouble(amountView.getText().toString()),
 				currency.getSelectedItem().toString());
 		finish();

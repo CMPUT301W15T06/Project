@@ -28,7 +28,7 @@ package ca.ualberta.CMPUT301W15T06.test;
 
 import org.junit.Before;
 
-import ca.ualberta.CMPUT301W15T06.ClaimantDestinationReasonActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantAddDestinationActivity;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
@@ -38,7 +38,7 @@ import android.widget.EditText;
 // test for US01.02.01
 @SuppressWarnings("unused")
 public class ClaimantDestinationReasonActivityUITest extends
-		ActivityInstrumentationTestCase2<ClaimantDestinationReasonActivity> {
+		ActivityInstrumentationTestCase2<ClaimantAddDestinationActivity> {
 
 	Instrumentation instrumentation;
 	Activity activity;
@@ -46,7 +46,7 @@ public class ClaimantDestinationReasonActivityUITest extends
 	EditText claimant_reason;
 	
 	public ClaimantDestinationReasonActivityUITest() {
-		super(ClaimantDestinationReasonActivity.class);
+		super(ClaimantAddDestinationActivity.class);
 	}
 
 	@Before

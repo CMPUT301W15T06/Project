@@ -28,12 +28,11 @@ package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
 
-public class Claim {
+public class Claim extends AppModel{
 
 	private String name;
 	private String beginDate;
 	private String endDate;
-	private Item currentItem;
 	private String status="In progress";
 	private ArrayList<Item> itemList;
 	private ArrayList<Destination> destinationList;
@@ -43,6 +42,7 @@ public class Claim {
 
 	
 	public Claim(String claimName) {
+		super();
 		itemList=new ArrayList<Item>();
 		destinationList=new ArrayList<Destination>();
 		name=claimName;
@@ -50,6 +50,7 @@ public class Claim {
 	
 	public void setName(String name){
 		this.name=name;
+		notifyListeners();
 	}
 	
 	public String getName() {
@@ -58,6 +59,7 @@ public class Claim {
 	
 	public void setBeginDate(String beginDate){
 		this.beginDate=beginDate;
+		notifyListeners();
 	}
 	
 	public String getBeginDate() {
@@ -66,23 +68,18 @@ public class Claim {
 	
 	public void setEndDate(String endDate){
 		this.endDate=endDate;
+		notifyListeners();
 	}
 	
 	public String getEndDate() {
 		return endDate;
 	}
 	
-	public void setCurrentItem(Item item) {
-		currentItem=item;
-	}
-	
-	public Item getCurrentItem() {
-		return currentItem;	
-	}
 	
 	
 	public void setStatus(String status){
 		this.status=status;
+		notifyListeners();
 	}
 	
 	public String getStatus(){
@@ -91,10 +88,12 @@ public class Claim {
 
 	public void addItem(Item item) {
 		itemList.add(item);
+		notifyListeners();
 	}
 	
 	public void removeItem(Item item) {
 		itemList.remove(item);
+		notifyListeners();
 	}
 	
 	
@@ -104,10 +103,12 @@ public class Claim {
 	
 	public void addDestination(Destination destination) {
 		destinationList.add(destination);
+		notifyListeners();
 	}
 	
 	public void removeDestination(Destination destination) {
-		destinationList.remove(destination);	
+		destinationList.remove(destination);
+		notifyListeners();
 	}
 	
 	public ArrayList<Destination> getDestinationList() {

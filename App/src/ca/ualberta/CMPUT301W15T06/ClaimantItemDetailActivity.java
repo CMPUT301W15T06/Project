@@ -33,15 +33,16 @@ public class ClaimantItemDetailActivity extends Activity {
 		TextView descriptionView=(TextView) findViewById(R.id.itemDescriptionVTextView);
 		TextView amountView=(TextView) findViewById(R.id.itemAmountVTextView);
 		TextView currencyView=(TextView) findViewById(R.id.itemCurrencyVTextView);
-		dateView.setText(ClaimListController.getCurrentItem().getDate());
-		categoryView.setText(ClaimListController.getCurrentItem().getCategory());
-		descriptionView.setText(ClaimListController.getCurrentItem().getDescription());
-		amountView.setText(String.valueOf(ClaimListController.getCurrentItem().getAmount()));
-		currencyView.setText(ClaimListController.getCurrentItem().getCurrency());
+		dateView.setText(AppSingleton.getInstance().getCurrentItem().getDate());
+		categoryView.setText(AppSingleton.getInstance().getCurrentItem().getCategory());
+		descriptionView.setText(AppSingleton.getInstance().getCurrentItem().getDescription());
+		amountView.setText(String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
+		currencyView.setText(AppSingleton.getInstance().getCurrentItem().getCurrency());
 	}
 	
 	public void deleteItem(View v){
-		ClaimListController.removeItem();
+		ClaimantDeleteItemController cdic=new ClaimantDeleteItemController(AppSingleton.getInstance().getCurrentClaim());
+		cdic.removeItem(AppSingleton.getInstance().getCurrentItem());
 		finish();
 	}
 	
