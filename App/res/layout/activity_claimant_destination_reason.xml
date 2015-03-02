@@ -26,7 +26,7 @@
         android:ems="10" />
 
     <Button
-        android:id="@+id/FinshButton"
+        android:id="@+id/finishAddDestinationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

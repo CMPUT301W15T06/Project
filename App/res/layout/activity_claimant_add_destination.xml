@@ -9,7 +9,7 @@
     tools:context=".ClaimantClaimDetailActivity" >
 
     <Button
-        android:id="@+id/DeleteClaimantClaimDetailButton"
+        android:id="@+id/addDestinationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -76,7 +76,7 @@
         android:id="@+id/claimantDetailListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/DeleteClaimantClaimDetailButton"
+        android:layout_above="@+id/addDestinationButton"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/endingDateValueClaimantClaimDetailTextView" >
 

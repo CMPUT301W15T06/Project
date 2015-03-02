@@ -26,12 +26,18 @@ governing permissions and limitations under the License.
 
 package ca.ualberta.CMPUT301W15T06.test;
 
-import org.junit.Before;
 
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.app.Instrumentation.ActivityMonitor;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.ViewAsserts;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -43,12 +49,12 @@ public class ClaimantAddClaimActivityUITest extends
 	EditText claimant_name;
 	EditText claimant_starting_date;
 	EditText claimant_ending_date;
+	Button FinishButton;
 	
 	public ClaimantAddClaimActivityUITest() {
 		super(ClaimantAddClaimActivity.class);
 	}
-
-	@Before
+	//set up
 	protected void setUp() throws Exception {
 		super.setUp();
 		instrumentation = getInstrumentation();
@@ -57,8 +63,38 @@ public class ClaimantAddClaimActivityUITest extends
 		claimant_name = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimNameEditText));
 		claimant_starting_date = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimStartingDateEditText));
 		claimant_ending_date = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimEndDateEditText));
+		FinishButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton);
 	}
 
+	// US01.01.01 & US01.04.01 test Finish button layout
+	public void testApproverButtonlayout() {
+	    final View decorView = activity.getWindow().getDecorView();
+
+	    ViewAsserts.assertOnScreen(decorView, FinishButton);
+
+	    final ViewGroup.LayoutParams layoutParams =
+	           FinishButton.getLayoutParams();
+	    assertNotNull(layoutParams);
+	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
+	    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
+	    
+	    Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+	    assertEquals("Incorrect label of the button", "Finish", view.getText());
+	}
+	
+	//US01.01.01 test options menu
+	public void testRoute1() {
+		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
+
+		// Click the menu option
+		getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
+		getInstrumentation().invokeMenuActionSync(activity,ca.ualberta.CMPUT301W15T06.R.id.add_new_claim, 0);
+
+		Activity a = getInstrumentation().waitForMonitorWithTimeout(am, 1000);
+		assertEquals(true, getInstrumentation().checkMonitorHit(am, 1));
+		a.finish();
+	}
+	
 	// fill blank (Test US01.01.01 & US01.04.01 & US01.05.01)
 	@SuppressWarnings("unused")
 	private void testAddButton(String claimantName, String claimantStartingDate, String itemEndingDate) {
@@ -82,4 +118,26 @@ public class ClaimantAddClaimActivityUITest extends
 		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton)).performClick();
 	    assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView));	    
 	}
+	
+	//US01.01.01 test finish button activity
+	public void testOpenNextActivity() {
+		  // register next activity that need to be monitored.
+		  ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
+
+		  // open current activity.
+		  ClaimantAddClaimActivity myActivity = getActivity();
+		  final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton);
+		  myActivity.runOnUiThread(new Runnable() {
+		    @Override
+		    public void run() {
+		      // click button and open next activity.
+		      button.performClick();
+		    }
+		  });
+
+		  ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5);
+		  // next activity is opened and captured.
+		  assertNotNull(nextActivity);
+		  nextActivity .finish();
+		}
 }

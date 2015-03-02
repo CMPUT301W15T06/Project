@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
+import android.widget.Button;
 
 public class ClaimantClaimListActivityUITest extends
 		ActivityInstrumentationTestCase2<ClaimantClaimListActivity> {
@@ -29,6 +30,11 @@ public class ClaimantClaimListActivityUITest extends
 	public void testClaim(){
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView));
 		((View) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView)).performClick();
+	}
+	
+	//test ClaimList (listView) long click
+	public void testLongClick(){
+		
 	}
 
 		
