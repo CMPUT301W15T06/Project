@@ -81,11 +81,16 @@ public class ClaimantAddClaimActivityUITest extends
 	    Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
 	    assertEquals("Incorrect label of the button", "Finish", view.getText());
 	}
-	
-	//US01.01.01 test options menu
+	/*
+	 * Test for US01.01.01 Basic Flow 4 and 5
+	 */
+	//test options menu
 	public void testRoute1() {
 		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
 
+		/*
+		 * Test for US01.01.01 Basic Flow 6
+		 */
 		// Click the menu option
 		getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
 		getInstrumentation().invokeMenuActionSync(activity,ca.ualberta.CMPUT301W15T06.R.id.add_new_claim, 0);

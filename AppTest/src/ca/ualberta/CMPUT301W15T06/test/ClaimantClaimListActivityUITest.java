@@ -33,6 +33,7 @@ public class ClaimantClaimListActivityUITest extends
 	}
 
 	/*
+	 * Test for US01.01.01 Basic Flow 3
 	 * Test for US04.01.01 Basic Flow 3
 	 * Test for US04.05.01 Basic Flow 3
 	 */

@@ -65,6 +65,7 @@ public class MainActivityUITest extends
 	}
 	
 	/*
+	 * Test for US01.01.01 Basic Flow 1
 	 * Test for US04.01.01 Basic Flow 1
 	 * Test for US04.05.01 Basic Flow 1
 	 */
@@ -86,6 +87,7 @@ public class MainActivityUITest extends
 	}
 	
 	/*
+	 * Test for US01.01.01 Basic Flow 2
 	 * Test for US04.01.01 Basic Flow 2
 	 * Test for US04.05.01 Basic Flow 2
 	 */
