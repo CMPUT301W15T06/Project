@@ -41,6 +41,11 @@ public class ClaimantAddItemUITest extends
 	EditText item_amount;
 	Spinner item_currency;
 	Button finish_button;
+	TextView date;
+	TextView category;
+	TextView desc;
+	TextView amount;
+	TextView currency;
 	
 	private SpinnerAdapter cate;
 	private SpinnerAdapter curr;
@@ -77,6 +82,11 @@ public class ClaimantAddItemUITest extends
 		finish_button = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.FinishItemButton);
 	    cate = item_category.getAdapter();
 	    curr = item_currency.getAdapter();
+	    date = (TextView) activity.findViewById(R.id.createItemDateTextView);
+	    category = (TextView) activity.findViewById(R.id.createItemCategoryTextView);
+	    desc = (TextView) activity.findViewById(R.id.createItemDescriptionTextView);
+	    amount = (TextView) activity.findViewById(R.id.createItemAmountTextView);
+	    currency = (TextView) activity.findViewById(R.id.createItemCurrencyTextView);
 	    
 	    /* This turns off touch mode in the device or emulator. 
 	     * If any of your test methods send key events to the application, 
@@ -236,7 +246,6 @@ public class ClaimantAddItemUITest extends
 	
 	// This is layout test for createItemDateTextView
 	public void testCreateItemDateTextView_layout() {
-		TextView date = (TextView) activity.findViewById(R.id.createItemDateTextView);
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, date);
 	    assertTrue(View.GONE == date.getVisibility());
@@ -244,7 +253,6 @@ public class ClaimantAddItemUITest extends
 	
 	// This is layout test for createItemCategoryTextView
 	public void testCreateItemCategoryTextView_layout() {
-		TextView category = (TextView) activity.findViewById(R.id.createItemCategoryTextView);
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, category);
 	    assertTrue(View.GONE == category.getVisibility());
@@ -252,7 +260,6 @@ public class ClaimantAddItemUITest extends
 	
 	// This is layout test for createItemDescriptionTextView
 	public void testCreateItemDescriionTextView() {
-		TextView desc = (TextView) activity.findViewById(R.id.createItemDescriptionTextView);
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, desc);
 	    assertTrue(View.GONE == desc.getVisibility());
@@ -260,7 +267,6 @@ public class ClaimantAddItemUITest extends
 	
 	// This is layout test for createItemAmountTextView
 	public void testCreateItemAmountTextView() {
-		TextView amount = (TextView) activity.findViewById(R.id.createItemAmountTextView);
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, amount);
 	    assertTrue(View.GONE == amount.getVisibility());
@@ -268,7 +274,6 @@ public class ClaimantAddItemUITest extends
 	
 	// This is layout test for createItemCurrencyTextView
 	public void testCreateItemCurrencyTextView() {
-		TextView currency = (TextView) activity.findViewById(R.id.createItemCurrencyTextView);
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, currency);
 	    assertTrue(View.GONE == currency.getVisibility());
