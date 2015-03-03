@@ -28,7 +28,6 @@ import ca.ualberta.CMPUT301W15T06.R;
  * This test contains the tests of: 
  * 		1. whether the text field and button are shown on screen
  * 		2. whether the texts shown on screen are correct
- * 		3. whether clicking button triggers saving inputs and starting new activity
  */
 public class ClaimantAddItemUITest extends
 		ActivityInstrumentationTestCase2<ClaimantAddItemActivity>
@@ -184,7 +183,7 @@ public class ClaimantAddItemUITest extends
 	} 
 
 	/*
-	 * End of spinner testing
+	 * End of spinner test
 	 */
 	
 	/*
@@ -208,12 +207,7 @@ public class ClaimantAddItemUITest extends
 	    assertTrue(View.GONE == finish_button.getVisibility());
 	    
 	} 
-	
-	// test the string shown on button
-	public void testInfoTextView_layout() {
-	    assertTrue(finish_button.getText().equals("Finish"));
-	}
-	
+
 	// test button behavior
 	public void testFinishButton_expectInfo() {
 		// expected string
@@ -224,11 +218,64 @@ public class ClaimantAddItemUITest extends
 	    assertTrue(View.VISIBLE == finish_button.getVisibility());
 	    
 	    // check if text shown on button equals expected text
-	    assertEquals(expectedInfoText, finish_button.getText());
+	    assertEquals(expectedInfoText.contains(finish_button.getText()), true);
 	}
 	
-	// TBC..
+	/*
+	 * End of button test
+	 */
+
+	/*
+	 * This part is Text field testing
+	 * Text id: createItemDateTextView
+	 * 			createItemCategoryTextView
+	 * 			createItemDescriptionTextView
+	 * 			createItemAmountTextView
+	 * 			createItemCurrencyTextView
+	 */
 	
+	// This is layout test for createItemDateTextView
+	public void testCreateItemDateTextView_layout() {
+		TextView date = (TextView) activity.findViewById(R.id.createItemDateTextView);
+	    final View decorView = activity.getWindow().getDecorView();
+	    ViewAsserts.assertOnScreen(decorView, date);
+	    assertTrue(View.GONE == date.getVisibility());
+	}
+	
+	// This is layout test for createItemCategoryTextView
+	public void testCreateItemCategoryTextView_layout() {
+		TextView category = (TextView) activity.findViewById(R.id.createItemCategoryTextView);
+	    final View decorView = activity.getWindow().getDecorView();
+	    ViewAsserts.assertOnScreen(decorView, category);
+	    assertTrue(View.GONE == category.getVisibility());
+	}
+	
+	// This is layout test for createItemDescriptionTextView
+	public void testCreateItemDescriionTextView() {
+		TextView desc = (TextView) activity.findViewById(R.id.createItemDescriptionTextView);
+	    final View decorView = activity.getWindow().getDecorView();
+	    ViewAsserts.assertOnScreen(decorView, desc);
+	    assertTrue(View.GONE == desc.getVisibility());
+	}
+	
+	// This is layout test for createItemAmountTextView
+	public void testCreateItemAmountTextView() {
+		TextView amount = (TextView) activity.findViewById(R.id.createItemAmountTextView);
+	    final View decorView = activity.getWindow().getDecorView();
+	    ViewAsserts.assertOnScreen(decorView, amount);
+	    assertTrue(View.GONE == amount.getVisibility());
+	}
+	
+	// This is layout test for createItemCurrencyTextView
+	public void testCreateItemCurrencyTextView() {
+		TextView currency = (TextView) activity.findViewById(R.id.createItemCurrencyTextView);
+	    final View decorView = activity.getWindow().getDecorView();
+	    ViewAsserts.assertOnScreen(decorView, currency);
+	    assertTrue(View.GONE == currency.getVisibility());
+	}
+	/*
+	 * End of text view test
+	 */
 	
 	/*
 	// test button

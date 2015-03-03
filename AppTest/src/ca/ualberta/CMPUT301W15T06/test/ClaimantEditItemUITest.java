@@ -5,9 +5,6 @@ import java.util.Collection;
 
 import junit.framework.TestCase;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-
 import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimListController;
 import ca.ualberta.CMPUT301W15T06.ClaimantEditItemActivity;
@@ -40,7 +37,6 @@ public class ClaimantEditItemUITest extends
 		super(ClaimantEditItemActivity.class);
 	}
 
-	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 		instrumentation = getInstrumentation();
