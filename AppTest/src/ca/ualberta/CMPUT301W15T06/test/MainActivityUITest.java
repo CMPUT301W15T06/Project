@@ -64,6 +64,11 @@ public class MainActivityUITest extends
 	    assertEquals("Incorrect label of the button", "Approver", view.getText());
 	}
 	
+	/*
+	 * Test for US04.01.01 Basic Flow 1
+	 * Test for US04.05.01 Basic Flow 1
+	 */
+	
 	//test Claimant Button layout
 	public void testClaimantButtonlayout() {
 	    final View decorView = activity.getWindow().getDecorView();
@@ -80,7 +85,11 @@ public class MainActivityUITest extends
 	    assertEquals("Incorrect label of the button", "Claimant", view.getText());
 	}
 	
-
+	/*
+	 * Test for US04.01.01 Basic Flow 2
+	 * Test for US04.05.01 Basic Flow 2
+	 */
+	
 	 //test button activity
 	public void activityTest(){
 		Button view1 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);

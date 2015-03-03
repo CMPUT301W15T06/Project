@@ -24,10 +24,6 @@ import ca.ualberta.CMPUT301W15T06.R;
 
 /*
  * This is UI test class for ClaimantAddItemActivity (US04.01.01)
- * 
- * This test contains the tests of: 
- * 		1. whether the text field and button are shown on screen
- * 		2. whether the texts shown on screen are correct
  */
 public class ClaimantAddItemUITest extends
 		ActivityInstrumentationTestCase2<ClaimantAddItemActivity>
@@ -57,7 +53,12 @@ public class ClaimantAddItemUITest extends
 	private String mSelection;
 	private int mPos;
 	
-
+	/*
+	 * Test for US04.01.01 Basic Flow 9 and 10
+	 * Test for US04.02.01 Basic Flow 1
+	 * Test for US04.03.01 Basic Flow 1
+	 */
+	
 	// test case constructor
 	public ClaimantAddItemUITest()
 	{
@@ -119,6 +120,9 @@ public class ClaimantAddItemUITest extends
 		
 	} 
 	
+	/*
+	 * Test for US04.02.01 Basic Flow 2
+	 */
 	
 	// test category spinner
 	public void testCategorySpinnerUI() {
@@ -141,6 +145,10 @@ public class ClaimantAddItemUITest extends
 	    // send key event
 	    this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
 	    
+		/*
+		 * Test for US04.02.01 Basic Flow 3
+		 */
+	    
 	    // check the result
 	    mPos = item_category.getSelectedItemPosition();
 	    mSelection = (String)item_category.getItemAtPosition(mPos);
@@ -156,6 +164,9 @@ public class ClaimantAddItemUITest extends
 
 	} 
 	
+	/*
+	 * Test for US04.03.01 Basic Flow 2
+	 */
 	
 	// test currency spinner
 	public void testCurrencySpinnerUI() {
@@ -176,6 +187,10 @@ public class ClaimantAddItemUITest extends
 
 	    // send key event
 	    this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
+	    
+		/*
+		 * Test for US04.02.01 Basic Flow 3
+		 */
 	    
 	    // check the result
 	    mPos = item_currency.getSelectedItemPosition();
@@ -282,8 +297,7 @@ public class ClaimantAddItemUITest extends
 	 * End of text view test
 	 */
 	
-	/*
-	// test button
+	/* There are bugs in this method
 	@SuppressWarnings("unused")
 	private void testAddButton(String itemName, String itemDate, String itemCate, String itemDes, String itemAmount, String itemCurr) {
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.FinishItemButton));
