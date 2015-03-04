@@ -99,6 +99,9 @@ public class ClaimantAddClaimActivityUITest extends
 	}
 	
 
+	/*
+	 * test for US01.06.01 Basic Flow 1
+	 */
 	// fill blank (Test US01.01.01 & US01.04.01 & US01.05.01)
 	@SuppressWarnings("unused")
 	private void testAddButton(String claimantName, String claimantStartingDate, String itemEndingDate) {
