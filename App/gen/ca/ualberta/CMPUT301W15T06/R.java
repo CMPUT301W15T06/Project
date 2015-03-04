@@ -41,13 +41,11 @@ public final class R {
         public static final int ApproverItemList=0x7f090008;
         public static final int ApproverStartDate=0x7f090002;
         public static final int Comments=0x7f090025;
-        public static final int DeleteClaimantClaimDetailButton=0x7f090011;
         public static final int DestinationEditText=0x7f090028;
         public static final int DestinationListApprover=0x7f090006;
         public static final int DestinationTextView=0x7f09002c;
         public static final int EndDateApprover=0x7f090005;
         public static final int FinishItemButton=0x7f090019;
-        public static final int FinshButton=0x7f09002b;
         public static final int NameInApprover=0x7f090000;
         public static final int PhotoRecipt=0x7f090045;
         public static final int ReasonEditText=0x7f09002a;
@@ -57,6 +55,7 @@ public final class R {
         public static final int StartDateApprover=0x7f090003;
         public static final int TagList=0x7f090048;
         public static final int action_settings=0x7f09004c;
+        public static final int addDestinationButton=0x7f090011;
         public static final int addItemButton=0x7f090044;
         public static final int add_new_claim=0x7f09004d;
         public static final int approverButton=0x7f09004b;
@@ -97,6 +96,7 @@ public final class R {
         public static final int editItemDescriptionTextView=0x7f090036;
         public static final int endingDateClaimantClaimDetailTextView=0x7f090016;
         public static final int endingDateValueClaimantClaimDetailTextView=0x7f090017;
+        public static final int finishAddDestinationButton=0x7f09002b;
         public static final int finishEditItemButton=0x7f090032;
         public static final int itemAmountTextView=0x7f09003f;
         public static final int itemAmountVTextView=0x7f090040;
