@@ -45,28 +45,45 @@ public class ClaimantItemListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_item_list);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_item_list, menu);
-		return true;
-	}
-	
-	public void onResume(){
-		super.onResume();
+		
 		ListView listView = (ListView) findViewById(R.id.itemListView);
-		final ArrayList<Item> list =ClaimListController.getCurrentClaim().getItemList();
-		ArrayAdapter<Item> adapter=new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1,list);
+		final ArrayList<Item> list =AppSingleton.getInstance().getCurrentClaim().getItemList();
+		final ArrayAdapter<Item> adapter=new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1,list);
 		listView.setAdapter(adapter);
 		
+		AppSingleton.getInstance().getCurrentClaim().addListener(new Listener() {
+			
+			@Override
+			public void update() {
+				adapter.notifyDataSetChanged();
+				ClaimListManager.getInstance().save();
+			}
+		});
+		
+		AppSingleton.getInstance().getCurrentClaim().addListener(new Listener() {
+			
+			@Override
+			public void update() {
+				adapter.notifyDataSetChanged();
+				ClaimListManager.getInstance().save();
+			}
+		});
+
+
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				ClaimListController.setCurrentItem(list.get(position));
+				AppSingleton.getInstance().setCurrentItem(list.get(position));
+				AppSingleton.getInstance().getCurrentItem().addListener(new Listener() {
+					
+					@Override
+					public void update() {
+						adapter.notifyDataSetChanged();
+						ClaimListManager.getInstance().save();
+					}
+				});
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantItemListActivity.this);
 				builder.setTitle(R.string.title_item_dialog);
 				builder.setItems(R.array.item_dialog_array, new DialogInterface.OnClickListener() {
@@ -91,8 +108,16 @@ public class ClaimantItemListActivity extends Activity {
 			}
 			
 		});
-		
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.claimant_item_list, menu);
+		return true;
+	}
+	
+
 	
 	public void addItem(View v){
 		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantAddItemActivity.class);

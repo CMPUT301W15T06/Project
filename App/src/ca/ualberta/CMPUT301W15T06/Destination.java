@@ -25,17 +25,19 @@ governing permissions and limitations under the License.
  */
 package ca.ualberta.CMPUT301W15T06;
 
-public class Destination {
+public class Destination extends AppModel{
 	
 	private String name;
 	private String reason;
 	
 	public Destination(String name){
+		super();
 		this.name=name;
 	}
 	
 	public void setName(String name){
 		this.name=name;
+		notifyListeners();
 	}
 	
 	public String getName(){		
@@ -44,6 +46,7 @@ public class Destination {
 	
 	public void setReason(String reason){
 		this.reason=reason;
+		notifyListeners();
 	}
 	
 	public String getReason(){		

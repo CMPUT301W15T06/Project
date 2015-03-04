@@ -41,17 +41,6 @@ public class ClaimantAddItemActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_add_item);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_add_item, menu);
-		return true;
-	}
-	
-	public void onResume(){
-		super.onResume();
 		Spinner currency=(Spinner) findViewById(R.id.createCurrencySpinner);
 		ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this,R.array.currency, 
 				android.R.layout.simple_spinner_item);
@@ -63,6 +52,15 @@ public class ClaimantAddItemActivity extends Activity {
 		categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		category.setAdapter(categoryAdapter);
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.claimant_add_item, menu);
+		return true;
+	}
+	
+	
 	
 	public void finishAdd(View v){
 		EditText dateView= (EditText) findViewById(R.id.createItemDateEditText);
@@ -70,7 +68,8 @@ public class ClaimantAddItemActivity extends Activity {
 		EditText descriptionView= (EditText) findViewById(R.id.createItemDescriptionEditText);
 		EditText amountView= (EditText) findViewById(R.id.createItemAmountEditText);
 		Spinner currency=(Spinner) findViewById(R.id.createCurrencySpinner);
-		ClaimListController.addItem(dateView.getText().toString(),category.getSelectedItem().toString(),
+		ClaimantAddItemController caic=new ClaimantAddItemController(AppSingleton.getInstance().getCurrentClaim());
+		caic.addItem(dateView.getText().toString(),category.getSelectedItem().toString(),
 				descriptionView.getText().toString(),Double.parseDouble(amountView.getText().toString()),
 				currency.getSelectedItem().toString());
 		finish();

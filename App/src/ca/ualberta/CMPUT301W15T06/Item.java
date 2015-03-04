@@ -27,7 +27,7 @@ package ca.ualberta.CMPUT301W15T06;
 
 
 
-public class Item{
+public class Item extends AppModel{
 
 	private String name;
 	private String date;
@@ -43,6 +43,7 @@ public class Item{
 
 	public void setDate(String itemDate) {
 		date=itemDate;
+		notifyListeners();
 	}
 
 	public String getDate() {
@@ -51,6 +52,7 @@ public class Item{
 
 	public void setCategory(String category) {
 		this.category=category;
+		notifyListeners();
 	}
 
 	public String getCategory() {
@@ -59,6 +61,7 @@ public class Item{
 
 	public void setDescription(String description) {
 		this.description=description;
+		notifyListeners();
 	}
 
 	public String getDescription() {
@@ -67,6 +70,7 @@ public class Item{
 
 	public void setAmount(double amount) {
 		this.amount=amount;
+		notifyListeners();
 	}
 
 	public double getAmount() {
@@ -75,6 +79,7 @@ public class Item{
 
 	public void setCurrency(String currency) {
 		this.currency=currency;
+		notifyListeners();
 	}
 
 	public String getCurrency() {
@@ -84,6 +89,7 @@ public class Item{
 	public String toString(){
 		return date+'\n'+category+'\n'+description+'\n'+amount+' '+currency;
 	}
+	
 	public void setRecipt(Recipt recipt) {
 		
 	}

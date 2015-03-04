@@ -16,16 +16,28 @@ import com.google.gson.JsonIOException;
 import com.google.gson.reflect.TypeToken;
 
 public class ClaimListManager {
+	private static ClaimListManager clm=null;
 	private static final String FILENAME="data";
-	private static Context context=null;
+	private Context context=null;
 	
-	public static void initial(Context ct){
-		if (context==null){
-			context=ct;
-		}		
+	private ClaimListManager(Context context){
+		this.context=context;
 	}
 	
-	public static ClaimList load(){
+	public static ClaimListManager getInstance() {  
+        if (clm == null) {  
+    		throw new RuntimeException("Did not initialize ClaimListManager");
+        }  
+        return clm;  
+    }
+	
+	public static void initial(Context ct){
+		if (clm==null){
+			clm=new ClaimListManager(ct);	
+		}
+	}
+	
+	public ClaimList load(){
 		Gson gson =new Gson();
 		ClaimList cl=null;
 		try {
@@ -35,10 +47,9 @@ public class ClaimListManager {
 			cl = gson.fromJson(isr, dataType);
 			fis.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("IOException");
 		}
 
 		if (cl==null){
@@ -48,25 +59,20 @@ public class ClaimListManager {
 		
 	}
 	
-	public static void save(){
+	public void save(){
 		Gson gson=new Gson();
 		try {
 			FileOutputStream fos = context.openFileOutput(FILENAME, 0);
 			OutputStreamWriter osw =new OutputStreamWriter(fos);
-			gson.toJson(ClaimListController.getClaimListForSave(),osw);
+			gson.toJson(AppSingleton.getInstance().getClaimList(),osw);
 			osw.flush();
 			fos.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			throw new RuntimeException("FileNotFoundException when save");
 		}catch (JsonIOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			throw new RuntimeException("JsonIOException when save");
 		}catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException();
 		}
 	}
 

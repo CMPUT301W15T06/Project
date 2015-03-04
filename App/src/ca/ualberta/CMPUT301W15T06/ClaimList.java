@@ -28,36 +28,24 @@ package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
 
-public class ClaimList {
+public class ClaimList extends AppModel{
 
 	private ArrayList<Claim> claimList;
-	private Claim currentClaim;
 
 	
 	public ClaimList(){
+		super();
 		claimList=new ArrayList<Claim>();
 	}
-	
-	public void addClaim(Claim claim){
-		claimList.add(claim);
-	}
-
-	public void remove(Claim claim) {
-		claimList.remove(claim);
-	}
-	
-	
+			
 	public ArrayList<Claim> getClaimList(){
 		return claimList;
 	}
-	
+		
 
-	public void setCurrentClaim(Claim claim){
-		currentClaim=claim;
-	}
-	
-	public Claim getCurrentClaim(){
-		return currentClaim;
+	public void addClaim(Claim c){
+		claimList.add(c);
+		notifyListeners();
 	}
 	
 	public void pushOnline(){	
