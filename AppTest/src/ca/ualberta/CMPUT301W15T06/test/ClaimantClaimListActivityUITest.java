@@ -3,9 +3,11 @@ package ca.ualberta.CMPUT301W15T06.test;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.app.Instrumentation.ActivityMonitor;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -34,6 +36,9 @@ public class ClaimantClaimListActivityUITest extends
 
 	/*
 	 * Test for US01.01.01 Basic Flow 3
+	 * Test for US01.02.01 Basic Flow 3
+	 * Test for US01.03.01 Basic Flow 3
+	 * test for US01.06.01 Basic Flow 4
 	 * Test for US04.01.01 Basic Flow 3
 	 * Test for US04.05.01 Basic Flow 3
 	 */
@@ -52,20 +57,53 @@ public class ClaimantClaimListActivityUITest extends
 	    assertTrue(View.GONE == gv.getVisibility());
 	    
 	} 
-
 	
 	/*
+	 * Test for US01.01.01 Basic Flow 4 and 5
+	 */
+	
+	//test options menu
+	public void testRoute1() {
+		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
+
+		/*
+		 * Test for US01.01.01 Basic Flow 6
+		 */
+		// Click the menu option
+		getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
+		getInstrumentation().invokeMenuActionSync(activity,ca.ualberta.CMPUT301W15T06.R.id.add_new_claim, 0);
+
+		Activity a = getInstrumentation().waitForMonitorWithTimeout(am, 1000);
+		assertEquals(true, getInstrumentation().checkMonitorHit(am, 1));
+		a.finish();
+	}
+
+
+	/*
+	 * Test for US01.02.01 Basic Flow 4
+	 * Test for US01.03.01 Basic Flow 4
 	 * Test for US04.01.01 Basic Flow 4
 	 * Test for US04.05.01 Basic Flow 4
 	 */
+	public void testLongClickClaimList(){
+		ListView claimList = (ListView) (activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView));
+		assertTrue(claimList.performLongClick());
+	}
 	
-	public void testClaim(){
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView));
-		((View) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView)).performClick();
+	
+	/*
+
+	 */
+	
+	public void testClickClaimList(){
+		ListView claimList = (ListView) (activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView));
+		assertTrue(claimList.performClick());
 	}
 
 	
 	/*
+	 * Test for US01.02.01 Basic Flow 5
+	 * Test for US01.03.01 Basic Flow 5
 	 * Test for US04.01.01 Basic Flow 5
 	 * Test for US04.05.01 Basic Flow 5
 	 */
@@ -86,6 +124,8 @@ public class ClaimantClaimListActivityUITest extends
 	}
 	
 	/*
+	 * Test for US01.02.01 Basic Flow 6
+	 * Test for US01.03.01 Basic Flow 6
 	 * Test for US04.01.01 Basic Flow 6
 	 * Test for US04.05.01 Basic Flow 6
 	 */

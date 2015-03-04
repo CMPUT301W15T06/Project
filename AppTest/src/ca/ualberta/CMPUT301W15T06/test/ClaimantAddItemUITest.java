@@ -259,35 +259,35 @@ public class ClaimantAddItemUITest extends
 	 * 			createItemCurrencyTextView
 	 */
 	
-	// This is layout test for createItemDateTextView
-	public void testCreateItemDateTextView_layout() {
+	// test text view: createItemDateTextView
+	public void testCreateItemDateTextView() {
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, date);
 	    assertTrue(View.GONE == date.getVisibility());
 	}
 	
-	// This is layout test for createItemCategoryTextView
-	public void testCreateItemCategoryTextView_layout() {
+	// test text view: createItemCategoryTextView
+	public void testCreateItemCategoryTextView() {
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, category);
 	    assertTrue(View.GONE == category.getVisibility());
 	}
 	
-	// This is layout test for createItemDescriptionTextView
+	// test text view: createItemDescriptionTextView
 	public void testCreateItemDescriionTextView() {
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, desc);
 	    assertTrue(View.GONE == desc.getVisibility());
 	}
 	
-	// This is layout test for createItemAmountTextView
+	// test text view: createItemAmountTextView
 	public void testCreateItemAmountTextView() {
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, amount);
 	    assertTrue(View.GONE == amount.getVisibility());
 	}
 	
-	// This is layout test for createItemCurrencyTextView
+	// test text view: createItemCurrencyTextView
 	public void testCreateItemCurrencyTextView() {
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, currency);

@@ -70,6 +70,37 @@ public class ClaimantDestinationReasonActivityUITest extends
 		finish = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.finishAddDestinationButton);
 	}
 
+	/*
+	 * test US01.02.01 Basic Flow 9
+	 */
+	// This is layout test for DestinationEditText
+	public void testClaimantDestinationTextView() {
+	    final View decorView = activity.getWindow().getDecorView();
+	    ViewAsserts.assertOnScreen(decorView, claimant_des);
+	    assertTrue(View.GONE == claimant_des.getVisibility());
+	}
+	
+	// This is layout test for ReasonEditText
+	public void testClaimantReasonTextView() {
+	    final View decorView = activity.getWindow().getDecorView();
+	    ViewAsserts.assertOnScreen(decorView, claimant_reason);
+	    assertTrue(View.GONE == claimant_reason.getVisibility());
+	}
+
+	/*
+	 * test US01.02.01 Basic Flow 10 and 11
+	 */
+	//US01.02.01 fill blank
+	private void testEditText(String claimantDes, String claimantReason) {
+		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.finishAddDestinationButton));
+		
+		claimant_des.setText(claimantDes);
+		claimant_reason.setText(claimantReason);
+	}
+	
+	/*
+	 * test US01.02.01 Basic Flow 12
+	 */
 	//US01.02.01 test finish button layout
 	public void testApproverButtonlayout() {
 	    final View decorView = activity.getWindow().getDecorView();

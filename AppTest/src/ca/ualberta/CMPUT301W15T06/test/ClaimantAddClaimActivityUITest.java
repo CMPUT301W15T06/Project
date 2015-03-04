@@ -40,6 +40,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class ClaimantAddClaimActivityUITest extends
 		ActivityInstrumentationTestCase2<ClaimantAddClaimActivity> {
@@ -49,6 +50,9 @@ public class ClaimantAddClaimActivityUITest extends
 	EditText claimant_name;
 	EditText claimant_starting_date;
 	EditText claimant_ending_date;
+	TextView input_name;
+	TextView input_start;
+	TextView input_end;
 	Button FinishButton;
 	
 	public ClaimantAddClaimActivityUITest() {
@@ -63,9 +67,62 @@ public class ClaimantAddClaimActivityUITest extends
 		claimant_name = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimNameEditText));
 		claimant_starting_date = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimStartingDateEditText));
 		claimant_ending_date = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimEndDateEditText));
+		input_name = (TextView) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimNameTextView);
+		input_start = (TextView) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimStartingDateTextView);
+		input_end = (TextView) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimEndingDateTextView);
 		FinishButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton);
 	}
 
+	/*
+	 * test US01.01.01 Basic Flow 7
+	 */
+	
+	// test text view: createClaimNameEditText
+	public void testClaimantNameTextView_layout() {
+	    final View decorView = activity.getWindow().getDecorView();
+	    ViewAsserts.assertOnScreen(decorView, input_name);
+	    assertTrue(View.GONE == input_name.getVisibility());
+	}
+	
+	// test text view: createClaimStartingDateEditText
+	public void testClaimantStartingDateTextView_layout() {
+	    final View decorView = activity.getWindow().getDecorView();
+	    ViewAsserts.assertOnScreen(decorView, input_start);
+	    assertTrue(View.GONE == input_start.getVisibility());
+	}
+	
+	// test text view: createClaimEndDateEditText
+	public void testClaimantEndingDateTextView_layout() {
+	    final View decorView = activity.getWindow().getDecorView();
+	    ViewAsserts.assertOnScreen(decorView, input_end);
+	    assertTrue(View.GONE == input_end.getVisibility());
+	}
+	
+
+	// fill blank (Test US01.01.01 & US01.04.01 & US01.05.01)
+	@SuppressWarnings("unused")
+	private void testAddButton(String claimantName, String claimantStartingDate, String itemEndingDate) {
+		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton));
+		/*
+		 * test US01.01.01 Basic Flow 8
+		 */
+		claimant_name.setText(claimantName);
+		/*
+		 * test US01.01.01 Basic Flow 9
+		 */
+		claimant_starting_date.setText(claimantStartingDate);
+		/*
+		 * test US01.01.01 Basic Flow 10
+		 */
+		claimant_ending_date.setText(itemEndingDate);
+		
+		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton)).performClick();
+	}
+	
+	/*
+	 * test US01.01.01 Basic Flow 11
+	 * test US01.06.01 Basic Flow 2
+	 */
 	// US01.01.01 & US01.04.01 test Finish button layout
 	public void testApproverButtonlayout() {
 	    final View decorView = activity.getWindow().getDecorView();
@@ -81,37 +138,11 @@ public class ClaimantAddClaimActivityUITest extends
 	    Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
 	    assertEquals("Incorrect label of the button", "Finish", view.getText());
 	}
+
 	/*
-	 * Test for US01.01.01 Basic Flow 4 and 5
+	 * test for US01.06.01 Basic Flow 3
 	 */
-	//test options menu
-	public void testRoute1() {
-		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
-
-		/*
-		 * Test for US01.01.01 Basic Flow 6
-		 */
-		// Click the menu option
-		getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
-		getInstrumentation().invokeMenuActionSync(activity,ca.ualberta.CMPUT301W15T06.R.id.add_new_claim, 0);
-
-		Activity a = getInstrumentation().waitForMonitorWithTimeout(am, 1000);
-		assertEquals(true, getInstrumentation().checkMonitorHit(am, 1));
-		a.finish();
-	}
 	
-	// fill blank (Test US01.01.01 & US01.04.01 & US01.05.01)
-	@SuppressWarnings("unused")
-	private void testAddButton(String claimantName, String claimantStartingDate, String itemEndingDate) {
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton));
-		
-		claimant_name.setText(claimantName);
-		claimant_starting_date.setText(claimantStartingDate);
-		claimant_ending_date.setText(itemEndingDate);
-		
-		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton)).performClick();
-	}
-
 	//test if add a new claim to list (US01.03.01 & US 01.06.01)
 	public void testClickAddButton(String claimantName, String claimantStartingDate, String itemEndingDate) {
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton));
@@ -144,5 +175,5 @@ public class ClaimantAddClaimActivityUITest extends
 		  // next activity is opened and captured.
 		  assertNotNull(nextActivity);
 		  nextActivity .finish();
-		}
+	}
 }

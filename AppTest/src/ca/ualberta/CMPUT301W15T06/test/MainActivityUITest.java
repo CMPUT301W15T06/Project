@@ -2,6 +2,7 @@ package ca.ualberta.CMPUT301W15T06.test;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.app.Instrumentation.ActivityMonitor;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.TouchUtils;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
 
@@ -41,6 +43,13 @@ public class MainActivityUITest extends
 
 	}
 	
+	/*
+	 * Test for US01.01.01 Basic Flow 1
+	 * Test for US01.02.01 Basic Flow 1 
+	 * Test for US01.03.01 Basic Flow 1
+	 * Test for US04.01.01 Basic Flow 1
+	 * Test for US04.05.01 Basic Flow 1
+	 */
 
 	// test button exists
 	public void testLayout() {
@@ -63,11 +72,14 @@ public class MainActivityUITest extends
 	    Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
 	    assertEquals("Incorrect label of the button", "Approver", view.getText());
 	}
+
 	
 	/*
-	 * Test for US01.01.01 Basic Flow 1
-	 * Test for US04.01.01 Basic Flow 1
-	 * Test for US04.05.01 Basic Flow 1
+	 * Test for US01.01.01 Basic Flow 2
+	 * Test for US01.02.01 Basic Flow 2
+	 * Test for US01.03.01 Basic Flow 2
+	 * Test for US04.01.01 Basic Flow 2
+	 * Test for US04.05.01 Basic Flow 2
 	 */
 	
 	//test Claimant Button layout
@@ -85,14 +97,8 @@ public class MainActivityUITest extends
 	    Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 	    assertEquals("Incorrect label of the button", "Claimant", view.getText());
 	}
-	
-	/*
-	 * Test for US01.01.01 Basic Flow 2
-	 * Test for US04.01.01 Basic Flow 2
-	 * Test for US04.05.01 Basic Flow 2
-	 */
-	
-	 //test button activity
+
+	 //test button behavior
 	public void activityTest(){
 		Button view1 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		TouchUtils.clickView(this, view1);
@@ -101,5 +107,27 @@ public class MainActivityUITest extends
 		TouchUtils.clickView(this, view2);
 		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton)).performClick();
 	}
+	
+	// test if the button can create next activity
+	public void testOpenNextActivity() {
+		  // register next activity that need to be monitored.
+		  ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
+
+		  // open current activity.
+		  MainActivity myActivity = getActivity();
+		  final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		  myActivity.runOnUiThread(new Runnable() {
+		    @Override
+		    public void run() {
+		      // click button and open next activity.
+		      button.performClick();
+		    }
+		  });
+
+		  ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5);
+		  // next activity is opened and captured.
+		  assertNotNull(nextActivity);
+		  nextActivity .finish();
+		}
 	
 }
