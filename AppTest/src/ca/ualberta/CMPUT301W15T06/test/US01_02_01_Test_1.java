@@ -143,7 +143,7 @@ public class US01_02_01_Test_1 extends
 	 * Test for US01.02.01 Basic Flow 5
 	 */	
 		ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		assertTrue(claimList.performItemClick(claimList, 0, 0));
+		assertNotNull(claimList.performClick());
 	
 	
 	/*
