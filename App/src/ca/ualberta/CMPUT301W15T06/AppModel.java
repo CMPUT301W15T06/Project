@@ -17,32 +17,34 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AppModel{
-	private transient Set<Listener> listners;
+	private transient ArrayList<Listener> listners;
 	
-	/**
-	 * This method creates a hash set for listeners that 
-	 * records all listener
-	 */
+//	/**
+//	 * This method creates a hash set for listeners that 
+//	 * records all listener
+//	 */
 	public AppModel(){
-		listners=new HashSet<Listener>();
+		listners=new ArrayList<Listener>();
 	}
 	
-	/**
-	 * This method allows user to add a listener to the 
-	 * hash set listeners
-	 * 
-	 * @param l  a Listener type l
-	 */
+//	/**
+//	 * This method allows user to add a listener to the 
+//	 * hash set listeners
+//	 * 
+//	 * @param l  a Listener type l
+//	 */
 	public void addListener(Listener l){
-		getListeners().add(l);
+		if (!getListeners().contains(l)){
+			getListeners().add(l);
+		}
 	}
 	
-	/**
-	 * This method allows user to remove a listener from
-	 * the hash set listeners
-	 * 
-	 * @param l  a Listener type l
-	 */
+//	/**
+//	 * This method allows user to remove a listener from
+//	 * the hash set listeners
+//	 * 
+//	 * @param l  a Listener type l
+//	 */
 	public void removeListener(Listener l){
 		getListeners().remove(l);
 	}
@@ -53,18 +55,18 @@ public class AppModel{
 	 * 
 	 * @return listeners
 	 */
-	private Set<Listener> getListeners(){
+	private ArrayList<Listener> getListeners(){
 		if (listners==null){
-			listners=new HashSet<Listener>();
+			listners=new ArrayList<Listener>();
 		}
 		return listners;
 	}
 	
-	/**
-	 * This method is design for notifying all listener 
-	 * in listeners hash set if there's any update
-	 */
-	protected void notifyListeners() {
+//	/**
+//	 * This method is design for notifying all listener 
+//	 * in listeners hash set if there's any update
+//	 */
+	public void notifyListeners() {
 		for (Listener  listener : getListeners()) {
 			listener.update();
 		}

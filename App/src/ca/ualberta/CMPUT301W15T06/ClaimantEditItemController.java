@@ -1,5 +1,7 @@
 package ca.ualberta.CMPUT301W15T06;
 
+import ca.ualberta.cs.moneytrack.StatusException;
+
 public class ClaimantEditItemController {
 	
 	private Item item;
@@ -9,11 +11,14 @@ public class ClaimantEditItemController {
 	}
 	
 	public void editItem(String date, String category, String description, double amount, String currency){	
-	item.setDate(date);
-	item.setCategory(category);
-	item.setDescription(description);
-	item.setAmount(amount);
-	item.setCurrency(currency);
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
+		item.setDate(date);
+		item.setCategory(category);
+		item.setDescription(description);
+		item.setAmount(amount);
+		item.setCurrency(currency);
 
-}
+	}
 }

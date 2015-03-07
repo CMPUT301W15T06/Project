@@ -37,10 +37,14 @@ import android.widget.Spinner;
 
 public class ClaimantAddItemActivity extends Activity {
 
+	private ClaimantAddItemController caic=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_add_item);
+		
+		caic=new ClaimantAddItemController(AppSingleton.getInstance().getCurrentClaim());
+		
 		Spinner currency=(Spinner) findViewById(R.id.createCurrencySpinner);
 		ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this,R.array.currency, 
 				android.R.layout.simple_spinner_item);
@@ -68,7 +72,7 @@ public class ClaimantAddItemActivity extends Activity {
 		EditText descriptionView= (EditText) findViewById(R.id.createItemDescriptionEditText);
 		EditText amountView= (EditText) findViewById(R.id.createItemAmountEditText);
 		Spinner currency=(Spinner) findViewById(R.id.createCurrencySpinner);
-		ClaimantAddItemController caic=new ClaimantAddItemController(AppSingleton.getInstance().getCurrentClaim());
+		
 		caic.addItem(dateView.getText().toString(),category.getSelectedItem().toString(),
 				descriptionView.getText().toString(),Double.parseDouble(amountView.getText().toString()),
 				currency.getSelectedItem().toString());

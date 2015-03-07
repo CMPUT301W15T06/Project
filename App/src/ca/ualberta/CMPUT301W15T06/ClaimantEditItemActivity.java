@@ -36,10 +36,14 @@ import android.widget.Spinner;
 
 public class ClaimantEditItemActivity extends Activity {
 
+	private ClaimantEditItemController ceic=null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_edit_item);
+		
+		ceic=new ClaimantEditItemController(AppSingleton.getInstance().getCurrentItem());
 		
 		EditText dateView=(EditText) findViewById(R.id.editItemDateEditText);
 		EditText descriptionView=(EditText) findViewById(R.id.editItemDescriptionEditText);
@@ -101,7 +105,7 @@ public class ClaimantEditItemActivity extends Activity {
 		EditText amountView= (EditText) findViewById(R.id.editItemAmountEditText);
 		Spinner currency=(Spinner) findViewById(R.id.editCurrencySpinner);
 		
-		ClaimantEditItemController ceic=new ClaimantEditItemController(AppSingleton.getInstance().getCurrentItem());
+
 		ceic.editItem(dateView.getText().toString(),category.getSelectedItem().toString(),
 				descriptionView.getText().toString(),Double.parseDouble(amountView.getText().toString()),
 				currency.getSelectedItem().toString());

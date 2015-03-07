@@ -5,6 +5,7 @@ public class AppSingleton {
 	private ClaimList claimList;
 	private Claim currentClaim;
 	private Item currentItem;
+	private String status;
 	
     private AppSingleton() {  
     	claimList=ClaimListManager.getInstance().load();
@@ -24,6 +25,7 @@ public class AppSingleton {
 
 	public void setCurrentClaim(Claim claim) {
 		currentClaim=claim;
+		status=claim.getStatus();
 	}
 
 	public Claim getCurrentClaim() {
@@ -37,6 +39,10 @@ public class AppSingleton {
 	
 	public Item getCurrentItem() {
 		return currentItem;	
+	}
+
+	public String getStatus() {
+		return status;
 	}
 	
     

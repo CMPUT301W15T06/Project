@@ -33,10 +33,14 @@ import android.view.View;
 import android.widget.EditText;
 
 public class ClaimantAddClaimActivity extends Activity {
-	@Override
+	
+	private ClaimantAddClaimController cacc=null;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_add_claim);
+		
+		cacc=new ClaimantAddClaimController(AppSingleton.getInstance().getClaimList());
 	}
 
 	@Override
@@ -51,7 +55,7 @@ public class ClaimantAddClaimActivity extends Activity {
 		EditText beginView=(EditText) findViewById(R.id.createClaimStartingDateEditText);
 		EditText endView=(EditText) findViewById(R.id.createClaimEndDateEditText);
 		
-		ClaimantAddClaimController cacc=new ClaimantAddClaimController(AppSingleton.getInstance().getClaimList());
+
 		cacc.addClaim(nameView.getText().toString(), beginView.getText().toString(),endView.getText().toString());
 		finish();
 	}

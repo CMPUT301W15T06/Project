@@ -15,7 +15,8 @@ public class ClaimantAddItemController {
 		item.setDescription(description);
 		item.setAmount(amount);
 		item.setCurrency(currency);
-		claim.addItem(item);
+		claim.getItemList().add(item);
+		claim.notifyListeners();
 
 	}
 }

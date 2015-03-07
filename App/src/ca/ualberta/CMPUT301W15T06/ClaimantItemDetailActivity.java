@@ -13,21 +13,15 @@ import android.widget.Toast;
 
 public class ClaimantItemDetailActivity extends Activity {
 
+	private ClaimantDeleteItemController cdic=null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_item_detail);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_item_detail, menu);
-		return true;
-	}
-
-	public void onResume(){
-		super.onResume();		
+		
+		cdic=new ClaimantDeleteItemController(AppSingleton.getInstance().getCurrentClaim());
+		
 		TextView dateView=(TextView) findViewById(R.id.itemDateVTextView);
 		TextView categoryView=(TextView) findViewById(R.id.itemCategoryVTextView);
 		TextView descriptionView=(TextView) findViewById(R.id.itemDescriptionVTextView);
@@ -39,9 +33,16 @@ public class ClaimantItemDetailActivity extends Activity {
 		amountView.setText(String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
 		currencyView.setText(AppSingleton.getInstance().getCurrentItem().getCurrency());
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.claimant_item_detail, menu);
+		return true;
+	}
+
 	
 	public void deleteItem(View v){
-		ClaimantDeleteItemController cdic=new ClaimantDeleteItemController(AppSingleton.getInstance().getCurrentClaim());
 		cdic.removeItem(AppSingleton.getInstance().getCurrentItem());
 		finish();
 	}

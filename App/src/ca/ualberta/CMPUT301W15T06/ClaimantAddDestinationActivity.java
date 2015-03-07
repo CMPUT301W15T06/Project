@@ -33,10 +33,14 @@ import android.widget.EditText;
 
 public class ClaimantAddDestinationActivity extends Activity {
 
+	private ClaimantAddDestinationController cadc=null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_destination_reason);
+		
+		cadc=new ClaimantAddDestinationController(AppSingleton.getInstance().getCurrentClaim());
 	}
 
 	@Override
@@ -49,7 +53,6 @@ public class ClaimantAddDestinationActivity extends Activity {
 	public void finishAdd(View v){
 		EditText destinationView= (EditText) findViewById(R.id.DestinationEditText);
 		EditText reasonView=(EditText) findViewById(R.id.ReasonEditText);
-		ClaimantAddDestinationController cadc=new ClaimantAddDestinationController(AppSingleton.getInstance().getCurrentClaim());
 		cadc.addDestination(destinationView.getText().toString(),reasonView.getText().toString());
 		finish();
 	}
