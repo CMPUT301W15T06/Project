@@ -26,7 +26,7 @@
         <item>GBP</item>
     </string-array>
     <string-array name="item_dialog_array">
-        <item>Flag this item</item>
+        <item>Flag/Deflag this item</item>
         <item>Photo Recipt</item>
         <item>Details</item>
     </string-array>

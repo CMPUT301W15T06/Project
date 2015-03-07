@@ -49,7 +49,9 @@
         android:layout_alignLeft="@+id/createItemDateTextView"
         android:layout_below="@+id/createItemDateTextView"
         android:ems="10"
-        android:inputType="date" />
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:onClick="showDatePickerDialog" />
 
     <TextView
         android:id="@+id/createItemAmountTextView"

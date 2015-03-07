@@ -29,6 +29,9 @@ package ca.ualberta.CMPUT301W15T06;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -37,10 +40,17 @@ import android.widget.Spinner;
 
 public class ClaimantAddItemActivity extends Activity {
 
+	private EditText dateView=null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_add_item);
+		
+		dateView= (EditText) findViewById(R.id.createItemDateEditText);
+		
+			
+		
 		Spinner currency=(Spinner) findViewById(R.id.createCurrencySpinner);
 		ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this,R.array.currency, 
 				android.R.layout.simple_spinner_item);
@@ -63,16 +73,30 @@ public class ClaimantAddItemActivity extends Activity {
 	
 	
 	public void finishAdd(View v){
-		EditText dateView= (EditText) findViewById(R.id.createItemDateEditText);
+
 		Spinner category= (Spinner ) findViewById(R.id.createItemCategorySpinner);
 		EditText descriptionView= (EditText) findViewById(R.id.createItemDescriptionEditText);
 		EditText amountView= (EditText) findViewById(R.id.createItemAmountEditText);
+		
+		Double amount;
+		try {
+			amount=Double.parseDouble(amountView.getText().toString());
+		} catch (NumberFormatException e) {
+			amount=null;
+		}
+		
 		Spinner currency=(Spinner) findViewById(R.id.createCurrencySpinner);
 		ClaimantAddItemController caic=new ClaimantAddItemController(AppSingleton.getInstance().getCurrentClaim());
 		caic.addItem(dateView.getText().toString(),category.getSelectedItem().toString(),
-				descriptionView.getText().toString(),Double.parseDouble(amountView.getText().toString()),
+				descriptionView.getText().toString(),amount,
 				currency.getSelectedItem().toString());
 		finish();
+	}
+	
+	public void showDatePickerDialog(View v) {
+		AppSingleton.getInstance().setDateEditText(dateView);
+		DialogFragment newFragment = new DatePickerFragment();
+	    newFragment.show(getFragmentManager(), "datePicker");
 	}
 
 }

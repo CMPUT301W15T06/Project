@@ -8,7 +8,7 @@ public class ClaimantEditItemController {
 		this.item=item;
 	}
 	
-	public void editItem(String date, String category, String description, double amount, String currency){	
+	public void editItem(String date, String category, String description, Double amount, String currency){	
 	item.setDate(date);
 	item.setCategory(category);
 	item.setDescription(description);

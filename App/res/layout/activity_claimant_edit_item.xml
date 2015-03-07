@@ -23,8 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/editItemDateTextView"
+        android:digits=""
         android:ems="10"
-        android:inputType="date" />
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:onClick="showDatePickerDialog" />
 
     <TextView
         android:id="@+id/editItemCategoryTextView"
@@ -42,7 +45,7 @@
         android:layout_above="@+id/editItemCurrencyTextView"
         android:layout_alignParentLeft="true"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="number|numberDecimal" />
 
     <Button
         android:id="@+id/finishEditItemButton"

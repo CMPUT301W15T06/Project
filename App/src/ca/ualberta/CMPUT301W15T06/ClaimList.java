@@ -43,10 +43,7 @@ public class ClaimList extends AppModel{
 	}
 		
 
-	public void addClaim(Claim c){
-		claimList.add(c);
-		notifyListeners();
-	}
+	
 	
 	public void pushOnline(){	
 	}

@@ -36,7 +36,11 @@ public class ClaimantItemDetailActivity extends Activity {
 		dateView.setText(AppSingleton.getInstance().getCurrentItem().getDate());
 		categoryView.setText(AppSingleton.getInstance().getCurrentItem().getCategory());
 		descriptionView.setText(AppSingleton.getInstance().getCurrentItem().getDescription());
-		amountView.setText(String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
+		if (AppSingleton.getInstance().getCurrentItem().getAmount()==null){
+			amountView.setText("");
+		}else{
+			amountView.setText(String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
+		}
 		currencyView.setText(AppSingleton.getInstance().getCurrentItem().getCurrency());
 	}
 	

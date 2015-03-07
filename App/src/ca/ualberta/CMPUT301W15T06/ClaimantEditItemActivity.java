@@ -28,6 +28,7 @@ package ca.ualberta.CMPUT301W15T06;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -36,17 +37,26 @@ import android.widget.Spinner;
 
 public class ClaimantEditItemActivity extends Activity {
 
+	private EditText dateView=null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_edit_item);
 		
-		EditText dateView=(EditText) findViewById(R.id.editItemDateEditText);
+		dateView=(EditText) findViewById(R.id.editItemDateEditText);
 		EditText descriptionView=(EditText) findViewById(R.id.editItemDescriptionEditText);
 		EditText amountView=(EditText) findViewById(R.id.editItemAmountEditText);
+		
 		dateView.setText(AppSingleton.getInstance().getCurrentItem().getDate());
 		descriptionView.setText(AppSingleton.getInstance().getCurrentItem().getDescription());
-		amountView.setText(String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
+		
+		if (AppSingleton.getInstance().getCurrentItem().getAmount()==null){
+			amountView.setText("");
+		}else{
+			amountView.setText(String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
+		}
+		
 		
 		Spinner currency=(Spinner) findViewById(R.id.editCurrencySpinner);
 		ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this,R.array.currency, 
@@ -101,11 +111,25 @@ public class ClaimantEditItemActivity extends Activity {
 		EditText amountView= (EditText) findViewById(R.id.editItemAmountEditText);
 		Spinner currency=(Spinner) findViewById(R.id.editCurrencySpinner);
 		
+		Double amount;
+		try {
+			amount=Double.parseDouble(amountView.getText().toString());
+		} catch (NumberFormatException e) {
+			amount=null;
+		}
+		
 		ClaimantEditItemController ceic=new ClaimantEditItemController(AppSingleton.getInstance().getCurrentItem());
 		ceic.editItem(dateView.getText().toString(),category.getSelectedItem().toString(),
-				descriptionView.getText().toString(),Double.parseDouble(amountView.getText().toString()),
+				descriptionView.getText().toString(),amount,
 				currency.getSelectedItem().toString());
 		finish();
+	}
+	
+	public void showDatePickerDialog(View v) {
+		AppSingleton.getInstance().setDateEditText(dateView);
+		AppSingleton.getInstance().setEditDate(AppSingleton.getInstance().getCurrentItem().getDate());
+		DialogFragment newFragment = new EditDatePickerFragment();
+	    newFragment.show(getFragmentManager(), "datePicker");
 	}
 
 }

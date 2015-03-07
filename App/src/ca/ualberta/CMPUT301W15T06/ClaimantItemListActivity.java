@@ -81,7 +81,7 @@ public class ClaimantItemListActivity extends Activity {
 					@Override
 					public void update() {
 						adapter.notifyDataSetChanged();
-						ClaimListManager.getInstance().save();
+
 					}
 				});
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantItemListActivity.this);
@@ -92,6 +92,7 @@ public class ClaimantItemListActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 						if (which ==0){
+							
 										
 						}else if (which==1){
 						

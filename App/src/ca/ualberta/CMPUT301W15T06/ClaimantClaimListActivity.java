@@ -63,7 +63,6 @@ public class ClaimantClaimListActivity extends Activity {
 			@Override
 			public void update() {
 				adapter.notifyDataSetChanged();
-				ClaimListManager.getInstance().save();
 			}
 		});
 		

@@ -9,6 +9,7 @@ public class ClaimantDeleteItemController {
 	}
 	
 	public void removeItem(Item item){
-		claim.removeItem(item);
+		claim.getItemList().remove(item);
+		claim.notifyListeners();
 	}
 }

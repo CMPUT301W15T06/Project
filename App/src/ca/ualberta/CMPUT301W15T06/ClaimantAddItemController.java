@@ -8,14 +8,15 @@ public class ClaimantAddItemController {
 		this.claim=claim;
 	}
 	
-	public void addItem(String date, String category, String description, double amount, String currency){
+	public void addItem(String date, String category, String description, Double amount, String currency){
 		Item item=new Item();
 		item.setDate(date);
 		item.setCategory(category);
 		item.setDescription(description);
 		item.setAmount(amount);
 		item.setCurrency(currency);
-		claim.addItem(item);
+		claim.getItemList().add(item);
+		claim.notifyListeners();
 
 	}
 }

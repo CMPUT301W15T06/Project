@@ -86,15 +86,6 @@ public class Claim extends AppModel{
 		return status;	
 	}
 
-	public void addItem(Item item) {
-		itemList.add(item);
-		notifyListeners();
-	}
-	
-	public void removeItem(Item item) {
-		itemList.remove(item);
-		notifyListeners();
-	}
 	
 	
 	public ArrayList<Item> getItemList() {

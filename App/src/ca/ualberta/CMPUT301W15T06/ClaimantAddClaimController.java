@@ -13,7 +13,8 @@ public class ClaimantAddClaimController {
 		Claim claim=new Claim(claimName);
 		claim.setBeginDate(begin);
 		claim.setEndDate(end);
-		claimList.addClaim(claim);
+		claimList.getClaimList().add(claim);
+		claimList.notifyListeners();
 	}
 
 }

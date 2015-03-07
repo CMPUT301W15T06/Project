@@ -64,10 +64,11 @@ public class AppModel{
 	 * This method is design for notifying all listener 
 	 * in listeners hash set if there's any update
 	 */
-	protected void notifyListeners() {
+	public void notifyListeners() {
 		for (Listener  listener : getListeners()) {
 			listener.update();
 		}
+		ClaimListManager.getInstance().save();
 	}
 
 

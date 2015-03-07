@@ -33,9 +33,11 @@ public class Item extends AppModel{
 	private String date;
 	private String category;
 	private String description;
-	private double amount=0;
+	private Double amount;
 	private String currency;
 	private Recipt recipt;
+	private boolean flag=false;
+	private boolean missValue;
 
 	public Item() {	
 	}
@@ -68,12 +70,12 @@ public class Item extends AppModel{
 		return description;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(Double amount) {
 		this.amount=amount;
 		notifyListeners();
 	}
 
-	public double getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
@@ -86,8 +88,30 @@ public class Item extends AppModel{
 		return currency;
 	}
 	
+	public void setFlag(boolean b) {
+		flag=b;
+		notifyListeners();
+	}
+
+	public boolean getFlag() {
+		return flag;
+	}
+	
+	public void setMissValue(boolean b) {
+		missValue=b;
+		notifyListeners();
+	}
+
+	public boolean getMissValue() {
+		return missValue;
+	}
+	
 	public String toString(){
-		return date+'\n'+category+'\n'+description+'\n'+amount+' '+currency;
+		if (amount==null){
+			return date+'\n'+category+'\n'+description+'\n'+" "+' '+currency;
+		}else{
+			return date+'\n'+category+'\n'+description+'\n'+amount+' '+currency;
+		}
 	}
 	
 	public void setRecipt(Recipt recipt) {
@@ -114,19 +138,7 @@ public class Item extends AppModel{
 		
 	}
 
-	public void addFlag() {
-		// TODO Auto-generated method stub
-		
-	}
-	public boolean getFlag() {
-		return false;
-		
-	}
 
-	public void deleteFlag() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public boolean infoComplete() {
 		// TODO Auto-generated method stub
@@ -138,6 +150,7 @@ public class Item extends AppModel{
 		
 	}
 
+	
 
 	public String getName() {
 		return name;

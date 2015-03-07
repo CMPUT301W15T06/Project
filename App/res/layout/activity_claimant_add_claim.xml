@@ -34,7 +34,11 @@
         android:layout_above="@+id/createClaimEndingDateTextView"
         android:layout_alignLeft="@+id/createClaimEndingDateTextView"
         android:layout_marginBottom="24dp"
-        android:ems="10" >
+        android:digits=""
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:onClick="showDatePickerDialogBegin" >
 
         <requestFocus />
     </EditText>
@@ -49,7 +53,7 @@
         android:text="Starting Date"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
+    <EditText	
         android:id="@+id/createClaimNameEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +69,11 @@
         android:layout_above="@+id/createClaimFinishButton"
         android:layout_alignLeft="@+id/createClaimEndingDateTextView"
         android:layout_marginBottom="32dp"
-        android:ems="10" />
+        android:digits=""
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:onClick="showDatePickerDialogEnd" />
 
     <TextView
         android:id="@+id/createClaimNameTextView"
