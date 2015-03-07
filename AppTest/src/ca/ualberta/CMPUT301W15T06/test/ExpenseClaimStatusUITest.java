@@ -16,7 +16,7 @@ public class ExpenseClaimStatusUITest extends
 		super(ClaimantItemListActivity.class);
 	}
 
-	protected void setUp() throws Exception {
+/*	protected void setUp() throws Exception {
 		super.setUp();
 		Claim claim1 = new Claim("abc");
 		ClaimListController.addClaim("1","2,","3");	
@@ -38,6 +38,6 @@ public class ExpenseClaimStatusUITest extends
 				button.performClick();
 			}
 		});
-	}
+	}*/
 }
 
