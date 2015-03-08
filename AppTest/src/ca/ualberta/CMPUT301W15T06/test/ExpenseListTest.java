@@ -29,6 +29,8 @@ import junit.framework.TestCase;
 import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.Item;
 import ca.ualberta.CMPUT301W15T06.ItemList;
+import ca.ualberta.CMPUT301W15T06.ClaimantAddItemController;
+import ca.ualberta.CMPUT301W15T06.StatusException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -80,7 +82,7 @@ public class ExpenseListTest extends TestCase
 		// satisfy the condition "add one or more item"
 		testExpense2.setDate("2015-01-02");
 		testExpense2.setCategory("accommodation");
-		testExpense2.setAmount(160);
+		testExpense2.setAmount(160.0);
 		testExpense2.setCurrency("USD");
 		testExpense2.setDescription("Fairmont");
 		expenseList.addItem(testExpense2);
@@ -92,22 +94,24 @@ public class ExpenseListTest extends TestCase
 	  US04.06.01
       As a claimant, I want to edit an expense item while changes are allowed.
 	 */
-	public void testEditExpense(){
+	public void testEditExpense() throws StatusException{
 		// set up expense information
-		Claim claim = new Claim("one");
+		Claim c = new Claim("a");
+		ClaimantAddItemController claim = new ClaimantAddItemController(c);
+		
 		Item testExpenseEdit = new Item();
-		claim.addItem(testExpenseEdit);	
-		testExpenseEdit.setDate("2015-01-05");
-		testExpenseEdit.setCategory("vehicle rental");
-		testExpenseEdit.setAmount(3000);
-		testExpenseEdit.setCurrency("CNY");
-		testExpenseEdit.setDescription("travel purpose");
+		claim.addItem("2015-01-05", "vehicle rental", "travel purpose", 3000.0, "CNY");
+//		testExpenseEdit.setDate("2015-01-05");
+//		testExpenseEdit.setCategory("vehicle rental");
+//		testExpenseEdit.setAmount(3000.0);
+//		testExpenseEdit.setCurrency("CNY");
+//		testExpenseEdit.setDescription("travel purpose");
 		// edit the information 
-		claim.setStatus("In progress");
-		((TestCase) claim.getItem("BMW")).setName("fairmont hotel");
+		c.setStatus("In progress");
+		((TestCase) c.getItem("BMW")).setName("fairmont hotel");
 		assertTrue("Edit successfully",testExpenseEdit.getName()=="fairmont hotel");
-		claim.setStatus("Submmited");
-		((Item) claim.getItem("BMW")).setDate("2015-02-01");
+		c.setStatus("Submmited");
+		((Item) c.getItem("BMW")).setDate("2015-02-01");
 		assertFalse("cannot edit",testExpenseEdit.getDate()== "2015-02-01");		
 	}
 
@@ -151,39 +155,44 @@ public class ExpenseListTest extends TestCase
       the textual description, amount spent, unit of currency, whether there is a photographic 
       receipt, and incompleteness indicator.
 	 */
-	public void testOrderedExpenseList() throws ParseException {	
+	public void testOrderedExpenseList() throws ParseException, StatusException {	
 		// sample test data 1
 		String expenseName1 = "BMW";
 		Item expenseTest1 = new Item();
-		expenseTest1.setDate("2015-01-05");
-		expenseTest1.setCategory("vehicle rental");
-		expenseTest1.setAmount(3000);
-		expenseTest1.setCurrency("CNY");
-		expenseTest1.setDescription("travel purpose");
+//		expenseTest1.setDate("2015-01-05");
+//		expenseTest1.setCategory("vehicle rental");
+//		expenseTest1.setAmount(3000.0);
+//		expenseTest1.setCurrency("CNY");
+//		expenseTest1.setDescription("travel purpose");
 		
 		// sample test data 2
 		String expenseName2 = "bus ticket";
 		Item expenseTest2 = new Item();
-		expenseTest2.setDate("2015-01-01");
-		expenseTest2.setCategory("ground transport");
-		expenseTest2.setAmount(2.99);
-		expenseTest2.setCurrency("CAD");
-		expenseTest2.setDescription("one day bus trip");
+//		expenseTest2.setDate("2015-01-01");
+//		expenseTest2.setCategory("ground transport");
+//		expenseTest2.setAmount(2.99);
+//		expenseTest2.setCurrency("CAD");
+//		expenseTest2.setDescription("one day bus trip");
 		
 		// sample test data 3
 		String expenseName3 = "fairmont hotel";
 		Item expenseTest3 = new Item();
-		expenseTest3.setDate("2015-01-02");
-		expenseTest3.setCategory("accommodation");
-		expenseTest3.setAmount(160);
-		expenseTest3.setCurrency("USD");
-		expenseTest3.setDescription("Fairmont");
+//		expenseTest3.setDate("2015-01-02");
+//		expenseTest3.setCategory("accommodation");
+//		expenseTest3.setAmount(160.0);
+//		expenseTest3.setCurrency("USD");
+//		expenseTest3.setDescription("Fairmont");
 		
 		// add all three expense to the claim
-		Claim claim1 = new Claim("NEW");
-		claim1.addItem(expenseTest1);	
-		claim1.addItem(expenseTest2);	
-		claim1.addItem(expenseTest3);	
+		Claim c = new Claim("NEW");
+		ClaimantAddItemController claim = new ClaimantAddItemController(c);
+		claim.addItem("2015-01-05", "vehicle rental", "travel purpose", 3000.0, "CNY");
+		claim.addItem("2015-01-01", "ground transport", "one day bus trip", 2.99, "CAD");
+		claim.addItem("2015-01-02", "accommodation", "Fairmont", 160.0, "USD");
+		
+//		claim.addItem(expenseTest1);	
+//		claim.addItem(expenseTest2);	
+//		claim.addItem(expenseTest3);	
 		
 		// http://stackoverflow.com/questions/15925509/java-compare-two-dates 2015-2-12		
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault());
@@ -203,35 +212,35 @@ public class ExpenseListTest extends TestCase
 		}
 		
 		// show each expense item information
-		assertEquals("expense Test 1 date:",localDate1,claim1.getItemDate(expenseTest1));
-		assertEquals("expense Test 1 category","vehicle rental",claim1.getItemCategory(expenseTest1));
-		assertEquals("expense Test 1 amount",3000,claim1.getItemAmount(expenseTest1));
-		assertEquals("expense Test 1 currency","CNY",claim1.getItemCurrency(expenseTest1));
-		assertEquals("expense Test 1 description", "travel purpose",claim1.getItemDescription(expenseTest1));
+		assertEquals("expense Test 1 date:",localDate1,c.getItemDate(expenseTest1));
+		assertEquals("expense Test 1 category","vehicle rental",c.getItemCategory(expenseTest1));
+		assertEquals("expense Test 1 amount",3000.0,c.getItemAmount(expenseTest1));
+		assertEquals("expense Test 1 currency","CNY",c.getItemCurrency(expenseTest1));
+		assertEquals("expense Test 1 description", "travel purpose",c.getItemDescription(expenseTest1));
 		
-		assertEquals("expense Test 2 date:",localDate2,claim1.getItemDate(expenseTest2));
-		assertEquals("expense Test 2 category","grount transport",claim1.getItemCategory(expenseTest2));
-		assertEquals("expense Test 2 amount",2.99,claim1.getItemAmount(expenseTest2));
-		assertEquals("expense Test 2 currency","CAD",claim1.getItemCurrency(expenseTest2));
-		assertEquals("expense Test 2 description", "one day bus trip",claim1.getItemDescription(expenseTest2));
+		assertEquals("expense Test 2 date:",localDate2,c.getItemDate(expenseTest2));
+		assertEquals("expense Test 2 category","grount transport",c.getItemCategory(expenseTest2));
+		assertEquals("expense Test 2 amount",2.99,c.getItemAmount(expenseTest2));
+		assertEquals("expense Test 2 currency","CAD",c.getItemCurrency(expenseTest2));
+		assertEquals("expense Test 2 description", "one day bus trip",c.getItemDescription(expenseTest2));
 		
-		assertEquals("expense Test 3 date:",localDate3,claim1.getItemDate(expenseTest3));
-		assertEquals("expense Test 3 category","accommodation",claim1.getItemCategory(expenseTest3));
-		assertEquals("expense Test 3 amount",160,claim1.getItemAmount(expenseTest3));
-		assertEquals("expense Test 3 currency","USD",claim1.getItemCurrency(expenseTest3));
-		assertEquals("expense Test 3 description", "Fairmont",claim1.getItemDescription(expenseTest3));
+		assertEquals("expense Test 3 date:",localDate3,c.getItemDate(expenseTest3));
+		assertEquals("expense Test 3 category","accommodation",c.getItemCategory(expenseTest3));
+		assertEquals("expense Test 3 amount",160.0,c.getItemAmount(expenseTest3));
+		assertEquals("expense Test 3 currency","USD",c.getItemCurrency(expenseTest3));
+		assertEquals("expense Test 3 description", "Fairmont",c.getItemDescription(expenseTest3));
 		
-		System.out.println(claim1.getItemDate(expenseTest1)+claim1.getItemCategory(expenseTest1)+
-				claim1.getItemAmount(expenseTest1)+claim1.getItemCurrency(expenseTest1)+
-			    claim1.getItemDescription(expenseTest1));	
+		System.out.println(c.getItemDate(expenseTest1)+c.getItemCategory(expenseTest1)+
+				c.getItemAmount(expenseTest1)+c.getItemCurrency(expenseTest1)+
+			    c.getItemDescription(expenseTest1));	
 		
-		System.out.println(claim1.getItemDate(expenseTest2)+claim1.getItemCategory(expenseTest2)+
-				claim1.getItemAmount(expenseTest2)+claim1.getItemCurrency(expenseTest2)+
-			    claim1.getItemDescription(expenseTest2));	
+		System.out.println(c.getItemDate(expenseTest2)+c.getItemCategory(expenseTest2)+
+				c.getItemAmount(expenseTest2)+c.getItemCurrency(expenseTest2)+
+			    c.getItemDescription(expenseTest2));	
 		
-		System.out.println(claim1.getItemDate(expenseTest3)+claim1.getItemCategory(expenseTest3)+
-				claim1.getItemAmount(expenseTest3)+claim1.getItemCurrency(expenseTest3)+
-			    claim1.getItemDescription(expenseTest3));	
+		System.out.println(c.getItemDate(expenseTest3)+c.getItemCategory(expenseTest3)+
+				c.getItemAmount(expenseTest3)+c.getItemCurrency(expenseTest3)+
+			    c.getItemDescription(expenseTest3));	
 		
 	}
 

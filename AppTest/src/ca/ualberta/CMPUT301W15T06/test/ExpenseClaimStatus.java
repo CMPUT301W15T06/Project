@@ -26,9 +26,8 @@ governing permissions and limitations under the License.
 package ca.ualberta.CMPUT301W15T06.test;
 
 import junit.framework.TestCase;
-import ca.ualberta.CMPUT301W15T06.Claim;
-import ca.ualberta.CMPUT301W15T06.Item;
-import ca.ualberta.CMPUT301W15T06.Recipt;
+import ca.ualberta.CMPUT301W15T06.*;
+
 
 public class ExpenseClaimStatus extends TestCase {
 	//US 07.01.01
@@ -41,7 +40,7 @@ public class ExpenseClaimStatus extends TestCase {
 	public void testWarning(){
 		Item item = new Item();
 		Recipt re = new Recipt();
-		item.setAmount(100);
+		item.setAmount(100.0);
 		assertTrue("exist?", item.getAmount()==100);
 		item.setCategory("aa");
 		assertTrue("exist?", item.getCategory()=="aa");

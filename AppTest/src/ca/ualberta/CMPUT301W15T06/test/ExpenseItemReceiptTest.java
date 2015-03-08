@@ -25,12 +25,14 @@ governing permissions and limitations under the License.
  */
 package ca.ualberta.CMPUT301W15T06.test;
 
+import android.net.Uri;
 import junit.framework.TestCase;
 import ca.ualberta.CMPUT301W15T06.Item;
 import ca.ualberta.CMPUT301W15T06.Claim;
 
 
 public class ExpenseItemReceiptTest extends TestCase {
+	
 	//US06.01.01
 	public void reciptPhoto(){
 		Item item = new Item();
@@ -39,6 +41,7 @@ public class ExpenseItemReceiptTest extends TestCase {
 	//US06.02.01
 	public void viewReceipt(){
 		Item item = new Item();
+		item.takePhoto();
 		assertTrue("photo exist",item.getPhoto()!=false);
 	}
 	//US06.03.01
