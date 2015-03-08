@@ -31,8 +31,10 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -63,10 +65,22 @@ public class ClaimantClaimListActivity extends Activity {
 			}
 		});
 		
-		listView.setOnItemClickListener(new OnItemClickListener() {
+		listView.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				AppSingleton.getInstance().setCurrentClaim(list.get(position));
+				Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantItemListActivity.class);
+				startActivity(intent);
+			}
+			
+		});
+		listView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					final int position, long id) {
 				AppSingleton.getInstance().setCurrentClaim(list.get(position));
 				
@@ -75,6 +89,7 @@ public class ClaimantClaimListActivity extends Activity {
 				builder.setTitle(R.string.title_claim_dialog);
 				builder.setItems(R.array.claim_dialog_array, new DialogInterface.OnClickListener() {
 					
+					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
@@ -82,8 +97,7 @@ public class ClaimantClaimListActivity extends Activity {
 							Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantClaimDetailActivity.class);
 							startActivity(intent);				
 						}else if (which==1){
-							Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantItemListActivity.class);
-							startActivity(intent);
+							
 						}else if (which==2){
 							if (list.get(position).getStatus().equals("Submitted")||list.get(position).getStatus().equals("Approved")){
 								Toast.makeText(getApplicationContext(), "Can't submit a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
@@ -135,7 +149,7 @@ public class ClaimantClaimListActivity extends Activity {
 				});
 				builder.create();  
 				builder.show();
-				
+				return false;
 			}
 			
 		});

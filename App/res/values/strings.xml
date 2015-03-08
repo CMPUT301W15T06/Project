@@ -21,7 +21,7 @@
 
     <string-array name="claim_dialog_array">
         <item>Details</item>
-        <item>Item List</item>
+        <item> </item>
         <item>Submit this claim</item>
         <item>Edit this claim</item>
         <item>Delete this claim</item>
