@@ -36,6 +36,7 @@ public class US01_03_01_Test_2 extends ActivityInstrumentationTestCase2<Claimant
 		endView=(TextView) activity.findViewById(R.id.endingDateValueClaimantClaimDetailTextView);
 	}
 	
+	
 	/*
 	 * Test for US01.03.01 Basic Flow 7
 	 */
@@ -60,21 +61,5 @@ public class US01_03_01_Test_2 extends ActivityInstrumentationTestCase2<Claimant
 	    ViewAsserts.assertOnScreen(decorView, endView);
 	    assertTrue(View.GONE == endView.getVisibility());
 	}
-	
-	// US01.02.01 test 'Add a Destination' button layout
-	public void testApproverButtonlayout() {
-	    final View decorView = activity.getWindow().getDecorView();
-
-	    ViewAsserts.assertOnScreen(decorView, AddDestination);
-
-	    final ViewGroup.LayoutParams layoutParams = AddDestination.getLayoutParams();
-	    assertNotNull(layoutParams);
-	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
-	    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-	    
-	    Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);
-	    assertEquals("Incorrect label of the button", "Add a destination", view.getText());
-	}
-	
 
 }

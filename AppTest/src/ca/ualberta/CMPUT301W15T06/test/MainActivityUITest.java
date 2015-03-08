@@ -66,7 +66,7 @@ public class MainActivityUITest extends
 	    final ViewGroup.LayoutParams layoutParams =
 	           ApproverButton.getLayoutParams();
 	    assertNotNull(layoutParams);
-	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
+	    assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
 	    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
 	    
 	    Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
@@ -91,7 +91,7 @@ public class MainActivityUITest extends
 	    final ViewGroup.LayoutParams layoutParams =
 	           ClaimantButton.getLayoutParams();
 	    assertNotNull(layoutParams);
-	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
+	    assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
 	    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
 	    
 	    Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
@@ -124,7 +124,7 @@ public class MainActivityUITest extends
 		    }
 		  });
 
-		  ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5);
+		  ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 1000);
 		  // next activity is opened and captured.
 		  assertNotNull(nextActivity);
 		  nextActivity .finish();

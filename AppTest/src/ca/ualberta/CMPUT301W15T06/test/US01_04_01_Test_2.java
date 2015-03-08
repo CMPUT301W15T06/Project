@@ -2,10 +2,10 @@ package ca.ualberta.CMPUT301W15T06.test;
 
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantEditClaimActivity;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
-import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
 import android.view.View;
@@ -13,30 +13,23 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
-public class US01_01_01_Test_2 extends
-		ActivityInstrumentationTestCase2<ClaimantAddClaimActivity> {
+public class US01_04_01_Test_2 extends ActivityInstrumentationTestCase2<ClaimantEditClaimActivity> {
 
-	public US01_01_01_Test_2() {
-		super(ClaimantAddClaimActivity.class);
+	public US01_04_01_Test_2() {
+		super(ClaimantEditClaimActivity.class);
 	}
 	
-	Button ApproverButton;
-	Button ClaimantButton;
-	Button FinishButton;
 	Instrumentation instrumentation;
 	Activity activity;
-	EditText textInput;
-	Intent intent;
-	TextView input_name;
-	TextView input_start;
-	TextView input_end;
-	ListView listView;
 	EditText claimant_name;
 	EditText claimant_starting_date;
 	EditText claimant_ending_date;
+	TextView input_name;
+	TextView input_start;
+	TextView input_end;
+	Button FinishButton;
 
 	//set up
 	protected void setUp() throws Exception {
@@ -44,20 +37,19 @@ public class US01_01_01_Test_2 extends
 		instrumentation = getInstrumentation();
 		activity = getActivity();
 		setActivityInitialTouchMode(true);
-		input_name = (TextView) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimNameTextView);
-		input_start = (TextView) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimStartingDateTextView);
-		input_end = (TextView)activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimEndingDateTextView);
-		claimant_name = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimNameEditText));
-		claimant_starting_date = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimStartingDateEditText));
-		claimant_ending_date = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimEndDateEditText));
-		FinishButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton);
-		intent = new Intent(getInstrumentation().getTargetContext(), ClaimantAddClaimActivity.class);	
+		claimant_name = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimNameEditText));
+		claimant_starting_date = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateEditText));
+		claimant_ending_date = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimEndDateEditText));
+		input_name = (TextView) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimNameTextView);
+		input_start = (TextView) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateTextView);
+		input_end = (TextView) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimEndingDateTextView);
+		FinishButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimFinishButton);
 	}
 	
 	
 	/*
 	 * Test for US01.01.01 Basic Flow 7
-	 */
+	 */	
 	
 	// test text view: createClaimNameEditText
 	public void testClaimantNameTextView_layout() {
@@ -79,28 +71,25 @@ public class US01_01_01_Test_2 extends
 	    ViewAsserts.assertOnScreen(decorView, input_end);
 	    assertTrue(View.GONE == input_end.getVisibility());
 	}
-	
+
 	
 	/*
-	 * test US01.01.01 Basic Flow 8
+	 * Test for US01.04.01 Basic Flow 8
 	 */
-	
-	// fill blank 
-	@SuppressWarnings("unused")
-	private void testAddButton(String claimantName, String claimantStartingDate, String itemEndingDate) {
+	public void testEdit(String claimantName, String claimantStartingDate, String itemEndingDate) {
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton));
 		claimant_name.setText(claimantName);
 		claimant_starting_date.setText(claimantStartingDate);
-		claimant_ending_date.setText(itemEndingDate);	
+		claimant_ending_date.setText(itemEndingDate);
+		
 	}
 	
 	
 	/*
-	 * test US01.01.01 Basic Flow 9
-	 * 
+	 * Test for US01.04.01 Basic Flow 9
 	 */
 	
-	// test Finish button layout
+	//test finish button Layout
 	public void testFinishButtonlayout() {
 	    final View decorView = activity.getWindow().getDecorView();
 
@@ -112,25 +101,17 @@ public class US01_01_01_Test_2 extends
 	    assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
 	    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
 	    
-	    Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton);
+	    Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimFinishButton);
 	    assertEquals("Incorrect label of the button", "Finish", view.getText());
-	    
-	    ((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton)).performClick();
 	}
 	
-	
-	/*
-	 * test US01.01.01 Basic Flow 10
-	 * 
-	 */
-	
-	//US01.01.01 test finish button activity
+	//test finish button activity
 	public void testOpenNextActivity() {
 		  // register next activity that need to be monitored.
 		  ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
 
 		  // open current activity.
-		  ClaimantAddClaimActivity myActivity = getActivity();
+		  ClaimantEditClaimActivity myActivity = getActivity();
 		  final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createClaimFinishButton);
 		  myActivity.runOnUiThread(new Runnable() {
 		    @Override
@@ -145,4 +126,5 @@ public class US01_01_01_Test_2 extends
 		  assertNotNull(nextActivity);
 		  nextActivity .finish();
 	}
+
 }

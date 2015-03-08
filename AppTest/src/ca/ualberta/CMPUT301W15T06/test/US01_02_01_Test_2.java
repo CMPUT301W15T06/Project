@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 import android.widget.TextView;
 
@@ -30,6 +31,8 @@ public class US01_02_01_Test_2 extends
 	TextView nameView;
 	TextView beginView;
 	TextView endView;
+	EditText claimant_des;
+	EditText claimant_reason;
 	
 	//set up
 	protected void setUp() throws Exception{
@@ -42,11 +45,12 @@ public class US01_02_01_Test_2 extends
 		endView=(TextView) activity.findViewById(R.id.endingDateValueClaimantClaimDetailTextView);
 	}
 	
+	
 	/*
 	 * Test for US01.02.01 Basic Flow 7
 	 */
 	
-/*	// test text view: nameValueClaimantClaimDetailTextView
+	// test text view: nameValueClaimantClaimDetailTextView
 	public void testNameViewTexT_layout() {
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, nameView);
@@ -65,9 +69,9 @@ public class US01_02_01_Test_2 extends
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, endView);
 	    assertTrue(View.GONE == endView.getVisibility());
-	}*/
+	}
 	
-	// US01.02.01 test 'Add a Destination' button layout
+	// test 'Add a Destination' button layout
 	public void testDestinationButtonlayout() {
 	    final View decorView = activity.getWindow().getDecorView();
 	    ViewAsserts.assertOnScreen(decorView, AddDestination);
@@ -81,6 +85,7 @@ public class US01_02_01_Test_2 extends
 	    assertEquals("Incorrect label of the button", "Add a destination", view.getText());
 	}
 
+	
 	/*
 	 * Test for US01.02.01 Basic Flow 8
 	 */
@@ -100,9 +105,26 @@ public class US01_02_01_Test_2 extends
 		    }
 		  });
 
-		  ClaimantAddDestinationActivity nextActivity = (ClaimantAddDestinationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5);
+		  ClaimantAddDestinationActivity nextActivity = (ClaimantAddDestinationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 1000);
 		  // next activity is opened and captured.
-		  assertNotNull(nextActivity);
+		assertNotNull(nextActivity);
+	
+		
+	/*
+	 * test US01.02.01 Basic Flow 9
+	 */
+		  // This is layout test for DestinationEditText
+		  claimant_des = ((EditText) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.DestinationEditText));
+		  claimant_reason = ((EditText) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.ReasonEditText));
+			
+		  final View decorView = activity.getWindow().getDecorView();
+		  ViewAsserts.assertOnScreen(decorView, claimant_des);
+		  assertTrue(View.GONE == claimant_des.getVisibility());
+			
+		  // This is layout test for ReasonEditText
+		  final View decorView1 = activity.getWindow().getDecorView();
+		  ViewAsserts.assertOnScreen(decorView1, claimant_reason);
+		  assertTrue(View.GONE == claimant_reason.getVisibility());			
 		}
 }
 

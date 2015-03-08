@@ -42,8 +42,9 @@ public class US01_04_01_Test_1 extends
 		intent = new Intent(getInstrumentation().getTargetContext(), MainActivity.class);
 	}
 	
+	
 	/*
-	 * Test for US01.03.01 Basic Flow 1
+	 * Test for US01.04.01 Basic Flow 1
 	 */
 
 	// test button exists
@@ -70,7 +71,7 @@ public class US01_04_01_Test_1 extends
 
 	
 	/*
-	 * Test for US01.03.01 Basic Flow 2
+	 * Test for US01.04.01 Basic Flow 2
 	 */
 	
 	//test Claimant Button layout
@@ -119,10 +120,11 @@ public class US01_04_01_Test_1 extends
 		  // next activity is opened and captured.
 		  assertNotNull(nextActivity);
 		  //nextActivity .finish();
+	
 		  
-		 /*
-		  * Test for US01.02.01 Basic Flow 3
-		 */
+	/*
+	 * Test for US01.04.01 Basic Flow 3
+	 */
 
 		 // view which is expected to be present on the screen
 		  final View decorView = nextActivity.getWindow().getDecorView();
@@ -136,17 +138,17 @@ public class US01_04_01_Test_1 extends
 		  assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
 			
 		  
-		/*
-		 * Test for US01.02.01 Basic Flow 4
-		 * Test for US01.02.01 Basic Flow 5
-		 */	
+	/*
+	 * Test for US01.04.01 Basic Flow 4
+	 * Test for US01.04.01 Basic Flow 5
+	 */	
 		  ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		  assertNotNull(claimList.performClick());
+		  assertNotNull(claimList.performLongClick());
 			
 			
-		/*
-		 * Test for US01.02.01 Basic Flow 6
-		 */	
+	/*
+	 * Test for US01.04.01 Basic Flow 6
+	 */	
 			
 		//test ClaimList(ListView) ContextMenu	
 /*		final ContextMenu contextMenu = (ContextMenu) getActivity().getBaseContext();

@@ -77,6 +77,7 @@ public class US01_01_01_Test_1 extends
 	    assertEquals("Incorrect label of the button", "Approver", view.getText());
 	}
 
+	
 	/*
 	 * Test for US 01.01.01 Basic Flow 2
 	 */
@@ -119,6 +120,7 @@ public class US01_01_01_Test_1 extends
 		  // next activity is opened and captured.
 		  assertNotNull(nextActivity);
 	
+		  
 	 /*
 	  * Test Case for US01.01.01 Basic Flow 3
 	  */
@@ -144,17 +146,18 @@ public class US01_01_01_Test_1 extends
 	//test options menu 
 		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
 
+		
      /*	
       * Test for US01.01.01 Basic Flow 6
       */
 		 
 		// Click the menu option
 		getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
-		getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.add_new_claim, 0);
+		getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.add_new_claim, 1);
 
 		Activity a = getInstrumentation().waitForMonitorWithTimeout(am, 1000);
-		/*assertEquals(true, getInstrumentation().checkMonitorHit(am, 1));
-		a.finish();*/
+		/*assertEquals(true, getInstrumentation().checkMonitorHit(am, 1));*/
+		//a.finish();
 	}
 }
 
