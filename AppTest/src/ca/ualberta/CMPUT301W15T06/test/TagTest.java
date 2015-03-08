@@ -32,7 +32,7 @@ public class TagTest extends TestCase {
 	public void testTag(){
 		String name = "a tag";
 		Tag tagName = new Tag(name);
-		assertTrue("tag name is not equal", name.equals(tagName.getname()));		
+		assertTrue("tag name is not equal", name.equals(tagName.getName()));		
 	}
 	
 

@@ -31,6 +31,7 @@ import java.util.Collection;
 import junit.framework.TestCase;
 import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.Tag;
 import ca.ualberta.CMPUT301W15T06.TagList;
 
@@ -74,7 +75,9 @@ public class TagInClaimTest extends TestCase {
 		String name = "Travel";
 		Claim claim = new Claim(name);
 		ClaimList claimList = new ClaimList();
-		claimList.addClaim(claim);
+		ClaimantAddClaimController ClaimList = new ClaimantAddClaimController(claimList);
+		/*Manager initial*/
+		/*laimList.addClaim(name,null,null);*/
 		claimList.pushOnline();
 		assertTrue("Push Online unsuccessfully",claim.equals(claimList.pullOnline()));
 	}
