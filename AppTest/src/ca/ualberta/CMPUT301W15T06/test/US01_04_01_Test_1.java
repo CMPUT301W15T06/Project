@@ -16,13 +16,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class US01_03_01_Test_1 extends
+public class US01_04_01_Test_1 extends
 		ActivityInstrumentationTestCase2<MainActivity> {
 
-	public US01_03_01_Test_1() {
+	public US01_04_01_Test_1() {
 		super(MainActivity.class);
 	}
-
+	
 	Button ApproverButton;
 	Button ClaimantButton;
 	Instrumentation instrumentation;
@@ -160,6 +160,5 @@ public class US01_03_01_Test_1 extends
 		getInstrumentation().waitForIdleSync();
 */
 		}
-	
-	
+
 }
