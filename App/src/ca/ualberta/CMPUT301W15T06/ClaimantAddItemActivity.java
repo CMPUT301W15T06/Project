@@ -37,19 +37,23 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class ClaimantAddItemActivity extends Activity {
 
+
 	private EditText dateView=null;
-	
+	private ClaimantAddItemController caic=null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_add_item);
 		
+
 		dateView= (EditText) findViewById(R.id.createItemDateEditText);
-		
-			
+		caic=new ClaimantAddItemController(AppSingleton.getInstance().getCurrentClaim());
+
 		
 		Spinner currency=(Spinner) findViewById(R.id.createCurrencySpinner);
 		ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this,R.array.currency, 
@@ -86,10 +90,14 @@ public class ClaimantAddItemActivity extends Activity {
 		}
 		
 		Spinner currency=(Spinner) findViewById(R.id.createCurrencySpinner);
-		ClaimantAddItemController caic=new ClaimantAddItemController(AppSingleton.getInstance().getCurrentClaim());
-		caic.addItem(dateView.getText().toString(),category.getSelectedItem().toString(),
-				descriptionView.getText().toString(),amount,
-				currency.getSelectedItem().toString());
+		
+		try {
+			caic.addItem(dateView.getText().toString(),category.getSelectedItem().toString(),
+					descriptionView.getText().toString(),amount,
+					currency.getSelectedItem().toString());
+		} catch (StatusException e) {
+			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}
 		finish();
 	}
 	

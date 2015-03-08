@@ -30,13 +30,18 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ClaimantAddDestinationActivity extends Activity {
 
+	private ClaimantAddDestinationController cadc=null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_destination_reason);
+		
+		cadc=new ClaimantAddDestinationController(AppSingleton.getInstance().getCurrentClaim());
 	}
 
 	@Override
@@ -49,8 +54,11 @@ public class ClaimantAddDestinationActivity extends Activity {
 	public void finishAdd(View v){
 		EditText destinationView= (EditText) findViewById(R.id.DestinationEditText);
 		EditText reasonView=(EditText) findViewById(R.id.ReasonEditText);
-		ClaimantAddDestinationController cadc=new ClaimantAddDestinationController(AppSingleton.getInstance().getCurrentClaim());
-		cadc.addDestination(destinationView.getText().toString(),reasonView.getText().toString());
+		try {
+			cadc.addDestination(destinationView.getText().toString(),reasonView.getText().toString());
+		} catch (StatusException e) {
+			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}
 		finish();
 	}
 

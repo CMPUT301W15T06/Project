@@ -34,17 +34,23 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class ClaimantEditItemActivity extends Activity {
 
 	private EditText dateView=null;
+	private ClaimantEditItemController ceic=null;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_edit_item);
 		
+
 		dateView=(EditText) findViewById(R.id.editItemDateEditText);
+		ceic=new ClaimantEditItemController(AppSingleton.getInstance().getCurrentItem());
+		
 		EditText descriptionView=(EditText) findViewById(R.id.editItemDescriptionEditText);
 		EditText amountView=(EditText) findViewById(R.id.editItemAmountEditText);
 		
@@ -111,17 +117,22 @@ public class ClaimantEditItemActivity extends Activity {
 		EditText amountView= (EditText) findViewById(R.id.editItemAmountEditText);
 		Spinner currency=(Spinner) findViewById(R.id.editCurrencySpinner);
 		
+
 		Double amount;
 		try {
 			amount=Double.parseDouble(amountView.getText().toString());
 		} catch (NumberFormatException e) {
 			amount=null;
 		}
-		
-		ClaimantEditItemController ceic=new ClaimantEditItemController(AppSingleton.getInstance().getCurrentItem());
-		ceic.editItem(dateView.getText().toString(),category.getSelectedItem().toString(),
-				descriptionView.getText().toString(),amount,
-				currency.getSelectedItem().toString());
+
+
+		try {
+			ceic.editItem(dateView.getText().toString(),category.getSelectedItem().toString(),
+					descriptionView.getText().toString(),amount,
+					currency.getSelectedItem().toString());
+		} catch (StatusException e) {
+			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}
 		finish();
 	}
 	

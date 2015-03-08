@@ -82,5 +82,10 @@
             android:name=".ClaimantEditItemActivity"
             android:label="@string/title_activity_claimant_edit_item" >
         </activity>
+        <activity
+            android:name=".ClaimantEditClaimActivity"
+            android:label="@string/title_activity_claimant_edit_claim" >
+        </activity>
     </application>
+
 </manifest>

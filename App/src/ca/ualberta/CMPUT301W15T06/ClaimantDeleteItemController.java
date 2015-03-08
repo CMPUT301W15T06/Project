@@ -8,7 +8,10 @@ public class ClaimantDeleteItemController {
 		this.claim=claim;
 	}
 	
-	public void removeItem(Item item){
+	public void removeItem(Item item) throws StatusException{
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
 		claim.getItemList().remove(item);
 		claim.notifyListeners();
 	}

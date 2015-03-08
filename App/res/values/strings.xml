@@ -22,11 +22,12 @@
     <string-array name="claim_dialog_array">
         <item>Details</item>
         <item>Item List</item>
-        <item>EUR</item>
-        <item>GBP</item>
+        <item>Submit this claim</item>
+        <item>Edit this claim</item>
+        <item>Delete this claim</item>
     </string-array>
     <string-array name="item_dialog_array">
-        <item>Flag/Deflag this item</item>
+        <item>Flag/Deflag for Incompleteness</item>
         <item>Photo Recipt</item>
         <item>Details</item>
     </string-array>
@@ -56,6 +57,6 @@
     <string name="title_activity_claimant_add_item">Add an Item</string>
     <string name="title_activity_claimant_item_detail">Item Detail</string>
     <string name="title_activity_claimant_edit_item">Edit this Item</string>
+    <string name="title_activity_claimant_edit_claim">Edit Claim</string>
 
 </resources>
-

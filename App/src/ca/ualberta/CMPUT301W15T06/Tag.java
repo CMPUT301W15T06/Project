@@ -34,7 +34,7 @@ public class Tag {
 		
 	}
 
-	public String getname() {
+	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}

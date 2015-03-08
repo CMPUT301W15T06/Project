@@ -28,6 +28,7 @@ package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
 
+
 public class Claim extends AppModel{
 
 	private String name;
@@ -39,12 +40,14 @@ public class Claim extends AppModel{
 	private String approver;
 	private String comment;	
 	private ArrayList<Tag> tagList;
+	
 
 	
 	public Claim(String claimName) {
 		super();
 		itemList=new ArrayList<Item>();
 		destinationList=new ArrayList<Destination>();
+		tagList=new ArrayList<Tag>();
 		name=claimName;
 	}
 	
@@ -92,22 +95,39 @@ public class Claim extends AppModel{
 		return itemList;
 	}
 	
-	public void addDestination(Destination destination) {
-		destinationList.add(destination);
-		notifyListeners();
-	}
-	
-	public void removeDestination(Destination destination) {
-		destinationList.remove(destination);
-		notifyListeners();
-	}
-	
+
 	public ArrayList<Destination> getDestinationList() {
 		return destinationList;
 	}
 	
 	public String toString(){
-		return name+'\n'+beginDate+'\n';
+		String dest="";
+		for (Destination d:destinationList){
+			dest+='\n'+"      "+d.getName();
+		}
+		String tag="";
+		for (Tag t:tagList){
+			dest+='\n'+"      "+t.getName();
+		}
+		return "Starting Date: "+beginDate+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+"Tag(s) : "+tag+'\n'+
+				getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY");
+
+	}
+	
+	public String getCM(String currency){
+		Double total = null;
+
+		for (Item item:itemList){
+			if(item.getCurrency().equals(currency)&&item.getAmount()!=null){
+				if(total==null){
+					total=item.getAmount();
+				}else{
+					total+=item.getAmount();
+				}
+			}		
+		}
+
+		return total==null?(currency+": "):(currency+": "+total.toString());
 	}
 	
 	public ArrayList<Item> getClaimDetail() {

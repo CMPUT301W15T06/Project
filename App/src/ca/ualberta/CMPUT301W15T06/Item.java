@@ -35,9 +35,9 @@ public class Item extends AppModel{
 	private String description;
 	private Double amount;
 	private String currency;
-	private Recipt recipt;
+	private Recipt recipt=null;
 	private boolean flag=false;
-	private boolean missValue;
+	
 
 	public Item() {	
 	}
@@ -97,21 +97,11 @@ public class Item extends AppModel{
 		return flag;
 	}
 	
-	public void setMissValue(boolean b) {
-		missValue=b;
-		notifyListeners();
-	}
 
-	public boolean getMissValue() {
-		return missValue;
-	}
 	
 	public String toString(){
-		if (amount==null){
-			return date+'\n'+category+'\n'+description+'\n'+" "+' '+currency;
-		}else{
-			return date+'\n'+category+'\n'+description+'\n'+amount+' '+currency;
-		}
+		return "Date: "+date+'\n'+"Category: "+category+'\n'+"Description: "+description+'\n'+"Spend: "+(amount==null?"   ":amount)+' '+currency+'\n'+
+				"Photographic Receipt: "+(recipt==null?"Not Have":"Have")+'\n'+"Incompleteness: "+(flag?"YES":"NO");	
 	}
 	
 	public void setRecipt(Recipt recipt) {

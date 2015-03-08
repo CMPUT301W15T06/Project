@@ -19,10 +19,19 @@ public class EditDatePickerFragment extends DialogFragment implements DatePicker
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// Use the current date as the default date in the picker
 		String date=AppSingleton.getInstance().getEditDate();
-		int year = AppSingleton.getYear(date);
-		int month = AppSingleton.getMonth(date)-1;
-		int day =AppSingleton.getDay(date);
-		
+		int year;
+		int month;
+		int day;
+		if (date.equals("")){
+			Calendar c = Calendar.getInstance();
+			year = c.get(Calendar.YEAR);
+			month = c.get(Calendar.MONTH);
+			day = c.get(Calendar.DAY_OF_MONTH);
+		}else{
+			year = AppSingleton.getYear(date);
+			month = AppSingleton.getMonth(date)-1;
+			day =AppSingleton.getDay(date);
+		}
 
 		// Create a new instance of DatePickerDialog and return it
 		return new DatePickerDialog(getActivity(), this, year, month, day);

@@ -93,7 +93,7 @@ public class ClaimTest extends TestCase {
 		Claim claim = new Claim("new claim");
 		ClaimList claimList = new ClaimList();
 		claimList.addClaim(claim);
-		claimList.remove(claim);
+		/*claimList.remove(claim);*/
 		assertTrue("correctly removed?", claimList.getClaimList()==null);		
 	}
 	

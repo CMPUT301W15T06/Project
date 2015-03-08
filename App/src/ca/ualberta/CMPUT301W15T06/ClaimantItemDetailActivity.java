@@ -13,10 +13,38 @@ import android.widget.Toast;
 
 public class ClaimantItemDetailActivity extends Activity {
 
+	private ClaimantDeleteItemController cdic=null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_item_detail);
+		
+		cdic=new ClaimantDeleteItemController(AppSingleton.getInstance().getCurrentClaim());
+		
+		final TextView dateView=(TextView) findViewById(R.id.itemDateVTextView);
+		final TextView categoryView=(TextView) findViewById(R.id.itemCategoryVTextView);
+		final TextView descriptionView=(TextView) findViewById(R.id.itemDescriptionVTextView);
+		final TextView amountView=(TextView) findViewById(R.id.itemAmountVTextView);
+		final TextView currencyView=(TextView) findViewById(R.id.itemCurrencyVTextView);
+		dateView.setText(AppSingleton.getInstance().getCurrentItem().getDate());
+		categoryView.setText(AppSingleton.getInstance().getCurrentItem().getCategory());
+		descriptionView.setText(AppSingleton.getInstance().getCurrentItem().getDescription());
+		amountView.setText(AppSingleton.getInstance().getCurrentItem().getAmount()==null?"":String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
+		currencyView.setText(AppSingleton.getInstance().getCurrentItem().getCurrency());
+		
+		AppSingleton.getInstance().getCurrentItem().addListener(new Listener() {
+			
+			@Override
+			public void update() {
+				// TODO Auto-generated method stub
+				dateView.setText(AppSingleton.getInstance().getCurrentItem().getDate());
+				categoryView.setText(AppSingleton.getInstance().getCurrentItem().getCategory());
+				descriptionView.setText(AppSingleton.getInstance().getCurrentItem().getDescription());
+				amountView.setText(AppSingleton.getInstance().getCurrentItem().getAmount()==null?"":String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
+				currencyView.setText(AppSingleton.getInstance().getCurrentItem().getCurrency());
+			}
+		});
 	}
 
 	@Override
@@ -26,27 +54,13 @@ public class ClaimantItemDetailActivity extends Activity {
 		return true;
 	}
 
-	public void onResume(){
-		super.onResume();		
-		TextView dateView=(TextView) findViewById(R.id.itemDateVTextView);
-		TextView categoryView=(TextView) findViewById(R.id.itemCategoryVTextView);
-		TextView descriptionView=(TextView) findViewById(R.id.itemDescriptionVTextView);
-		TextView amountView=(TextView) findViewById(R.id.itemAmountVTextView);
-		TextView currencyView=(TextView) findViewById(R.id.itemCurrencyVTextView);
-		dateView.setText(AppSingleton.getInstance().getCurrentItem().getDate());
-		categoryView.setText(AppSingleton.getInstance().getCurrentItem().getCategory());
-		descriptionView.setText(AppSingleton.getInstance().getCurrentItem().getDescription());
-		if (AppSingleton.getInstance().getCurrentItem().getAmount()==null){
-			amountView.setText("");
-		}else{
-			amountView.setText(String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
-		}
-		currencyView.setText(AppSingleton.getInstance().getCurrentItem().getCurrency());
-	}
 	
 	public void deleteItem(View v){
-		ClaimantDeleteItemController cdic=new ClaimantDeleteItemController(AppSingleton.getInstance().getCurrentClaim());
-		cdic.removeItem(AppSingleton.getInstance().getCurrentItem());
+		try {
+			cdic.removeItem(AppSingleton.getInstance().getCurrentItem());
+		} catch (StatusException e) {
+			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}
 		finish();
 	}
 	

@@ -9,6 +9,8 @@ public class AppSingleton {
 	private Item currentItem;
 	private EditText dateEditText;
 	private String editDate;
+	private String status;
+
 	
     private AppSingleton() {  
     	claimList=ClaimListManager.getInstance().load();
@@ -28,6 +30,7 @@ public class AppSingleton {
 
 	public void setCurrentClaim(Claim claim) {
 		currentClaim=claim;
+		status=claim.getStatus();
 	}
 
 	public Claim getCurrentClaim() {
@@ -42,6 +45,7 @@ public class AppSingleton {
 	public Item getCurrentItem() {
 		return currentItem;	
 	}
+
 
 	
 	public void setDateEditText(EditText date){
@@ -60,6 +64,12 @@ public class AppSingleton {
 	
 	public String getEditDate(){
 		return editDate;
+	}
+
+	
+	public String getStatus() {
+		return status;
+
 	}
 	
 	

@@ -6,7 +6,7 @@ import java.util.Collection;
 import junit.framework.TestCase;
 
 import ca.ualberta.CMPUT301W15T06.Claim;
-import ca.ualberta.CMPUT301W15T06.ClaimListController;
+import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.ClaimantEditItemActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
 import ca.ualberta.CMPUT301W15T06.Item;

@@ -37,14 +37,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class ClaimantItemListActivity extends Activity {
 
+	private FlagController fc=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_item_list);
+		
 		
 		ListView listView = (ListView) findViewById(R.id.itemListView);
 		final ArrayList<Item> list =AppSingleton.getInstance().getCurrentClaim().getItemList();
@@ -56,34 +59,18 @@ public class ClaimantItemListActivity extends Activity {
 			@Override
 			public void update() {
 				adapter.notifyDataSetChanged();
-				ClaimListManager.getInstance().save();
 			}
 		});
 		
-		AppSingleton.getInstance().getCurrentClaim().addListener(new Listener() {
-			
-			@Override
-			public void update() {
-				adapter.notifyDataSetChanged();
-				ClaimListManager.getInstance().save();
-			}
-		});
 
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+					final int position, long id) {
 				AppSingleton.getInstance().setCurrentItem(list.get(position));
-				AppSingleton.getInstance().getCurrentItem().addListener(new Listener() {
-					
-					@Override
-					public void update() {
-						adapter.notifyDataSetChanged();
-
-					}
-				});
+				
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantItemListActivity.this);
 				builder.setTitle(R.string.title_item_dialog);
 				builder.setItems(R.array.item_dialog_array, new DialogInterface.OnClickListener() {
@@ -92,7 +79,12 @@ public class ClaimantItemListActivity extends Activity {
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
 						if (which ==0){
-							
+							fc=new FlagController(list.get(position));
+							try {
+								fc.changeFlag();
+							} catch (StatusException e) {
+								Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+							}
 										
 						}else if (which==1){
 						

@@ -40,19 +40,23 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-public class ClaimantAddClaimActivity extends Activity{
-	
 
+public class ClaimantAddClaimActivity extends Activity {
+	
+	private ClaimantAddClaimController cacc=null;
 	private EditText beginView=null;
 	private EditText endView=null;
-	
-	@Override
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_add_claim);
 		
+		cacc=new ClaimantAddClaimController(AppSingleton.getInstance().getClaimList());
+
 		beginView=(EditText) findViewById(R.id.createClaimStartingDateEditText);
 		endView=(EditText) findViewById(R.id.createClaimEndDateEditText);
+
+
 	}
 
 	@Override
@@ -64,8 +68,6 @@ public class ClaimantAddClaimActivity extends Activity{
 	
 	public void finishAdd(View v){
 		EditText nameView= (EditText) findViewById(R.id.createClaimNameEditText);
-
-		ClaimantAddClaimController cacc=new ClaimantAddClaimController(AppSingleton.getInstance().getClaimList());
 		cacc.addClaim(nameView.getText().toString(), beginView.getText().toString(),endView.getText().toString());
 		finish();
 	}

@@ -8,9 +8,29 @@ public class ClaimantAddDestinationController {
 	}
 	
 
-	public void addDestination(String dest, String reason) {
+	public void addDestination(String dest, String reason) throws StatusException {
+		
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
+		
 		Destination destination=new Destination(dest);
 		destination.setReason(reason);
-		claim.addDestination(destination);	
+		if (dest.equals("")||reason.equals("")){
+			destination.setMissValue(true);
+		}else{
+			destination.setMissValue(false);
+		}
+		
+		destination.addModelListener(new Listener() {
+			
+			@Override
+			public void update() {
+				// TODO Auto-generated method stub
+				claim.notifyListeners();
+			}
+		});
+		claim.getDestinationList().add(destination);	
+		claim.notifyListeners();
 	}
 }
