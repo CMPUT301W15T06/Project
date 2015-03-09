@@ -153,7 +153,7 @@ public class US01_02_01_Test_1 extends
 	 */	
 	
 	//test ClaimList(ListView) ContextMenu	
-/*		final ContextMenu contextMenu = (ContextMenu) getActivity().getBaseContext();
+		final ContextMenu contextMenu = (ContextMenu) getActivity().getBaseContext();
 		assertTrue(contextMenu != null);
 
 		getActivity().runOnUiThread(new Runnable() {
@@ -162,7 +162,7 @@ public class US01_02_01_Test_1 extends
 		        }
 		    });
 		getInstrumentation().waitForIdleSync();
-		*/
+		
 	}
 		
 }
