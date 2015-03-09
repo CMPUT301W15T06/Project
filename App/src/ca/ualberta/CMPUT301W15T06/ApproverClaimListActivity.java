@@ -23,6 +23,21 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
+ 
+/**
+ * This <code>ApproverClaimListActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class controls the User Interface of 
+ * <code>Claim</code> list for approver. This view displays a list of
+ * <code>Claim</code> and creates an option menu and return true as 
+ * the boolean value. It will be used when the approver asks to access to 
+ * the <code>Claim</code> list.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.view.Menu
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 import android.os.Bundle;

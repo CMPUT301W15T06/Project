@@ -25,7 +25,7 @@ public class ExpenseItemReceiptUITest extends
 	
 	//test for photo DISPLAY UI
 	public void testDisplayPhoto() {
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverRecieptView));
+		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverReceiptView));
 	}
 		
 	

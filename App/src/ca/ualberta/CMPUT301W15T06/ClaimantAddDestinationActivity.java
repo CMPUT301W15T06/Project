@@ -23,6 +23,22 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
+ 
+ /**
+ * This <code>ClaimantAddDestinationActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class controls the User Interface of 
+ * adding Destination. The interface need Bundle, EditText, option menu bar 
+ * and finishBbutton. 
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.view.Menu
+ * @see android.view.View
+ * @see android.widget.EditText
+ * @see android.widget.Toast
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 import android.os.Bundle;
@@ -34,6 +50,10 @@ import android.widget.Toast;
 
 public class ClaimantAddDestinationActivity extends Activity {
 
+	/**
+	 * Set a ClaimantAddDestinationController object cadc with initial 
+	 * default value null.
+	 */
 	private ClaimantAddDestinationController cadc=null;
 	
 	@Override
@@ -51,6 +71,15 @@ public class ClaimantAddDestinationActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * This method will create a finish button to trigger the action finishAdd. 
+	 * It will also check the exceptions to prevent crush.
+	 * 
+	 * @param v  a View object
+	 * @see android.view.View
+	 * @see android.widget.EditText
+	 * @exception StatusException
+	 */
 	public void finishAdd(View v){
 		EditText destinationView= (EditText) findViewById(R.id.DestinationEditText);
 		EditText reasonView=(EditText) findViewById(R.id.ReasonEditText);

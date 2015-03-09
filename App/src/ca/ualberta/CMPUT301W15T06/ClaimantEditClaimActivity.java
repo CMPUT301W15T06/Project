@@ -28,8 +28,8 @@ public class ClaimantEditClaimActivity extends Activity {
 		endView=(EditText) findViewById(R.id.editClaimEndDateEditText);
 		
 		nameView.setText(AppSingleton.getInstance().getCurrentClaim().getName());
-		beginView.setText(AppSingleton.getInstance().getCurrentClaim().getBeginDate());
-		endView.setText(AppSingleton.getInstance().getCurrentClaim().getEndDate());
+		beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
+		endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
 		
 	}
 
@@ -54,7 +54,11 @@ public class ClaimantEditClaimActivity extends Activity {
 	
 	public void finishEdit(View v){
 		try {
-			cecc.editClaim(nameView.getText().toString(), beginView.getText().toString(),endView.getText().toString());
+			if (beginView.getText().toString().equals("")){
+				Toast.makeText(getApplicationContext(), "Start Date can't be empty", Toast.LENGTH_LONG).show();
+			}else{
+				cecc.editClaim(nameView.getText().toString(), beginView.getText().toString(),endView.getText().toString());
+			}
 		} catch (StatusException e) {
 			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
 		}

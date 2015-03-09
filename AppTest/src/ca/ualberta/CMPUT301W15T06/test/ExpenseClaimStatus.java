@@ -31,57 +31,61 @@ import ca.ualberta.CMPUT301W15T06.*;
 
 public class ExpenseClaimStatus extends TestCase {
 	//US 07.01.01
-	public void testSubmitApproval(){
+	public void testSubmitApproval() throws StatusException{
 		Claim claim = new Claim("123");
+		ClaimantAddItemController i1 = new ClaimantAddItemController(claim);
+		i1.addItem("2015-01-01", "ground transport", "one day bus trip", 2.99, "CAD");
 		assertTrue("can be submmit",claim.getStatus().toString().equals("in progress"));
 		assertTrue("editable?", claim.getEdiable()==false);
 	}
 	//US 07.02.01
-	public void testWarning(){
+	public void testWarning() throws StatusException{
+		Claim claim = new Claim("123");
+		ClaimantAddItemController i1 = new ClaimantAddItemController(claim);
+		i1.addItem("2015-01-01", "ground transport", "one day bus trip", 2.99, "CAD");
 		Item item = new Item();
-		Recipt re = new Recipt();
-		item.setAmount(100.0);
+		Receipt re = new Receipt();
 		assertTrue("exist?", item.getAmount()==100);
-		item.setCategory("aa");
 		assertTrue("exist?", item.getCategory()=="aa");
-		item.setCurrency("CNY");
-		item.setDate("2010-10-10");
-		item.setDescription("abcd");
-		item.setRecipt(re);
 		if (item.getAmount()!=0){
 			if (item.getCategory()!=""){
 				if (item.getCurrency()!=""){
 					if (item.getDate()!="")
 						if(item.getDescription()!=""){
-							if (item.getName()!=""){
 								if (item.getRecipt()!=null){
 									//no warning
 								}
 							}
 						}
 				}
-			}
 			
 		}else{
 			//warning
 		}
 	}
+	
 	//US 07.03.01
-	public void testReturned(){
+	public void testReturned() throws StatusException{
 		Claim claim = new Claim("123");
+		ClaimantAddItemController i1 = new ClaimantAddItemController(claim);
+		i1.addItem("2015-01-01", "ground transport", "one day bus trip", 2.99, "CAD");
 		assertTrue("can be submmit",claim.getStatus().toString().equals("Returned"));
 		assertTrue("editable?", claim.getEdiable()==true);
 	}
 	//US 07.04.01
-	public void testApproved(){
+	public void testApproved() throws StatusException{
 		Claim claim = new Claim("123");
+		ClaimantAddItemController i1 = new ClaimantAddItemController(claim);
+		i1.addItem("2015-01-01", "ground transport", "one day bus trip", 2.99, "CAD");
 		assertTrue("can be submmit",claim.getStatus().toString().equals("Approved"));
 		assertTrue("editable?", claim.getEdiable()==false);
 	}
 	
 	//US 07.05.01
-	public void testApproverComment() {
+	public void testApproverComment() throws StatusException {
 		Claim claim = new Claim("Test");
+		ClaimantAddItemController i1 = new ClaimantAddItemController(claim);
+		i1.addItem("2015-01-01", "ground transport", "one day bus trip", 2.99, "CAD");
 		claim.setApprover("A");
 		claim.setComment("abc");
 		assertTrue("match?",claim.getApprover().equals("A"));

@@ -32,7 +32,6 @@
 //import android.widget.Spinner;
 //import junit.framework.TestCase;
 //import ca.ualberta.CMPUT301W15T06.Item;
-//import ca.ualberta.CMPUT301W15T06.ItemList;
 //import ca.ualberta.CMPUT301W15T06.R;
 //
 //// https://www.youtube.com/watch?v=k9ZNbsc0Qgo&list=PL240uJOh_Vb4PtMZ0f7N8ACYkCLv0673O&index=3  2015-02-08

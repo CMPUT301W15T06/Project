@@ -25,6 +25,7 @@ import java.util.Comparator;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -41,6 +42,7 @@ import android.widget.Toast;
 
 public class ClaimantClaimListActivity extends Activity {
 	private ClaimantClaimListController cclc=null;
+	private Dialog dialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -161,13 +163,8 @@ public class ClaimantClaimListActivity extends Activity {
 			@Override
 			public int compare(Claim lhs, Claim rhs) {
 				// TODO Auto-generated method stub
+				return rhs.getBeginDate().compareTo(lhs.getBeginDate());			
 				
-				int lh=AppSingleton.getYear(lhs.getBeginDate())*10000+AppSingleton.getMonth(lhs.getBeginDate())*100+AppSingleton.getDay(lhs.getBeginDate());
-				int rh=AppSingleton.getYear(rhs.getBeginDate())*10000+AppSingleton.getMonth(rhs.getBeginDate())*100+AppSingleton.getDay(rhs.getBeginDate());
-				if(lh<rh){
-					return 1;
-				}
-				return -1;			
 			}
 		};
 	}
@@ -207,5 +204,15 @@ public class ClaimantClaimListActivity extends Activity {
 			}
 		}
 		return result;
+	}
+	
+	public Dialog getDialog() {
+		return dialog;
+	}
+	
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
+		super.onPrepareDialog(id, dialog, args);
+		this.dialog = dialog;
 	}
 }

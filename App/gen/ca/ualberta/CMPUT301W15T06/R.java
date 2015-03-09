@@ -59,7 +59,7 @@ public final class R {
         public static final int addItemButton=0x7f09004b;
         public static final int add_new_claim=0x7f090054;
         public static final int approverButton=0x7f090052;
-        public static final int approverRecieptView=0x7f090009;
+        public static final int approverReceiptView=0x7f090009;
         public static final int approvername=0x7f090024;
         public static final int claimListView=0x7f090027;
         public static final int claimantButton=0x7f090051;
@@ -127,7 +127,7 @@ public final class R {
         public static final int activity_approver_claim_detail_list=0x7f030000;
         public static final int activity_approver_claim_list=0x7f030001;
         public static final int activity_approver_item_list=0x7f030002;
-        public static final int activity_approver_recipt_activity=0x7f030003;
+        public static final int activity_approver_receipt_activity=0x7f030003;
         public static final int activity_claimant_add_claim=0x7f030004;
         public static final int activity_claimant_add_destination=0x7f030005;
         public static final int activity_claimant_add_item=0x7f030006;
@@ -138,7 +138,7 @@ public final class R {
         public static final int activity_claimant_edit_item=0x7f03000b;
         public static final int activity_claimant_item_detail=0x7f03000c;
         public static final int activity_claimant_item_list=0x7f03000d;
-        public static final int activity_claimant_recipt=0x7f03000e;
+        public static final int activity_claimant_receipt=0x7f03000e;
         public static final int activity_claimant_tag_list=0x7f03000f;
         public static final int activity_main=0x7f030010;
     }
