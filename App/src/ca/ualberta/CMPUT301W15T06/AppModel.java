@@ -1,10 +1,11 @@
 /**
- * The <code>AppModel</code> class can create a hash set for listeners,
- * set up listeners, add a listener, remove a listener, 
- * and notify listeners for updates.
+ * The <code>AppModel</code> class can create an ArrayList named
+ * listeners, which contains Listener subject. This class can
+ * set up listeners, add a Listener to listeners, remove a listener
+ * from listeners, notify listeners for updates, set up missValue.
  * 
  * @author CMPUT301W15T06
- * @version 02/28/2015
+ * @version 03/07/2015
  * @see java.util.ArrayList
  * @see java.util.HashSet
  * @see java.util.Set
@@ -18,24 +19,35 @@ import java.util.Set;
 
 public class AppModel{
 	
-	private transient ArrayList<Listener> listners;
-	private transient ArrayList<Listener> modelListners;
+	/**
+	 * Set two private ArrayList variable named listeners
+	 * and modelListeners to contain Listener subject
+	 * 
+	 * @see java.util.ArrayList;
+	 */
+	private transient ArrayList<Listener> listeners;
+	private transient ArrayList<Listener> modelListeners;
+	/**
+	 * Set a boolean variable missValue to justify the 
+	 * <code>AppModel</code>
+	 */
 	private boolean missValue;
 	
 	/**
-	 * This method creates a ArrayList for listeners that 
-	 * records all listener
+	 * This method creates an ArrayList listeners and an
+	 * ArrayList modelListers for listeners that 
+	 * records all Listener
 	 */
 	public AppModel(){
-		listners=new ArrayList<Listener>();
-		modelListners=new ArrayList<Listener>();
+		listeners=new ArrayList<Listener>();
+		modelListeners=new ArrayList<Listener>();
 	}
 	
 	/**
-	 * This method allows user to add a listener to the 
+	 * This method allows user to add a Listener to the 
 	 * ArrayList listeners
 	 * 
-	 * @param l  a Listener type l
+	 * @param l  a Listener type
 	 */
 	public void addListener(Listener l){
 		if (!getListeners().contains(l)){
@@ -44,10 +56,10 @@ public class AppModel{
 	}
 	
 	/**
-	 * This method allows user to remove a listener from
+	 * This method allows user to remove a Listener from
 	 * the ArrayList listeners
 	 * 
-	 * @param l  a Listener type l
+	 * @param l  a Listener type
 	 */
 	public void removeListener(Listener l){
 		getListeners().remove(l);
@@ -57,22 +69,22 @@ public class AppModel{
 	 * This method checks if there's any listeners, 
 	 * if not, set up a new one and return it for further use
 	 * 
-	 * @return listeners
+	 * @return listeners  an ArrayList type
 	 */
 	private ArrayList<Listener> getListeners(){
-		if (listners==null){
-			listners=new ArrayList<Listener>();
+		if (listeners==null){
+			listeners=new ArrayList<Listener>();
 		}
-		return listners;
+		return listeners;
 	}
 	
 
 	/**
-	 * This method is design for notifying all listener 
-	 * in listeners ArrayList if there's any update, and
-	 * the ClaimListManager will save the change 
+	 * This method is design for notifying all Listener 
+	 * in listeners ArrayList and modelListeners ArrayList 
+	 * if there's any update, and the ClaimListManager 
+	 * will save the change 
 	 */
-
 	public void notifyListeners() {
 		for (Listener  listener : getListeners()) {
 			listener.update();
@@ -84,10 +96,11 @@ public class AppModel{
 	}
 
 	/**
-	 * This method allows user to add a listener to the 
-	 * model if the model does not contains a Listener l
+	 * This method allows user to add a Listener to the 
+	 * modelListeners if the model does not contains 
+	 * a Listener l
 	 * 
-	 * @param l a Listener type l
+	 * @param l  a Listener type
 	 */
 	public void addModelListener(Listener l){
 		if (!getModelListeners().contains(l)){
@@ -96,33 +109,34 @@ public class AppModel{
 	}
 	
 	/**
-	 * This model is designed for remove a listener from
-	 * the model.
+	 * This method is designed to remove a Listener from
+	 * the modelListeners ArrayList
 	 * 
-	 * @param l a Listener type l
+	 * @param l  a Listener type
 	 */
 	public void removeModelListener(Listener l){
 		getModelListeners().remove(l);
 	}
 	
 	/**
-	 * This method will create a Listeners ArrayList model 
-	 * if there's no model and return the new Listeners model
+	 * This method will create a new ArrayList modelListeners 
+	 * if there's none and return the new modelListeners
 	 * 
-	 * @return a ArrayList modelListners
+	 * @return modelListners  an ArrayList type
 	 */
 	private ArrayList<Listener> getModelListeners(){
-		if (modelListners==null){
-			modelListners=new ArrayList<Listener>();
+		if (modelListeners==null){
+			modelListeners=new ArrayList<Listener>();
 		}
-		return modelListners;
+		return modelListeners;
 	}
 	
 	/**
-	 * Set a missValue to b, and notify all listener in
-	 * listeners ArrayList about this update.
+	 * Set missValue to b, and notify all Listener in
+	 * listeners ArrayList and modelListeners ArrayList 
+	 * about this update.
 	 *  
-	 * @param b a boolean type b
+	 * @param b  a boolean type b
 	 */
 	public void setMissValue(boolean b) {
 		missValue=b;
@@ -130,11 +144,11 @@ public class AppModel{
 	}
 
 	/**
-	 * return the misValue. This method will be used
+	 * return the missValue. This method will be used
 	 * when user needs to use the value of missValue 
-	 * to justify the model.
+	 * to justify the <code>AppModel</code>.
 	 * 
-	 * @return missValue a boolean type missValue
+	 * @return missValue  a boolean type
 	 */
 	public boolean getMissValue() {
 		return missValue;

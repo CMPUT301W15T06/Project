@@ -22,7 +22,23 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
 ANY KIND, either express or implied. See the License for the specific language 
 governing permissions and limitations under the License.
 
+*/
+
+/**
+ * The <code>Claim</code> class is an sub-class of <code>AppModel</code>.
+ * This class can set up a claim with the information including claimant's name, 
+ * travel begin and end date, travel status, item list, destination list with reason, 
+ * approve status, comment and tag list. The class also allows the user to call
+ * <code>ClaimantAddClaimController</code> to create a new claim, set up and 
+ * edit claim detail(such as name, start date and end date), set status, call 
+ * <code>ClaimantAddDestinationController</code> class to add destination and reason, 
+ * get item list from <code>ItemList</code> and get tag list from <code>TagList</code>.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/07/2015
+ * @see java.util.ArrayList
  */
+
 package ca.ualberta.CMPUT301W15T06;
 
 
