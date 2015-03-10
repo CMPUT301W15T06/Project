@@ -208,6 +208,11 @@ public class Claim extends AppModel{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public int getItemSize() {
+		// TODO Auto-generated method stub
+		return itemList.size();
+	}
 	
 	
 }

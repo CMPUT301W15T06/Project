@@ -53,14 +53,12 @@ public class ExpenseClaimStatus extends TestCase {
 				if (item.getCurrency()!=""){
 					if (item.getDate()!="")
 						if(item.getDescription()!=""){
-							if (item.getName()!=""){
 								if (item.getRecipt()!=null){
 									//no warning
 								}
 							}
 						}
 				}
-			}
 			
 		}else{
 			//warning

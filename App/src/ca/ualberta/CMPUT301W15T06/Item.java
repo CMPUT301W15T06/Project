@@ -29,7 +29,6 @@ package ca.ualberta.CMPUT301W15T06;
 
 public class Item extends AppModel{
 
-	private String name;
 	private String date;
 	private String category;
 	private String description;
@@ -141,10 +140,6 @@ public class Item extends AppModel{
 	}
 
 	
-
-	public String getName() {
-		return name;
-	}
 	
 	
 }
