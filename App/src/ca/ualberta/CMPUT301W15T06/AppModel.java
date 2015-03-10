@@ -34,9 +34,9 @@ public class AppModel{
 	private boolean missValue;
 	
 	/**
-	 * This method creates an ArrayList listeners and an
-	 * ArrayList modelListers for listeners that 
-	 * records all Listener
+	 * General construction. This method creates an ArrayList 
+	 * listeners and an ArrayList modelListers for listeners 
+	 * that records all Listener.
 	 */
 	public AppModel(){
 		listeners=new ArrayList<Listener>();
@@ -57,7 +57,7 @@ public class AppModel{
 	
 	/**
 	 * This method allows user to remove a Listener from
-	 * the ArrayList listeners
+	 * the listeners ArrayList.
 	 * 
 	 * @param l  a Listener type
 	 */
@@ -66,7 +66,7 @@ public class AppModel{
 	}
 	
 	/**
-	 * This method checks if there's any listeners, 
+	 * This method checks if there's any listeners ArrayList, 
 	 * if not, set up a new one and return it for further use
 	 * 
 	 * @return listeners  an ArrayList type
