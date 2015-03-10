@@ -46,19 +46,46 @@ import java.util.ArrayList;
 
 
 public class Claim extends AppModel{
-
+	/**
+	 * Set private string name to record claimant's name. Set private String beginDate 
+	 * and endDate to record the begining and ending date for travel. Set private
+	 * Sting status to track whether the Claim travel status and the default value 
+	 * is "In progress".
+	*/
 	private String name;
 	private String beginDate;
 	private String endDate;
 	private String status="In progress";
+	/**
+	 *Set an ArrayList named itemList to contain all the Item  within the Claim.
+	 * Set an ArrayList named destinationList to record all the Destination 
+	 * information, including location and reason. 
+	 * 
+	 * @see java.util.ArrayList
+	*/
 	private ArrayList<Item> itemList;
 	private ArrayList<Destination> destinationList;
+	/**
+	 * Set private String approver to track if the claim is approved. Set private
+	 * String comment to add comment to the Claim.
+	*/
 	private String approver;
 	private String comment;	
+	/**
+	 * Set private ArrayList named tagList which contains all the tags of the Claim.
+	 * 
+	 * @see java.util.ArrayList
+	*/
 	private ArrayList<Tag> tagList;
 	
 
-	
+	/**
+	 * General constraction. This public method sets up itemList, destinationList 
+	 * and tagList and name.
+	 * 
+	 * @param claimName  a String variable
+	 * @see java.util.ArrayList
+	*/
 	public Claim(String claimName) {
 		super();
 		itemList=new ArrayList<Item>();
@@ -67,40 +94,94 @@ public class Claim extends AppModel{
 		name=claimName;
 	}
 	
+	/**
+	 * Set up the name and use <code>nitifyListeners()</code> in <code>AppModel</code> 
+	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
+	 * This public method will be used when the claimant entering a name to a new 
+	 * Claim or editing a current Claim.
+	 * 
+	 * @param name  a String variable
+	*/
 	public void setName(String name){
 		this.name=name;
 		notifyListeners();
 	}
 	
+	/**
+	 * Return the string variable name. This method will be used when 
+	 * other class need to use the name. 
+	 * 
+	 * @return name  a String variable
+	*/
 	public String getName() {
 		return name;
 	}
 	
+	/**
+	 * Set up the beginDate and use <code>nitifyListeners()</code> in <code>AppModel</code> 
+	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
+	 * This public method will be used when the claimant entering a travel begining 
+	 * date to a new Claim or editing a current Claim.
+	 * 
+	 * @param beginDate  a String variable
+	*/
 	public void setBeginDate(String beginDate){
 		this.beginDate=beginDate;
 		notifyListeners();
 	}
 	
+	/**
+	 * Return the string variable beginDate. This method will be used when 
+	 * other class need to use the beginDate. 
+	 * 
+	 * @return beginDate  a String variable
+	*/
 	public String getBeginDate() {
 		return beginDate;
 	}
 	
+	/**
+	 * Set up the endDate and use <code>nitifyListeners()</code> in <code>AppModel</code> 
+	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
+	 * This public method will be used when the claimant entering a travel ending 
+	 * date to a new Claim or editing a current Claim.
+	 * 
+	 * @param endDate  a String variable
+	*/
 	public void setEndDate(String endDate){
 		this.endDate=endDate;
 		notifyListeners();
 	}
 	
+	/**
+	 * Return the string variable endDate. This method will be used when 
+	 * other class need to use the endDate. 
+	 * 
+	 * @return endDate  a String variable
+	*/
 	public String getEndDate() {
 		return endDate;
 	}
 	
-	
-	
+	/**
+	 * Set up the status and notify all the Listener in both listeners and
+	 * modelListeners ArrayList. This public method will be used when the 
+	 * claimant added a new Claim or edited a current Claim. The default 
+	 * value of status is "In progress".
+	 * 
+	 * @param status  a String variable
+	*/
 	public void setStatus(String status){
 		this.status=status;
 		notifyListeners();
 	}
 	
+	/**
+	 * Return the string variable status. This method will be used when 
+	 * other class need to use the status. 
+	 * 
+	 * @return status  a String variable
+	*/
 	public String getStatus(){
 		return status;	
 	}
