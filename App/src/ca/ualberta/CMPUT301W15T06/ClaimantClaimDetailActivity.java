@@ -55,14 +55,21 @@ public class ClaimantClaimDetailActivity extends Activity {
 		final ArrayAdapter<Destination> adapter=new ArrayAdapter<Destination>(this, android.R.layout.simple_list_item_1,list);
 		listView.setAdapter(adapter);
 		
-		AppSingleton.getInstance().getCurrentClaim().addListener(new Listener() {
+		
+		Listener l=new Listener() {
 			
 			@Override
 			public void update() {
 				adapter.notifyDataSetChanged();
-				ClaimListManager.getInstance().save();
 			}
-		});
+		};
+		
+		AppSingleton.getInstance().getCurrentClaim().addListener(l);
+		
+		for (Destination dest:AppSingleton.getInstance().getCurrentClaim().getDestinationList()){
+			dest.addListener(l);
+		};
+		
 	}
 
 	@Override
