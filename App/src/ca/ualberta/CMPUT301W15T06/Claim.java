@@ -269,6 +269,27 @@ public class Claim extends AppModel{
 	}
 	
 	/**
+	 * This method allows user to add a Listener to the 
+	 * ArrayList listeners and add listener to destinations
+	 * and items in this claim
+	 * 
+	 * @param l  a Listener type
+	 */
+	public void addListener(Listener l){
+		if (!getListeners().contains(l)){
+			getListeners().add(l);
+		}
+		
+		for (Item item:itemList){
+			item.addListener(l);
+		}
+		
+		for (Destination dest:destinationList){
+			dest.addListener(l);
+		}
+	}
+	
+	/**
 	 * Return the ArrayList cLaimDetail as null. This method will be used when 
 	 * other class need to use or display the detail of the Claim. 
 	 * 

@@ -98,7 +98,7 @@ public class AppModel{
 	 * 
 	 * @return listeners  an ArrayList type
 	 */
-	private ArrayList<Listener> getListeners(){
+	protected ArrayList<Listener> getListeners(){
 		if (listeners==null){
 			listeners=new ArrayList<Listener>();
 		}

@@ -95,22 +95,16 @@ public class ClaimantClaimListActivity extends Activity {
 		final ArrayAdapter<Claim> adapter=new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1,list);
 		adapter.sort(sortClaim());
 		listView.setAdapter(adapter);
-		Listener l=new Listener() {
+
+		AppSingleton.getInstance().getClaimList().addListener(new Listener() {
 			
 			@Override
 			public void update() {
+				// TODO Auto-generated method stub
 				adapter.sort(sortClaim());
 				adapter.notifyDataSetChanged();
 			}
-		};
-		AppSingleton.getInstance().getClaimList().addListener(l);
-		
-		for (Claim claim :AppSingleton.getInstance().getClaimList().getClaimList()){
-			for(Item item : claim.getItemList()){
-				item.addListener(l);
-			}
-			claim.addListener(l);
-		}
+		});
 		
 		listView.setOnItemClickListener(new OnItemClickListener(){
 

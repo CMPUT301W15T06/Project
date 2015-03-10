@@ -54,19 +54,16 @@ public class ClaimantItemListActivity extends Activity {
 		final ArrayAdapter<Item> adapter=new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1,list);
 		listView.setAdapter(adapter);
 		
-		Listener l=new Listener() {
+		
+		AppSingleton.getInstance().getCurrentClaim().addListener(new Listener() {
 			
 			@Override
 			public void update() {
+				// TODO Auto-generated method stub
 				adapter.notifyDataSetChanged();
 			}
-		};
+		});
 		
-		AppSingleton.getInstance().getCurrentClaim().addListener(l);
-		
-		for (Item item:AppSingleton.getInstance().getCurrentClaim().getItemList()){
-			item.addListener(l);
-		};
 		
 
 
