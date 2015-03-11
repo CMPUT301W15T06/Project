@@ -48,7 +48,7 @@ import java.util.ArrayList;
 public class Claim extends AppModel{
 	/**
 	 * Set private string name to record claimant's name. Set private String beginDate 
-	 * and endDate to record the begining and ending date for travel. Set private
+	 * and endDate to record the beginning and ending date for travel. Set private
 	 * Sting status to track whether the Claim travel status and the default value 
 	 * is "In progress".
 	 */
@@ -80,7 +80,7 @@ public class Claim extends AppModel{
 	
 
 	/**
-	 * General constraction. This public method sets up itemList, destinationList 
+	 * General construction. This public method sets up itemList, destinationList 
 	 * and tagList and name.
 	 * 
 	 * @param claimName  a String variable
@@ -120,7 +120,7 @@ public class Claim extends AppModel{
 	/**
 	 * Set up the beginDate and use <code>nitifyListeners()</code> in <code>AppModel</code> 
 	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
-	 * This public method will be used when the claimant entering a travel begining 
+	 * This public method will be used when the claimant entering a travel beginning 
 	 * date to a new Claim or editing a current Claim.
 	 * 
 	 * @param beginDate  a String variable
@@ -210,11 +210,11 @@ public class Claim extends AppModel{
 	
 	/**
 	 * This method uses <code>getName()</code> to combine all Destination in destinationList
-	 * and Tag in tagList to a big String. Use <code>getCM()</code> to dispaly the amount 
-	 * with coresponding currency. It will be operate when the program need the 
+	 * and Tag in tagList to a big String. Use <code>getCM()</code> to display the amount 
+	 * with corresponding currency. It will be operate when the program need the 
 	 * destinationList and tagList to display.
 	 * 
-	 * @return ""  a string object combine with many small string varrable
+	 * @return ""  a string object combine with many small string variable
 	 */
 	public String toString(){
 		String dest="";
@@ -234,7 +234,7 @@ public class Claim extends AppModel{
 	 * Calculate the total amount and return the value. This method first 
 	 * set up a Double variable total with a default value null, then 
 	 * use <code>getCurrency()</code> and <code>getAmount()</code> method 
-	 * to get a total amount of the Calim and return it using <code>toString()</code>. 
+	 * to get a total amount of the Claim and return it using <code>toString()</code>. 
 	 * 
 	 * @param currency  a String variable
 	 * @return total  a Double variable
@@ -257,7 +257,7 @@ public class Claim extends AppModel{
 	
 	/**
 	 * Return the ArrayList cLaimDetail as null. This method will be used when 
-	 * other class need to use or dispaly the detail of the Claim. 
+	 * other class need to use or display the detail of the Claim. 
 	 * 
 	 * @see java.util.ArrayList
 	 * @return null  an ArrayList object
@@ -316,7 +316,7 @@ public class Claim extends AppModel{
 	
 	/**
 	 * Return the ArrayList tagList as null. This method will be used when 
-	 * other class need to use or dispaly the list of Tag. 
+	 * other class need to use or display the list of Tag. 
 	 * 
 	 * @see java.util.ArrayList
 	 * @return null  an ArrayList object
@@ -413,7 +413,7 @@ public class Claim extends AppModel{
 	}
 
 	/**
-	 * Return the int itemSize. This method will be used when 
+	 * Return the integer itemSize. This method will be used when 
 	 * other class need to use or display the size of the item. 
 	 * 
 	 * @return <code>itemList.size()</code>  an int variable
