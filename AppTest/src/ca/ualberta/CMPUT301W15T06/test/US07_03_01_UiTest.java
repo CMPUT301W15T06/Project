@@ -1,28 +1,25 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
-import java.lang.reflect.Proxy;
-
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
-import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.TouchUtils;
 import android.test.ViewAsserts;
-import android.view.ContextMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
+import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
 
-public class US07_02_01_Test_NOTFINISHED extends ActivityInstrumentationTestCase2<MainActivity>{
+public class US07_03_01_UiTest extends ActivityInstrumentationTestCase2<MainActivity>{
 
-	public US07_02_01_Test_NOTFINISHED() {
+	public US07_03_01_UiTest() {
 		super(MainActivity.class);
 	}
 	
@@ -85,7 +82,7 @@ public class US07_02_01_Test_NOTFINISHED extends ActivityInstrumentationTestCase
 	}
 	
 	/*
-	 * Test for US07.02.01 Basic Flow 2
+	 * Test for US07.03.01 Basic Flow 2
 	 */
 	
 	public void testLongClickClaimList() {
@@ -102,98 +99,100 @@ public class US07_02_01_Test_NOTFINISHED extends ActivityInstrumentationTestCase
 			  ClaimantButton.performClick();
 		  }
 		});
-
-		ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		
+		// get ClaimantClaimListActivity
+		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+		// get claimListView
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
+		
+		// start ClaimantClaimListActivity
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				assertNotNull(claimList.performLongClick());
+				// build controller
+				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new ClaimList());
+				
+				// add new claim, position: index 0
+				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				
+				// long click new claim
+				assertNotNull(claimList.getChildAt(0).performLongClick());
 			}
 		});
+		// ClaimantClaimListActivity finishes
+		nextActivity.finish();
 		
 		/*
 		 * Test for US07.03.01 Basic Flow 3
-		 * 
-		 * WARNING: missing function
 		 */
+		
+		// restart ClaimantClaimListActivity
+		nextActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				// build controller
+				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new ClaimList());
+				
+				// add new claim, position: index 0
+				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				
+				// long click new claim
+				assertNotNull(claimList.getChildAt(0).performLongClick());
+				
+				// get contextMenu
+				final GridView contextMenu = (GridView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
+				
+				// get decorView on ClaimantClaimListActivity
+				final View decorView = nextActivity.getWindow().getDecorView();	
+				
+				// check if the context menu is on screen
+			    ViewAsserts.assertOnScreen(decorView, contextMenu);
+			    
+			    // get layout parameters of the list view
+			    final ViewGroup.LayoutParams layoutParams = claimList.getLayoutParams();
+			    
+			    // check if the paremeter exists
+			    assertNotNull(layoutParams);
+			    
+			    // check if the claim list view is shown directly
+			    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
+			    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
+			}
+		});
+		// ClaimantClaimListActivity finishes
+		nextActivity.finish();
 
-//		final ContextMenu contextMenu = nextActivity.getContextMenu();
-//		assertTrue(contextMenu != null);
-//		
-//
-//	    getActivity().runOnUiThread(new Runnable() {
-//	        public void run() {
-//	            contextMenu.performIdentifierAction(ca.ualberta.CMPUT301W15T06.R.id.add_new_claim, 0);
-//	        }
-//	    });
-//	    getInstrumentation().waitForIdleSync();
 
 		/*
 		 * Test for US07.03.01 Basic Flow 4
 		 */
 		
-//	    getActivity().runOnUiThread(new Runnable() {
-//	        public void run() {
-//	            contextMenu.performIdentifierAction(ca.ualberta.CMPUT301W15T06.R.id.add_new_claim, 0);
-//	        }
-//	    });
-//	    getInstrumentation().waitForIdleSync();
-		
+		nextActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				// build controller
+				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new ClaimList());
+				
+				// add new claim, position: index 0
+				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				
+				// long click new claim
+				assertNotNull(claimList.getChildAt(0).performLongClick());
+				
+				// get contextMenu
+				final GridView contextMenu = (GridView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
 
+				// check if user can click this context menu
+            	assertNotNull(contextMenu.performClick());
+            }
+        });
 		
-		/*
-		 * Test for US07.02.01 Basic Flow 5
-		 */
-		
-//		View mLLAppelerFixe = nextActivity.
-//		
-//		nextActivity.runOnUiThread(new Runnable() {
-//	        @Override
-//	        public void run() {
-//	            View mLLAppelerFixe;
-//				assertTrue(mLLAppelerFixe.performClick());
-//
-//	            AlertDialog mDialog = nextActivity.getAdAppelerFixe();
-//	            assertTrue(mDialog.isShowing());
-//
-//	            Button okButton = mDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-//
-//	            assertTrue(okButton.performClick());
-//	            assertTrue(nextActivity.isNumeroValide());
-//	        }
-//	    });
-		
-		/*
-		 * Test for US07.02.01 Basic Flow 6
-		 */
-		
-		//????????????????????????????????????????????/
-		
-		/*
-		 * Test for US07.02.01 Basic Flow 7
-		 */
-		
-    	// view which is expected to be present on the screen
-		final View decorView = nextActivity.getWindow().getDecorView();	  
-	    ListView updatedclaimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-	    
-	    // check if claim list is on screen
-	    ViewAsserts.assertOnScreen(decorView, updatedclaimList);
-	    
-		// check whether the Button object's width and height attributes match the expected values
-	    final ViewGroup.LayoutParams layoutParams = updatedclaimList.getLayoutParams();
-	    
-	    assertNotNull(layoutParams);
-	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
-	    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-	    
+	    // finish activities
 	    nextActivity.finish();
+	    
+	    // MainActivity finishes
 	    activity.finish();
 
 	}
-	
-
 
 }
