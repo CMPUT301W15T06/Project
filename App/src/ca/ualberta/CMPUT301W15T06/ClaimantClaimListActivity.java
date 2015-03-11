@@ -163,7 +163,8 @@ public class ClaimantClaimListActivity extends Activity {
 			@Override
 			public int compare(Claim lhs, Claim rhs) {
 				// TODO Auto-generated method stub
-				return lhs.getBeginDate().compareTo(rhs.getBeginDate());			
+				return rhs.getBeginDate().compareTo(lhs.getBeginDate());			
+				
 			}
 		};
 	}

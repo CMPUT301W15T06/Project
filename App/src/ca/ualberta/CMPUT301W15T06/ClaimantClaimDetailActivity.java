@@ -48,8 +48,8 @@ public class ClaimantClaimDetailActivity extends Activity {
 		TextView beginView=(TextView) findViewById(R.id.startDateValueClaimantClaimDetailTextView);
 		TextView endView=(TextView) findViewById(R.id.endingDateValueClaimantClaimDetailTextView);
 		nameView.setText(AppSingleton.getInstance().getCurrentClaim().getName());
-		beginView.setText(AppSingleton.getDateFormat().format(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
-		endView.setText(AppSingleton.getDateFormat().format(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
+		beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
+		endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
 		ListView listView = (ListView) findViewById(R.id.claimantDetailListView);
 		ArrayList<Destination> list =AppSingleton.getInstance().getCurrentClaim().getDestinationList();
 		final ArrayAdapter<Destination> adapter=new ArrayAdapter<Destination>(this, android.R.layout.simple_list_item_1,list);

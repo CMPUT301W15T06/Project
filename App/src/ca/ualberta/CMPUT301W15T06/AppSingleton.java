@@ -111,7 +111,15 @@ public class AppSingleton {
 
 	}
 	
-	public static DateFormat getDateFormat(){
+	public static String formatDate(Date date){
+		if (date==null){
+			return "";
+		}
+		return format.format(date);
+	}
+
+	public static DateFormat getDateFormat() {
+		// TODO Auto-generated method stub
 		return format;
 	}
 	

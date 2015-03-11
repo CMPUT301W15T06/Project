@@ -27,7 +27,7 @@ public class ClaimantItemDetailActivity extends Activity {
 		final TextView descriptionView=(TextView) findViewById(R.id.itemDescriptionVTextView);
 		final TextView amountView=(TextView) findViewById(R.id.itemAmountVTextView);
 		final TextView currencyView=(TextView) findViewById(R.id.itemCurrencyVTextView);
-		dateView.setText(AppSingleton.getDateFormat().format(AppSingleton.getInstance().getCurrentItem().getDate()));
+		dateView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentItem().getDate()));
 		categoryView.setText(AppSingleton.getInstance().getCurrentItem().getCategory());
 		descriptionView.setText(AppSingleton.getInstance().getCurrentItem().getDescription());
 		amountView.setText(AppSingleton.getInstance().getCurrentItem().getAmount()==null?"":String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
@@ -38,7 +38,7 @@ public class ClaimantItemDetailActivity extends Activity {
 			@Override
 			public void update() {
 				// TODO Auto-generated method stub
-				dateView.setText(AppSingleton.getDateFormat().format(AppSingleton.getInstance().getCurrentItem().getDate()));
+				dateView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentItem().getDate()));
 				categoryView.setText(AppSingleton.getInstance().getCurrentItem().getCategory());
 				descriptionView.setText(AppSingleton.getInstance().getCurrentItem().getDescription());
 				amountView.setText(AppSingleton.getInstance().getCurrentItem().getAmount()==null?"":String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
