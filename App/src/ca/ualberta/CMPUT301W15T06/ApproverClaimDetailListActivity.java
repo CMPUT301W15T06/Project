@@ -27,7 +27,7 @@ governing permissions and limitations under the License.
 /**
  * This <code>ApproverClaimDetailListActivity</code> class is an extended class
  * of <code>Activity</code> class. This class controlls the User Interface of 
- * Claim Detail. 
+ * <code>Claim</code> detail for approvers. 
  * 
  * @author CMPUT301W15T06
  * @version 03/07/2015
@@ -45,7 +45,7 @@ public class ApproverClaimDetailListActivity extends Activity {
 
 	/**
 	 * This protected method creates a content view that dispalys a list of
-	 * <code>Claim</code> details. It will be used when the user asked to 
+	 * <code>Claim</code> details. It will be used when the approver asks to 
 	 * access to the claim detail. 
 	 * 
 	 * @param savedInstanceState  a Bundle object
@@ -58,7 +58,7 @@ public class ApproverClaimDetailListActivity extends Activity {
 
 	/**
 	 * This protected method creates an option menu and return true as 
-	 * the boolean value. The method will be called when the user asked 
+	 * the boolean value. The method will be called when the approver asks 
 	 * to access to the claim detail.
 	 * 
 	 * @param menu  a Menu object
