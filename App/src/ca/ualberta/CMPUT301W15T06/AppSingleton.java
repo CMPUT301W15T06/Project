@@ -1,3 +1,10 @@
+/**
+ * This class
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/07/2015
+ * @see android.widget.EditText
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 import android.widget.EditText;
