@@ -44,7 +44,7 @@ public class ExpenseClaimStatus extends TestCase {
 		ClaimantAddItemController i1 = new ClaimantAddItemController(claim);
 		i1.addItem("2015-01-01", "ground transport", "one day bus trip", 2.99, "CAD");
 		Item item = new Item();
-		Recipt re = new Recipt();
+		Receipt re = new Receipt();
 		assertTrue("exist?", item.getAmount()==100);
 		assertTrue("exist?", item.getCategory()=="aa");
 		if (item.getAmount()!=0){

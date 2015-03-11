@@ -23,18 +23,33 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
+
+/**
+ * This <code>ApproverReciptActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class controls the User Interface of 
+ * <code>Receipt</code> detail for approvers. This view displays a list of
+ * <code>Receipt</code> details and creates an option menu and return true as 
+ * the boolean value. It will be used when the approver asks to access to the 
+ * <code>Receipt</code> detail. 
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/07/2015
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.view.Menu
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class ApproverReciptActivity extends Activity {
+public class ApproverReceiptActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_approver_recipt_activity);
+		setContentView(R.layout.activity_approver_receipt_activity);
 	}
 
 	@Override

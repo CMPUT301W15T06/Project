@@ -58,7 +58,7 @@ public class Claim extends AppModel{
 	private Date endDate;
 	private String status="In progress";
 	/**
-	 *Set an ArrayList named itemList to contain all the Item  within the Claim.
+	 * Set an ArrayList named itemList to contain all the Item  within the Claim.
 	 * Set an ArrayList named destinationList to record all the Destination 
 	 * information, including location and reason. 
 	 * 

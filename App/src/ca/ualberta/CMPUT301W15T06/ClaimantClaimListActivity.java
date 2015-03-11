@@ -25,6 +25,7 @@ import java.util.Comparator;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -41,6 +42,7 @@ import android.widget.Toast;
 
 public class ClaimantClaimListActivity extends Activity {
 	private ClaimantClaimListController cclc=null;
+	private Dialog dialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -201,5 +203,15 @@ public class ClaimantClaimListActivity extends Activity {
 			}
 		}
 		return result;
+	}
+	
+	public Dialog getDialog() {
+		return dialog;
+	}
+	
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
+		super.onPrepareDialog(id, dialog, args);
+		this.dialog = dialog;
 	}
 }
