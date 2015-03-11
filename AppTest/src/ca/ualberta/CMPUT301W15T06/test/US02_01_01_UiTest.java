@@ -14,9 +14,9 @@ import android.widget.ListView;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
 
-public class US02_01_01Test extends ActivityInstrumentationTestCase2<MainActivity>{
+public class US02_01_01_UiTest extends ActivityInstrumentationTestCase2<MainActivity>{
 
-	public US02_01_01Test() {
+	public US02_01_01_UiTest() {
 		super(MainActivity.class);
 	}
 	

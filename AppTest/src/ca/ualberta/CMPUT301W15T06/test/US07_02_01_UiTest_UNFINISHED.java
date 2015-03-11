@@ -23,9 +23,9 @@ import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
 
-public class US07_02_01_Test_UNFINISHED extends ActivityInstrumentationTestCase2<MainActivity>{
+public class US07_02_01_UiTest_UNFINISHED extends ActivityInstrumentationTestCase2<MainActivity>{
 
-	public US07_02_01_Test_UNFINISHED() {
+	public US07_02_01_UiTest_UNFINISHED() {
 		super(MainActivity.class);
 	}
 	
