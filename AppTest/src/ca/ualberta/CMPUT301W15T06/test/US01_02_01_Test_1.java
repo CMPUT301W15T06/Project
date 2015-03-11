@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class US01_02_01_Test_1 extends
-		ActivityInstrumentationTestCase2<MainActivity> {
+	ActivityInstrumentationTestCase2<MainActivity> {
 
 	Button ApproverButton;
 	Button ClaimantButton;
@@ -111,7 +111,7 @@ public class US01_02_01_Test_1 extends
 			@Override
 			public void run() {
 				// click button and open next activity.
-    	 button.performClick();
+				button.performClick();
 			}
 		});
 
@@ -135,14 +135,14 @@ public class US01_02_01_Test_1 extends
 		assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
  
 		/*
-	* Test for US01.02.01 Basic Flow 4
-	* Test for US01.02.01 Basic Flow 5
-	*/	
+		 * Test for US01.02.01 Basic Flow 4
+		 */	
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		assertNotNull(claimList.performLongClick());
-	/*
-	* Test for US01.02.01 Basic Flow 6
-	*/	
+		
+		/*
+		 * Test for US01.02.01 Basic Flow 5
+		 */	
 		//test ClaimList(ListView) ContextMenu	
 		final Context contextMenu = (Context) nextActivity.getBaseContext();
 		assertTrue(contextMenu != null);
@@ -150,9 +150,8 @@ public class US01_02_01_Test_1 extends
 		nextActivity.runOnUiThread(new Runnable() {
 			public void run() {
 				claimList.getContext();
-	      }
+			}
 		});
 		getInstrumentation().waitForIdleSync();
 	}
 }
-

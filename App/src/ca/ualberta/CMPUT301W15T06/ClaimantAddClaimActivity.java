@@ -23,6 +23,26 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
+
+/**
+ * This <code>ClaimantAddClaimActivity</code> class is an extended class
+ * of <code>Activity</code> class.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/07/2015
+ * @see java.text.SimpleDateFormat
+ * @see java.util.Calendar
+ * @see java.util.Locale
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.app.DatePickerDialog
+ * @see android.app.DatePickerDialog.OnDateSetListener
+ * @see android.app.DialogFragment
+ * @see android.view.Menu
+ * @see android.view.View
+ * @see android.widget.DatePicker
+ * @see android.widget.EditText
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 

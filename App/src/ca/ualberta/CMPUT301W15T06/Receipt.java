@@ -25,7 +25,7 @@ governing permissions and limitations under the License.
  */
 package ca.ualberta.CMPUT301W15T06;
 
-public class Recipt {
+public class Receipt {
 	
 	private int photo;
 	
