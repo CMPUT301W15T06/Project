@@ -23,6 +23,21 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
+
+/**
+ * The <code>Item</code> class is an sub-class of <code>AppModel</code>.
+ * This class can set up a claim with the information including claimant's name, 
+ * travel begin and end date, travel status, item list, destination list with reason, 
+ * approve status, comment and tag list. The class also allows the user to call
+ * <code>ClaimantAddItemController</code> to create a new item, call 
+ * <code>ClaimantEditItemController</code> class to edit and make changes to 
+ * current item, set up the category of item, call <code>Receipt</code> to set up and 
+ * edit the photo receipt.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/07/2015
+ * @see java.util.Date
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 import java.util.Date;
@@ -31,12 +46,37 @@ import java.util.Date;
 
 public class Item extends AppModel{
 
+	/**
+	 * Set the Date object date to record the date of <code>Item</code> expenses.
+	 */
 	private Date date;
+	/**
+	 * Set the String variable category to record the category of the item expenses.
+	 */
 	private String category;
+	/**
+	 * Set the String variable description to add comment and descriptions to 
+	 * the <code>Item</code>.
+	 */
 	private String description;
+	/**
+	 * Set Double variable amount to record the  amount of <code>Item</code> expenses.
+	 */
 	private Double amount;
+	/**
+	 * Set String variable currency to record the currency of the <code>Item</code> 
+	 * expenses.
+	 */
 	private String currency;
+	/**
+	 * Set a Receipt object receipt to contain a receipt of the <code>Item</code> 
+	 * expenses. The initial default value is null.
+	 */
 	private Receipt recipt=null;
+	/**
+	 * Set a boolean variable flag to add a flag to <code>Item</code>. The initial 
+	 * default value is false.
+	 */
 	private boolean flag=false;
 	
 

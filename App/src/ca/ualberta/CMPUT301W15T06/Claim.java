@@ -37,6 +37,7 @@ governing permissions and limitations under the License.
  * @author CMPUT301W15T06
  * @version 03/07/2015
  * @see java.util.ArrayList
+ * @see java.util.Date
  */
 
 package ca.ualberta.CMPUT301W15T06;
@@ -52,13 +53,13 @@ public class Claim extends AppModel{
 	 */
 	private String name;
 	/**
-	 * Set private String beginDate and endDate to record the 
+	 * Set private Date object beginDate and endDate to record the 
 	 * beginning and ending date for travel. 
 	 */
 	private Date beginDate;
 	private Date endDate;
 	/**
-	 * Set private Sting status to track whether the Claim travel 
+	 * Set private String status to track whether the Claim travel 
 	 * status and the default value is "In progress".
 	 */
 	private String status="In progress";
