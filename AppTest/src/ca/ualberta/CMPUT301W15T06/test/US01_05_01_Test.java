@@ -4,6 +4,7 @@ import ca.ualberta.CMPUT301W15T06.ClaimList;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantEditClaimActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
 import ca.ualberta.CMPUT301W15T06.R;
 import android.app.Activity;
@@ -13,6 +14,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
+import android.view.ContextMenu;
+import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -22,8 +26,9 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class US01_03_01_Test extends
-		ActivityInstrumentationTestCase2<MainActivity> {
+public class US01_05_01_Test extends
+
+ActivityInstrumentationTestCase2<MainActivity> {
 
 	Button ApproverButton;
 	Button ClaimantButton;
@@ -37,13 +42,15 @@ public class US01_03_01_Test extends
 	TextView endView;
 	ListView listView;
 
-	public US01_03_01_Test() {
+	public US01_05_01_Test() {
 		super(MainActivity.class);
 	}
 
 	// set up
+
 	protected void setUp() throws Exception {
 		super.setUp();
+
 		instrumentation = getInstrumentation();
 		activity = getActivity();
 		setActivityInitialTouchMode(true);
@@ -53,16 +60,16 @@ public class US01_03_01_Test extends
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		AddDestination = (Button) activity
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);
-
 		intent = new Intent(getInstrumentation().getTargetContext(),
 				MainActivity.class);
 	}
 
 	/*
-	 * Test for US01.02.01 Basic Flow 1
+	 * Test for US01.04.01 Basic Flow 1
 	 */
 
 	// test button exists
+
 	public void testLayout() {
 		assertNotNull(activity
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
@@ -71,32 +78,31 @@ public class US01_03_01_Test extends
 		// test Approver button layout
 		final View decorView = activity.getWindow().getDecorView();
 		ViewAsserts.assertOnScreen(decorView, ApproverButton);
-		final ViewGroup.LayoutParams layoutParams = ApproverButton
-				.getLayoutParams();
+		final ViewGroup.LayoutParams layoutParams =
+		ApproverButton.getLayoutParams();
 		assertNotNull(layoutParams);
 		assertEquals(layoutParams.width,
 				WindowManager.LayoutParams.WRAP_CONTENT);
 		assertEquals(layoutParams.height,
 				WindowManager.LayoutParams.WRAP_CONTENT);
-
 		Button view = (Button) activity
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
 		assertEquals("Incorrect label of the button", "Approver",
 				view.getText());
 		/*
-		 * Test for US01.02.01 Basic Flow 2
+		 * 
+		 * Test for US01.04.01 Basic Flow 2
 		 */
+
 		// test Claimant Button layout
 		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
-
-		final ViewGroup.LayoutParams layoutParams1 = ClaimantButton
-				.getLayoutParams();
+		final ViewGroup.LayoutParams layoutParams1 =
+		ClaimantButton.getLayoutParams();
 		assertNotNull(layoutParams1);
 		assertEquals(layoutParams1.width,
 				WindowManager.LayoutParams.WRAP_CONTENT);
 		assertEquals(layoutParams1.height,
 				WindowManager.LayoutParams.WRAP_CONTENT);
-
 		Button view1 = (Button) activity
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		assertEquals("Incorrect label of the button", "Claimant",
@@ -105,7 +111,6 @@ public class US01_03_01_Test extends
 		// register next activity that need to be monitored.
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(
 				ClaimantClaimListActivity.class.getName(), null, false);
-
 		// open current activity.
 		MainActivity myActivity = getActivity();
 		final Button button = (Button) myActivity
@@ -117,19 +122,17 @@ public class US01_03_01_Test extends
 				button.performClick();
 			}
 		});
-
 		ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation()
 				.waitForMonitorWithTimeout(activityMonitor, 10000);
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
-
 		/*
-		 * Test for US01.02.01 Basic Flow 3
+		 * 
+		 * Test for US01.04.01 Basic Flow 3
 		 */
 
 		// view which is expected to be present on the screen
 		final View decorView2 = nextActivity.getWindow().getDecorView();
-
 		listView = (ListView) nextActivity
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		// check if it is on screen
@@ -141,20 +144,20 @@ public class US01_03_01_Test extends
 				WindowManager.LayoutParams.MATCH_PARENT);
 		assertEquals(layoutParams2.height,
 				WindowManager.LayoutParams.WRAP_CONTENT);
-
 		/*
-		 * Test for US01.02.01 Basic Flow 4
+		 * 
+		 * Test for US01.04.01 Basic Flow 4
 		 */
 		final ListView claimList = (ListView) nextActivity
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		assertNotNull(claimList.performLongClick());
 		/*
-		 * Test for US01.02.01 Basic Flow 5
+		 * 
+		 * Test for US01.04.01 Basic Flow 5
 		 */
 		// test ClaimList(ListView) ContextMenu
 		final Context contextMenu = (Context) nextActivity.getBaseContext();
 		assertTrue(contextMenu != null);
-
 		nextActivity.runOnUiThread(new Runnable() {
 			public void run() {
 				claimList.getContext();
@@ -162,7 +165,8 @@ public class US01_03_01_Test extends
 		});
 		getInstrumentation().waitForIdleSync();
 		/*
-		 * Test for US01.02.01 Basic Flow 6
+		 * 
+		 * Test for US01.04.01 Basic Flow 6
 		 */
 		// promote info, check button
 		// test if the button can create next activity
@@ -184,7 +188,6 @@ public class US01_03_01_Test extends
 				// get claimListView
 				final ListView claimList = (ListView) nextActivity
 						.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
 				// long click new claim
@@ -192,45 +195,22 @@ public class US01_03_01_Test extends
 				// get contextMenu
 				final GridView contextMenu = (GridView) nextActivity
 						.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
-
 				// check if user can click this context menu
 				assertNotNull(contextMenu.performClick());
-
 				// open new activity
 				ActivityMonitor am = getInstrumentation().addMonitor(
 						ClaimantClaimDetailActivity.class.getName(), null,
 						false);
-
 				nextActivity.runOnUiThread(new Runnable() {
-
 					@Override
 					public void run() {
-						contextMenu.performItemClick(contextMenu, 0, claimList
-								.getAdapter().getItemId(0));
+						long row = 4;
+						contextMenu.performItemClick(contextMenu, 0, row);
 					}
 				});
-
-				ClaimantClaimDetailActivity a = (ClaimantClaimDetailActivity) getInstrumentation()
+				ClaimantClaimListActivity a = (ClaimantClaimListActivity) getInstrumentation()
 						.waitForMonitorWithTimeout(am, 10000);
 				assertNotNull(a);
-
-				/*
-				 * Test for US01.03.01 Basic Flow 7
-				 */
-				// test text view: nameValueClaimantClaimDetailTextView
-				nameView = (TextView) a.findViewById(R.id.nameValueClaimantClaimDetailTextView);
-				beginView = (TextView) a.findViewById(R.id.startDateValueClaimantClaimDetailTextView);
-				endView = (TextView) a.findViewById(R.id.endingDateValueClaimantClaimDetailTextView);
-			
-				final View decorView = a.getWindow().getDecorView();
-				ViewAsserts.assertOnScreen(decorView, nameView);
-				assertTrue(View.GONE == nameView.getVisibility());
-				// test text view: nameValueClaimantClaimDetailTextView
-				ViewAsserts.assertOnScreen(decorView, beginView);
-				assertTrue(View.GONE == beginView.getVisibility());
-				// test text view: nameValueClaimantClaimDetailTextView
-				ViewAsserts.assertOnScreen(decorView, endView);
-				assertTrue(View.GONE == endView.getVisibility());
 			}
 		});
 	}
