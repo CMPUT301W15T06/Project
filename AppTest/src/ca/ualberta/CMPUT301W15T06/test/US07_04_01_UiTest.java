@@ -39,12 +39,12 @@ public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 		setActivityInitialTouchMode(false);
 
 	}
-	
-	/*
-	 * Test for US07.04.01 Basic Flow 1
-	 */
-	
+
 	public void testClaimList() {
+		
+		/*
+		 * Test for US07.04.01 Basic Flow 1
+		 */
 		
 		// test if the button can create next activity
 		// register next activity that need to be monitored.
@@ -59,13 +59,13 @@ public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 		  }
 		});
 
-		ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
 		
     	// view which is expected to be present on the screen
 		final View decorView = nextActivity.getWindow().getDecorView();	  
-	    ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
+	    final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 	    
 	    // check if claim list is on screen
 	    ViewAsserts.assertOnScreen(decorView, claimList);
@@ -77,34 +77,11 @@ public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
 	    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
 	    
-	    nextActivity.finish();
-	    activity.finish();
-	}
-	
-	/*
-	 * Test for US07.04.01 Basic Flow 2
-	 */
-	
-	public void testLongClickClaimList() {
 		
-		// test if the button can create next activity
-		// register next activity that need to be monitored.
-		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
-
-		// open current activity.
-		activity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-			  // click button and open next activity.
-			  ClaimantButton.performClick();
-		  }
-		});
-
-		// get ClaimantClaimListActivity
-		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
-		// get claimListView
-		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		
+		/*
+		 * Test for US07.04.01 Basic Flow 2
+		 */
+	    
 		// start ClaimantClaimListActivity
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
@@ -207,6 +184,6 @@ public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 	    
 	    nextActivity.finish();
 	    activity.finish();
-		
 	}
+	
 }
