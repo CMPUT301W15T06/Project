@@ -55,9 +55,6 @@ ActivityInstrumentationTestCase2<MainActivity> {
 		ApproverButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
 		ClaimantButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		AddDestination = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);	
-		nameView= (TextView) activity.findViewById(R.id.nameValueClaimantClaimDetailTextView);
-		beginView=(TextView) activity.findViewById(R.id.startDateValueClaimantClaimDetailTextView);
-		endView=(TextView) activity.findViewById(R.id.endingDateValueClaimantClaimDetailTextView);
 		intent = new Intent(getInstrumentation().getTargetContext(), MainActivity.class);	
 	}
 
