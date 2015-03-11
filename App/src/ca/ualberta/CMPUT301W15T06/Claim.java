@@ -214,14 +214,14 @@ public class Claim extends AppModel{
 		return destinationList;
 	}
 	
-//	/**
-//	 * This method uses <code>getName()</code> to combine all Destination in destinationList
-//	 * and Tag in tagList to a big String. Use <code>getCM()</code> to display the amount 
-//	 * with corresponding currency. It will be operate when the program need the 
-//	 * destinationList and tagList to display.
-//	 * 
-//	 * @return ""  a string object combine with many small string variable
-//	 */
+	/**
+	 * This method translate Destination from date object to string object. 
+	 * Then combine all Destination in destinationList and Tag in tagList to a big String. 
+	 * Use <code>getCM()</code> to display the amount with corresponding currency. It will 
+	 * be operate when the program need the destinationList and tagList to display.
+	 * 
+	 * @return ""  a string object combine with many small string variable
+	 */
 	public String toString(){
 		String dest="";
 		for (Destination d:destinationList){
