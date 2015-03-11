@@ -97,7 +97,7 @@ public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 			}
 		});
 		// ClaimantClaimListActivity finishes
-		nextActivity.finish();
+		// nextActivity.finish();
 		
 		/*
 		 * Test for US07.04.01 Basic Flow 3
@@ -137,7 +137,7 @@ public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 			}
 		});
 		// ClaimantClaimListActivity finishes
-		nextActivity.finish();
+		// nextActivity.finish();
 
 		/*
 		 * Test for US07.04.01 Basic Flow 4

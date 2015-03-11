@@ -12,7 +12,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import ca.ualberta.CMPUT301W15T06.Claim;
+import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
 
 public class US02_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActivity>{
@@ -98,6 +102,46 @@ public class US02_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 	    assertEquals(layoutParams2.width, WindowManager.LayoutParams.MATCH_PARENT);
 	    assertEquals(layoutParams2.height, WindowManager.LayoutParams.WRAP_CONTENT);
 		
+	    // test if the list is ordered
+		// 4 new dates
+		String d1 = "2012-03-27";
+		String d2 = "2012-03-27";
+		String d3 = "2014-05-12";
+		String d4 = "2013-12-01";
+		
+		// build new claim list
+		ClaimList cList = new ClaimList();
+		
+		// get controller
+		ClaimantAddClaimController cacc = new ClaimantAddClaimController(cList);
+		
+		// add new claim, date is d1
+		cacc.addClaim("A", d1, d1);
+		
+		// add new claim, date is d2
+		cacc.addClaim("B", d2, d2);
+		
+		// add new claim, date is d3
+		cacc.addClaim("C", d3, d3);
+		
+		// add new claim, date is d4
+		cacc.addClaim("D", d4, d4);
+		
+		// get length of claim list
+		int length = cList.getClaimList().size();
+		// initialize date
+		String last_date = cList.getClaimList().get(0).getBeginDate();
+		String new_date = last_date;
+		// date should be sorted from the oldest one to the nearest one
+		int i = 0;
+		while (i < length){
+			new_date = cList.getClaimList().get(i).getBeginDate();
+			// It's an error now because our function returns null
+			assertTrue("new date is larger than or equal to old date", new_date.compareTo(last_date)>=0);
+			i++;
+		}
+	    
 		nextActivity.finish();
 	}
+	
 }

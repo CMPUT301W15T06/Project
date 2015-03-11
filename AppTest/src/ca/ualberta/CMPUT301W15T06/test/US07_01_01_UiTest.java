@@ -96,7 +96,7 @@ public class US07_01_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 			}
 		});
 		// ClaimantClaimListActivity finishes
-		nextActivity.finish();
+		// nextActivity.finish();
 
 		/*
 		 * Test for US07.01.01 Basic Flow 3
@@ -136,7 +136,7 @@ public class US07_01_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 			}
 		});
 		// ClaimantClaimListActivity finishes
-		nextActivity.finish();
+		// nextActivity.finish();
 
 		/*
 		 * Test for US07.01.01 Basic Flow 4
@@ -158,7 +158,7 @@ public class US07_01_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 				final GridView contextMenu = (GridView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
 
 				// check if user can click this context menu
-            	assertNotNull(contextMenu.performClick());
+            	assertNotNull(contextMenu.getChildAt(2).performClick());
             }
         });
 		
