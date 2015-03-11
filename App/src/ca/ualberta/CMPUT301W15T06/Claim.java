@@ -226,7 +226,7 @@ public class Claim extends AppModel{
 		for (Tag t:tagList){
 			dest+='\n'+"      "+t.getName();
 		}
-		return "Starting Date: "+AppSingleton.getDateFormat().format(beginDate)+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+"Tag(s) : "+tag+'\n'+
+		return "Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+"Tag(s) : "+tag+'\n'+
 				getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY");
 
 	}

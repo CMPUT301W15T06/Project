@@ -51,8 +51,8 @@ public class AppModel{
 	 * 
 	 * @see java.util.ArrayList;
 	 */
-	private transient ArrayList<Listener> listeners;
-	private transient ArrayList<Listener> modelListeners;
+	private ArrayList<Listener> listeners;
+	private ArrayList<Listener> modelListeners;
 	/**
 	 * Set a boolean variable missValue to justify the 
 	 * <code>AppModel</code>

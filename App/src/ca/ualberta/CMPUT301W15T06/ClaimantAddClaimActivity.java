@@ -59,6 +59,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class ClaimantAddClaimActivity extends Activity {
@@ -88,7 +89,11 @@ public class ClaimantAddClaimActivity extends Activity {
 	
 	public void finishAdd(View v){
 		EditText nameView= (EditText) findViewById(R.id.createClaimNameEditText);
-		cacc.addClaim(nameView.getText().toString(), beginView.getText().toString(),endView.getText().toString());
+		if (beginView.getText().toString().equals("")){
+			Toast.makeText(getApplicationContext(), "Start Date can't be empty", Toast.LENGTH_LONG).show();
+		}else{
+			cacc.addClaim(nameView.getText().toString(), beginView.getText().toString(),endView.getText().toString());
+		}
 		finish();
 	}
 	
