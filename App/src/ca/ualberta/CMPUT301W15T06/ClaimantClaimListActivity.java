@@ -161,13 +161,7 @@ public class ClaimantClaimListActivity extends Activity {
 			@Override
 			public int compare(Claim lhs, Claim rhs) {
 				// TODO Auto-generated method stub
-				
-				int lh=AppSingleton.getYear(lhs.getBeginDate())*10000+AppSingleton.getMonth(lhs.getBeginDate())*100+AppSingleton.getDay(lhs.getBeginDate());
-				int rh=AppSingleton.getYear(rhs.getBeginDate())*10000+AppSingleton.getMonth(rhs.getBeginDate())*100+AppSingleton.getDay(rhs.getBeginDate());
-				if(lh<rh){
-					return 1;
-				}
-				return -1;			
+				return lhs.getBeginDate().compareTo(rhs.getBeginDate());			
 			}
 		};
 	}

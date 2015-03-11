@@ -54,7 +54,7 @@ public class ClaimantEditItemActivity extends Activity {
 		EditText descriptionView=(EditText) findViewById(R.id.editItemDescriptionEditText);
 		EditText amountView=(EditText) findViewById(R.id.editItemAmountEditText);
 		
-		dateView.setText(AppSingleton.getInstance().getCurrentItem().getDate());
+		dateView.setText(AppSingleton.getDateFormat().format(AppSingleton.getInstance().getCurrentItem().getDate()));
 		descriptionView.setText(AppSingleton.getInstance().getCurrentItem().getDescription());
 		
 		if (AppSingleton.getInstance().getCurrentItem().getAmount()==null){

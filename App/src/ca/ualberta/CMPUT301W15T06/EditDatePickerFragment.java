@@ -2,6 +2,7 @@ package ca.ualberta.CMPUT301W15T06;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import android.app.DatePickerDialog;
@@ -15,23 +16,22 @@ import android.widget.Toast;
 //http://developer.android.com/guide/topics/ui/controls/pickers.html  Apache 2.0 license 
 public class EditDatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// Use the current date as the default date in the picker
-		String date=AppSingleton.getInstance().getEditDate();
-		int year;
-		int month;
-		int day;
-		if (date.equals("")){
-			Calendar c = Calendar.getInstance();
-			year = c.get(Calendar.YEAR);
-			month = c.get(Calendar.MONTH);
-			day = c.get(Calendar.DAY_OF_MONTH);
-		}else{
-			year = AppSingleton.getYear(date);
-			month = AppSingleton.getMonth(date)-1;
-			day =AppSingleton.getDay(date);
+		Date date=AppSingleton.getInstance().getEditDate();
+		int year = 0;
+		int month = 0;
+		int day = 0;
+		Calendar c = Calendar.getInstance();
+		if (date!=null){
+			c.setTime(date);
 		}
+		
+		year = c.get(Calendar.YEAR);
+		month = c.get(Calendar.MONTH);
+		day = c.get(Calendar.DAY_OF_MONTH);
 
 		// Create a new instance of DatePickerDialog and return it
 		return new DatePickerDialog(getActivity(), this, year, month, day);
@@ -42,10 +42,9 @@ public class EditDatePickerFragment extends DialogFragment implements DatePicker
 		Calendar c = Calendar.getInstance();
 		c.set(year,month,day);
 		
-		String myFormat = "yyyy-MM-dd";
-	    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+		
 
-	    AppSingleton.getInstance().getDateEditText().setText(sdf.format(c.getTime()));
+	    AppSingleton.getInstance().getDateEditText().setText(AppSingleton.getDateFormat().format(c.getTime()));
 	}
 	
 	

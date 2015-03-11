@@ -43,18 +43,19 @@ package ca.ualberta.CMPUT301W15T06;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class Claim extends AppModel{
-	/**
-	 * Set private string name to record claimant's name. Set private String beginDate 
-	 * and endDate to record the beginning and ending date for travel. Set private
-	 * Sting status to track whether the Claim travel status and the default value 
-	 * is "In progress".
-	 */
+//	/**
+//	 * Set private string name to record claimant's name. Set private String beginDate 
+//	 * and endDate to record the beginning and ending date for travel. Set private
+//	 * Sting status to track whether the Claim travel status and the default value 
+//	 * is "In progress".
+//	 */
 	private String name;
-	private String beginDate;
-	private String endDate;
+	private Date beginDate;
+	private Date endDate;
 	private String status="In progress";
 	/**
 	 *Set an ArrayList named itemList to contain all the Item  within the Claim.
@@ -117,49 +118,49 @@ public class Claim extends AppModel{
 		return name;
 	}
 	
-	/**
-	 * Set up the beginDate and use <code>nitifyListeners()</code> in <code>AppModel</code> 
-	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
-	 * This public method will be used when the claimant entering a travel beginning 
-	 * date to a new Claim or editing a current Claim.
-	 * 
-	 * @param beginDate  a String variable
-	 */
-	public void setBeginDate(String beginDate){
+//	/**
+//	 * Set up the beginDate and use <code>nitifyListeners()</code> in <code>AppModel</code> 
+//	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
+//	 * This public method will be used when the claimant entering a travel beginning 
+//	 * date to a new Claim or editing a current Claim.
+//	 * 
+//	 * @param beginDate  a String variable
+//	 */
+	public void setBeginDate(Date beginDate){
 		this.beginDate=beginDate;
 		notifyListeners();
 	}
 	
-	/**
-	 * Return the string variable beginDate. This method will be used when 
-	 * other class need to use or display the beginDate. 
-	 * 
-	 * @return beginDate  a String variable
-	 */
-	public String getBeginDate() {
+//	/**
+//	 * Return the string variable beginDate. This method will be used when 
+//	 * other class need to use or display the beginDate. 
+//	 * 
+//	 * @return beginDate  a String variable
+//	 */
+	public Date getBeginDate() {
 		return beginDate;
 	}
 	
-	/**
-	 * Set up the endDate and use <code>nitifyListeners()</code> in <code>AppModel</code> 
-	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
-	 * This public method will be used when the claimant entering a travel ending 
-	 * date to a new Claim or editing a current Claim.
-	 * 
-	 * @param endDate  a String variable
-	 */
-	public void setEndDate(String endDate){
+//	/**
+//	 * Set up the endDate and use <code>nitifyListeners()</code> in <code>AppModel</code> 
+//	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
+//	 * This public method will be used when the claimant entering a travel ending 
+//	 * date to a new Claim or editing a current Claim.
+//	 * 
+//	 * @param endDate  a String variable
+//	 */
+	public void setEndDate(Date endDate){
 		this.endDate=endDate;
 		notifyListeners();
 	}
 	
-	/**
-	 * Return the string variable endDate. This method will be used when 
-	 * other class need to use or display the endDate. 
-	 * 
-	 * @return endDate  a String variable
-	 */
-	public String getEndDate() {
+//	/**
+//	 * Return the string variable endDate. This method will be used when 
+//	 * other class need to use or display the endDate. 
+//	 * 
+//	 * @return endDate  a String variable
+//	 */
+	public Date getEndDate() {
 		return endDate;
 	}
 	
@@ -208,14 +209,14 @@ public class Claim extends AppModel{
 		return destinationList;
 	}
 	
-	/**
-	 * This method uses <code>getName()</code> to combine all Destination in destinationList
-	 * and Tag in tagList to a big String. Use <code>getCM()</code> to display the amount 
-	 * with corresponding currency. It will be operate when the program need the 
-	 * destinationList and tagList to display.
-	 * 
-	 * @return ""  a string object combine with many small string variable
-	 */
+//	/**
+//	 * This method uses <code>getName()</code> to combine all Destination in destinationList
+//	 * and Tag in tagList to a big String. Use <code>getCM()</code> to display the amount 
+//	 * with corresponding currency. It will be operate when the program need the 
+//	 * destinationList and tagList to display.
+//	 * 
+//	 * @return ""  a string object combine with many small string variable
+//	 */
 	public String toString(){
 		String dest="";
 		for (Destination d:destinationList){
@@ -225,7 +226,7 @@ public class Claim extends AppModel{
 		for (Tag t:tagList){
 			dest+='\n'+"      "+t.getName();
 		}
-		return "Starting Date: "+beginDate+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+"Tag(s) : "+tag+'\n'+
+		return "Starting Date: "+AppSingleton.getDateFormat().format(beginDate)+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+"Tag(s) : "+tag+'\n'+
 				getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY");
 
 	}

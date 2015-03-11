@@ -28,8 +28,8 @@ public class ClaimantEditClaimActivity extends Activity {
 		endView=(EditText) findViewById(R.id.editClaimEndDateEditText);
 		
 		nameView.setText(AppSingleton.getInstance().getCurrentClaim().getName());
-		beginView.setText(AppSingleton.getInstance().getCurrentClaim().getBeginDate());
-		endView.setText(AppSingleton.getInstance().getCurrentClaim().getEndDate());
+		beginView.setText(AppSingleton.getDateFormat().format(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
+		endView.setText(AppSingleton.getDateFormat().format(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
 		
 	}
 

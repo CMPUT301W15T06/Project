@@ -32,9 +32,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 		Calendar c = Calendar.getInstance();
 		c.set(year,month,day);
 		
-		String myFormat = "yyyy-MM-dd";
-	    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+		
 
-	    AppSingleton.getInstance().getDateEditText().setText(sdf.format(c.getTime()));
+	    AppSingleton.getInstance().getDateEditText().setText(AppSingleton.getDateFormat().format(c.getTime()));
 	}
 }

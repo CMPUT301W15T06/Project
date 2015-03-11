@@ -1,5 +1,10 @@
 package ca.ualberta.CMPUT301W15T06;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import android.widget.EditText;
 
 public class AppSingleton {
@@ -8,8 +13,9 @@ public class AppSingleton {
 	private Claim currentClaim;
 	private Item currentItem;
 	private EditText dateEditText;
-	private String editDate;
+	private Date editDate;
 	private String status;
+	private static final DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
 	
     private AppSingleton() {  
@@ -58,11 +64,11 @@ public class AppSingleton {
 		return dateEditText;
 	}
 	
-	public void setEditDate(String date){
+	public void setEditDate(Date date){
 		editDate=date;
 	}
 	
-	public String getEditDate(){
+	public Date getEditDate(){
 		return editDate;
 	}
 
@@ -72,17 +78,20 @@ public class AppSingleton {
 
 	}
 	
-	
-	public static int getYear(String date){
-		return Integer.valueOf(date.split("-")[0]);
+	public static DateFormat getDateFormat(){
+		return format;
 	}
 	
-	public static int getMonth(String date){
-		return Integer.valueOf(date.split("-")[1]);
-	}
-	
-	public static int getDay(String date){
-		return Integer.valueOf(date.split("-")[2]);
-	}
+//	public static int getYear(String date){
+//		return Integer.valueOf(date.split("-")[0]);
+//	}
+//	
+//	public static int getMonth(String date){
+//		return Integer.valueOf(date.split("-")[1]);
+//	}
+//	
+//	public static int getDay(String date){
+//		return Integer.valueOf(date.split("-")[2]);
+//	}
     
 }

@@ -25,11 +25,13 @@ governing permissions and limitations under the License.
  */
 package ca.ualberta.CMPUT301W15T06;
 
+import java.util.Date;
+
 
 
 public class Item extends AppModel{
 
-	private String date;
+	private Date date;
 	private String category;
 	private String description;
 	private Double amount;
@@ -42,12 +44,12 @@ public class Item extends AppModel{
 	}
 	
 
-	public void setDate(String itemDate) {
+	public void setDate(Date itemDate) {
 		date=itemDate;
 		notifyListeners();
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
@@ -99,7 +101,7 @@ public class Item extends AppModel{
 
 	
 	public String toString(){
-		return "Date: "+date+'\n'+"Category: "+category+'\n'+"Description: "+description+'\n'+"Spend: "+(amount==null?"   ":amount)+' '+currency+'\n'+
+		return "Date: "+AppSingleton.getDateFormat().format(date)+'\n'+"Category: "+category+'\n'+"Description: "+description+'\n'+"Spend: "+(amount==null?"   ":amount)+' '+currency+'\n'+
 				"Photographic Receipt: "+(recipt==null?"Not Have":"Have")+'\n'+"Incompleteness: "+(flag?"YES":"NO");	
 	}
 	
