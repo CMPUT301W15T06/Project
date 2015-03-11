@@ -34,7 +34,7 @@ public class Item extends AppModel{
 	private String description;
 	private Double amount;
 	private String currency;
-	private Recipt recipt=null;
+	private Receipt recipt=null;
 	private boolean flag=false;
 	
 
@@ -103,11 +103,11 @@ public class Item extends AppModel{
 				"Photographic Receipt: "+(recipt==null?"Not Have":"Have")+'\n'+"Incompleteness: "+(flag?"YES":"NO");	
 	}
 	
-	public void setRecipt(Recipt recipt) {
+	public void setRecipt(Receipt recipt) {
 		
 	}
 	
-	public Recipt getRecipt() {
+	public Receipt getRecipt() {
 		return null;
 	}
 	
