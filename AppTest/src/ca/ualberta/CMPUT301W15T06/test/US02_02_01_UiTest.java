@@ -39,12 +39,13 @@ public class US02_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 
 	}
 	
-	/*
-	 * Test for US02.02.01 Basic Flow 1
-	 */
-	
 	//test Claimant Button layout
 	public void testClaimantButtonlayout() {
+		
+		/*
+		 * Test for US02.01.01 Basic Flow 1
+		 */
+		
 	    final View decorView = activity.getWindow().getDecorView();
 
 	    ViewAsserts.assertOnScreen(decorView, ClaimantButton);
@@ -54,15 +55,13 @@ public class US02_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 	    assertNotNull(layoutParams);
 	    assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
 	    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-
+	    
 	    assertEquals("Incorrect label of the button", "Claimant", ClaimantButton.getText());
-	}
-	
-	/*
-	 * Test Case for US02.02.01 Basic Flow 2
-	 */
-	public void testClickClaimantButton() {
 		
+		/*
+		 * Test for US02.01.01 Basic Flow 2
+		 */
+	    
 		// test if the button can create next activity
 		// monitor
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
@@ -79,46 +78,26 @@ public class US02_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 		ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
-		nextActivity.finish();
-	}
-	
-	/*
-	 * Test for US02.02.01 Basic Flow 3
-	 */
-	
-	public void testClaimList() {
 		
-		// test if the button can create next activity
-		// register next activity that need to be monitored.
-		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
-
-		// open current activity.
-		activity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-			  // click button and open next activity.
-			  ClaimantButton.performClick();
-		  }
-		});
-
-		ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
-		// next activity is opened and captured.
-		assertNotNull(nextActivity);
+		
+		/*
+		 * Test for US02.01.01 Basic Flow 3
+		 */
 		
     	// view which is expected to be present on the screen
-		final View decorView = nextActivity.getWindow().getDecorView();	  
+		final View decorView2 = nextActivity.getWindow().getDecorView();	  
 	    ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 	    
 	    // check if claim list is on screen
-	    ViewAsserts.assertOnScreen(decorView, claimList);
+	    ViewAsserts.assertOnScreen(decorView2, claimList);
 	    
 		// check whether the Button object's width and height attributes match the expected values
-	    final ViewGroup.LayoutParams layoutParams = claimList.getLayoutParams();
+	    final ViewGroup.LayoutParams layoutParams2 = claimList.getLayoutParams();
 	    
-	    assertNotNull(layoutParams);
-	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
-	    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-	    
-	    nextActivity.finish();
+	    assertNotNull(layoutParams2);
+	    assertEquals(layoutParams2.width, WindowManager.LayoutParams.MATCH_PARENT);
+	    assertEquals(layoutParams2.height, WindowManager.LayoutParams.WRAP_CONTENT);
+		
+		nextActivity.finish();
 	}
 }
