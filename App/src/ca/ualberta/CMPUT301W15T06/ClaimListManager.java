@@ -107,6 +107,22 @@ public class ClaimListManager {
 		}
 	}
 	
+	/**
+	 * This method will load the ClamList and return it for further
+	 * use or display. It also checks exceptions to prevent crush.
+	 * 
+	 * @exception FileNotFoundException
+	 * @exception IOException
+	 * @throw RuntimeException
+	 * @see com.google.gson.Gson
+ 	 * @see java.io.FileInputStream
+	 * @see java.io.FileNotFoundException
+	 * @see java.io.FileOutputStream
+	 * @see java.io.IOException
+	 * @see java.io.InputStreamReader
+	 * @see java.io.OutputStreamWriter
+	 * @return cl  a ClaimList object
+	 */
 	public ClaimList load(){
 		Gson gson =new Gson();
 		ClaimList cl=null;
@@ -129,6 +145,23 @@ public class ClaimListManager {
 		
 	}
 	
+	/**
+	 * This method will save the ClaimList using a <code>OutputStreamWriter</code>.
+	 * It also checks exceptions to prevent crush.
+	 * 
+	 * @exception FileNotFoundException
+	 * @exception JsonIOException
+	 * @exception IOException
+	 * @see com.google.gson.Gson
+ 	 * @see java.io.FileInputStream
+	 * @see java.io.FileNotFoundException
+	 * @see java.io.FileOutputStream
+	 * @see java.io.IOException
+	 * @see java.io.InputStreamReader
+	 * @see java.io.OutputStreamWriter
+	 * @see com.google.gson.JsonIOException
+	 * @see com.google.gson.reflect.TypeToken
+	 */
 	public void save(){
 		Gson gson=new Gson();
 		try {
