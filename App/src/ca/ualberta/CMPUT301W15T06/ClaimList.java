@@ -50,6 +50,7 @@ public class ClaimList extends AppModel{
 	 */
 	private ArrayList<Claim> claimList;
 
+	
 	/**
 	 * General construction. This method Set up the claimList.
 	 * 

@@ -35,8 +35,9 @@ governing permissions and limitations under the License.
  * get item list from <code>ItemList</code> and get tag list from <code>TagList</code>.
  * 
  * @author CMPUT301W15T06
- * @version 03/07/2015
+ * @version 03/16/2015
  * @see java.util.ArrayList
+ * @see java.util.Date
  */
 
 package ca.ualberta.CMPUT301W15T06;
@@ -52,8 +53,10 @@ public class Claim extends AppModel{
 	 */
 	private String name;
 	/**
-	 * Set private String beginDate and endDate to record the 
-	 * beginning and ending date for travel. 
+	 * Set private Date beginDate and endDate to record the 
+	 * beginning and ending date for travel.
+	 * 
+	 *  @see java.util.Date
 	 */
 	private Date beginDate;
 	private Date endDate;
@@ -124,12 +127,13 @@ public class Claim extends AppModel{
 	}
 	
 	/**
-	 * Set up the beginDate and use <code>nitifyListeners()</code> in <code>AppModel</code> 
+	 * Set up the beginDate and use <code>notifyListeners()</code> in <code>AppModel</code> 
 	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
 	 * This public method will be used when the claimant entering a travel beginning 
 	 * date to a new Claim or editing a current Claim.
 	 * 
 	 * @param beginDate  a Date object
+	 * @see java.util.Date
 	 */
 	public void setBeginDate(Date beginDate){
 		this.beginDate=beginDate;
@@ -141,6 +145,7 @@ public class Claim extends AppModel{
 	 * other class need to use or display the beginDate. 
 	 * 
 	 * @return beginDate  a Date object
+	 * @see java.util.Date
 	 */
 	public Date getBeginDate() {
 		return beginDate;
@@ -153,6 +158,7 @@ public class Claim extends AppModel{
 	 * date to a new Claim or editing a current Claim.
 	 * 
 	 * @param endDate  a Date object
+	 * @see java.util.Date
 	 */
 	public void setEndDate(Date endDate){
 		this.endDate=endDate;
@@ -164,6 +170,7 @@ public class Claim extends AppModel{
 	 * other class need to use or display the endDate. 
 	 * 
 	 * @return endDate  a Date object
+	 * @see java.util.Date
 	 */
 	public Date getEndDate() {
 		return endDate;
@@ -215,12 +222,12 @@ public class Claim extends AppModel{
 	}
 	
 	/**
-	 * This method translate Destination from date object to string object. 
-	 * Then combine all Destination in destinationList and Tag in tagList to a big String. 
+	 * This method translates Destination startDate and endDate from Date object to String object. 
+	 * Then combines all Destination in destinationList and Tag in tagList to a big String. 
 	 * Use <code>getCM()</code> to display the amount with corresponding currency. It will 
-	 * be operate when the program need the destinationList and tagList to display.
+	 * be operated when the program need the destinationList and tagList to display.
 	 * 
-	 * @return ""  a string object combine with many small string variable
+	 * @return ""  a String object combine with many small String variable
 	 */
 	public String toString(){
 		String dest="";
