@@ -32,6 +32,13 @@ governing permissions and limitations under the License.
   */
 package ca.ualberta.CMPUT301W15T06;
 
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.ArrayList
+import java.util.Date
+import java.util.Locale
+
 public class ClaimantAddDestinationController {
 	
 	/**
