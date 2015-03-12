@@ -23,6 +23,31 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
+ 
+ /**
+ * This <code>ClaimantAddItemActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class will control the interface
+ * of <code>Item</code> detail and <code>ClaimantItemListActivity</code> 
+ * for claimant. This view displays <code>Item</code> details and creates 
+ * an option menu, a finish add button, a date picker. It will be used 
+ * when the claimant asks to access to the <code>Item</code> detail. 
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.app.DialogFragment
+ * @see android.app.DatePickerDialog
+ * @see android.app.DatePickerDialog.OnDateSetListener
+ * @see android.text.InputFilter
+ * @see android.text.Spanned
+ * @see android.view.Menu
+ * @see android.view.View
+ * @see android.widget.ArrayAdapter;
+ * @see android.widget.EditText;
+ * @see android.widget.Spinner;
+ * @see android.widget.Toast
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 
@@ -30,6 +55,8 @@ package ca.ualberta.CMPUT301W15T06;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.view.Menu;
@@ -41,8 +68,17 @@ import android.widget.Toast;
 
 public class ClaimantAddItemActivity extends Activity {
 
-
+	/**
+	 * Set EditText object dateView to record the starting date with
+	 * initial default value null.
+	 * 
+	 * @see android.widget.EditText
+	 */
 	private EditText dateView=null;
+	/**
+	 * Set a ClaimantAddItemController object caic with initial 
+	 * default value null.
+	 */
 	private ClaimantAddItemController caic=null;
 
 	@Override
@@ -75,7 +111,15 @@ public class ClaimantAddItemActivity extends Activity {
 	}
 	
 	
-	
+	/**
+	 * This method will create a finish button to trigger the action finishAdd. 
+	 * 
+	 * @param v  a View object
+	 * @exception NumberFormatException
+	 * @exception StatusException
+	 * @see android.view.View
+	 * @see android.widget.EditText
+	 */
 	public void finishAdd(View v){
 
 		Spinner category= (Spinner ) findViewById(R.id.createItemCategorySpinner);
@@ -101,6 +145,18 @@ public class ClaimantAddItemActivity extends Activity {
 		finish();
 	}
 	
+	/**
+	 * Create a DatePickerDialog object to help user(claimant) to enter 
+	 * the item expenses date.
+	 * 
+	 * @param v  a View object
+	 * @see android.view.View
+	 * @see android.widget.EditText
+	 * @see android.widget.DatePicker
+	 * @see android.app.DialogFragment;
+	 * @see android.app.DatePickerDialog
+	 * @see android.app.DatePickerDialog.OnDateSetListener
+	 */
 	public void showDatePickerDialog(View v) {
 		AppSingleton.getInstance().setDateEditText(dateView);
 		DialogFragment newFragment = new DatePickerFragment();
