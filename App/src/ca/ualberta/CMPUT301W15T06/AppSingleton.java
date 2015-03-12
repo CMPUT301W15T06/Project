@@ -123,6 +123,16 @@ public class AppSingleton {
 		return format;
 	}
 	
-
+//	public static int getYear(String date){
+//		return Integer.valueOf(date.split("-")[0]);
+//	}
+//	
+//	public static int getMonth(String date){
+//		return Integer.valueOf(date.split("-")[1]);
+//	}
+//	
+//	public static int getDay(String date){
+//		return Integer.valueOf(date.split("-")[2]);
+//	}
     
 }

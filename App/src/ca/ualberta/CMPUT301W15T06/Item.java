@@ -38,22 +38,9 @@ public class Item extends AppModel{
 	private String currency;
 	private Receipt recipt=null;
 	private boolean flag=false;
-	private Claim parent;
+	
 
 	public Item() {	
-		
-	}
-	
-	public void setParent(Claim c){
-		parent=c;
-	}
-	
-	public void notifyListeners() {
-		for (Listener  listener : getListeners()) {
-			listener.update();
-		}
-		parent.notifyListeners();	
-		ClaimListManager.getInstance().save();
 	}
 	
 

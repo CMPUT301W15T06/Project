@@ -29,8 +29,6 @@ public class ClaimantAddItemController {
 			date=null;
 		}
 		Item item=new Item();
-		item.setParent(claim);
-		
 		item.setDate(date);
 		item.setCategory(category);
 		item.setDescription(description);
@@ -43,10 +41,15 @@ public class ClaimantAddItemController {
 			item.setMissValue(false);
 		}
 		
-	
+		item.addModelListener(new Listener() {
+			
+			@Override
+			public void update() {
+				claim.notifyListeners();				
+			}
+		});
 		
 		claim.getItemList().add(item);
-		
 		claim.notifyListeners();
 
 	}
