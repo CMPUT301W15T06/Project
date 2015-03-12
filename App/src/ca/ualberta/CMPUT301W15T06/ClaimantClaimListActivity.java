@@ -67,6 +67,7 @@ public class ClaimantClaimListActivity extends Activity {
 			}
 		});
 		
+
 		listView.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override

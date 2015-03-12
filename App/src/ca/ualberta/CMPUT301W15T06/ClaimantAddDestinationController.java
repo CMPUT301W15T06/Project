@@ -15,6 +15,8 @@ public class ClaimantAddDestinationController {
 		}
 		
 		Destination destination=new Destination(dest);
+		destination.setParent(claim);
+		
 		destination.setReason(reason);
 		if (dest.equals("")||reason.equals("")){
 			destination.setMissValue(true);
@@ -22,15 +24,9 @@ public class ClaimantAddDestinationController {
 			destination.setMissValue(false);
 		}
 		
-		destination.addModelListener(new Listener() {
-			
-			@Override
-			public void update() {
-				// TODO Auto-generated method stub
-				claim.notifyListeners();
-			}
-		});
-		claim.getDestinationList().add(destination);	
+		
+		claim.getDestinationList().add(destination);
+		
 		claim.notifyListeners();
 	}
 }

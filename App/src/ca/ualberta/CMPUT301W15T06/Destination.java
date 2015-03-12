@@ -29,11 +29,13 @@ public class Destination extends AppModel{
 	
 	private String name;
 	private String reason;
+
 	
 	public Destination(String name){
 		super();
 		this.name=name;
 	}
+
 	
 	public void setName(String name){
 		this.name=name;
