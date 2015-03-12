@@ -45,14 +45,14 @@ import java.util.Set;
 
 public class AppModel{
 	
-	/**
-	 * Set two private ArrayList variable named listeners
-	 * and modelListeners to contain Listener subject
-	 * 
-	 * @see java.util.ArrayList;
-	 */
-	private ArrayList<Listener> listeners;
-	private ArrayList<Listener> modelListeners;
+//	/**
+//	 * Set two private ArrayList variable named listeners
+//	 * and modelListeners to contain Listener subject
+//	 * 
+//	 * @see java.util.ArrayList;
+//	 */
+	private transient ArrayList<Listener> listeners=null;
+	
 	/**
 	 * Set a boolean variable missValue to justify the 
 	 * <code>AppModel</code>
@@ -66,7 +66,7 @@ public class AppModel{
 	 */
 	public AppModel(){
 		listeners=new ArrayList<Listener>();
-		modelListeners=new ArrayList<Listener>();
+		
 	}
 	
 	/**
@@ -97,7 +97,7 @@ public class AppModel{
 	 * 
 	 * @return listeners  an ArrayList type
 	 */
-	private ArrayList<Listener> getListeners(){
+	protected ArrayList<Listener> getListeners(){
 		if (listeners==null){
 			listeners=new ArrayList<Listener>();
 		}
@@ -105,57 +105,55 @@ public class AppModel{
 	}
 	
 
-	/**
-	 * This method is design for notifying all Listener 
-	 * in listeners ArrayList and modelListeners ArrayList 
-	 * if there's any update, and the ClaimListManager 
-	 * will save the change 
-	 */
+//	/**
+//	 * This method is design for notifying all Listener 
+//	 * in listeners ArrayList and modelListeners ArrayList 
+//	 * if there's any update, and the ClaimListManager 
+//	 * will save the change 
+//	 */
 	public void notifyListeners() {
 		for (Listener  listener : getListeners()) {
 			listener.update();
 		}
-		for (Listener  listener : getModelListeners()) {
-			listener.update();
-		}
+		
 		ClaimListManager.getInstance().save();
 	}
-
-	/**
-	 * This method allows user to add a Listener to the 
-	 * modelListeners if the model does not contains 
-	 * a Listener l
-	 * 
-	 * @param l  a Listener type
-	 */
-	public void addModelListener(Listener l){
-		if (!getModelListeners().contains(l)){
-			getModelListeners().add(l);
-		}
-	}
-	
-	/**
-	 * This method is designed to remove a Listener from
-	 * the modelListeners ArrayList
-	 * 
-	 * @param l  a Listener type
-	 */
-	public void removeModelListener(Listener l){
-		getModelListeners().remove(l);
-	}
-	
-	/**
-	 * This method will create a new ArrayList modelListeners 
-	 * if there's none and return the new modelListeners
-	 * 
-	 * @return modelListners  an ArrayList type
-	 */
-	private ArrayList<Listener> getModelListeners(){
-		if (modelListeners==null){
-			modelListeners=new ArrayList<Listener>();
-		}
-		return modelListeners;
-	}
+//
+//	/**
+//	 * This method allows user to add a Listener to the 
+//	 * modelListeners if the model does not contains 
+//	 * a Listener l
+//	 * 
+//	 * @param l  a Listener type
+//	 */
+//	public void addModelListener(Listener l){
+//		if (!getModelListeners().contains(l)){
+//			getModelListeners().add(l);
+//		}
+//	}
+//	
+//	/**
+//	 * This method is designed to remove a Listener from
+//	 * the modelListeners ArrayList
+//	 * 
+//	 * @param l  a Listener type
+//	 */
+//	public void removeModelListener(Listener l){
+//		getModelListeners().remove(l);
+//	}
+//	
+//	/**
+//	 * This method will create a new ArrayList modelListeners 
+//	 * if there's none and return the new modelListeners
+//	 * 
+//	 * @return modelListners  an ArrayList type
+//	 */
+//	private ArrayList<Listener> getModelListeners(){
+//		if (modelListeners==null){
+//			modelListeners=new ArrayList<Listener>();
+//		}
+//		return modelListeners;
+//	}
 	
 	/**
 	 * Set missValue to b, and notify all Listener in

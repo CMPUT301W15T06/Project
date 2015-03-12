@@ -84,6 +84,10 @@ public class Claim extends AppModel{
 	 */
 	private ArrayList<Tag> tagList;
 	
+	
+	private ClaimList parent=null;
+	
+	
 
 	/**
 	 * General construction. This public method sets up itemList, destinationList 
@@ -100,6 +104,19 @@ public class Claim extends AppModel{
 		name=claimName;
 	}
 	
+	
+	public void setParent(ClaimList cl){
+		parent=cl;
+	}
+	
+	public void notifyListeners() {
+		for (Listener  listener : getListeners()) {
+			listener.update();
+		}
+		parent.notifyListeners();	
+		ClaimListManager.getInstance().save();
+	}
+
 	/**
 	 * Set up the name and use <code>nitifyListeners()</code> in <code>AppModel</code> 
 	 * to notify all the Listener in both listeners and modelListeners ArrayList. 

@@ -16,7 +16,7 @@ public class ClaimantAddClaimController {
 	
 	public void addClaim(String claimName, String begin, String end){
 		Claim claim=new Claim(claimName);
-		
+		claim.setParent(claimList);
 		
 		Date beginDate = null;
 		Date endDate = null;
@@ -40,15 +40,9 @@ public class ClaimantAddClaimController {
 			claim.setMissValue(false);
 		}
 
-		claim.addModelListener(new Listener() {
-			
-			@Override
-			public void update() {
-				// TODO Auto-generated method stub
-				claimList.notifyListeners();
-			}
-		});
+		
 		claimList.getClaimList().add(claim);
+		
 		claimList.notifyListeners();
 	}
 
