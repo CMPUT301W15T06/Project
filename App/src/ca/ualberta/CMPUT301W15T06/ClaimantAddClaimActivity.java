@@ -30,7 +30,7 @@ governing permissions and limitations under the License.
  * of <code>Claim</code> detail and <code>ClaimList</code> for claimant. 
  * This view displays <code>Claim</code> details and creates an option menu,
  * a finish add button, a starting date picker and an ending date picker. 
- * It will be used when the approver asks to access to the <code>Claim</code> 
+ * It will be used when the claimant asks to access to the <code>Claim</code> 
  * detail. The associated class including <code>ClaimantAddClaimController</code>,
  * <code>Claim</code>, <code>ClaimList</code> and <code>ClaimListManager</code>.
  * 
@@ -168,12 +168,5 @@ public class ClaimantAddClaimActivity extends Activity {
 		DialogFragment newFragment = new DatePickerFragment();
 	    newFragment.show(getFragmentManager(), "datePicker");
 	}
-	
-
-
-
-	
-
-
 
 }
