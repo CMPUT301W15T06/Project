@@ -71,7 +71,7 @@ import android.widget.Toast;
 public class ClaimantAddClaimActivity extends Activity {
 
 	/**
-	 * Set a ClaimantAddDestinationController object cadc with initial 
+	 * Set a ClaimantAddClaimActivity object cacc with initial 
 	 * default value null.
 	 */
 	private ClaimantAddClaimController cacc=null;
@@ -134,8 +134,8 @@ public class ClaimantAddClaimActivity extends Activity {
 	}
 	
 	/**
-	 * Create a DatePicker object to help user(claimant) to enter 
-	 * the starting date.
+	 * Create a DatePickerDialog object to help user(claimant) to enter 
+	 * the starting date of the travel.
 	 * 
 	 * @param v  a View object
 	 * @see android.view.View
@@ -152,8 +152,8 @@ public class ClaimantAddClaimActivity extends Activity {
 	}
 	
 	/**
-	 * Create a DatePicker object to help user(claimant) to enter 
-	 * the ending date.
+	 * Create a DatePickerDialog object to help user(claimant) to enter 
+	 * the ending date of the travel.
 	 * 
 	 * @param v  a View object
 	 * @see android.view.View
