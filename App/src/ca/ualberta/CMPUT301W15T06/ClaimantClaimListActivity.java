@@ -14,13 +14,43 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
 ANY KIND, either express or implied. See the License for the specific language 
 governing permissions and limitations under the License.
  */
+ 
+/**
+ * This <code>ClaimantClaimListActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class controls the User Interface of 
+ * <code>Claim</code> list for claimant. This view displays a list of
+ * <code>Claim</code>, creates an option menu, have add a new claim option,
+ * set a checkForWarn method to check if there is any warning and error and 
+ * return a boolean value.  It will be used when the claimant asks to access to 
+ * the <code>Claim</code> list.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @ see java.util.ArrayList
+ * @see java.util.Comparator
+ * @see android.os.Bundle
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.app.AlertDialog
+ * @see android.app.Dialog
+ * @see android.content.DialogInterface
+ * @see android.content.DialogInterface.OnClickListener
+ * @see android.content.Intent
+ * @see android.view.Menu
+ * @see android.view.MenuItem
+ * @see android.view.View
+ * @see android.view.View.OnLongClickListener
+ * @see android.widget.AdapterView
+ * @see android.widget.AdapterView.OnItemClickListener
+ * @see android.widget.AdapterView.OnItemLongClickListener
+ * @see android.widget.ArrayAdapter
+ * @see android.widget.ListView
+ * @see android.widget.Toast
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-
-
-
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -41,7 +71,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class ClaimantClaimListActivity extends Activity {
+	
+	/**
+	 * Set a ClaimantClaimListController object cclc with initial 
+	 * default value null.
+	 */
 	private ClaimantClaimListController cclc=null;
+	/**
+	 * Set a Dialog object dialog to 
+	 */
 	private Dialog dialog;
 	
 	@Override
