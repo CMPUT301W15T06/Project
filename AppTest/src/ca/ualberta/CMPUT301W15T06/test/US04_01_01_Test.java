@@ -53,7 +53,7 @@ public class US04_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 	}
 
 	/*
-	 * Test for US01.02.01 Basic Flow 1
+	 * Test for US04.01.01 Basic Flow 1
 	 */
 
 	// test button exists
@@ -72,7 +72,7 @@ public class US04_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		assertEquals("Incorrect label of the button", "Approver",view.getText());
 		
 		/*
-		 * Test for US01.02.01 Basic Flow 2
+		 * Test for US04.01.01 Basic Flow 2
 		 */
 		// test Claimant Button layout
 		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
@@ -105,7 +105,7 @@ public class US04_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		assertNotNull(nextActivity);
 
 		/*
-		 * Test for US01.02.01 Basic Flow 3
+		 * Test for US04.01.01 Basic Flow 3
 		 */
 
 		// view which is expected to be present on the screen
@@ -121,7 +121,7 @@ public class US04_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		assertEquals(layoutParams2.height,WindowManager.LayoutParams.WRAP_CONTENT);
 
 		/*
-		 * Test for US01.02.01 Basic Flow 4
+		 * Test for US04.01.01 Basic Flow 4
 		 */
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		assertNotNull(claimList.performClick());
@@ -143,7 +143,7 @@ public class US04_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				assertNotNull(claimList.getChildAt(0).performClick());
 						
 				/*
-				 * Test for US01.02.01 Basic Flow 5
+				 * Test for US04.01.01 Basic Flow 5
 				 */
 				
 				// get ClaimantItemListActivity
@@ -160,7 +160,7 @@ public class US04_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				ViewAsserts.assertOnScreen(decorView3, itemList);
 				
 				/*
-				 * Test for US01.02.01 Basic Flow 6
+				 * Test for US04.01.01 Basic Flow 6
 				 */
 				
 				final Button addItem = (Button) ilActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addItemButton);
@@ -173,7 +173,7 @@ public class US04_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				});
 				
 				/*
-				 * Test for US01.02.01 Basic Flow 7
+				 * Test for US04.01.01 Basic Flow 7
 				 */
 				
 				ClaimantAddItemActivity aiActivity = (ClaimantAddItemActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
@@ -206,7 +206,7 @@ public class US04_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				assertNotNull(iCurr.getVisibility());
 				
 				/*
-				 * Test for US01.02.01 Basic Flow 8
+				 * Test for US04.01.01 Basic Flow 8
 				 */
 				
 				String itemDate = "2015-03-03";
