@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
+import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimList;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
@@ -90,6 +91,9 @@ public class US07_01_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				Claim claim =  new Claim("test");
+				assertTrue("can be submmit",claim.getStatus().toString().equals("in progress"));
+				assertTrue("editable?", claim.getEdiable()==false);
 				
 				// long click new claim
 				assertNotNull(claimList.getChildAt(0).performLongClick());
@@ -111,6 +115,9 @@ public class US07_01_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				Claim claim =  new Claim("test");
+				assertTrue("can be submmit",claim.getStatus().toString().equals("in progress"));
+				assertTrue("editable?", claim.getEdiable()==false);
 				
 				// long click new claim
 				assertNotNull(claimList.getChildAt(0).performLongClick());
@@ -150,6 +157,9 @@ public class US07_01_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				Claim claim =  new Claim("test");
+				assertTrue("can be submmit",claim.getStatus().toString().equals("in progress"));
+				assertTrue("editable?", claim.getEdiable()==false);
 				
 				// long click new claim
 				assertNotNull(claimList.getChildAt(0).performLongClick());
