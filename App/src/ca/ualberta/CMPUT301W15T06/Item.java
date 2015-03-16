@@ -54,37 +54,6 @@ import java.util.Date;
 public class Item extends AppModel{
 
 	/**
-<<<<<<< HEAD
-	 * Set the Date object date to record the date of <code>Item</code> expenses.
-	 */
-	private Date date;
-	/**
-	 * Set the String variable category to record the category of the item expenses.
-	 */
-	private String category;
-	/**
-	 * Set the String variable description to add comment and descriptions to 
-	 * the <code>Item</code>.
-	 */
-	private String description;
-	/**
-	 * Set Double variable amount to record the  amount of <code>Item</code> expenses.
-	 */
-	private Double amount;
-	/**
-	 * Set String variable currency to record the currency of the <code>Item</code> 
-	 * expenses.
-	 */
-	private String currency;
-	/**
-	 * Set a Receipt object receipt to contain a receipt of the <code>Item</code> 
-	 * expenses. The initial default value is null.
-	 */
-	private Receipt recipt=null;
-	/**
-	 * Set a boolean variable flag to add a flag to <code>Item</code>. The initial 
-	 * default value is false.
-=======
 	 * Set a Date object date to record the date of the <code>Item</code> expenses.
 	 * 
 	 * @see java.util.Date
@@ -118,7 +87,6 @@ public class Item extends AppModel{
 	/**
 	 * Set a boolean variable flag to add flag to the <code>Item</code> expenses.
 	 * The initial default value is false.
->>>>>>> fa7674dceeaf733bdd9de48163710f0c8356d4cc
 	 */
 	private boolean flag=false;
 	
