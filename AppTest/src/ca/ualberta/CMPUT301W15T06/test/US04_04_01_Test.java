@@ -199,7 +199,7 @@ public class US04_04_01_Test extends
 						}
 						
 						// click new item
-						assertNotNull(itemList1.getChildAt(0).performLongClick());
+						assertNotNull(itemList1.getChildAt(0).performClick());
 						
 						/*
 						 * Test for US04.04.01 Basic Flow 7
