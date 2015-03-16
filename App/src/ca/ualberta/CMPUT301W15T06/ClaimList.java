@@ -50,6 +50,7 @@ public class ClaimList extends AppModel{
 	 */
 	private ArrayList<Claim> claimList;
 
+	
 	/**
 	 * General construction. This method Set up the claimList.
 	 * 
@@ -90,7 +91,7 @@ public class ClaimList extends AppModel{
 	
 	/**
 	 * Use the string variable tagName to do the search method 
-	 * and return a Claim object with defualt value null.. T
+	 * and return a Claim object with default value null.. T
 	 * his method will be used when other class need to use 
 	 * or display. 
 	 * 
@@ -101,6 +102,20 @@ public class ClaimList extends AppModel{
 		return null;
 	}
 	
+	/**
+	 * This method allows user to add a Listener to the 
+	 * ArrayList listeners and also add listener to each claim
+	 * in this claimList
+	 * @param l  a Listener type
+	 */
+	public void addListener(Listener l){
+		if (!getListeners().contains(l)){
+			getListeners().add(l);
+		}
+		for (Claim claim:claimList){
+			claim.addListener(l);
+		}
+	}
 	/**
 	 * Sort the claimList. The method does nothing here, but may
 	 * have further use.

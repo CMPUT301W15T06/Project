@@ -31,7 +31,7 @@ governing permissions and limitations under the License.
  * from listeners, notify listeners for updates, set up missValue.
  * 
  * @author CMPUT301W15T06
- * @version 03/07/2015
+ * @version 03/16/2015
  * @see java.util.ArrayList
  * @see java.util.HashSet
  * @see java.util.Set
@@ -51,13 +51,14 @@ public class AppModel{
 	 * 
 	 * @see java.util.ArrayList;
 	 */
-	private ArrayList<Listener> listeners;
-	private ArrayList<Listener> modelListeners;
+	private transient ArrayList<Listener> listeners;
+	private transient ArrayList<Listener> modelListeners;
 	/**
 	 * Set a boolean variable missValue to justify the 
 	 * <code>AppModel</code>
 	 */
 	private boolean missValue;
+	
 	
 	/**
 	 * General construction. This method creates an ArrayList 
@@ -97,7 +98,7 @@ public class AppModel{
 	 * 
 	 * @return listeners  an ArrayList type
 	 */
-	private ArrayList<Listener> getListeners(){
+	protected ArrayList<Listener> getListeners(){
 		if (listeners==null){
 			listeners=new ArrayList<Listener>();
 		}

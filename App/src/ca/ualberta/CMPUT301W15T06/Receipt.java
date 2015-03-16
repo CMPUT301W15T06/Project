@@ -40,6 +40,7 @@ public class Receipt {
 	 */
 	private int photo;
 	
+	
 	/**
 	 * This method will set a photo for <code>Receipt</code>.
 	 */

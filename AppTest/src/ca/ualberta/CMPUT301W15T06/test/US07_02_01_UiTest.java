@@ -18,10 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
+import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimList;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
+import ca.ualberta.CMPUT301W15T06.ClaimantAddItemController;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
+import ca.ualberta.CMPUT301W15T06.Item;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
+import ca.ualberta.CMPUT301W15T06.StatusException;
 
 public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActivity>{
 
@@ -46,7 +50,7 @@ public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 
 	}
 	
-	public void testClaimList() {
+	public void testClaimList() throws StatusException{
 		
 		/*
 		 * Test for US07.02.01 Basic Flow 1
@@ -96,6 +100,9 @@ public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				Claim claim =  new Claim("test");
+				assertTrue("can be submmit",claim.getStatus().toString().equals("in progress"));
+				assertTrue("editable?", claim.getEdiable()==false);
 				
 				// long click new claim
 				assertNotNull(claimList.getChildAt(0).performLongClick());
@@ -116,6 +123,9 @@ public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				Claim claim =  new Claim("test");
+				assertTrue("can be submmit",claim.getStatus().toString().equals("in progress"));
+				assertTrue("editable?", claim.getEdiable()==false);
 				
 				// long click new claim
 				assertNotNull(claimList.getChildAt(0).performLongClick());
@@ -156,6 +166,9 @@ public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				Claim claim =  new Claim("test");
+				assertTrue("can be submmit",claim.getStatus().toString().equals("in progress"));
+				assertTrue("editable?", claim.getEdiable()==false);
 				
 				// long click new claim
 				assertNotNull(claimList.getChildAt(0).performLongClick());
@@ -180,6 +193,9 @@ public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 				
 				// add new claim
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				Claim claim =  new Claim("test");
+				assertTrue("can be submmit",claim.getStatus().toString().equals("in progress"));
+				assertTrue("editable?", claim.getEdiable()==false);
 				
 				// long click new claim
 				claimList.getChildAt(0).performLongClick();
@@ -226,6 +242,18 @@ public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 			public void run() {
 				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new ClaimList());
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				Claim claim =  new Claim("test");
+				ClaimantAddItemController i1 = new ClaimantAddItemController(claim);
+				try {
+					i1.addItem("2015-01-01", "ground transport", "one day bus trip", 2.99, "CAD");
+				} catch (StatusException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Item item = new Item();
+				assertTrue("can be submmit",claim.getStatus().toString().equals("in progress"));
+				assertTrue("editable?", claim.getEdiable()==false);
+				assertTrue("complete?", item.infoComplete()==false);
 				assertNotNull(claimList.getChildAt(0).performLongClick());
 				
 				final GridView contextMenu = (GridView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
