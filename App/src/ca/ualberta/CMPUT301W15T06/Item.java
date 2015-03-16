@@ -38,8 +38,6 @@ package ca.ualberta.CMPUT301W15T06;
 
 import java.util.Date;
 
-
-
 public class Item extends AppModel{
 
 	/**

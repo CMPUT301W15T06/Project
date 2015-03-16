@@ -28,10 +28,10 @@ governing permissions and limitations under the License.
  * This <code>ClaimantClaimDetailActivity</code> class is an extended class
  * of <code>Activity</code> class. This class will control the interface
  * of <code>Claim</code> detail for claimant. This view displays 
- * <code>Claim</code> details,  and creates an option menu, including claimant's
- * name, travel begin and end date, destination. It will be used when the claimant 
- * asks to access to the <code>Claim</code> detail. The associated class including
- * <code>Claim</code> and <code>Destination</code>.
+ * <code>Claim</code> details, including claimant's name, travel begin, 
+ * end date and destination. It also creates an option menu. It will be 
+ * used when the claimant asks to access to the <code>Claim</code> detail. 
+ * The associated class including <code>Claim</code> and <code>Destination</code>.
  * 
  * @author CMPUT301W15T06
  * @version 03/16/2015

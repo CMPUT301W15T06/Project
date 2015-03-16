@@ -18,17 +18,16 @@ governing permissions and limitations under the License.
 /**
  * This <code>ClaimantClaimListActivity</code> class is an extended class
  * of <code>Activity</code> class. This class controls the User Interface of 
- * <code>Claim</code> list for claimant. This view displays a list of
+ * <code>ClaimList</code> for claimant. This view displays a list of
  * <code>Claim</code>, creates an option menu, have add a new claim option,
- * set a checkForWarn method to check if there is any warning and error and 
- * return a boolean value.  It will be used when the claimant asks to access to 
- * the <code>Claim</code> list.
+ * set a <code>checkForWarn</code> method to check if there is any warning 
+ * and error and return a boolean value. It will be used when the claimant 
+ * asks to access to the <code>ClaimList</code>.
  * 
  * @author CMPUT301W15T06
  * @version 03/16/2015
- * @ see java.util.ArrayList
+ * @see java.util.ArrayList
  * @see java.util.Comparator
- * @see android.os.Bundle
  * @see android.os.Bundle
  * @see android.app.Activity
  * @see android.app.AlertDialog
@@ -78,7 +77,11 @@ public class ClaimantClaimListActivity extends Activity {
 	 */
 	private ClaimantClaimListController cclc=null;
 	/**
-	 * Set a Dialog object dialog to 
+	 * Set a Dialog object dialog
+	 * 
+	 * @see android.app.Dialog
+	 * @see android.content.DialogInterface
+	 * @see android.content.DialogInterface.OnClickListener
 	 */
 	private Dialog dialog;
 	
@@ -196,6 +199,12 @@ public class ClaimantClaimListActivity extends Activity {
 		});
 	}
 
+	/**
+	 * Sort the <code>ClaimList</code> by the starting date of the claim.
+	 * 
+	 * @return a Comparator object
+	 * @see java.util.Comparator
+	 */
 	private Comparator<? super Claim> sortClaim() {
 		return new Comparator<Claim>() {
 			
@@ -216,12 +225,27 @@ public class ClaimantClaimListActivity extends Activity {
 	}
 	
 
-	
+	/**
+	 * Add a claim to the <code>ClaimList</code> by calling the 
+	 * <code>ClaimantAddClaimActivity</code> class.
+	 * 
+	 * @param m  a MenuItem object
+	 * @see android.content.Intent
+	 * @see android.view.Menu
+	 * @see android.view.MenuItem
+	 */
 	public void addClaim(MenuItem m){
 		Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantAddClaimActivity.class);
 		startActivity(intent);
 	}
 
+	/**
+	 * This method will check the missValue and flag to justify if the claim,
+	 * item and destination have any errors.
+	 * 
+	 * @param claim  a Claim object
+	 * @return result  a boolean variable
+	 */
 	private boolean checkForWarn(Claim claim){
 		boolean result=false;
 		if(claim.getMissValue()){
@@ -245,10 +269,20 @@ public class ClaimantClaimListActivity extends Activity {
 		return result;
 	}
 	
+	/**
+	 * Return the Dialog object dialog. This method will be used when 
+	 * other class need to use or display the dialog. 
+	 * 
+	 * @return dialog  a Dialog variable
+	 * @see android.app.Dialog
+	 * @see android.content.DialogInterface
+	 * @see android.content.DialogInterface.OnClickListener
+	 */
 	public Dialog getDialog() {
 		return dialog;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
 		super.onPrepareDialog(id, dialog, args);

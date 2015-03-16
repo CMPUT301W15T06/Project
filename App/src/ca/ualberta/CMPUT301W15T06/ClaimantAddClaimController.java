@@ -48,7 +48,7 @@ public class ClaimantAddClaimController {
 	
 	
 	/**
-	 * General contruction. This method is will create a ClaimList object 
+	 * General construction. This method will create a ClaimList object 
 	 * claimList for other classes and methods to use.
 	 * 
 	 * @param claimList  a ClaimList object
@@ -60,7 +60,7 @@ public class ClaimantAddClaimController {
 	/**
 	 * This method will create a new Claim object claim and set the name,
 	 * starting date and ending date to the claim. Then add the claim to 
-	 * the claimList. It also gonna notify all Listener in listeners list
+	 * the claimList. It will also notify all Listener in listeners list
 	 * about this update.
 	 * 
 	 * @param claimName  a String variable
