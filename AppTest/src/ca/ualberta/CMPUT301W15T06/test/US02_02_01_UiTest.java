@@ -1,9 +1,10 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
-import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
 import android.view.View;
@@ -12,11 +13,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimList;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
-import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
 
 public class US02_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActivity>{
@@ -130,8 +129,8 @@ public class US02_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 		// get length of claim list
 		int length = cList.getClaimList().size();
 		// initialize date
-		String last_date = cList.getClaimList().get(0).getBeginDate();
-		String new_date = last_date;
+		Date last_date = cList.getClaimList().get(0).getBeginDate();
+		Date new_date = last_date;
 		// date should be sorted from the oldest one to the nearest one
 		int i = 0;
 		while (i < length){

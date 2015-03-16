@@ -23,13 +23,28 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
+
+/**
+ * This <code>ClaimantReceiptActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class controls the User Interface of 
+ * <code>Receipt</code> for claimant. This view displays the
+ * <code>Receipt</code> and creates an option menu and return true as 
+ * the boolean value. It will be used when the claimant asks to access to 
+ * the <code>Receipt</code>.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.view.Menu
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class ClaimantReciptActivity extends Activity {
+public class ClaimantReceiptActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

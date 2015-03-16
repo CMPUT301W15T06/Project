@@ -1,6 +1,49 @@
+/*
+UA CMPUT 301 Project Group: CMPUT301W15T06
+
+Copyright {2015} {Jingjiao Ni
+
+              Tianqi Xiao
+
+              Jiafeng Wu
+
+              Xinyi Pan 
+
+              Xinyi Wu
+
+              Han Wang}
+Licensed under the Apache License, Version 2.0 (the "License");
+
+you may not use this file except in compliance with the License.
+
+You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+Unless required by applicable law or agreed to in writing, software distributed under 
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF 
+ANY KIND, either express or implied. See the License for the specific language 
+governing permissions and limitations under the License.
+
+ */
+ 
+ /**
+ * This <code>ClaimantItemDetailActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class will control the interface
+ * of <code>Item</code> detail for claimant. This view displays 
+ * <code>Item</code> details, and creates an option menu, including item's
+ * date, category, description, amount, and amount. It will be used when the claimant 
+ * asks to access to the <code>Item</code> detail.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.content.Intent
+ * @see android.view.Menu
+ * @see android.view.MenuItem
+ * @see android.view.View
+ * @see android.widget.TextView
+ * @see android.widget.Toast
+ */
 package ca.ualberta.CMPUT301W15T06;
-
-
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +56,10 @@ import android.widget.Toast;
 
 public class ClaimantItemDetailActivity extends Activity {
 
+	/**
+	 * Set a ClaimantClaimListController object cdic with initial 
+	 * default value null.
+	 */
 	private ClaimantDeleteItemController cdic=null;
 	
 	@Override
@@ -54,7 +101,16 @@ public class ClaimantItemDetailActivity extends Activity {
 		return true;
 	}
 
-	
+	/**
+	 * Delete an item from the <code>ItemList</code> by calling the 
+	 * <code>AppSingleton</code> class. It also checks the 
+	 * <code>StatusException</code> warnings and errors.
+	 * 
+	 * @param v  a View object
+	 * @see android.widget.TextView
+	 * @see android.widget.Toast
+	 * @exception StatusException
+	 */
 	public void deleteItem(View v){
 		try {
 			cdic.removeItem(AppSingleton.getInstance().getCurrentItem());
@@ -64,6 +120,13 @@ public class ClaimantItemDetailActivity extends Activity {
 		finish();
 	}
 	
+	/**
+	 * Edit an item in the <code>ItemList</code> by calling the 
+	 * <code>ClaimantEditItemActivity</code> class and set a new intent.
+	 * 
+	 * @param v  a View object
+	 * @see android.content.Intent
+	 */
 	public void editItem(View v){
 		Intent intent =new Intent(ClaimantItemDetailActivity.this,ClaimantEditItemActivity.class);
 		startActivity(intent);		

@@ -35,6 +35,7 @@ import ca.ualberta.CMPUT301W15T06.StatusException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -64,8 +65,7 @@ public class ExpenseListTest extends TestCase
 		ClaimantAddItemController i1 = new ClaimantAddItemController(nc);
 		i1.addItem("2015-01-01", "ground transport", "one day bus trip", 2.99, "CAD");
 		assertTrue("Expense List size", nc.getItemSize() == 1);
-
-		assertTrue("Correct date?",testExpense.getDate()=="2015-01-01");
+		assertTrue("Correct date?",testExpense.getDate().toString()=="2015-01-01");
 		assertTrue("Correct category?",testExpense.getCategory()=="ground transport");
 		assertTrue("Correct amount?", testExpense.getAmount()==2.99);
 		assertTrue("Correct currenct?",testExpense.getCurrency()=="CAD");
@@ -83,7 +83,7 @@ public class ExpenseListTest extends TestCase
 		i2.addItem("2015-01-02", "accomodation", "Fairmont", 160.0, "USD");
 		assertTrue("Expense List size", nc.getItemSize() == 2);
 		
-		assertTrue("Correct date?",testExpense.getDate()=="2015-01-02");
+		assertTrue("Correct date?",testExpense.getDate().toString()=="2015-01-02");
 		assertTrue("Correct category?",testExpense.getCategory()=="accommodation");
 		assertTrue("Correct amount?", testExpense.getAmount()==160.0);
 		assertTrue("Correct currenct?",testExpense.getCurrency()=="USD");
@@ -109,8 +109,8 @@ public class ExpenseListTest extends TestCase
 		// edit the information 
 		c.setStatus("In progress");
 		c.setStatus("Submmited");
-		((Item) c.getItem("BMW")).setDate("2015-02-01");
-		assertFalse("cannot edit",testExpenseEdit.getDate()== "2015-02-01");		
+		testExpenseEdit.setAmount(100.00);
+		assertFalse("cannot edit",testExpenseEdit.getAmount()== 100.00);		
 	}
 
 	
@@ -179,9 +179,9 @@ public class ExpenseListTest extends TestCase
 		
 		// http://stackoverflow.com/questions/15925509/java-compare-two-dates 2015-2-12		
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault());
-		Date localDate1 = date.parse(expenseTest1.getDate()); 
-		Date localDate2 = date.parse(expenseTest2.getDate()); 
-		Date localDate3 = date.parse(expenseTest3.getDate());	 	
+		Date localDate1 = expenseTest1.getDate(); 
+		Date localDate2 = expenseTest2.getDate(); 
+		Date localDate3 = expenseTest3.getDate();	 	
 		
 		// check the order for the expense list
 		if (localDate1.before(localDate2)){

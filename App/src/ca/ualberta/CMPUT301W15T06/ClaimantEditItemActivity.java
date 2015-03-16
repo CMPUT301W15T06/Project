@@ -23,6 +23,27 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
+
+/**
+ * This <code>ClaimantEditItemActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class controls the User Interface of 
+ * editing <code>Item</code> detail for claimant. This view displays the 
+ * detail of <code>Item</code> and allows claimant to change and update 
+ * the information. It will be used when the claimant asks to edit the item
+ * detail.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see android.app.Activity
+ * @see android.app.DialogFragment
+ * @see android.os.Bundle
+ * @see android.view.Menu
+ * @see android.view.View
+ * @see android.widget.EditText
+ * @see android.widget.Toast
+ * @see android.widget.ArrayAdapter
+ * @see android.widget.Spinner
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 
@@ -38,7 +59,17 @@ import android.widget.Toast;
 
 public class ClaimantEditItemActivity extends Activity {
 
+	/**
+	 * Set a EditText object dateView to view and edit the date.
+	 * The initial default value is null.
+	 * 
+	 * @see android.widget.EditText
+	 */
 	private EditText dateView=null;
+	/**
+	 * Set a ClaimantEditItemController object ceic with initial 
+	 * default value null.
+	 */
 	private ClaimantEditItemController ceic=null;
 
 	
@@ -85,9 +116,15 @@ public class ClaimantEditItemActivity extends Activity {
 		getMenuInflater().inflate(R.menu.claimant_edit_item, menu);
 		return true;
 	}
-	
 
-	
+	/**
+	 * This method get the category of a item. It will choose a category from 
+	 * a String List, and return the number of the position of the desired 
+	 * category in the list.
+	 * 
+	 * @param category  a String variable
+	 * @return an integer variable
+	 */
 	private int getCategoryPosition(String category) {
 		String [] list={"air fare", "ground transport", "vehicle rental", "private automobile", "fuel", "parking",
 				"registration", "accommodation", "meal","supplies"};
@@ -99,7 +136,15 @@ public class ClaimantEditItemActivity extends Activity {
 		return 0;
 	}
 
-	//used to check the int  position of the input currency
+	//used to check the integer position of the input currency
+	/**
+	 * This method get the currency of a item. It will choose a category from 
+	 * a String List, and return the number of the position of the desired 
+	 * currency in the list.
+	 * 
+	 * @param currency
+	 * @return an integer variable
+	 */
 	private int getCurrencyPosition(String currency){
 		String [] list={"CAD","USD", "EUR", "GBP","CHF","JPY","CNY"};
 		for (int i=0;i<list.length;i++){
@@ -110,6 +155,17 @@ public class ClaimantEditItemActivity extends Activity {
 		return 0;
 	}
 	
+	/**
+	 * This method will create a finish button to trigger the action finishAdd. 
+	 * It will also checks <code>NumberFormatException()</code> and 
+	 * <code>StatusException()</code> warning to prevent crush.
+	 * 
+	 * @param v  a View object
+	 * @see android.view.View
+	 * @see android.widget.EditText
+	 * @see android.widget.Spinner
+	 * @see android.widget.Toast
+	 */
 	public void finishEdit(View v){
 		EditText dateView= (EditText) findViewById(R.id.editItemDateEditText);
 		Spinner category= (Spinner ) findViewById(R.id.editCategorySpinner);
@@ -136,6 +192,13 @@ public class ClaimantEditItemActivity extends Activity {
 		finish();
 	}
 	
+	/**
+	 * This method will display the DatePickerDialog by calling 
+	 * <code>AppSingleton</code> and <code>DialogFragment</code>.
+	 * 
+	 * @param v  a View object
+	 * @see android.app.DialogFragment
+	 */
 	public void showDatePickerDialog(View v) {
 		AppSingleton.getInstance().setDateEditText(dateView);
 		AppSingleton.getInstance().setEditDate(AppSingleton.getInstance().getCurrentItem().getDate());

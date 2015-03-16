@@ -46,13 +46,13 @@ public class ClaimListTest extends TestCase {
 	{
 		ClaimList claimlist =new ClaimList();
 		Claim c1=new Claim("1");
-		c1.setBeginDate("20141005");
+		//c1.setBeginDate("20141005");
 		Claim c2=new Claim("2");
-		c1.setBeginDate("20140905");
+		//c1.setBeginDate("20140905");
 		Claim c3=new Claim("3");
-		c1.setBeginDate("20131105");
+		//c1.setBeginDate("20131105");
 		Claim c4=new Claim("4");
-		c1.setBeginDate("20141004");
+		//c1.setBeginDate("20141004");
 		claimlist.sort();
 		assertTrue("The first one should be c3", claimlist.getClaimList().get(0)==c3);
 		assertTrue("The first one should be c2", claimlist.getClaimList().get(1)==c2);

@@ -23,6 +23,30 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
+
+ /**
+  * This <code>ClaimantItemListActivity</code> class is an extended class
+  * of <code>Activity</code> class. This class controls the User Interface of 
+  * <code>ItemList</code> for claimant. This view displays a list of
+  * <code>Item</code>, creates an option menu and have add a new item option.
+  * It associated with class <code>FlagController</code>.
+  * 
+  * @author CMPUT301W15T06
+  * @version 03/16/2015
+  * @see java.util.ArrayList
+  * @see android.os.Bundle
+  * @see android.app.Activity
+  * @see android.app.AlertDialog
+  * @see android.content.Intent
+  * @see android.content.DialogInterface
+  * @see android.view.Menu
+  * @see android.view.View
+  * @see android.widget.AdapterView
+  * @see android.widget.ArrayAdapter
+  * @see android.widget.Toast
+  * @see android.widget.AdapterView.OnItemClickListener
+  * @see android.widget.ListView
+  */
 package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
@@ -42,7 +66,12 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ClaimantItemListActivity extends Activity {
 
+	/**
+	 * Set a FlagController object fc with the initial 
+	 * default value of null.
+	 */
 	private FlagController fc=null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,13 +83,16 @@ public class ClaimantItemListActivity extends Activity {
 		final ArrayAdapter<Item> adapter=new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1,list);
 		listView.setAdapter(adapter);
 		
+		
 		AppSingleton.getInstance().getCurrentClaim().addListener(new Listener() {
 			
 			@Override
 			public void update() {
+				// TODO Auto-generated method stub
 				adapter.notifyDataSetChanged();
 			}
 		});
+		
 		
 
 
@@ -110,8 +142,13 @@ public class ClaimantItemListActivity extends Activity {
 		return true;
 	}
 	
-
-	
+	/**
+	 * Add a new item to the <code>ItemList</code> by calling the 
+	 * <code>ClaimantAddItemActivity</code> class and set a new intent.
+	 * 
+	 * @param v  a View object
+	 * @see android.content.Intent
+	 */
 	public void addItem(View v){
 		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantAddItemActivity.class);
 		startActivity(intent);		

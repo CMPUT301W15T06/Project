@@ -35,7 +35,7 @@ governing permissions and limitations under the License.
  * get item list from <code>ItemList</code> and get tag list from <code>TagList</code>.
  * 
  * @author CMPUT301W15T06
- * @version 03/07/2015
+ * @version 03/16/2015
  * @see java.util.ArrayList
  * @see java.util.Date
  */
@@ -53,8 +53,15 @@ public class Claim extends AppModel{
 	 */
 	private String name;
 	/**
+<<<<<<< HEAD
 	 * Set private Date object beginDate and endDate to record the 
 	 * beginning and ending date for travel. 
+=======
+	 * Set private Date beginDate and endDate to record the 
+	 * beginning and ending date for travel.
+	 * 
+	 *  @see java.util.Date
+>>>>>>> fa7674dceeaf733bdd9de48163710f0c8356d4cc
 	 */
 	private Date beginDate;
 	private Date endDate;
@@ -64,7 +71,7 @@ public class Claim extends AppModel{
 	 */
 	private String status="In progress";
 	/**
-	 * Set an ArrayList named itemList to contain all the Item  within the Claim.
+	 * Set an ArrayList named itemList to contain all the Item within the Claim.
 	 * Set an ArrayList named destinationList to record all the Destination 
 	 * information, including location and reason. 
 	 * 
@@ -87,8 +94,8 @@ public class Claim extends AppModel{
 	
 
 	/**
-	 * General construction. This public method sets up itemList, destinationList 
-	 * and tagList and name.
+	 * General construction. This public method sets up a Claim object with
+	 * itemList, destinationList and tagList and name.
 	 * 
 	 * @param claimName  a String variable
 	 * @see java.util.ArrayList
@@ -102,10 +109,10 @@ public class Claim extends AppModel{
 	}
 	
 	/**
-	 * Set up the name and use <code>nitifyListeners()</code> in <code>AppModel</code> 
+	 * Set up the name and use <code>notifyListeners()</code> in <code>AppModel</code> 
 	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
 	 * This public method will be used when the claimant entering a name to a new 
-	 * Claim or editing a current Claim.
+	 * claim or editing a current claim.
 	 * 
 	 * @param name  a String variable
 	 */
@@ -125,12 +132,13 @@ public class Claim extends AppModel{
 	}
 	
 	/**
-	 * Set up the beginDate and use <code>nitifyListeners()</code> in <code>AppModel</code> 
+	 * Set up the beginDate and use <code>notifyListeners()</code> in <code>AppModel</code> 
 	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
 	 * This public method will be used when the claimant entering a travel beginning 
-	 * date to a new Claim or editing a current Claim.
+	 * date to a new claim or editing a current claim.
 	 * 
 	 * @param beginDate  a Date object
+	 * @see java.util.Date
 	 */
 	public void setBeginDate(Date beginDate){
 		this.beginDate=beginDate;
@@ -142,18 +150,20 @@ public class Claim extends AppModel{
 	 * other class need to use or display the beginDate. 
 	 * 
 	 * @return beginDate  a Date object
+	 * @see java.util.Date
 	 */
 	public Date getBeginDate() {
 		return beginDate;
 	}
 	
 	/**
-	 * Set up the endDate and use <code>nitifyListeners()</code> in <code>AppModel</code> 
+	 * Set up the endDate and use <code>notifyListeners()</code> in <code>AppModel</code> 
 	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
 	 * This public method will be used when the claimant entering a travel ending 
-	 * date to a new Claim or editing a current Claim.
+	 * date to a new claim or editing a current claim.
 	 * 
 	 * @param endDate  a Date object
+	 * @see java.util.Date
 	 */
 	public void setEndDate(Date endDate){
 		this.endDate=endDate;
@@ -165,6 +175,7 @@ public class Claim extends AppModel{
 	 * other class need to use or display the endDate. 
 	 * 
 	 * @return endDate  a Date object
+	 * @see java.util.Date
 	 */
 	public Date getEndDate() {
 		return endDate;
@@ -173,7 +184,7 @@ public class Claim extends AppModel{
 	/**
 	 * Set up the status and notify all the Listener in both listeners and
 	 * modelListeners ArrayList. This public method will be used when the 
-	 * claimant added a new Claim or edited a current Claim. The default 
+	 * claimant added a new claim or edited a current claim. The default 
 	 * value of status is "In progress".
 	 * 
 	 * @param status  a String variable
@@ -216,12 +227,12 @@ public class Claim extends AppModel{
 	}
 	
 	/**
-	 * This method translate Destination from date object to string object. 
-	 * Then combine all Destination in destinationList and Tag in tagList to a big String. 
+	 * This method translates Destination startDate and endDate from Date object to String object. 
+	 * Then combines all Destination in destinationList and Tag in tagList to a big String. 
 	 * Use <code>getCM()</code> to display the amount with corresponding currency. It will 
-	 * be operate when the program need the destinationList and tagList to display.
+	 * be operated when the program need the destinationList and tagList to display.
 	 * 
-	 * @return ""  a string object combine with many small string variable
+	 * @return ""  a String object combine with many small String variable
 	 */
 	public String toString(){
 		String dest="";
@@ -241,7 +252,7 @@ public class Claim extends AppModel{
 	 * Calculate the total amount and return the value. This method first 
 	 * set up a Double variable total with a default value null, then 
 	 * use <code>getCurrency()</code> and <code>getAmount()</code> method 
-	 * to get a total amount of the Claim and return it using <code>toString()</code>. 
+	 * to get a total amount of the claim and return it using <code>toString()</code>. 
 	 * 
 	 * @param currency  a String variable
 	 * @return total  a Double variable
@@ -263,8 +274,29 @@ public class Claim extends AppModel{
 	}
 	
 	/**
+	 * This method allows user to add a Listener to the 
+	 * ArrayList listeners and add listener to destinations
+	 * and items in this claim
+	 * 
+	 * @param l  a Listener type
+	 */
+	public void addListener(Listener l){
+		if (!getListeners().contains(l)){
+			getListeners().add(l);
+		}
+		
+		for (Item item:itemList){
+			item.addListener(l);
+		}
+		
+		for (Destination dest:destinationList){
+			dest.addListener(l);
+		}
+	}
+	
+	/**
 	 * Return the ArrayList cLaimDetail as null. This method will be used when 
-	 * other class need to use or display the detail of the Claim. 
+	 * other class need to use or display the detail of the claim. 
 	 * 
 	 * @see java.util.ArrayList
 	 * @return null  an ArrayList object
@@ -423,7 +455,7 @@ public class Claim extends AppModel{
 	 * Return the integer itemSize. This method will be used when 
 	 * other class need to use or display the size of the item. 
 	 * 
-	 * @return <code>itemList.size()</code>  an int variable
+	 * @return <code>itemList.size()</code>  an Integer variable
 	 */
 	public int getItemSize() {
 		// TODO Auto-generated method stub

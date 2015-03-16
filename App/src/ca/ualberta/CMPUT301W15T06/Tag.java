@@ -23,17 +23,39 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
+
+/**
+ * The <code>Tag</code> class allows the user to access to the 
+ * <code>Tag</code>. This class can set up a <code>Tag</code> 
+ * and add a name to the <code>Tag</code>.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ */
 package ca.ualberta.CMPUT301W15T06;
 
-
-
 public class Tag {
+	
+	/**
+	 * Set a String variable name as the name of the tag.
+	 */
 	private String name;
 	
+	/**
+	 * General construction. Set up a tag by using the
+	 * String variable name.
+	 * 
+	 * @param name  a String variable
+	 */
 	public Tag(String name){
 		
 	}
 
+	/**
+	 * Return the name of the tag as null for display or further use.
+	 * 
+	 * @return null  a String variable
+	 */
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;

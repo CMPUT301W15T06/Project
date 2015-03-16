@@ -45,11 +45,11 @@ public class ClaimTest extends TestCase {
 		assertNotSame("The Name is not equal", name, claim.getName());
 		// add starting date
 		String beginDate = "2015-02-18";
-		claim.setBeginDate(beginDate);
+		//claim.setBeginDate(beginDate);
 		assertEquals("The begin date is", beginDate, claim.getBeginDate());
 		// add ending date
 		String endDate = "2015-03-08";
-		claim.setEndDate(endDate);
+		//claim.setEndDate(endDate);
 		assertEquals("The begin date is", endDate, claim.getBeginDate());
 	}
 	
@@ -73,9 +73,9 @@ public class ClaimTest extends TestCase {
 		destination.setReason("Travel");
 		claim.getDestinationList().add(destination);
 		String beginDate = "2015-02-18";
-		claim.setBeginDate(beginDate);
+		//claim.setBeginDate(beginDate);
 		String endDate = "2015-03-08";
-		claim.setEndDate(endDate);
+		//claim.setEndDate(endDate);
 		assertTrue("correct display claim detail?", claim.getClaimDetail()!=null);
 	}
 	

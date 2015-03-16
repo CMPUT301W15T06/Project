@@ -23,6 +23,21 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
+ 
+ /**
+ * This <code>ClaimantApproverInfoActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class will control the interface
+ * of <code>Claim</code> approver information detail for claimant. 
+ * This view displays the content of the approval status and creates an 
+ * option menu. It will be used when the claimant asks to access to 
+ * the information detail of approval status.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.view.Menu
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 import android.os.Bundle;

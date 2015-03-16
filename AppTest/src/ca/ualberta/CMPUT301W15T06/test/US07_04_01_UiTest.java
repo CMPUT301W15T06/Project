@@ -12,10 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
+import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimList;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
+import ca.ualberta.CMPUT301W15T06.StatusException;
 
 public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActivity>{
 
@@ -40,7 +42,7 @@ public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 
 	}
 
-	public void testClaimList() {
+	public void testClaimList() throws StatusException{
 		
 		/*
 		 * Test for US07.04.01 Basic Flow 1
@@ -91,6 +93,9 @@ public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				Claim claim =  new Claim("test");
+				assertTrue("can be submmit",claim.getStatus().toString().equals("Approved"));
+				assertTrue("editable?", claim.getEdiable()==false);
 				
 				// long click new claim
 				assertNotNull(claimList.getChildAt(0).performLongClick());
@@ -112,6 +117,9 @@ public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				Claim claim =  new Claim("test");
+				assertTrue("can be submmit",claim.getStatus().toString().equals("Approved"));
+				assertTrue("editable?", claim.getEdiable()==false);
 				
 				// long click new claim
 				assertNotNull(claimList.getChildAt(0).performLongClick());
@@ -151,6 +159,9 @@ public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
+				Claim claim =  new Claim("test");
+				assertTrue("can be submmit",claim.getStatus().toString().equals("Approved"));
+				assertTrue("editable?", claim.getEdiable()==false);
 				
 				// long click new claim
 				assertNotNull(claimList.getChildAt(0).performLongClick());

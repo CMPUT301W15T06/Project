@@ -14,13 +14,42 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
 ANY KIND, either express or implied. See the License for the specific language 
 governing permissions and limitations under the License.
  */
+ 
+/**
+ * This <code>ClaimantClaimListActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class controls the User Interface of 
+ * <code>ClaimList</code> for claimant. This view displays a list of
+ * <code>Claim</code>, creates an option menu, have add a new claim option,
+ * set a <code>checkForWarn</code> method to check if there is any warning 
+ * and error and return a boolean value. It will be used when the claimant 
+ * asks to access to the <code>ClaimList</code>.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see java.util.ArrayList
+ * @see java.util.Comparator
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.app.AlertDialog
+ * @see android.app.Dialog
+ * @see android.content.DialogInterface
+ * @see android.content.DialogInterface.OnClickListener
+ * @see android.content.Intent
+ * @see android.view.Menu
+ * @see android.view.MenuItem
+ * @see android.view.View
+ * @see android.view.View.OnLongClickListener
+ * @see android.widget.AdapterView
+ * @see android.widget.AdapterView.OnItemClickListener
+ * @see android.widget.AdapterView.OnItemLongClickListener
+ * @see android.widget.ArrayAdapter
+ * @see android.widget.ListView
+ * @see android.widget.Toast
+ */
 package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-
-
-
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -41,7 +70,19 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class ClaimantClaimListActivity extends Activity {
+	
+	/**
+	 * Set a ClaimantClaimListController object cclc with initial 
+	 * default value null.
+	 */
 	private ClaimantClaimListController cclc=null;
+	/**
+	 * Set a Dialog object dialog
+	 * 
+	 * @see android.app.Dialog
+	 * @see android.content.DialogInterface
+	 * @see android.content.DialogInterface.OnClickListener
+	 */
 	private Dialog dialog;
 	
 	@Override
@@ -57,11 +98,12 @@ public class ClaimantClaimListActivity extends Activity {
 		final ArrayAdapter<Claim> adapter=new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1,list);
 		adapter.sort(sortClaim());
 		listView.setAdapter(adapter);
-		
+
 		AppSingleton.getInstance().getClaimList().addListener(new Listener() {
 			
 			@Override
 			public void update() {
+				// TODO Auto-generated method stub
 				adapter.sort(sortClaim());
 				adapter.notifyDataSetChanged();
 			}
@@ -157,6 +199,12 @@ public class ClaimantClaimListActivity extends Activity {
 		});
 	}
 
+	/**
+	 * Sort the <code>ClaimList</code> by the starting date of the claim.
+	 * 
+	 * @return a Comparator object
+	 * @see java.util.Comparator
+	 */
 	private Comparator<? super Claim> sortClaim() {
 		return new Comparator<Claim>() {
 			
@@ -177,12 +225,27 @@ public class ClaimantClaimListActivity extends Activity {
 	}
 	
 
-	
+	/**
+	 * Add a claim to the <code>ClaimList</code> by calling the 
+	 * <code>ClaimantAddClaimActivity</code> class.
+	 * 
+	 * @param m  a MenuItem object
+	 * @see android.content.Intent
+	 * @see android.view.Menu
+	 * @see android.view.MenuItem
+	 */
 	public void addClaim(MenuItem m){
 		Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantAddClaimActivity.class);
 		startActivity(intent);
 	}
 
+	/**
+	 * This method will check the missValue and flag to justify if the claim,
+	 * item and destination have any errors.
+	 * 
+	 * @param claim  a Claim object
+	 * @return result  a boolean variable
+	 */
 	private boolean checkForWarn(Claim claim){
 		boolean result=false;
 		if(claim.getMissValue()){
@@ -206,10 +269,20 @@ public class ClaimantClaimListActivity extends Activity {
 		return result;
 	}
 	
+	/**
+	 * Return the Dialog object dialog. This method will be used when 
+	 * other class need to use or display the dialog. 
+	 * 
+	 * @return dialog  a Dialog variable
+	 * @see android.app.Dialog
+	 * @see android.content.DialogInterface
+	 * @see android.content.DialogInterface.OnClickListener
+	 */
 	public Dialog getDialog() {
 		return dialog;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
 		super.onPrepareDialog(id, dialog, args);
