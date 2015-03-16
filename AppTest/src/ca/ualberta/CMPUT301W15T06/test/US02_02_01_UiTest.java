@@ -1,5 +1,7 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
@@ -130,8 +132,8 @@ public class US02_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 		// get length of claim list
 		int length = cList.getClaimList().size();
 		// initialize date
-		String last_date = cList.getClaimList().get(0).getBeginDate();
-		String new_date = last_date;
+		Date last_date = cList.getClaimList().get(0).getBeginDate();
+		Date new_date = last_date;
 		// date should be sorted from the oldest one to the nearest one
 		int i = 0;
 		while (i < length){
