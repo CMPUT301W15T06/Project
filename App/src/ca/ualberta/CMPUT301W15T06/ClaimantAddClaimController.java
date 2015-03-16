@@ -94,7 +94,7 @@ public class ClaimantAddClaimController {
 		claim.setBeginDate(beginDate);
 		claim.setEndDate(endDate);
 		
-		if (claimName.equals("")||begin.equals("")||end.equals("")){
+		if (claimName.equals("")||begin==null||end==null){
 			claim.setMissValue(true);
 		}else{
 			claim.setMissValue(false);
