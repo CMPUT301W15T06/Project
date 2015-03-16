@@ -7,7 +7,7 @@ import ca.ualberta.CMPUT301W15T06.ClaimantAddDestinationActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
-import ca.ualberta.CMPUT301W15T06.R;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
@@ -15,9 +15,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
-import android.view.ContextMenu;
-import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -27,6 +24,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+@SuppressLint("CutPasteId")
 public class US01_02_01_Test extends
 ActivityInstrumentationTestCase2<MainActivity> {
 

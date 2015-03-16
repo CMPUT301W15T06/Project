@@ -9,6 +9,7 @@ import ca.ualberta.CMPUT301W15T06.ClaimantItemDetailActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
 import ca.ualberta.CMPUT301W15T06.StatusException;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
@@ -19,12 +20,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
+@SuppressLint("CutPasteId")
 public class US04_07_01_Test extends
 		ActivityInstrumentationTestCase2<MainActivity> {
 	

@@ -1,31 +1,27 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
-import android.content.Context;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.TouchUtils;
 import android.test.ViewAsserts;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import ca.ualberta.CMPUT301W15T06.ClaimList;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddItemActivity;
-import ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
-import ca.ualberta.CMPUT301W15T06.R;
 
+@SuppressLint("CutPasteId")
 public class US04_01_01_Test extends ActivityInstrumentationTestCase2<MainActivity>{
 
 	Button ApproverButton;
@@ -293,19 +289,19 @@ public class US04_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				Spinner iCurr1 = (Spinner) aiActivity11.findViewById(ca.ualberta.CMPUT301W15T06.R.id.createCurrencySpinner);
 				
 				// check if it is on screen
-				ViewAsserts.assertOnScreen(decorView4, iDate1);
+				ViewAsserts.assertOnScreen(decorView111, iDate1);
 				assertNotNull(iDate1.getVisibility());
 				
-				ViewAsserts.assertOnScreen(decorView4, iCat1);
+				ViewAsserts.assertOnScreen(decorView111, iCat1);
 				assertNotNull(iCat1.getVisibility());
 				
-				ViewAsserts.assertOnScreen(decorView4, iDes1);
+				ViewAsserts.assertOnScreen(decorView111, iDes1);
 				assertNotNull(iDes1.getVisibility());
 				
-				ViewAsserts.assertOnScreen(decorView4, iAmount1);
+				ViewAsserts.assertOnScreen(decorView111, iAmount1);
 				assertNotNull(iAmount1.getVisibility());
 				
-				ViewAsserts.assertOnScreen(decorView4, iCurr1);
+				ViewAsserts.assertOnScreen(decorView111, iCurr1);
 				assertNotNull(iCurr1.getVisibility());
 				
 

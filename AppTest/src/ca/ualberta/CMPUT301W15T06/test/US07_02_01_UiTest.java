@@ -1,16 +1,11 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
-import java.lang.reflect.Proxy;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
-import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.TouchUtils;
 import android.test.ViewAsserts;
-import android.view.ContextMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
