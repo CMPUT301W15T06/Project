@@ -29,7 +29,7 @@ package ca.ualberta.CMPUT301W15T06;
 public class FlagController {
 
 	/**
-	 * Set a Item object item with a defualt value of null.
+	 * Set a Item object item with a default value of null.
 	 */
 	private Item item=null;
 	
@@ -46,8 +46,9 @@ public class FlagController {
 	}
 	
 	/**
-	 * Change flag when needed/ If there's a existing flag, set it to be
-	 * false, otherwise set it to be true.
+	 * Change flag when needed. If there's a existing flag, set it to be
+	 * false, otherwise set it to be true. This method also uses
+	 * <code>AppSinleton</code> class to use shared data.
 	 * 
 	 * @throws StatusException
 	 */

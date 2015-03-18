@@ -72,7 +72,7 @@ public class ClaimList extends AppModel{
 	}
 		
 	/**
-	 * Push the claimList to the Internaet. Do nothing
+	 * Push the claimList to the Internet. Do nothing
 	 * right know, but may have further use.
 	 */
 	public void pushOnline(){	

@@ -243,7 +243,7 @@ public class Item extends AppModel{
 	 * 
 	 * @param receipt  a Receipt object
 	 */
-	public void setRecipt(Receipt recipt) {
+	public void setRecipt(Receipt receipt) {
 		
 	}
 	
@@ -305,8 +305,13 @@ public class Item extends AppModel{
 		
 	}
 
-
-
+	/**
+	 * Check if the information of the item is fulfilled and return a
+	 * boolean value with default as false. This method will be used 
+	 * when user finished editing Item.
+	 * 
+	 * @return false  a boolean value
+	 */
 	public boolean infoComplete() {
 		// TODO Auto-generated method stub
 		return false;

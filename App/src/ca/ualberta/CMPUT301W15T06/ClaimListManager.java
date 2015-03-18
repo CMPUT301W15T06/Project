@@ -84,7 +84,7 @@ public class ClaimListManager {
 	 * This method checks if the ClaimListManager object clm has been 
 	 * initialized.
 	 * 
-	 * @throw RuntimeException
+	 * @throws RuntimeException
 	 * @return clm  a ClaimManager 
 	 */
 	public static ClaimListManager getInstance() {  
@@ -95,11 +95,10 @@ public class ClaimListManager {
     }
 	
 	/**
-	 * This method initialize a new clm if there's none or not intialize
+	 * This method initialize a new clm if there's none or not initialize
 	 * before. 
 	 * 
 	 * @param ct  a Context object'
-	 * @see android.content.Context
 	 */
 	public static void initial(Context ct){
 		if (clm==null){
@@ -113,7 +112,7 @@ public class ClaimListManager {
 	 * 
 	 * @exception FileNotFoundException
 	 * @exception IOException
-	 * @throw RuntimeException
+	 * @throws RuntimeException
 	 * @see com.google.gson.Gson
  	 * @see java.io.FileInputStream
 	 * @see java.io.FileNotFoundException

@@ -72,7 +72,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 	}
 	
 	/**
-	 * Set a date with desired format.
+	 * Set a date with desired format. This class also called <code>AppSingleton</code>
+	 * to use shared date.
 	 * 
 	 * @param view  a DatePicker object
 	 * @param year  an Integer variable

@@ -50,7 +50,7 @@ public class ClaimantEditItemController {
 	 * General construction. This method will create a Item object 
 	 * item for other classes and methods to use.
 	 * 
-	 * @param currentClaim  a Claim object
+	 * @param item a Item object
 	 */
 	public ClaimantEditItemController(Item item){
 		this.item=item;
@@ -62,9 +62,11 @@ public class ClaimantEditItemController {
 	 * and currency. It will also checks <code>StatusException()</code> 
 	 * warning to prevent crush.
 	 * 
-	 * @param name  a String variable
-	 * @param begin  a String variable
-	 * @param end  a String variable
+	 * @param dateSTR  a String variable
+	 * @param category  a String variable
+	 * @param description  a String variable
+	 * @param amount  a Double variable
+	 * @param currency  a String variable
 	 * @throws StatusException
 	 * @see java.text.DateFormat
 	 * @see java.text.ParseException

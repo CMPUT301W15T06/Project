@@ -87,7 +87,7 @@ public class ClaimantAddClaimActivity extends Activity {
 
 
 	/**
-	 * This method is an extened version of onCreate content view. 
+	 * This method is an extended version of onCreate content view. 
 	 * It will set up a new ClaimantAddClaimController object cacc to
 	 * store the claimList. Then set up the EditText object beginView 
 	 * and endView.

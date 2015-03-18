@@ -47,7 +47,7 @@ public class ClaimantAddItemController {
 	
 	
 	/**
-	 * General contruction. This method is will create a Claim object 
+	 * General construction. This method is will create a Claim object 
 	 * claim for other classes and methods to use.
 	 * 
 	 * @param claim  a Claim object
@@ -59,7 +59,7 @@ public class ClaimantAddItemController {
 	/**
 	 * This method will create a new String variable dateSTR, category, 
 	 * description and currency, and a Double variable amount, all to the 
-	 * Item. Then set a bolean variable missValueto to justify the 
+	 * Item. Then set a boolean variable missValueto to justify the 
 	 * <code>Item</code>. It also gonna notify all Listener in listeners 
 	 * list about this update.
 	 * 
@@ -68,7 +68,7 @@ public class ClaimantAddItemController {
 	 * @param description  a String variable
 	 * @param amount  a Double variable
 	 * @param currency  a String variable
-	 * @throw StatusException
+	 * @throws StatusException
 	 * @see java.text.DateFormat
 	 * @see java.text.ParseException
 	 * @see java.text.SimpleDateFormat
