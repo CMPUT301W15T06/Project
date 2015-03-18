@@ -53,15 +53,10 @@ public class Claim extends AppModel{
 	 */
 	private String name;
 	/**
-<<<<<<< HEAD
-	 * Set private Date object beginDate and endDate to record the 
-	 * beginning and ending date for travel. 
-=======
 	 * Set private Date beginDate and endDate to record the 
 	 * beginning and ending date for travel.
 	 * 
 	 *  @see java.util.Date
->>>>>>> fa7674dceeaf733bdd9de48163710f0c8356d4cc
 	 */
 	private Date beginDate;
 	private Date endDate;
