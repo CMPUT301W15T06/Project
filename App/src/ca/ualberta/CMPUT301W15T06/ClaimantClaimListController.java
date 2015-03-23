@@ -101,6 +101,19 @@ public class ClaimantClaimListController {
 		claimList.notifyListeners();
 		
 	}
+
+	public void addTag(long l) {
+		// TODO Auto-generated method stub
+		claim.getTagIDList().add(l);
+		claim.notifyListeners();
+		
+	}
+
+	public void removeTag(long l) {
+		// TODO Auto-generated method stub
+		claim.getTagIDList().remove(l);
+		claim.notifyListeners();
+	}
 	
 
 }

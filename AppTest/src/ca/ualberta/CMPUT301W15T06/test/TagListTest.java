@@ -27,7 +27,7 @@ package ca.ualberta.CMPUT301W15T06.test;
 
 import java.util.Collection;
 
-import ca.ualberta.CMPUT301W15T06.Tag;
+import ca.ualberta.CMPUT301W15T06.String;
 import ca.ualberta.CMPUT301W15T06.TagList;
 import junit.framework.TestCase;
 
@@ -37,9 +37,9 @@ public class TagListTest extends TestCase {
 	public void testAddTagList(){
 		TagList tagList = new TagList();
 		String name = "A tag";
-		Tag testTag = new Tag(name);
+		String testTag = new String(name);
 		tagList.addTags(testTag);
-		Collection<Tag> tags = tagList.getTags();
+		Collection<String> tags = tagList.getTags();
 		assertTrue("should add a tag into tag list", name.equals(tags));
 	}
 
@@ -48,9 +48,9 @@ public class TagListTest extends TestCase {
 	public void testRmoveTagList(){
 		TagList tagList = new TagList();
 		String name = "New tag";
-		Tag testTag = new Tag(name);
+		String testTag = new String(name);
 		tagList.addTags(testTag);
-		Collection<Tag> tags = tagList.getTags();
+		Collection<String> tags = tagList.getTags();
 		assertTrue("should add a tag into tag list", name.equals(tags));
 		tagList.removeTags(testTag);
 		assertFalse("Tag list still contains that tag", tags.contains(testTag));	
@@ -60,9 +60,9 @@ public class TagListTest extends TestCase {
 	public void testRenameTag(){
 		TagList tagList = new TagList();
 		String name = "AA tag";
-		Tag testTag = new Tag(name);
+		String testTag = new String(name);
 		tagList.addTags(testTag);
-		Collection<Tag> tags = tagList.getTags();
+		Collection<String> tags = tagList.getTags();
 		assertTrue("should add a tag into tag list", name.equals(tags));
 		tagList.renameTags(testTag);
 		assertFalse("should rename the tag", name.equals(tags));

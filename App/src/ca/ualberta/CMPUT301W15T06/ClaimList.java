@@ -39,6 +39,7 @@ package ca.ualberta.CMPUT301W15T06;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ClaimList extends AppModel{
 
@@ -50,6 +51,10 @@ public class ClaimList extends AppModel{
 	 */
 	private ArrayList<Claim> claimList;
 
+	private ArrayList<Tag> tagList;
+	
+	
+	private Date lastModify;
 	
 	/**
 	 * General construction. This method Set up the claimList.
@@ -59,7 +64,9 @@ public class ClaimList extends AppModel{
 	public ClaimList(){
 		super();
 		claimList=new ArrayList<Claim>();
+		tagList=new ArrayList<Tag>();
 	}
+	
 			
 	/**
 	 * Return the ArrayList claimList. This method will be used when 
@@ -115,6 +122,10 @@ public class ClaimList extends AppModel{
 		for (Claim claim:claimList){
 			claim.addListener(l);
 		}
+		for (Tag tag:tagList){
+			tag.addListener(l);
+		}
+		
 	}
 	/**
 	 * Sort the claimList. The method does nothing here, but may
@@ -124,5 +135,39 @@ public class ClaimList extends AppModel{
 		// TODO Auto-generated method stub
 		
 	}
+
+	public Date getLastModify() {
+		return lastModify;
+	}
+
+	public void setLastModify(Date lastModify) {
+		this.lastModify = lastModify;
+	}
+
+	public ArrayList<Tag> getTagList() {
+		return tagList;
+	}
+
+	public CharSequence[] toTagList() {
+		// TODO Auto-generated method stub
+		ArrayList<CharSequence> csal = new ArrayList<CharSequence>();
+		for (Tag tag:tagList){
+			csal.add(tag.toString());
+		}
+		CharSequence[] result=new CharSequence[csal.size()];
+		return csal.toArray(result);
+	}
+
+
+	public Tag getTagByID(Long l) {
+		// TODO Auto-generated method stub
+		for(Tag tag:tagList){
+			if(l.equals(tag.getID())){
+				return tag;
+			}
+		}
+		return null;
+	}
+
 
 }

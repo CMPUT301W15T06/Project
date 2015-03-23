@@ -42,6 +42,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
+import java.util.Date;
 
 
 import android.content.Context;
@@ -166,7 +167,9 @@ public class ClaimListManager {
 		try {
 			FileOutputStream fos = context.openFileOutput(FILENAME, 0);
 			OutputStreamWriter osw =new OutputStreamWriter(fos);
-			gson.toJson(AppSingleton.getInstance().getClaimList(),osw);
+			ClaimList cl=AppSingleton.getInstance().getClaimList();
+			cl.setLastModify(new Date());
+			gson.toJson(cl,osw);
 			osw.flush();
 			fos.close();
 		} catch (FileNotFoundException e) {

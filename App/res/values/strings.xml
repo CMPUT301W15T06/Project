@@ -21,7 +21,7 @@
 
     <string-array name="claim_dialog_array">
         <item>Details</item>
-        <item> </item>
+        <item>Change tags</item>
         <item>Submit this claim</item>
         <item>Edit this claim</item>
         <item>Delete this claim</item>
@@ -30,6 +30,10 @@
         <item>Flag/Deflag for Incompleteness</item>
         <item>Photo Recipt</item>
         <item>Details</item>
+    </string-array>
+    <string-array name="tag_dialog_array">
+        <item>Edit</item>
+        <item>Delete</item>
     </string-array>
     <string-array name="currency">
         <item>CAD</item>
@@ -58,5 +62,9 @@
     <string name="title_activity_claimant_item_detail">Item Detail</string>
     <string name="title_activity_claimant_edit_item">Edit this Item</string>
     <string name="title_activity_claimant_edit_claim">Edit Claim</string>
-
+    <string name="title_activity_claimant_receipt">Photo Receipt</string>
+    <string name="push_online">Push Online</string>
+    <string name="add_photo">Add a Photographic Receipt</string>
+    <string name="delete_photo">Delete this Photographic Receipt</string>
+    <string name="manage_tag">Manage Tag</string>
 </resources>

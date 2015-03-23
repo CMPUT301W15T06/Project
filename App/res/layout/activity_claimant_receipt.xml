@@ -8,10 +8,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ClaimantReceiptActivity" >
 
-    <ImageView 
-        android:id="@+id/PhotoRecipt" 
-        android:layout_width="match_parent" 
-        android:layout_height="match_parent" 
-        android:src="@drawable/ic_launcher"/>
+    <ImageView
+        android:id="@+id/photoReciptImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>

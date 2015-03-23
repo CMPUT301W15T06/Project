@@ -9,10 +9,11 @@ package ca.ualberta.CMPUT301W15T06;
 
 public final class R {
     public static final class array {
-        public static final int category=0x7f060003;
+        public static final int category=0x7f060004;
         public static final int claim_dialog_array=0x7f060000;
-        public static final int currency=0x7f060002;
+        public static final int currency=0x7f060003;
         public static final int item_dialog_array=0x7f060001;
+        public static final int tag_dialog_array=0x7f060002;
     }
     public static final class attr {
     }
@@ -35,8 +36,6 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int AddTag=0x7f09004d;
-        public static final int AddTagButton=0x7f09004e;
         public static final int ApproverEndingDate=0x7f090004;
         public static final int ApproverItemList=0x7f090008;
         public static final int ApproverStartDate=0x7f090002;
@@ -47,16 +46,16 @@ public final class R {
         public static final int EndDateApprover=0x7f090005;
         public static final int FinishItemButton=0x7f090019;
         public static final int NameInApprover=0x7f090000;
-        public static final int PhotoRecipt=0x7f09004c;
         public static final int ReasonEditText=0x7f09002a;
         public static final int ReasonTextView=0x7f090029;
         public static final int SeeComment=0x7f090026;
         public static final int SeeNameForApprover=0x7f090001;
         public static final int StartDateApprover=0x7f090003;
-        public static final int TagList=0x7f09004f;
         public static final int action_settings=0x7f090053;
         public static final int addDestinationButton=0x7f090011;
         public static final int addItemButton=0x7f09004b;
+        public static final int addTagButton=0x7f09004e;
+        public static final int addTagEditText=0x7f09004d;
         public static final int add_new_claim=0x7f090054;
         public static final int approverButton=0x7f090052;
         public static final int approverReceiptView=0x7f090009;
@@ -82,7 +81,7 @@ public final class R {
         public static final int createItemDescriptionEditText=0x7f09001f;
         public static final int createItemDescriptionTextView=0x7f090023;
         public static final int deleteItemButton=0x7f09003f;
-        public static final int deletePhoto=0x7f090056;
+        public static final int deletePhoto=0x7f090058;
         public static final int editCategorySpinner=0x7f09003e;
         public static final int editClaimEndDateEditText=0x7f09002f;
         public static final int editClaimEndingDateTextView=0x7f09002e;
@@ -116,12 +115,16 @@ public final class R {
         public static final int itemDescriptionTextView=0x7f090044;
         public static final int itemDescriptionVTextView=0x7f090045;
         public static final int itemListView=0x7f090007;
+        public static final int manage_tag=0x7f090056;
         public static final int nameClaimantClaimDetailTextView=0x7f090012;
         public static final int nameValueClaimantClaimDetailTextView=0x7f090013;
+        public static final int photoReciptImageView=0x7f09004c;
+        public static final int push_online=0x7f090055;
         public static final int roleTextView=0x7f090050;
         public static final int startDateClaimantClaimDetailTextView=0x7f090014;
         public static final int startDateValueClaimantClaimDetailTextView=0x7f090015;
-        public static final int takephoto=0x7f090055;
+        public static final int tagListView=0x7f09004f;
+        public static final int takephoto=0x7f090057;
     }
     public static final class layout {
         public static final int activity_approver_claim_detail_list=0x7f030000;
@@ -165,8 +168,12 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int add_new_claim=0x7f05000d;
+        public static final int add_photo=0x7f050018;
         public static final int app_name=0x7f050000;
+        public static final int delete_photo=0x7f050019;
         public static final int hello_world=0x7f050002;
+        public static final int manage_tag=0x7f05001a;
+        public static final int push_online=0x7f050017;
         public static final int title_activity_approver_claim_detail_list=0x7f05000a;
         public static final int title_activity_approver_claim_list=0x7f050008;
         public static final int title_activity_approver_item_list=0x7f050009;
@@ -181,6 +188,7 @@ public final class R {
         public static final int title_activity_claimant_edit_item=0x7f050014;
         public static final int title_activity_claimant_item_detail=0x7f050013;
         public static final int title_activity_claimant_item_list=0x7f050011;
+        public static final int title_activity_claimant_receipt=0x7f050016;
         public static final int title_activity_claimant_recipt=0x7f050006;
         public static final int title_activity_claimant_tag_list=0x7f050007;
         public static final int title_claim_dialog=0x7f05000f;

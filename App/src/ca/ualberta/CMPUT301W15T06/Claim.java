@@ -80,12 +80,12 @@ public class Claim extends AppModel{
 	 */
 	private String approver;
 	private String comment;	
-	/**
-	 * Set private ArrayList named tagList which contains all the tags of the Claim.
-	 * 
-	 * @see java.util.ArrayList
-	 */
-	private ArrayList<Tag> tagList;
+//	/**
+//	 * Set private ArrayList named tagList which contains all the tags of the Claim.
+//	 * 
+//	 * @see java.util.ArrayList
+//	 */
+	private ArrayList<Long> tagIDList;
 	
 
 	/**
@@ -99,7 +99,7 @@ public class Claim extends AppModel{
 		super();
 		itemList=new ArrayList<Item>();
 		destinationList=new ArrayList<Destination>();
-		tagList=new ArrayList<Tag>();
+		tagIDList=new ArrayList<Long>();
 		name=claimName;
 	}
 	
@@ -235,8 +235,8 @@ public class Claim extends AppModel{
 			dest+='\n'+"      "+d.getName();
 		}
 		String tag="";
-		for (Tag t:tagList){
-			dest+='\n'+"      "+t.getName();
+		for (Long l:tagIDList){
+			tag+='\n'+"      "+AppSingleton.getInstance().getClaimList().getTagByID(l).getName();
 		}
 		return "Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+"Tag(s) : "+tag+'\n'+
 				getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY");
@@ -286,6 +286,19 @@ public class Claim extends AppModel{
 		
 		for (Destination dest:destinationList){
 			dest.addListener(l);
+		}
+	}
+	
+	public void addModelListener(Listener l){
+		if (!getModelListeners().contains(l)){
+			getModelListeners().add(l);
+		}
+		for (Item item:itemList){
+			item.addModelListener(l);
+		}
+		
+		for (Destination dest:destinationList){
+			dest.addModelListener(l);
 		}
 	}
 	
@@ -339,24 +352,17 @@ public class Claim extends AppModel{
 		return null;
 	}
 	
-	/**
-	 * Add a String tagName to tagList as new Tag. 
-	 * 
-	 * @param tagName  a String variable
-	 */
-	public void addTag(String tagName){
-		
-	}
+
 	
-	/**
-	 * Return the ArrayList tagList as null. This method will be used when 
-	 * other class need to use or display the list of Tag. 
-	 * 
-	 * @see java.util.ArrayList
-	 * @return null  an ArrayList object
-	 */
-	public ArrayList<Tag> getTagList(){		
-		return null;
+//	/**
+//	 * Return the ArrayList tagList as null. This method will be used when 
+//	 * other class need to use or display the list of Tag. 
+//	 * 
+//	 * @see java.util.ArrayList
+//	 * @return null  an ArrayList object
+//	 */
+	public ArrayList<Long> getTagIDList(){		
+		return tagIDList;
 	}	
 
 	/**
@@ -455,6 +461,22 @@ public class Claim extends AppModel{
 	public int getItemSize() {
 		// TODO Auto-generated method stub
 		return itemList.size();
+	}
+
+	public boolean[] toCheckArray() {
+		// TODO Auto-generated method stub
+		ArrayList<Tag> tl = AppSingleton.getInstance().getClaimList().getTagList();
+		boolean[] result = new boolean[tl.size()];
+		int i=0;
+		for (Tag tag:tl){
+			if(tagIDList.contains(tag.getID())){
+				result[i]=true;
+			}else{
+				result[i]=false;
+			}
+			i++;
+		}
+		return result;
 	}
 	
 	

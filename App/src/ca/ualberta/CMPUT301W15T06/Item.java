@@ -83,7 +83,7 @@ public class Item extends AppModel{
 	 * Set a Receipt object receipt to create a receipt of the 
 	 * <code>Item</code> expenses. The initial default value is null.
 	 */
-	private Receipt recipt=null;
+	private Receipt receipt=null;
 	/**
 	 * Set a boolean variable flag to add flag to the <code>Item</code> expenses.
 	 * The initial default value is false.
@@ -92,6 +92,7 @@ public class Item extends AppModel{
 	
 
 	public Item() {	
+		receipt=new Receipt();
 	}
 	
 	/**
@@ -234,7 +235,7 @@ public class Item extends AppModel{
 	 */
 	public String toString(){
 		return "Date: "+AppSingleton.formatDate(date)+'\n'+"Category: "+category+'\n'+"Description: "+description+'\n'+"Spend: "+(amount==null?"   ":amount)+' '+currency+'\n'+
-				"Photographic Receipt: "+(recipt==null?"Not Have":"Have")+'\n'+"Incompleteness: "+(flag?"YES":"NO");	
+				"Photographic Receipt: "+(receipt.getPhotoStr()==null?"Not Have":"Have")+'\n'+"Incompleteness: "+(flag?"YES":"NO");	
 	}
 	
 	/**
@@ -244,7 +245,7 @@ public class Item extends AppModel{
 	 * @param receipt  a Receipt object
 	 */
 	public void setRecipt(Receipt receipt) {
-		
+		this.receipt=receipt;
 	}
 	
 	/**
@@ -255,7 +256,22 @@ public class Item extends AppModel{
 	 * @return null  a Receipt object
 	 */
 	public Receipt getRecipt() {
-		return null;
+		return receipt;
+	}
+	
+	public void addListener(Listener l){
+		if (!getListeners().contains(l)){
+			getListeners().add(l);
+		}
+		
+		receipt.addListener(l);
+	}
+	
+	public void addModelListener(Listener l){
+		if (!getModelListeners().contains(l)){
+			getModelListeners().add(l);
+		}
+		receipt.addModelListener(l);
 	}
 	
 	/**

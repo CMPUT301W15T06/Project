@@ -46,7 +46,7 @@ public class TagList {
 	/**
 	 * Set an ArrayList named tagList to contain all the Tag.
 	 */
-	private ArrayList<Tag> tagList;
+	private ArrayList<String> tagList;
 	
 	
 	/**
@@ -55,7 +55,7 @@ public class TagList {
 	 * 
 	 * @return null  a ArrayList object
 	 */
-	public ArrayList<Tag> getTagList(){		
+	public ArrayList<String> getTagList(){		
 		return null;
 	}
 
@@ -64,7 +64,7 @@ public class TagList {
 	 * 
 	 * @return null  a Collection object
 	 */
-	public Collection<Tag> getTags() {
+	public Collection<String> getTags() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -74,7 +74,7 @@ public class TagList {
 	 * 
 	 * @param testTag  a Tag object
 	 */
-	public void addTags(Tag testTag) {
+	public void addTags(String testTag) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -84,7 +84,7 @@ public class TagList {
 	 * 
 	 * @param testTag  a Tag object
 	 */
-	public void removeTags(Tag testTag) {
+	public void removeTags(String testTag) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -94,7 +94,7 @@ public class TagList {
 	 * 
 	 * @param testTag  a Tag object
 	 */
-	public void renameTags(Tag testTag) {
+	public void renameTags(String testTag) {
 		// TODO Auto-generated method stub
 		
 	}	
