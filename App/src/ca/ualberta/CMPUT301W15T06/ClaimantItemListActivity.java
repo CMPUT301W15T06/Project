@@ -119,6 +119,8 @@ public class ClaimantItemListActivity extends Activity {
 							}
 										
 						}else if (which==1){
+							Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantReceiptActivity.class);
+							startActivity(intent);					
 						
 						}else if (which==2){
 							Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantItemDetailActivity.class);

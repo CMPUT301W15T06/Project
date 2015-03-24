@@ -5,7 +5,13 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
-    <item android:id="@+id/takephoto"></item>
-    <item android:id="@+id/deletePhoto"></item>
+    <item 
+        android:id="@+id/takephoto" 
+        android:title="@string/add_photo" 
+        android:onClick="addPhoto"/>
+    <item 
+        android:id="@+id/deletePhoto" 
+        android:title="@string/delete_photo" 
+        android:onClick="deletePhoto"/>
 
 </menu>

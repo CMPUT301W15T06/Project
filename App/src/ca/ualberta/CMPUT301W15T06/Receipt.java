@@ -33,28 +33,30 @@ governing permissions and limitations under the License.
  */
 package ca.ualberta.CMPUT301W15T06;
 
-public class Receipt {
+public class Receipt extends AppModel {
 	
-	/**
-	 * Set a private field photo integer.
-	 */
-	private int photo;
+//	/**
+//	 * Set a private field photo String.
+//	 */
+	private String photoStr=null;
 	
 	
-	/**
-	 * This method will set a photo for <code>Receipt</code>.
-	 */
-	public void setPhoto(){
-		
+//	/**
+//	 * This method will set a photo for <code>Receipt</code>.
+//	 */
+	public void setPhotoStr(String photo){
+		photoStr=photo;
+		notifyListeners();
 	}
-	/**
-	 * This method will return a photo <code>Receipt</code> for display or 
-	 * further use.
-	 * 
-	 * @return 0  an integer variable
-	 */
-	public int getPhoto(){
-		return 0;
+//	/**
+//	 * This method will return a photo <code>Receipt</code> for display or 
+//	 * further use.
+//	 * 
+//	 * @return 0  an integer variable
+//	 */
+	public String getPhotoStr(){
+		return photoStr;
 	}
+
 
 }

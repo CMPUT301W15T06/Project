@@ -32,7 +32,7 @@ import junit.framework.TestCase;
 import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimList;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
-import ca.ualberta.CMPUT301W15T06.Tag;
+import ca.ualberta.CMPUT301W15T06.String;
 import ca.ualberta.CMPUT301W15T06.TagList;
 
 
@@ -43,15 +43,15 @@ public class TagInClaimTest extends TestCase {
 		//add tag to tagList
 		TagList tagList = new TagList();
 		String name = "A tag";
-		Tag testTag = new Tag(name);
+		String testTag = new String(name);
 		tagList.addTags(testTag);
-		Collection<Tag> tags = tagList.getTags();
+		Collection<String> tags = tagList.getTags();
 		assertTrue("Tag list added incorrect", name.equals(tags));
 		//add tag to a claim
 		String cname = "Travel";
 		Claim claim = new Claim(cname);
 		claim.addTag(name);
-		ArrayList<Tag> claimTagList = claim.getTagList();
+		ArrayList<String> claimTagList = claim.getTagList();
 		assertTrue("should add a tag to a claim",name.equals(claimTagList));
 	}
 	
@@ -60,7 +60,7 @@ public class TagInClaimTest extends TestCase {
 	public void testSearchByTag(){
 		TagList tagList = new TagList();
 		String name = "A tag";
-		Tag testTag = new Tag(name);
+		String testTag = new String(name);
 		tagList.addTags(testTag);
 		String cname = "Travel";
 		Claim claim = new Claim(cname);

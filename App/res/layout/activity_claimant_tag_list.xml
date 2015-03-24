@@ -8,31 +8,34 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ClaimantTagListActivity" >
 
-    <EditText 
-        android:id="@+id/AddTag" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignParentBottom="true" 
-        android:layout_alignParentLeft="true" 
-        android:layout_toLeftOf="@+id/AddTagButton" 
-        android:ems="10">
+    <EditText
+        android:id="@+id/addTagEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/addTagButton"
+        android:ems="10" >
+
         <requestFocus/>
     </EditText>
-    <Button 
-        android:id="@+id/AddTagButton" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignParentBottom="true" 
-        android:layout_alignParentRight="true" 
-        android:text="Add"/>
+
+    <Button
+        android:id="@+id/addTagButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="addTag"
+        android:text="Add" />
     
-    <ListView 
-        android:id="@+id/TagList"
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:layout_above="@+id/AddTagButton" 
-        android:layout_alignParentTop="true" 
-        android:layout_centerHorizontal="true">
+    <ListView
+        android:id="@+id/tagListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/addTagButton"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
 
     </ListView>
 

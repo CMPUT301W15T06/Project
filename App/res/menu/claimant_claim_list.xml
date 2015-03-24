@@ -6,9 +6,21 @@
         android:showAsAction="never"
         android:title="@string/action_settings">
     </item>
-    <item android:id="@+id/add_new_claim"
+    <item 
+        android:id="@+id/add_new_claim"
         android:title="@string/add_new_claim" 
         android:onClick="addClaim">
+    </item>
+    <item 
+        android:id="@+id/push_online"
+        android:title="@string/push_online" 
+        android:onClick="pushOnline">
+    </item>
+    
+    <item 
+        android:id="@+id/manage_tag"
+        android:title="@string/manage_tag" 
+        android:onClick="manageTag">
     </item>
 
 </menu>

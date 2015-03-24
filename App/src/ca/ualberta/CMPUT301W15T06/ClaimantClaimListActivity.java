@@ -48,6 +48,7 @@ governing permissions and limitations under the License.
  */
 package ca.ualberta.CMPUT301W15T06;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -55,9 +56,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.Loader;
+import android.text.method.DigitsKeyListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,6 +70,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -84,6 +89,8 @@ public class ClaimantClaimListActivity extends Activity {
 	 * @see android.content.DialogInterface.OnClickListener
 	 */
 	private Dialog dialog;
+	
+	private ProgressDialog pg =null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +148,25 @@ public class ClaimantClaimListActivity extends Activity {
 							Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantClaimDetailActivity.class);
 							startActivity(intent);				
 						}else if (which==1){
+							AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimListActivity.this);
+							builder.setTitle("Choose the Tags");
+							builder.setMultiChoiceItems(AppSingleton.getInstance().getClaimList().toTagList(),list.get(position).toCheckArray(),new DialogInterface.OnMultiChoiceClickListener() {
+								
+								@Override
+								public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+									// TODO Auto-generated method stub
+									if (isChecked){
+										cclc.addTag(AppSingleton.getInstance().getClaimList().getTagList().get(which).getID());
+		
+									}else if(AppSingleton.getInstance().getCurrentClaim().getTagIDList().contains(AppSingleton.getInstance().getClaimList().getTagList().get(which).getID())){
+										cclc.removeTag(AppSingleton.getInstance().getClaimList().getTagList().get(which).getID());
+									}
+								}
+							});
+							
+							builder.create();  
+							builder.show();
+							cclc=new ClaimantClaimListController(AppSingleton.getInstance().getCurrentClaim());
 							
 						}else if (which==2){
 							if (list.get(position).getStatus().equals("Submitted")||list.get(position).getStatus().equals("Approved")){
@@ -150,7 +176,6 @@ public class ClaimantClaimListActivity extends Activity {
 								if(checkForWarn(list.get(position))){
 									AlertDialog.Builder adb = new AlertDialog.Builder(ClaimantClaimListActivity.this);
 									adb.setMessage("You are trying to submit an expense claim that there are fields with missing values or there are any incompleteness indicators on the expense items,are you sure you want to submit?");
-									adb.setCancelable(true);
 									adb.setPositiveButton("Submit", new OnClickListener(){
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
@@ -239,6 +264,52 @@ public class ClaimantClaimListActivity extends Activity {
 		startActivity(intent);
 	}
 
+	//http://stackoverflow.com/questions/9814821/show-progressdialog-android Author:dldnh
+	public void pushOnline(MenuItem m){
+		pg =ProgressDialog.show(this, "Pushing Onling...","Please wait patiently :)", true);
+		Thread thread = new Thread(new Runnable(){
+		    @Override
+		    public void run() {
+		  
+		        try {
+		        	new ESClient().insertClaimList(AppSingleton.getInstance().getClaimList());
+		        	AppSingleton.getInstance().setSuc(true);
+		        	
+		        } catch (Exception e) {
+		        	AppSingleton.getInstance().setSuc(false);
+		        
+		        }
+		        
+		        runOnUiThread(new Runnable() {
+		            @Override
+		            public void run()
+		            {
+		              pg.dismiss();
+		            }
+		          });
+		    }
+		});
+
+		thread.start();
+		
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		if(AppSingleton.getInstance().isSuc()){
+			Toast.makeText(getApplicationContext(), "Push online successfully!", Toast.LENGTH_LONG).show();
+		}else{
+			Toast.makeText(getApplicationContext(), "Push Online Failed,No Internet Connection!", Toast.LENGTH_LONG).show();
+		}
+		
+	}
+	
+	public void manageTag(MenuItem m){
+		Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantTagListActivity.class);
+		startActivity(intent);	
+	}
 	/**
 	 * This method will check the missValue and flag to justify if the claim,
 	 * item and destination have any errors.
@@ -257,6 +328,9 @@ public class ClaimantClaimListActivity extends Activity {
 				result=true;
 			}
 			if(item.getFlag()){
+				result=true;
+			}
+			if(item.getRecipt().getPhotoStr()==null){
 				result=true;
 			}
 		}

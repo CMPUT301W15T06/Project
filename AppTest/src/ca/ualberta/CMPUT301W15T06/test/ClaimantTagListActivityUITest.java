@@ -56,7 +56,7 @@ public class ClaimantTagListActivityUITest extends
 
 		instrumentation = getInstrumentation();
 		activity = getActivity();
-		textInput = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTag));
+		textInput = ((EditText) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addTagEditText));
 	}
 	
 
@@ -78,9 +78,9 @@ public class ClaimantTagListActivityUITest extends
 	//US 03.02.01
 	//fill in blank and click "add" activity under test
 	public void AddButton(String tag){
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton));
+		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addTagButton));
 		textInput.setText(tag);
-		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.AddTagButton)).performClick();
+		((Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addTagButton)).performClick();
 	}
 
 

@@ -90,13 +90,38 @@ public class AppSingleton {
 	 */
 	private static final DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
-	
+	private boolean suc;
 	/**
 	 * This method will load the claimList by calling <code>ClaimListManager</code>
 	 * and using <code>getInstance()</code> and <code>load()</code>.
 	 */
     private AppSingleton() {  
-    	claimList=ClaimListManager.getInstance().load();
+    	Thread thread = new Thread(new Runnable(){
+		    @Override
+		    public void run() {
+		    	ClaimList online=new ESClient().getClaimList();
+		    	ClaimList local=ClaimListManager.getInstance().load();
+		    	if (online ==null){
+		    		claimList=local;	    		
+		    	}else if (online.getLastModify()==null){
+		    		claimList=local;
+		    	}else if (local.getLastModify()==null){
+		    		claimList=online;
+		    	}else if (local.getLastModify().after(online.getLastModify())){
+		    		claimList=local;
+		    	}else{
+		    		claimList=online;
+		    	}
+		    }
+		});
+
+		thread.start();
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
     }  
     
     /**
@@ -231,7 +256,7 @@ public class AppSingleton {
      * @see java.text.SimpleDateFormat
      * @see java.util.Date
 	 */
-	public static String formatDate(Date date){
+	public static java.lang.String formatDate(Date date){
 		if (date==null){
 			return "";
 		}
@@ -250,6 +275,15 @@ public class AppSingleton {
 		// TODO Auto-generated method stub
 		return format;
 	}
+
+	public boolean isSuc() {
+		return suc;
+	}
+
+	public void setSuc(boolean suc) {
+		this.suc = suc;
+	}
+
 	
 //	public static int getYear(String date){
 //		return Integer.valueOf(date.split("-")[0]);
