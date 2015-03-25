@@ -22,11 +22,10 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 
-
 @SuppressLint("CutPasteId")
-public class US06_01_01_Test extends ActivityInstrumentationTestCase2<MainActivity>
+public class US06_02_01_Test extends
+		ActivityInstrumentationTestCase2<MainActivity>
 {
-	
 	Instrumentation instrumentation;
 	Activity activity;
 	Button ApproverButton;
@@ -34,7 +33,7 @@ public class US06_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 	Intent intent;
 	ListView clv;
 	
-	public US06_01_01_Test() {
+	public US06_02_01_Test() {
 		super(MainActivity.class);
 	}
 	
@@ -51,7 +50,7 @@ public class US06_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 	}
 
 	/*
-	 * Test for US06.01.01 Basic Flow 1
+	 * Test for US06.02.01 Basic Flow 1
 	 */
 
 	// test button exists
@@ -71,7 +70,7 @@ public class US06_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		assertEquals("Incorrect label of the button", "Approver",view.getText());
 				
 		/*
-		 * Test for US06.01.01 Basic Flow 2
+		 * Test for US06.02.01 Basic Flow 2
 		 */
 			
 		// test Claimant Button layout
@@ -106,7 +105,7 @@ public class US06_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		assertNotNull(nextActivity);
 
 		/*
-		 * Test for US06.01.01 Basic Flow 3
+		 * Test for US06.02.01 Basic Flow 3
 		 */
 
 		// view which is expected to be present on the screen
@@ -124,7 +123,7 @@ public class US06_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		assertEquals(layoutParams2.height,WindowManager.LayoutParams.WRAP_CONTENT);
 
 		/*
-		 * Test for US06.01.01 Basic Flow 4
+		 * Test for US06.02.01 Basic Flow 4
 		 */
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		assertNotNull(claimList.performClick());
@@ -149,7 +148,7 @@ public class US06_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				assertNotNull(claimList.getChildAt(0).performClick());
 								
 				/*
-				 * Test for US06.01.01 Basic Flow 5
+				 * Test for US06.02.01 Basic Flow 5
 				 */
 						
 				// get ClaimantItemListActivity
@@ -172,7 +171,7 @@ public class US06_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				assertEquals(layoutParams2.height,WindowManager.LayoutParams.WRAP_CONTENT);
 
 				/*
-				 * Test for US06.01.01 Basic Flow 6
+				 * Test for US06.02.01 Basic Flow 6
 				 */
 					
 				final ListView itemList1 = (ListView) ilActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
@@ -204,7 +203,7 @@ public class US06_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 						assertNotNull(itemList1.getChildAt(0).performClick());
 							
 						/*
-						 * Test for US06.01.01 Basic Flow 7
+						 * Test for US06.02.01 Basic Flow 7
 						 */
 							
 						// get contextMenu
@@ -214,7 +213,7 @@ public class US06_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 						assertNotNull(contextMenu.performClick());
 						
 						/*
-						 * Test for US06.01.01 Basic Flow 8
+						 * Test for US06.02.01 Basic Flow 8
 						 */
 						
 						ilActivity1.runOnUiThread(new Runnable(){
@@ -225,16 +224,17 @@ public class US06_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 							}
 						});
 						
+						/*
+						 * Test for US06.02.01 Basic Flow 9
+						 */
 						
-						
-						
+						// missing receipt interface
 					
 					}
 				});
 			}
 		});
 	}
-	
 	
 
 }
