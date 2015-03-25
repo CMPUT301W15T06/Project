@@ -140,7 +140,7 @@ public class ClaimantAddClaimActivity extends Activity {
 	 * @see android.view.View
 	 * @see android.widget.EditText
 	 * @see android.widget.DatePicker
-	 * @see android.app.DialogFragment;
+	 * @see android.app.DialogFragment
 	 */
 	public void showDatePickerDialogBegin(View v) {
 		AppSingleton.getInstance().setDateEditText(beginView);
@@ -156,7 +156,7 @@ public class ClaimantAddClaimActivity extends Activity {
 	 * @see android.view.View
 	 * @see android.widget.EditText
 	 * @see android.widget.DatePicker
-	 * @see android.app.DialogFragment;
+	 * @see android.app.DialogFragment
 	 */
 	public void showDatePickerDialogEnd(View v) {
 		AppSingleton.getInstance().setDateEditText(endView);

@@ -59,9 +59,9 @@ import android.widget.Toast;
 * @see android.text.Spanned
 * @see android.view.Menu
 * @see android.view.View
-* @see android.widget.ArrayAdapter;
-* @see android.widget.EditText;
-* @see android.widget.Spinner;
+* @see android.widget.ArrayAdapter
+* @see android.widget.EditText
+* @see android.widget.Spinner
 * @see android.widget.Toast
 */
 public class ClaimantAddItemActivity extends Activity {
@@ -151,7 +151,7 @@ public class ClaimantAddItemActivity extends Activity {
 	 * @see android.view.View
 	 * @see android.widget.EditText
 	 * @see android.widget.DatePicker
-	 * @see android.app.DialogFragment;
+	 * @see android.app.DialogFragment
 	 * @see android.app.DatePickerDialog
 	 * @see android.app.DatePickerDialog.OnDateSetListener
 	 */

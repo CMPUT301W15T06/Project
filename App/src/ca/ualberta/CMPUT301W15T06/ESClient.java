@@ -72,7 +72,7 @@ public class ESClient {
 
 	/**
 	 * Consumes the Get operation of the service
-	 * @return 
+	 * @return sr.getSource
 	 */
 	public ClaimList getClaimList(){
 		Hit<ClaimList> sr = null;
