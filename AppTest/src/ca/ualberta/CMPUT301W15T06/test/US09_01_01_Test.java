@@ -39,7 +39,7 @@ public class US09_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 
 	}
 	
-	public void testClaimListActivity() {
+	public void testPushOnline() {
 
 		// monitor
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
