@@ -80,11 +80,11 @@ public class Claim extends AppModel{
 	 */
 	private String approver;
 	private String comment;	
-//	/**
-//	 * Set private ArrayList named tagList which contains all the tags of the Claim.
-//	 * 
-//	 * @see java.util.ArrayList
-//	 */
+	/**
+	 * Set private ArrayList named tagIDList.
+	 * 
+	 * @see java.util.ArrayList
+	 */
 	private ArrayList<Long> tagIDList;
 	
 
@@ -354,13 +354,13 @@ public class Claim extends AppModel{
 	
 
 	
-//	/**
-//	 * Return the ArrayList tagList as null. This method will be used when 
-//	 * other class need to use or display the list of Tag. 
-//	 * 
-//	 * @see java.util.ArrayList
-//	 * @return null  an ArrayList object
-//	 */
+	/**
+	 * Return the ArrayList tagIDList as null. This method will be used when 
+	 * other class need to use or display the list of Tag. 
+	 * 
+	 * @see java.util.ArrayList
+	 * @return tagIDList  an ArrayList object
+	 */
 	public ArrayList<Long> getTagIDList(){		
 		return tagIDList;
 	}	
@@ -463,6 +463,9 @@ public class Claim extends AppModel{
 		return itemList.size();
 	}
 
+	/*
+	 * 
+	 */
 	public boolean[] toCheckArray() {
 		// TODO Auto-generated method stub
 		ArrayList<Tag> tl = AppSingleton.getInstance().getClaimList().getTagList();
