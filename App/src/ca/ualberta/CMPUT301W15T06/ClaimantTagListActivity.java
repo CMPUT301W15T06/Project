@@ -24,20 +24,6 @@ governing permissions and limitations under the License.
 
  */
 
-/**
- * This <code>ClaimantTagListActivity</code> class is an extended class
- * of <code>Activity</code> class. This class controls the User Interface of 
- * <code>TagList</code> for claimant. This view displays a list of
- * <code>Tag</code> and creates an option menu and return true as 
- * the boolean value. It will be used when the claimant asks to access to 
- * the <code>TagList</code>.
- * 
- * @author CMPUT301W15T06
- * @version 03/16/2015
- * @see android.os.Bundle
- * @see android.app.Activity
- * @see android.view.Menu
- */
 package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
@@ -57,6 +43,20 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+/**
+ * This <code>ClaimantTagListActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class controls the User Interface of 
+ * <code>TagList</code> for claimant. This view displays a list of
+ * <code>Tag</code> and creates an option menu and return true as 
+ * the boolean value. It will be used when the claimant asks to access to 
+ * the <code>TagList</code>.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.view.Menu
+ */
 public class ClaimantTagListActivity extends Activity {
 
 	private ClaimantTagListController ctlc=null;

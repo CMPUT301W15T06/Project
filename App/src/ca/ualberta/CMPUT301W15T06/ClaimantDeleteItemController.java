@@ -14,18 +14,18 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
 ANY KIND, either express or implied. See the License for the specific language 
 governing permissions and limitations under the License.
  */
- 
-/**
- * This <code>ClaimantDeleteItemController</code> class controls the action of 
- * <code>ItemList</code> and <code>Claim</code> for claimant. This controller 
- * class will remove a <code>Item</code> from <code>ItemList</code> in the
- * <code>Claim</code>. 
- * 
- * @author CMPUT301W15T06
- * @version 03/16/2015
- */
+
 package ca.ualberta.CMPUT301W15T06;
 
+/**
+* This <code>ClaimantDeleteItemController</code> class controls the action of 
+* <code>ItemList</code> and <code>Claim</code> for claimant. This controller 
+* class will remove a <code>Item</code> from <code>ItemList</code> in the
+* <code>Claim</code>. 
+* 
+* @author CMPUT301W15T06
+* @version 03/16/2015
+*/
 public class ClaimantDeleteItemController {
 	
 	/**

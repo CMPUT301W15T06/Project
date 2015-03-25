@@ -24,6 +24,8 @@ governing permissions and limitations under the License.
 
  */
 
+package ca.ualberta.CMPUT301W15T06;
+
 /**
  * The <code>Listener</code> class is a interface class of Listener. 
  * This class will be used when changes apply to the application and 
@@ -32,8 +34,6 @@ governing permissions and limitations under the License.
  * @author CMPUT301W15T06
  * @version 03/16/2015
  */
-package ca.ualberta.CMPUT301W15T06;
-
 public interface Listener {
 	public void update();
 }

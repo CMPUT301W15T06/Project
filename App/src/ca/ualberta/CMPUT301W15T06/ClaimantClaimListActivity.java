@@ -15,6 +15,34 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
  */
  
+package ca.ualberta.CMPUT301W15T06;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.Loader;
+import android.text.method.DigitsKeyListener;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnLongClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
+
 /**
  * This <code>ClaimantClaimListActivity</code> class is an extended class
  * of <code>Activity</code> class. This class controls the User Interface of 
@@ -46,34 +74,6 @@ governing permissions and limitations under the License.
  * @see android.widget.ListView
  * @see android.widget.Toast
  */
-package ca.ualberta.CMPUT301W15T06;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.content.Loader;
-import android.text.method.DigitsKeyListener;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnLongClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
-
 public class ClaimantClaimListActivity extends Activity {
 	
 	/**

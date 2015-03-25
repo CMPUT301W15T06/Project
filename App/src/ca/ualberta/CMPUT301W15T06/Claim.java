@@ -24,6 +24,11 @@ governing permissions and limitations under the License.
 
 */
 
+package ca.ualberta.CMPUT301W15T06;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * The <code>Claim</code> class is an sub-class of <code>AppModel</code>.
  * This class can set up a claim with the information including claimant's name, 
@@ -39,14 +44,6 @@ governing permissions and limitations under the License.
  * @see java.util.ArrayList
  * @see java.util.Date
  */
-
-package ca.ualberta.CMPUT301W15T06;
-
-
-import java.util.ArrayList;
-import java.util.Date;
-
-
 public class Claim extends AppModel{
 	/**
 	 * Set private string name to record claimant's name. 
@@ -289,6 +286,13 @@ public class Claim extends AppModel{
 		}
 	}
 	
+	/**
+	 * This method allows user to add a Listener to the 
+	 * ArrayList ModelListeners and add listener to destinations
+	 * and items in this claim
+	 * 
+	 * @param l  a Listener type
+	 */
 	public void addModelListener(Listener l){
 		if (!getModelListeners().contains(l)){
 			getModelListeners().add(l);
@@ -463,7 +467,9 @@ public class Claim extends AppModel{
 		return itemList.size();
 	}
 
-	/*
+	/**
+	 * This class will check the ArrayList object TagList to see if it contains certain
+	 * tag by checking the tag ID. It will return a   
 	 * 
 	 */
 	public boolean[] toCheckArray() {

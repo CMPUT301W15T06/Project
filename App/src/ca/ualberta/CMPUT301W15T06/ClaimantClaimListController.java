@@ -14,24 +14,24 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
 ANY KIND, either express or implied. See the License for the specific language 
 governing permissions and limitations under the License.
  */
- 
-/**
- * This <code>ClaimantClaimListController</code> class controls the action of 
- * <code>ClaimList</code> for claimant. This controller class will displays a 
- * list of <code>Claim</code>, add new <code>Claim</code> to the <code>ClaimList</code>,
- * change the status and delete <code>Claim</code>. It will be used when the 
- * claimant asks to access to the <code>ClaimList</code>.
- * 
- * @author CMPUT301W15T06
- * @version 03/16/2015
- * @see java.io.IOException
- * @see com.google.gson.JsonElement
- */
+
 package ca.ualberta.CMPUT301W15T06;
 
 import java.io.IOException;
 import com.google.gson.JsonElement;
 
+/**
+* This <code>ClaimantClaimListController</code> class controls the action of 
+* <code>ClaimList</code> for claimant. This controller class will displays a 
+* list of <code>Claim</code>, add new <code>Claim</code> to the <code>ClaimList</code>,
+* change the status and delete <code>Claim</code>. It will be used when the 
+* claimant asks to access to the <code>ClaimList</code>.
+* 
+* @author CMPUT301W15T06
+* @version 03/16/2015
+* @see java.io.IOException
+* @see com.google.gson.JsonElement
+*/
 public class ClaimantClaimListController {
 	
 	/**

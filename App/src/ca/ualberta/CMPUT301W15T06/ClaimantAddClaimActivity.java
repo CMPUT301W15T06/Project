@@ -24,6 +24,24 @@ governing permissions and limitations under the License.
 
  */
 
+package ca.ualberta.CMPUT301W15T06;
+
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.DialogFragment;
+import android.view.Menu;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Toast;
+
 /**
  * This <code>ClaimantAddClaimActivity</code> class is an extended class
  * of <code>Activity</code> class. This class will control the interface
@@ -49,25 +67,6 @@ governing permissions and limitations under the License.
  * @see android.widget.DatePicker
  * @see android.widget.EditText
  */
-package ca.ualberta.CMPUT301W15T06;
-
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
-import android.app.DialogFragment;
-import android.view.Menu;
-import android.view.View;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Toast;
-
-
 public class ClaimantAddClaimActivity extends Activity {
 
 	/**

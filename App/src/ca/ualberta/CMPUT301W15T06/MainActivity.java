@@ -24,6 +24,19 @@ governing permissions and limitations under the License.
 
  */
 
+package ca.ualberta.CMPUT301W15T06;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Toast;
+
 /**
  * This <code>MainActivity</code> class is an extended class of 
  * <code>Activity</code> class. This class will control the
@@ -39,20 +52,6 @@ governing permissions and limitations under the License.
  * @see android.view.Menu
  * @see android.view.View
  */
-package ca.ualberta.CMPUT301W15T06;
-
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.DialogInterface.OnClickListener;
-import android.view.Menu;
-import android.view.View;
-import android.widget.Toast;
-
 public class MainActivity extends Activity {
 
 	private ProgressDialog pg;

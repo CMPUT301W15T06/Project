@@ -23,29 +23,7 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
- 
- /**
- * This <code>ClaimantClaimDetailActivity</code> class is an extended class
- * of <code>Activity</code> class. This class will control the interface
- * of <code>Claim</code> detail for claimant. This view displays 
- * <code>Claim</code> details, including claimant's name, travel begin, 
- * end date and destination. It also creates an option menu. It will be 
- * used when the claimant asks to access to the <code>Claim</code> detail. 
- * The associated class including <code>Claim</code> and <code>Destination</code>.
- * 
- * @author CMPUT301W15T06
- * @version 03/16/2015
- * @see java.util.ArrayList
- * @see android.os.Bundle
- * @see android.app.Activity
- * @see android.content.Intent
- * @see android.view.Menu
- * @see android.view.View
- * @see android.widget.ArrayAdapter
- * @see android.widget.EditText
- * @see android.widget.ListView
- * @see android.widget.TextView
- */
+
 package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
@@ -60,6 +38,28 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/**
+* This <code>ClaimantClaimDetailActivity</code> class is an extended class
+* of <code>Activity</code> class. This class will control the interface
+* of <code>Claim</code> detail for claimant. This view displays 
+* <code>Claim</code> details, including claimant's name, travel begin, 
+* end date and destination. It also creates an option menu. It will be 
+* used when the claimant asks to access to the <code>Claim</code> detail. 
+* The associated class including <code>Claim</code> and <code>Destination</code>.
+* 
+* @author CMPUT301W15T06
+* @version 03/16/2015
+* @see java.util.ArrayList
+* @see android.os.Bundle
+* @see android.app.Activity
+* @see android.content.Intent
+* @see android.view.Menu
+* @see android.view.View
+* @see android.widget.ArrayAdapter
+* @see android.widget.EditText
+* @see android.widget.ListView
+* @see android.widget.TextView
+*/
 public class ClaimantClaimDetailActivity extends Activity {
 
 	@Override

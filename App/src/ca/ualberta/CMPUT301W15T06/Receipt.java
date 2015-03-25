@@ -24,6 +24,8 @@ governing permissions and limitations under the License.
 
  */
 
+package ca.ualberta.CMPUT301W15T06;
+
 /**
  * This <code>Receipt</code> class is design to set a photo receipt and to get photo if 
  * it is necessary.
@@ -31,8 +33,6 @@ governing permissions and limitations under the License.
  * @author CMPUT301W15T06
  * @version 03/07/2015
  */
-package ca.ualberta.CMPUT301W15T06;
-
 public class Receipt extends AppModel {
 	
 //	/**

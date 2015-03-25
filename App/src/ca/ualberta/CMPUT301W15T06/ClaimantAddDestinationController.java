@@ -14,22 +14,7 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
 ANY KIND, either express or implied. See the License for the specific language 
 governing permissions and limitations under the License.
  */
- 
- /**
-  * This <code>ClaimantAddDestinationController</code> is a controller class
-  * of <code>Destination</code> and <code>Claim</code>. By calling 
-  * this class, user(claimant) can add a <code>Claim</code> with its 
-  * detail to the claimList.
-  * 
-  * @author CMPUT301W15T06
-  * @version 03/16/2015
-  * @see java.text.DateFormat
-  * @see java.text.ParseException
-  * @see java.text.SimpleDateFormat
-  * @see java.util.ArrayList
-  * @see java.util.Date
-  * @see java.util.Locale
-  */
+
 package ca.ualberta.CMPUT301W15T06;
 
 import java.text.DateFormat;
@@ -39,6 +24,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * This <code>ClaimantAddDestinationController</code> is a controller class
+ * of <code>Destination</code> and <code>Claim</code>. By calling 
+ * this class, user(claimant) can add a <code>Claim</code> with its 
+ * detail to the claimList.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see java.text.DateFormat
+ * @see java.text.ParseException
+ * @see java.text.SimpleDateFormat
+ * @see java.util.ArrayList
+ * @see java.util.Date
+ * @see java.util.Locale
+ */
 public class ClaimantAddDestinationController {
 	
 	/**

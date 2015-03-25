@@ -14,26 +14,7 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
 ANY KIND, either express or implied. See the License for the specific language 
 governing permissions and limitations under the License.
  */
- 
-/**
- * This <code>ClaimantEditClaimActivity</code> class is an extended class
- * of <code>Activity</code> class. This class controls the User Interface of 
- * editing <code>Claim</code> detail for claimant. This view displays the 
- * detail of <code>Claim</code> and allows claimant to change and update 
- * the information. It will be used when the claimant asks to edit the claim
- * detail.
- * 
- * @author CMPUT301W15T06
- * @version 03/16/2015
- * @see android.app.Activity
- * @see android.app.DialogFragment
- * @see android.os.Bundle
- * @see android.view.Menu
- * @see android.view.MenuItem
- * @see android.view.View
- * @see android.widget.EditText
- * @see android.widget.Toast
- */
+
 package ca.ualberta.CMPUT301W15T06;
 
 import android.app.Activity;
@@ -45,6 +26,25 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+* This <code>ClaimantEditClaimActivity</code> class is an extended class
+* of <code>Activity</code> class. This class controls the User Interface of 
+* editing <code>Claim</code> detail for claimant. This view displays the 
+* detail of <code>Claim</code> and allows claimant to change and update 
+* the information. It will be used when the claimant asks to edit the claim
+* detail.
+* 
+* @author CMPUT301W15T06
+* @version 03/16/2015
+* @see android.app.Activity
+* @see android.app.DialogFragment
+* @see android.os.Bundle
+* @see android.view.Menu
+* @see android.view.MenuItem
+* @see android.view.View
+* @see android.widget.EditText
+* @see android.widget.Toast
+*/
 public class ClaimantEditClaimActivity extends Activity {
 
 	/**

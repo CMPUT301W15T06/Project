@@ -14,21 +14,7 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
 ANY KIND, either express or implied. See the License for the specific language 
 governing permissions and limitations under the License.
  */
- 
- /**
- * This <code>ClaimantAddItemController</code> class is a controller class
-  * of <code>Item</code>, <code>ItemList</code> and <code>Claim</code>. 
-  * By calling this class, user(claimant) can add a <code>Item/code> with its 
-  * detail to the itemList in claim.
- * 
- * @author CMPUT301W15T06
- * @version 03/16/2015
- * @see java.text.DateFormat
- * @see java.text.ParseException
- * @see java.text.SimpleDateFormat
- * @see java.util.Date
- * @see java.util.Locale
- */
+
 package ca.ualberta.CMPUT301W15T06;
 
 import java.text.DateFormat;
@@ -37,6 +23,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+* This <code>ClaimantAddItemController</code> class is a controller class
+ * of <code>Item</code>, <code>ItemList</code> and <code>Claim</code>. 
+ * By calling this class, user(claimant) can add a <code>Item/code> with its 
+ * detail to the itemList in claim.
+* 
+* @author CMPUT301W15T06
+* @version 03/16/2015
+* @see java.text.DateFormat
+* @see java.text.ParseException
+* @see java.text.SimpleDateFormat
+* @see java.util.Date
+* @see java.util.Locale
+*/
 public class ClaimantAddItemController {
 	
 	/**

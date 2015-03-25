@@ -24,6 +24,12 @@ governing permissions and limitations under the License.
 
  */
 
+package ca.ualberta.CMPUT301W15T06;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * The <code>AppModel</code> class can create an ArrayList named
  * listeners, which contains Listener subject. This class can
@@ -36,13 +42,6 @@ governing permissions and limitations under the License.
  * @see java.util.HashSet
  * @see java.util.Set
  */
-
-package ca.ualberta.CMPUT301W15T06;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 public class AppModel{
 	
 	/**

@@ -24,6 +24,8 @@ governing permissions and limitations under the License.
 
  */
 
+package ca.ualberta.CMPUT301W15T06;
+
 /**
  * The <code>StatusException</code> class is an sub-class of <code>Exception</code>.
  * This class will be used when checking the warnings and errors in the application 
@@ -32,8 +34,6 @@ governing permissions and limitations under the License.
  * @author CMPUT301W15T06
  * @version 03/16/2015
  */
-package ca.ualberta.CMPUT301W15T06;
-
 public class StatusException extends Exception {
 
 }

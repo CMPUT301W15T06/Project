@@ -24,6 +24,20 @@ governing permissions and limitations under the License.
 
 */
 
+package ca.ualberta.CMPUT301W15T06;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
+import android.os.Bundle;
+import android.widget.DatePicker;
+import android.widget.Toast;
+
 /**
  * The <code>DatePickerFragment</code> class is an sub-class of <code>DialogFragment</code>.
  * This class can set up a new DatePickerDialog and set date with desired format. This class 
@@ -42,20 +56,6 @@ governing permissions and limitations under the License.
  * @see android.widget.DatePicker
  * @see android.widget.Toast
  */
-package ca.ualberta.CMPUT301W15T06;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.TimePickerDialog;
-import android.os.Bundle;
-import android.widget.DatePicker;
-import android.widget.Toast;
-
 //http://developer.android.com/guide/topics/ui/controls/pickers.html  Apache 2.0 license 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 

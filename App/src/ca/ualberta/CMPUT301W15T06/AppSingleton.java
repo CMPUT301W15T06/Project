@@ -24,6 +24,15 @@ governing permissions and limitations under the License.
 
  */
 
+package ca.ualberta.CMPUT301W15T06;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import android.widget.EditText;
+
 /**
  * This class is a static class to store some information that we want to share 
  * between the whole application. The role is to ensure a class has only one 
@@ -37,15 +46,6 @@ governing permissions and limitations under the License.
  * @see java.util.Locale
  * @see android.widget.EditText
  */
-package ca.ualberta.CMPUT301W15T06;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import android.widget.EditText;
-
 public class AppSingleton {
 	/**
 	 * Set a static AppSingleton type object appsingleton.

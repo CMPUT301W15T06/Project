@@ -15,24 +15,6 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
  */
 
-/**
- * This <code>ClaimListManager</code> class is a management class of <code>ClaimList</code>.
- * By calling this class, the claimList can be loaded and saved.
- * 
- * @author CMPUT301W15T06
- * @version 03/16/2015
- * @see java.io.FileInputStream
- * @see java.io.FileNotFoundException
- * @see java.io.FileOutputStream
- * @see java.io.IOException
- * @see java.io.InputStreamReader
- * @see java.io.OutputStreamWriter
- * @see java.lang.reflect.Type
- * @see android.content.Context
- * @see com.google.gson.Gson
- * @see com.google.gson.JsonIOException
- * @see com.google.gson.reflect.TypeToken
- */
 package ca.ualberta.CMPUT301W15T06;
 
 import java.io.FileInputStream;
@@ -51,6 +33,24 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * This <code>ClaimListManager</code> class is a management class of <code>ClaimList</code>.
+ * By calling this class, the claimList can be loaded and saved.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see java.io.FileInputStream
+ * @see java.io.FileNotFoundException
+ * @see java.io.FileOutputStream
+ * @see java.io.IOException
+ * @see java.io.InputStreamReader
+ * @see java.io.OutputStreamWriter
+ * @see java.lang.reflect.Type
+ * @see android.content.Context
+ * @see com.google.gson.Gson
+ * @see com.google.gson.JsonIOException
+ * @see com.google.gson.reflect.TypeToken
+ */
 public class ClaimListManager {
 	/**
 	 * Set a static type ClaimListManager object clm with a default value 

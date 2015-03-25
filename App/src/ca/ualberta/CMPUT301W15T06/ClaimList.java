@@ -23,7 +23,13 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License. 
 
  */
- 
+
+package ca.ualberta.CMPUT301W15T06;
+
+
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * The <code>ClaimList</code> class is an sub-class of <code>AppModel</code>.
  * This class can set up a ArrayList named ClaimList which contains Claim.
@@ -35,12 +41,6 @@ governing permissions and limitations under the License.
  * @version 03/07/2015
  * @see java.util.ArrayList
  */
-package ca.ualberta.CMPUT301W15T06;
-
-
-import java.util.ArrayList;
-import java.util.Date;
-
 public class ClaimList extends AppModel{
 
 	/**

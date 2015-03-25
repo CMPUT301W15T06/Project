@@ -24,6 +24,8 @@ governing permissions and limitations under the License.
 
  */
 
+package ca.ualberta.CMPUT301W15T06;
+
 /**
  * The <code>Destination</code> class is an sub-class of <code>AppModel</code>.
  * This class can set up a <code>Destination</code> with a name and a reason. 
@@ -33,8 +35,6 @@ governing permissions and limitations under the License.
  * @author CMPUT301W15T06
  * @version 03/16/2015
  */
-package ca.ualberta.CMPUT301W15T06;
-
 public class Destination extends AppModel{
 	
 	/**

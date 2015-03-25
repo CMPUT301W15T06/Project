@@ -24,33 +24,20 @@ governing permissions and limitations under the License.
 
  */
 
+package ca.ualberta.CMPUT301W15T06;
+
+import java.util.Date;
+
 /**
  * The <code>Item</code> class is an sub-class of <code>AppModel</code>.
-<<<<<<< HEAD
- * This class can set up a claim with the information including claimant's name, 
- * travel begin and end date, travel status, item list, destination list with reason, 
- * approve status, comment and tag list. The class also allows the user to call
- * <code>ClaimantAddItemController</code> to create a new item, call 
- * <code>ClaimantEditItemController</code> class to edit and make changes to 
- * current item, set up the category of item, call <code>Receipt</code> to set up and 
- * edit the photo receipt.
- * 
- * @author CMPUT301W15T06
- * @version 03/07/2015
-=======
  * The class allows the user to call <code>ClaimantAddItemController</code> 
  * to create a new item, set up and edit item detail(including date, category, 
  * description and amount), call <code>receipt</code> class to create a receipt.
  * 
  * @author CMPUT301W15T06
  * @version 03/16/2015
->>>>>>> fa7674dceeaf733bdd9de48163710f0c8356d4cc
  * @see java.util.Date
  */
-package ca.ualberta.CMPUT301W15T06;
-
-import java.util.Date;
-
 public class Item extends AppModel{
 
 	/**
@@ -259,6 +246,9 @@ public class Item extends AppModel{
 		return receipt;
 	}
 	
+	/**
+	 * 
+	 */
 	public void addListener(Listener l){
 		if (!getListeners().contains(l)){
 			getListeners().add(l);

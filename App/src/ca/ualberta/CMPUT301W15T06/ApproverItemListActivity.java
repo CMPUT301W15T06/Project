@@ -24,6 +24,12 @@ governing permissions and limitations under the License.
 
  */
 
+package ca.ualberta.CMPUT301W15T06;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+
 /**
  * This <code>ApproverItemListActivity</code> class is an extended class
  * of <code>Activity</code> class. This class controls the User Interface of 
@@ -38,12 +44,6 @@ governing permissions and limitations under the License.
  * @see android.app.Activity
  * @see android.view.Menu
  */
-package ca.ualberta.CMPUT301W15T06;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
-
 public class ApproverItemListActivity extends Activity {
 
 	@Override

@@ -24,29 +24,6 @@ governing permissions and limitations under the License.
 
  */
 
- /**
-  * This <code>ClaimantItemListActivity</code> class is an extended class
-  * of <code>Activity</code> class. This class controls the User Interface of 
-  * <code>ItemList</code> for claimant. This view displays a list of
-  * <code>Item</code>, creates an option menu and have add a new item option.
-  * It associated with class <code>FlagController</code>.
-  * 
-  * @author CMPUT301W15T06
-  * @version 03/16/2015
-  * @see java.util.ArrayList
-  * @see android.os.Bundle
-  * @see android.app.Activity
-  * @see android.app.AlertDialog
-  * @see android.content.Intent
-  * @see android.content.DialogInterface
-  * @see android.view.Menu
-  * @see android.view.View
-  * @see android.widget.AdapterView
-  * @see android.widget.ArrayAdapter
-  * @see android.widget.Toast
-  * @see android.widget.AdapterView.OnItemClickListener
-  * @see android.widget.ListView
-  */
 package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
@@ -64,6 +41,29 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
+/**
+ * This <code>ClaimantItemListActivity</code> class is an extended class
+ * of <code>Activity</code> class. This class controls the User Interface of 
+ * <code>ItemList</code> for claimant. This view displays a list of
+ * <code>Item</code>, creates an option menu and have add a new item option.
+ * It associated with class <code>FlagController</code>.
+ * 
+ * @author CMPUT301W15T06
+ * @version 03/16/2015
+ * @see java.util.ArrayList
+ * @see android.os.Bundle
+ * @see android.app.Activity
+ * @see android.app.AlertDialog
+ * @see android.content.Intent
+ * @see android.content.DialogInterface
+ * @see android.view.Menu
+ * @see android.view.View
+ * @see android.widget.AdapterView
+ * @see android.widget.ArrayAdapter
+ * @see android.widget.Toast
+ * @see android.widget.AdapterView.OnItemClickListener
+ * @see android.widget.ListView
+ */
 public class ClaimantItemListActivity extends Activity {
 
 	/**

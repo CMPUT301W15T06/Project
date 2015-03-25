@@ -23,26 +23,7 @@ ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 
  */
- 
- /**
- * This <code>ClaimantItemDetailActivity</code> class is an extended class
- * of <code>Activity</code> class. This class will control the interface
- * of <code>Item</code> detail for claimant. This view displays 
- * <code>Item</code> details, and creates an option menu, including item's
- * date, category, description, amount, and amount. It will be used when the claimant 
- * asks to access to the <code>Item</code> detail.
- * 
- * @author CMPUT301W15T06
- * @version 03/16/2015
- * @see android.os.Bundle
- * @see android.app.Activity
- * @see android.content.Intent
- * @see android.view.Menu
- * @see android.view.MenuItem
- * @see android.view.View
- * @see android.widget.TextView
- * @see android.widget.Toast
- */
+
 package ca.ualberta.CMPUT301W15T06;
 
 import android.app.Activity;
@@ -54,6 +35,25 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+* This <code>ClaimantItemDetailActivity</code> class is an extended class
+* of <code>Activity</code> class. This class will control the interface
+* of <code>Item</code> detail for claimant. This view displays 
+* <code>Item</code> details, and creates an option menu, including item's
+* date, category, description, amount, and amount. It will be used when the claimant 
+* asks to access to the <code>Item</code> detail.
+* 
+* @author CMPUT301W15T06
+* @version 03/16/2015
+* @see android.os.Bundle
+* @see android.app.Activity
+* @see android.content.Intent
+* @see android.view.Menu
+* @see android.view.MenuItem
+* @see android.view.View
+* @see android.widget.TextView
+* @see android.widget.Toast
+*/
 public class ClaimantItemDetailActivity extends Activity {
 
 	/**

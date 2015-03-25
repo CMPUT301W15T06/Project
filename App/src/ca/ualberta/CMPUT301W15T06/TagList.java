@@ -24,6 +24,11 @@ governing permissions and limitations under the License.
 
  */
 
+package ca.ualberta.CMPUT301W15T06;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * The <code>TagList</code> class allows the user to access to the 
  * <code>TagList</code> and <code>Tag</code>, add a <code>Tag</code>
@@ -36,11 +41,6 @@ governing permissions and limitations under the License.
  * @see java.util.ArrayList
  * @see java.util.Collection
  */
-package ca.ualberta.CMPUT301W15T06;
-
-import java.util.ArrayList;
-import java.util.Collection;
-
 public class TagList {
 	
 	/**
