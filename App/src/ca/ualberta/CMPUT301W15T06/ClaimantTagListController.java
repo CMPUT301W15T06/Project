@@ -2,9 +2,9 @@ package ca.ualberta.CMPUT301W15T06;
 
 public class ClaimantTagListController {
 
-	private ClaimList cl=null;
+	private User cl=null;
 	
-	public ClaimantTagListController(ClaimList claimList) {
+	public ClaimantTagListController(User claimList) {
 		// TODO Auto-generated constructor stub
 		cl=claimList;
 	}

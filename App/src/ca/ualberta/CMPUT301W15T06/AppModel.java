@@ -42,7 +42,7 @@ import java.util.Set;
  * @see java.util.HashSet
  * @see java.util.Set
  */
-public class AppModel{
+public abstract class AppModel{
 	
 	/**
 	 * Set two private ArrayList variable named listeners
@@ -52,11 +52,7 @@ public class AppModel{
 	 */
 	private transient ArrayList<Listener> listeners;
 	private transient ArrayList<Listener> modelListeners;
-	/**
-	 * Set a boolean variable missValue to justify the 
-	 * <code>AppModel</code>
-	 */
-	private boolean missValue;
+
 	
 	
 	/**
@@ -118,7 +114,7 @@ public class AppModel{
 		for (Listener  listener : getModelListeners()) {
 			listener.update();
 		}
-		ClaimListManager.getInstance().save();
+		ClaimListManager.getInstance().save(AppSingleton.getInstance().getUserName());
 	}
 
 	/**
@@ -157,17 +153,6 @@ public class AppModel{
 		return modelListeners;
 	}
 	
-	/**
-	 * Set missValue to b, and notify all Listener in
-	 * listeners ArrayList and modelListeners ArrayList 
-	 * about this update.
-	 *  
-	 * @param b  a boolean type b
-	 */
-	public void setMissValue(boolean b) {
-		missValue=b;
-		notifyListeners();
-	}
 
 	/**
 	 * return the missValue. This method will be used
@@ -176,7 +161,5 @@ public class AppModel{
 	 * 
 	 * @return missValue  a boolean type
 	 */
-	public boolean getMissValue() {
-		return missValue;
-	}
+	public abstract boolean getMissValue();
 }

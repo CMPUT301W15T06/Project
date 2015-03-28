@@ -20,6 +20,8 @@ package ca.ualberta.CMPUT301W15T06;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,13 +54,7 @@ public class ClaimantEditClaimActivity extends Activity {
 	 * default value null.
 	 */
 	private ClaimantEditClaimController cecc=null;
-	/**
-	 * Set a EditText object nameView to view and edit the name.
-	 * The initial default value is null.
-	 * 
-	 * @see android.widget.EditText
-	 */
-	private EditText nameView=null;
+
 	/**
 	 * Set a EditText object beginView to view and edit the begin date.
 	 * The initial default value is null.
@@ -82,14 +78,82 @@ public class ClaimantEditClaimActivity extends Activity {
 		
 		cecc=new ClaimantEditClaimController(AppSingleton.getInstance().getCurrentClaim());
 
-		nameView= (EditText) findViewById(R.id.editClaimNameEditText);
+		
 		beginView=(EditText) findViewById(R.id.editClaimStartingDateEditText);
 		endView=(EditText) findViewById(R.id.editClaimEndDateEditText);
 		
-		nameView.setText(AppSingleton.getInstance().getCurrentClaim().getName());
+
 		beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
 		endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
 		
+	
+		
+		beginView.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				try {
+					cecc.editBegin(beginView.getText().toString());
+				} catch (StatusException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+					beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
+					
+				} catch (WrongEndDateException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(getApplicationContext(), "Ending Date must after Starting Date!", Toast.LENGTH_LONG).show();
+					beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
+
+				}
+			}
+		});
+		endView.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				try {
+					cecc.editEnd(beginView.getText().toString());
+				} catch (StatusException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+					
+					endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
+				} catch (WrongEndDateException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(getApplicationContext(), "Ending Date must after Starting Date!", Toast.LENGTH_LONG).show();
+					
+					endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
+				}
+			}
+		});
 	}
 
 	@Override
@@ -111,26 +175,7 @@ public class ClaimantEditClaimActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	/**
-	 * This method will do the finish action of editing and check if the 
-	 * begin date and status have errors or warnings.
-	 * 
-	 * @param v
-	 * @exception StatusException
-	 * @see android.view.View
-	 */
-	public void finishEdit(View v){
-		try {
-			if (beginView.getText().toString().equals("")){
-				Toast.makeText(getApplicationContext(), "Start Date can't be empty", Toast.LENGTH_LONG).show();
-			}else{
-				cecc.editClaim(nameView.getText().toString(), beginView.getText().toString(),endView.getText().toString());
-			}
-		} catch (StatusException e) {
-			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-		}
-		finish();
-	}
+
 	
 	/**
 	 * Create a DatePickerDialog object to help user(claimant) to enter 

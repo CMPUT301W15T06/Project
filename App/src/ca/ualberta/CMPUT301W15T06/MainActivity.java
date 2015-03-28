@@ -26,6 +26,7 @@ governing permissions and limitations under the License.
 
 package ca.ualberta.CMPUT301W15T06;
 
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,8 +34,12 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.text.InputType;
+import android.text.method.DigitsKeyListener;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -54,14 +59,24 @@ import android.widget.Toast;
  */
 public class MainActivity extends Activity {
 
+
 	private ProgressDialog pg;
+	private User user;
+	private TextView userName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		
 		ClaimListManager.initial(getApplicationContext());
+		
+		AppSingleton.getInstance().setCurrentUser("Guest");
+		
+		user=AppSingleton.getInstance().getCurrentUser();
+		userName=(TextView) findViewById(R.id.userTextView);
+		userName.setText(user.getUserName());
 		
 	}
 
@@ -70,6 +85,37 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	
+	
+	public void changeUser(View v){
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+		builder.setTitle("Enter your Name");
+		final EditText input=new EditText(MainActivity.this);
+		input.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);			
+		builder.setView(input);
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				AppSingleton.getInstance().setCurrentUser(input.getText().toString());
+				userName.setText(AppSingleton.getInstance().getCurrentUser().getUserName());
+			}
+		});
+		builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		builder.create();  
+		builder.show();
+		
 	}
 	
 	/**

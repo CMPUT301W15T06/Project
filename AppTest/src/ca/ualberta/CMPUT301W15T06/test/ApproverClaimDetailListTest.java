@@ -1,7 +1,7 @@
 //package ca.ualberta.CMPUT301W15T06.test;
 //
 //import ca.ualberta.CMPUT301W15T06.Claim;
-//import ca.ualberta.CMPUT301W15T06.ClaimList;
+//import ca.ualberta.CMPUT301W15T06.User;
 //import ca.ualberta.CMPUT301W15T06.Item;
 //import junit.framework.TestCase;
 //
@@ -11,7 +11,7 @@
 //	public void testSubmittedClaim() {
 //
 //		// build claim list
-//		ClaimList cList = new ClaimList();
+//		User cList = new User();
 //		
 //		// build new claim
 //		Claim test = new Claim("A");

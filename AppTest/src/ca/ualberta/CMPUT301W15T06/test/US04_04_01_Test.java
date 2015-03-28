@@ -1,6 +1,6 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
-import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.User;
 import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddItemController;
@@ -131,7 +131,7 @@ public class US04_04_01_Test extends
 			public void run() {
 					
 				// build controller
-				ClaimantAddClaimController cacc = new ClaimantAddClaimController(new ClaimList());
+				ClaimantAddClaimController cacc = new ClaimantAddClaimController(new User());
 				
 				// get ClaimantClaimListActivity
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(),null, false);

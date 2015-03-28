@@ -43,7 +43,7 @@ public class ESClient {
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
-	public void insertClaimList(ClaimList claimList) throws IllegalStateException, IOException{
+	public void insertClaimList(User claimList) throws IllegalStateException, IOException{
 		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301w15t06/app/4");
 		StringEntity stringentity = null;
 		try {
@@ -74,8 +74,8 @@ public class ESClient {
 	 * Consumes the Get operation of the service
 	 * @return sr.getSource
 	 */
-	public ClaimList getClaimList(){
-		Hit<ClaimList> sr = null;
+	public User getClaimList(){
+		Hit<User> sr = null;
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet("http://cmput301.softwareprocess.es:8080/cmput301w15t06/app/4");
 
@@ -89,7 +89,7 @@ public class ESClient {
 			return null;
 		}
 		
-		Type HitType = new TypeToken<Hit<ClaimList>>() {}.getType();
+		Type HitType = new TypeToken<Hit<User>>() {}.getType();
 
 		try {
 			sr = gson.fromJson(

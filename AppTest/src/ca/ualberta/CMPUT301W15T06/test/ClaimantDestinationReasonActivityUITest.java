@@ -30,7 +30,7 @@ package ca.ualberta.CMPUT301W15T06.test;
 
 
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimActivity;
-import ca.ualberta.CMPUT301W15T06.ClaimantAddDestinationActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantEditDestinationActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import android.app.Activity;
@@ -47,7 +47,7 @@ import android.widget.EditText;
 // test for US01.02.01
 @SuppressWarnings("unused")
 public class ClaimantDestinationReasonActivityUITest extends
-		ActivityInstrumentationTestCase2<ClaimantAddDestinationActivity> {
+		ActivityInstrumentationTestCase2<ClaimantEditDestinationActivity> {
 
 	Instrumentation instrumentation;
 	Activity activity;
@@ -56,7 +56,7 @@ public class ClaimantDestinationReasonActivityUITest extends
 	Button finish;
 	
 	public ClaimantDestinationReasonActivityUITest() {
-		super(ClaimantAddDestinationActivity.class);
+		super(ClaimantEditDestinationActivity.class);
 	}
 
 	//set up
@@ -133,7 +133,7 @@ public class ClaimantDestinationReasonActivityUITest extends
 		  ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimDetailActivity.class.getName(), null, false);
 
 		  // open current activity.
-		  ClaimantAddDestinationActivity myActivity = getActivity();
+		  ClaimantEditDestinationActivity myActivity = getActivity();
 		  final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);
 		  myActivity.runOnUiThread(new Runnable() {
 		    @Override

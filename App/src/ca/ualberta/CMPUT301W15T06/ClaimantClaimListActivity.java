@@ -46,11 +46,11 @@ import android.widget.Toast;
 /**
  * This <code>ClaimantClaimListActivity</code> class is an extended class
  * of <code>Activity</code> class. This class controls the User Interface of 
- * <code>ClaimList</code> for claimant. This view displays a list of
+ * <code>User</code> for claimant. This view displays a list of
  * <code>Claim</code>, creates an option menu, have add a new claim option,
  * set a <code>checkForWarn</code> method to check if there is any warning 
  * and error and return a boolean value. It will be used when the claimant 
- * asks to access to the <code>ClaimList</code>.
+ * asks to access to the <code>User</code>.
  * 
  * @author CMPUT301W15T06
  * @version 03/16/2015
@@ -81,6 +81,8 @@ public class ClaimantClaimListActivity extends Activity {
 	 * default value null.
 	 */
 	private ClaimantClaimListController cclc=null;
+	
+	private User user;
 	/**
 	 * Set a Dialog object dialog
 	 * 
@@ -98,15 +100,17 @@ public class ClaimantClaimListActivity extends Activity {
 		setContentView(R.layout.activity_claimant_claim_list);
 		
 		
+		user=AppSingleton.getInstance().getCurrentUser();
+		cclc=new ClaimantClaimListController(user);
 		
 		//set list view of claimlist
 		ListView listView = (ListView) findViewById(R.id.claimListView);
-		final ArrayList<Claim> list =AppSingleton.getInstance().getClaimList().getClaimList();
+		final ArrayList<Claim> list =user.getClaimList();
 		final ArrayAdapter<Claim> adapter=new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1,list);
 		adapter.sort(sortClaim());
 		listView.setAdapter(adapter);
 
-		AppSingleton.getInstance().getClaimList().addListener(new Listener() {
+		user.addListener(new Listener() {
 			
 			@Override
 			public void update() {
@@ -150,16 +154,16 @@ public class ClaimantClaimListActivity extends Activity {
 						}else if (which==1){
 							AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimListActivity.this);
 							builder.setTitle("Choose the Tags");
-							builder.setMultiChoiceItems(AppSingleton.getInstance().getClaimList().toTagList(),list.get(position).toCheckArray(),new DialogInterface.OnMultiChoiceClickListener() {
+							builder.setMultiChoiceItems(AppSingleton.getInstance().getCurrentUser().toTagList(),list.get(position).toCheckArray(),new DialogInterface.OnMultiChoiceClickListener() {
 								
 								@Override
 								public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 									// TODO Auto-generated method stub
 									if (isChecked){
-										cclc.addTag(AppSingleton.getInstance().getClaimList().getTagList().get(which).getID());
+										cclc.addTag(AppSingleton.getInstance().getCurrentUser().getTagList().get(which).getID());
 		
-									}else if(AppSingleton.getInstance().getCurrentClaim().getTagIDList().contains(AppSingleton.getInstance().getClaimList().getTagList().get(which).getID())){
-										cclc.removeTag(AppSingleton.getInstance().getClaimList().getTagList().get(which).getID());
+									}else if(AppSingleton.getInstance().getCurrentClaim().getTagIDList().contains(AppSingleton.getInstance().getCurrentUser().getTagList().get(which).getID())){
+										cclc.removeTag(AppSingleton.getInstance().getCurrentUser().getTagList().get(which).getID());
 									}
 								}
 							});
@@ -173,7 +177,7 @@ public class ClaimantClaimListActivity extends Activity {
 								Toast.makeText(getApplicationContext(), "Can't submit a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
 							}else{
 								cclc=new ClaimantClaimListController(list.get(position));
-								if(checkForWarn(list.get(position))){
+								if(list.get(position).getMissValue()){
 									AlertDialog.Builder adb = new AlertDialog.Builder(ClaimantClaimListActivity.this);
 									adb.setMessage("You are trying to submit an expense claim that there are fields with missing values or there are any incompleteness indicators on the expense items,are you sure you want to submit?");
 									adb.setPositiveButton("Submit", new OnClickListener(){
@@ -206,7 +210,7 @@ public class ClaimantClaimListActivity extends Activity {
 							startActivity(intent);
 							
 						}else if (which==4){
-							cclc=new ClaimantClaimListController(AppSingleton.getInstance().getClaimList());
+							cclc=new ClaimantClaimListController(AppSingleton.getInstance().getCurrentUser());
 							try {
 								cclc.delete(list.get(position));
 							} catch (StatusException e) {
@@ -225,7 +229,7 @@ public class ClaimantClaimListActivity extends Activity {
 	}
 
 	/**
-	 * Sort the <code>ClaimList</code> by the starting date of the claim.
+	 * Sort the <code>User</code> by the starting date of the claim.
 	 * 
 	 * @return a Comparator object
 	 * @see java.util.Comparator
@@ -251,7 +255,7 @@ public class ClaimantClaimListActivity extends Activity {
 	
 
 	/**
-	 * Add a claim to the <code>ClaimList</code> by calling the 
+	 * Add a claim to the <code>User</code> by calling the 
 	 * <code>ClaimantAddClaimActivity</code> class.
 	 * 
 	 * @param m  a MenuItem object
@@ -260,7 +264,8 @@ public class ClaimantClaimListActivity extends Activity {
 	 * @see android.view.MenuItem
 	 */
 	public void addClaim(MenuItem m){
-		Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantAddClaimActivity.class);
+		cclc.addClaim();
+		Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantEditClaimActivity.class);
 		startActivity(intent);
 	}
 
@@ -272,7 +277,7 @@ public class ClaimantClaimListActivity extends Activity {
 		    public void run() {
 		  
 		        try {
-		        	new ESClient().insertClaimList(AppSingleton.getInstance().getClaimList());
+		        	new ESClient().insertClaimList(AppSingleton.getInstance().getCurrentUser());
 		        	AppSingleton.getInstance().setSuc(true);
 		        	
 		        } catch (Exception e) {
@@ -310,38 +315,7 @@ public class ClaimantClaimListActivity extends Activity {
 		Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantTagListActivity.class);
 		startActivity(intent);	
 	}
-	/**
-	 * This method will check the missValue and flag to justify if the claim,
-	 * item and destination have any errors.
-	 * 
-	 * @param claim  a Claim object
-	 * @return result  a boolean variable
-	 */
-	private boolean checkForWarn(Claim claim){
-		boolean result=false;
-		if(claim.getMissValue()){
-			result=true;
-		}
-		
-		for(Item item:claim.getItemList()){
-			if(item.getMissValue()){
-				result=true;
-			}
-			if(item.getFlag()){
-				result=true;
-			}
-			if(item.getRecipt().getPhotoStr()==null){
-				result=true;
-			}
-		}
-		
-		for(Destination dest:claim.getDestinationList()){
-			if(dest.getMissValue()){
-				result=true;
-			}
-		}
-		return result;
-	}
+
 	
 	/**
 	 * Return the Dialog object dialog. This method will be used when 

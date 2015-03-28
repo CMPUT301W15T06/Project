@@ -96,10 +96,7 @@ public class EditDatePickerFragment extends DialogFragment implements DatePicker
 		// Do something with the date chosen by the user
 		Calendar c = Calendar.getInstance();
 		c.set(year,month,day);
-		
-		
-
-	    AppSingleton.getInstance().getDateEditText().setText(AppSingleton.getDateFormat().format(c.getTime()));
+		AppSingleton.getInstance().getDateEditText().setText(AppSingleton.getDateFormat().format(c.getTime()));
 	}
 	
 	

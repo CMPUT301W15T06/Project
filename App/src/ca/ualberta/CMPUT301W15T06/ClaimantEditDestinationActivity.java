@@ -28,13 +28,15 @@ package ca.ualberta.CMPUT301W15T06;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 /**
-* This <code>ClaimantAddDestinationActivity</code> class is an extended class
+* This <code>ClaimantEditDestinationActivity</code> class is an extended class
 * of <code>Activity</code> class. This class controls the User Interface of 
 * adding Destination. The interface need Bundle, EditText, option menu bar 
 * and finishBbutton. 
@@ -48,20 +50,62 @@ import android.widget.Toast;
 * @see android.widget.EditText
 * @see android.widget.Toast
 */
-public class ClaimantAddDestinationActivity extends Activity {
+public class ClaimantEditDestinationActivity extends Activity {
 
 	/**
 	 * Set a ClaimantAddDestinationController object cadc with initial 
 	 * default value null.
 	 */
-	private ClaimantAddDestinationController cadc=null;
+	private ClaimantEditDestinationController cedc=null;
+	private Destination dest=null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_destination_reason);
 		
-		cadc=new ClaimantAddDestinationController(AppSingleton.getInstance().getCurrentClaim());
+		dest=AppSingleton.getInstance().getCurrentDestination();
+		cedc=new ClaimantEditDestinationController(dest);
+		
+		final EditText destinationView= (EditText) findViewById(R.id.DestinationEditText);
+		final EditText reasonView=(EditText) findViewById(R.id.ReasonEditText);
+		
+		destinationView.setText(dest.getName());
+		reasonView.setText(dest.getReason());
+		
+		TextWatcher tw=new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				
+				try {
+					cedc.editDestination(destinationView.getText().toString(), reasonView.getText().toString());
+				} catch (StatusException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+				}
+				
+			}
+		};
+		
+		destinationView.addTextChangedListener(tw);
+		reasonView.addTextChangedListener(tw);
+	
+		
 	}
 
 	@Override
@@ -71,24 +115,6 @@ public class ClaimantAddDestinationActivity extends Activity {
 		return true;
 	}
 	
-	/**
-	 * This method will create a finish button to trigger the action finishAdd. 
-	 * It will also check the exceptions to prevent crush.
-	 * 
-	 * @param v  a View object
-	 * @see android.view.View
-	 * @see android.widget.EditText
-	 * @exception StatusException
-	 */
-	public void finishAdd(View v){
-		EditText destinationView= (EditText) findViewById(R.id.DestinationEditText);
-		EditText reasonView=(EditText) findViewById(R.id.ReasonEditText);
-		try {
-			cadc.addDestination(destinationView.getText().toString(),reasonView.getText().toString());
-		} catch (StatusException e) {
-			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-		}
-		finish();
-	}
+	
 
 }

@@ -74,19 +74,13 @@ public class ClaimantAddDestinationController {
 	 * @see java.util.Date
 	 * @see java.util.Locale
 	 */
-	public void addDestination(String dest, String reason) throws StatusException {
-		
+	public void addDestination() throws StatusException {
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
 		}
-		
-		Destination destination=new Destination(dest);
-		destination.setReason(reason);
-		if (dest.equals("")||reason.equals("")){
-			destination.setMissValue(true);
-		}else{
-			destination.setMissValue(false);
-		}
+
+		Destination destination=new Destination();
+
 		
 		destination.addModelListener(new Listener() {
 			
@@ -98,5 +92,6 @@ public class ClaimantAddDestinationController {
 		});
 		claim.getDestinationList().add(destination);	
 		claim.notifyListeners();
+		AppSingleton.getInstance().setCurrentDestination(destination);
 	}
 }

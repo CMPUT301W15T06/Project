@@ -45,10 +45,7 @@ import java.util.Date;
  * @see java.util.Date
  */
 public class Claim extends AppModel{
-	/**
-	 * Set private string name to record claimant's name. 
-	 */
-	private String name;
+
 	/**
 	 * Set private Date beginDate and endDate to record the 
 	 * beginning and ending date for travel.
@@ -85,43 +82,23 @@ public class Claim extends AppModel{
 	private ArrayList<Long> tagIDList;
 	
 
-	/**
-	 * General construction. This public method sets up a Claim object with
-	 * itemList, destinationList and tagList and name.
-	 * 
-	 * @param claimName  a String variable
-	 * @see java.util.ArrayList
-	 */
-	public Claim(String claimName) {
+//	/**
+//	 * General construction. This public method sets up a Claim object with
+//	 * itemList, destinationList and tagList and name.
+//	 * 
+//	 * @param claimName  a String variable
+//	 * @see java.util.ArrayList
+//	 */
+	public Claim() {
 		super();
 		itemList=new ArrayList<Item>();
 		destinationList=new ArrayList<Destination>();
 		tagIDList=new ArrayList<Long>();
-		name=claimName;
+		beginDate=new Date();
+		endDate=new Date();
 	}
 	
-	/**
-	 * Set up the name and use <code>notifyListeners()</code> in <code>AppModel</code> 
-	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
-	 * This public method will be used when the claimant entering a name to a new 
-	 * claim or editing a current claim.
-	 * 
-	 * @param name  a String variable
-	 */
-	public void setName(String name){
-		this.name=name;
-		notifyListeners();
-	}
-	
-	/**
-	 * Return the string variable name. This method will be used when 
-	 * other class need to use or display the name. 
-	 * 
-	 * @return name  a String variable
-	 */
-	public String getName() {
-		return name;
-	}
+
 	
 	/**
 	 * Set up the beginDate and use <code>notifyListeners()</code> in <code>AppModel</code> 
@@ -130,9 +107,17 @@ public class Claim extends AppModel{
 	 * date to a new claim or editing a current claim.
 	 * 
 	 * @param beginDate  a Date object
+	 * @throws StatusException 
+	 * @throws WrongEndDateException 
 	 * @see java.util.Date
 	 */
-	public void setBeginDate(Date beginDate){
+	public void setBeginDate(Date beginDate) throws StatusException, WrongEndDateException{
+		if (status.equals("Submitted")||status.equals("Approved")){
+			throw new StatusException();					
+		}
+		if (beginDate.after(endDate)){
+			throw new WrongEndDateException();
+		}
 		this.beginDate=beginDate;
 		notifyListeners();
 	}
@@ -155,9 +140,17 @@ public class Claim extends AppModel{
 	 * date to a new claim or editing a current claim.
 	 * 
 	 * @param endDate  a Date object
+	 * @throws StatusException 
+	 * @throws WrongEndDateException 
 	 * @see java.util.Date
 	 */
-	public void setEndDate(Date endDate){
+	public void setEndDate(Date endDate) throws StatusException, WrongEndDateException{
+		if (status.equals("Submitted")||status.equals("Approved")){
+			throw new StatusException();					
+		}
+		if (beginDate.after(endDate)){
+			throw new WrongEndDateException();
+		}
 		this.endDate=endDate;
 		notifyListeners();
 	}
@@ -233,7 +226,7 @@ public class Claim extends AppModel{
 		}
 		String tag="";
 		for (Long l:tagIDList){
-			tag+='\n'+"      "+AppSingleton.getInstance().getClaimList().getTagByID(l).getName();
+			tag+='\n'+"      "+AppSingleton.getInstance().getCurrentUser().getTagByID(l).getName();
 		}
 		return "Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+"Tag(s) : "+tag+'\n'+
 				getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY");
@@ -474,7 +467,7 @@ public class Claim extends AppModel{
 	 */
 	public boolean[] toCheckArray() {
 		// TODO Auto-generated method stub
-		ArrayList<Tag> tl = AppSingleton.getInstance().getClaimList().getTagList();
+		ArrayList<Tag> tl = AppSingleton.getInstance().getCurrentUser().getTagList();
 		boolean[] result = new boolean[tl.size()];
 		int i=0;
 		for (Tag tag:tl){
@@ -488,5 +481,20 @@ public class Claim extends AppModel{
 		return result;
 	}
 	
-	
+	public boolean getMissValue(){
+		boolean result=false;
+		
+		for(Item item:itemList){
+			if(item.getMissValue()){
+				result=true;
+			}
+		}
+		
+		for(Destination dest:destinationList){
+			if(dest.getMissValue()){
+				result=true;
+			}
+		}
+		return result;		
+	}
 }

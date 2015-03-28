@@ -52,9 +52,12 @@ public class AppSingleton {
 	 */
 	private static AppSingleton appsingleton;
 	/**
-	 * Set a ClaimList object claimList to access to <code>ClaimList</code>.
+	 * Set a User object currentUser to access to <code>User</code>.
 	 */
-	private ClaimList claimList;
+	private User currentUser;
+	
+	
+	private String userName;
 	/**
 	 * Set a Claim object currentClaim to access to <code>Claim</code>.
 	 */
@@ -63,6 +66,8 @@ public class AppSingleton {
 	 * Set a Item object currentItem to access to <code>Item</code>.
 	 */
 	private Item currentItem;
+	
+	private Destination currentDestination;
 	/**
 	 * Set a Android EditText object dateEditText to allow user edit
 	 * text in different classes.
@@ -92,36 +97,36 @@ public class AppSingleton {
 
 	private boolean suc;
 	/**
-	 * This method will load the claimList by calling <code>ClaimListManager</code>
+	 * This method will load the currentUser by calling <code>ClaimListManager</code>
 	 * and using <code>getInstance()</code> and <code>load()</code>.
 	 */
     private AppSingleton() {  
-    	Thread thread = new Thread(new Runnable(){
-		    @Override
-		    public void run() {
-		    	ClaimList online=new ESClient().getClaimList();
-		    	ClaimList local=ClaimListManager.getInstance().load();
-		    	if (online ==null){
-		    		claimList=local;	    		
-		    	}else if (online.getLastModify()==null){
-		    		claimList=local;
-		    	}else if (local.getLastModify()==null){
-		    		claimList=online;
-		    	}else if (local.getLastModify().after(online.getLastModify())){
-		    		claimList=local;
-		    	}else{
-		    		claimList=online;
-		    	}
-		    }
-		});
-
-		thread.start();
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e.getMessage());
-		}
+//    	Thread thread = new Thread(new Runnable(){
+//		    @Override
+//		    public void run() {
+//		    	User online=new ESClient().getClaimList();
+//		    	User local=ClaimListManager.getInstance().load();
+//		    	if (online ==null){
+//		    		currentUser=local;	    		
+//		    	}else if (online.getLastModify()==null){
+//		    		currentUser=local;
+//		    	}else if (local.getLastModify()==null){
+//		    		currentUser=online;
+//		    	}else if (local.getLastModify().after(online.getLastModify())){
+//		    		currentUser=local;
+//		    	}else{
+//		    		currentUser=online;
+//		    	}
+//		    }
+//		});
+//
+//		thread.start();
+//		try {
+//			thread.join();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			throw new RuntimeException(e.getMessage());
+//		}
     }  
     
     /**
@@ -138,13 +143,13 @@ public class AppSingleton {
     }
     
     /**
-	 * Return the claimList. This method will be used when other class need 
-	 * to use or display the claimList. 
+	 * Return the currentUser. This method will be used when other class need 
+	 * to use or display the currentUser. 
 	 * 
-	 * @return claimList  a ClaimList object
+	 * @return currentUser  a User object
 	 */
-  	public ClaimList getClaimList(){
-  		return claimList;
+  	public User getCurrentUser(){
+  		return currentUser;
   	}
 
   	/**
@@ -282,6 +287,32 @@ public class AppSingleton {
 
 	public void setSuc(boolean suc) {
 		this.suc = suc;
+	}
+
+	public void setCurrentUser(String name) {
+		// TODO Auto-generated method stub
+		userName=name;
+		currentUser=ClaimListManager.getInstance().load(name);
+		
+		
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+
+	public Destination getCurrentDestination() {
+		return currentDestination;
+	}
+
+	public void setCurrentDestination(Destination currentDestination) {
+		this.currentDestination = currentDestination;
 	}
 
 	

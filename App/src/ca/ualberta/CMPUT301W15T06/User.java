@@ -31,9 +31,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The <code>ClaimList</code> class is an sub-class of <code>AppModel</code>.
- * This class can set up a ArrayList named ClaimList which contains Claim.
- * The ClaimList can also be pushed online and pulled online, sort and search 
+ * The <code>User</code> class is an sub-class of <code>AppModel</code>.
+ * This class can set up a ArrayList named User which contains Claim.
+ * The User can also be pushed online and pulled online, sort and search 
  * Claim. This class is associated with <code>Claim</code> for Claim information, 
  * <code>Tag</code> and <code>TagList</code> for searching by Tag names.
  * 
@@ -41,7 +41,7 @@ import java.util.Date;
  * @version 03/07/2015
  * @see java.util.ArrayList
  */
-public class ClaimList extends AppModel{
+public class User extends AppModel{
 
 	/**
 	 * Set a ArrayList named claimList which records the information
@@ -54,20 +54,26 @@ public class ClaimList extends AppModel{
 	private ArrayList<Tag> tagList;
 	
 	
+	private String userName;
+	
 	private Date lastModify;
 	
-	/**
-	 * General construction. This method Set up the claimList.
-	 * 
-	 * @see java.util.ArrayList
-	 */
-	public ClaimList(){
+//	/**
+//	 * General construction. This method Set up the claimList.
+//	 * 
+//	 * @see java.util.ArrayList
+//	 */
+
+			
+	public User(String name) {
+		// TODO Auto-generated constructor stub
 		super();
 		claimList=new ArrayList<Claim>();
 		tagList=new ArrayList<Tag>();
+		userName=name;
 	}
-	
-			
+
+
 	/**
 	 * Return the ArrayList claimList. This method will be used when 
 	 * other class need to use or display the claimList. 
@@ -167,6 +173,25 @@ public class ClaimList extends AppModel{
 			}
 		}
 		return null;
+	}
+
+
+	
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+	@Override
+	public boolean getMissValue() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

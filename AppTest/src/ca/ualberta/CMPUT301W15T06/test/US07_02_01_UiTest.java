@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
 import ca.ualberta.CMPUT301W15T06.Claim;
-import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.User;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddItemController;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
@@ -91,7 +91,7 @@ public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 			@Override
 			public void run() {
 				// build controller
-				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new ClaimList());
+				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new User());
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
@@ -114,7 +114,7 @@ public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 			@Override
 			public void run() {
 				// build controller
-				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new ClaimList());
+				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new User());
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
@@ -157,7 +157,7 @@ public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 			@Override
 			public void run() {
 				// build controller
-				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new ClaimList());
+				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new User());
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
@@ -184,7 +184,7 @@ public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 			@Override
 			public void run() {
 				// build controller
-				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new ClaimList());
+				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new User());
 				
 				// add new claim
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
@@ -235,7 +235,7 @@ public class US07_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new ClaimList());
+				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new User());
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");
 				Claim claim =  new Claim("test");
 				ClaimantAddItemController i1 = new ClaimantAddItemController(claim);

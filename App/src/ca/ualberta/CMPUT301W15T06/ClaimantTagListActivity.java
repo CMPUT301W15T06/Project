@@ -65,14 +65,14 @@ public class ClaimantTagListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_tag_list);
 		
-		ctlc=new ClaimantTagListController(AppSingleton.getInstance().getClaimList());
+		ctlc=new ClaimantTagListController(AppSingleton.getInstance().getCurrentUser());
 		
 		ListView listView = (ListView) findViewById(R.id.tagListView);
-		final ArrayList<Tag> list =AppSingleton.getInstance().getClaimList().getTagList();
+		final ArrayList<Tag> list =AppSingleton.getInstance().getCurrentUser().getTagList();
 		final ArrayAdapter<Tag> adapter=new ArrayAdapter<Tag>(this, android.R.layout.simple_list_item_1,list);
 		listView.setAdapter(adapter);
 		
-		AppSingleton.getInstance().getClaimList().addListener(new Listener() {
+		AppSingleton.getInstance().getCurrentUser().addListener(new Listener() {
 			
 			@Override
 			public void update() {

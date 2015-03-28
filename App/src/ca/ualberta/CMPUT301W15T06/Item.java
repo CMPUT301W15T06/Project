@@ -328,6 +328,12 @@ public class Item extends AppModel{
 		
 	}
 
+	@Override
+	public boolean getMissValue() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 	
 	

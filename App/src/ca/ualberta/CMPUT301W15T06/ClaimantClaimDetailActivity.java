@@ -37,6 +37,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
 * This <code>ClaimantClaimDetailActivity</code> class is an extended class
@@ -62,15 +63,20 @@ import android.widget.TextView;
 */
 public class ClaimantClaimDetailActivity extends Activity {
 
+	
+	private ClaimantAddDestinationController cadc=null;
+	private Claim claim;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_add_destination);
 		
-		TextView nameView= (TextView) findViewById(R.id.nameValueClaimantClaimDetailTextView);
+
+		claim=AppSingleton.getInstance().getCurrentClaim();
+		cadc=new ClaimantAddDestinationController(claim);
+		
 		TextView beginView=(TextView) findViewById(R.id.startDateValueClaimantClaimDetailTextView);
 		TextView endView=(TextView) findViewById(R.id.endingDateValueClaimantClaimDetailTextView);
-		nameView.setText(AppSingleton.getInstance().getCurrentClaim().getName());
 		beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
 		endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
 		ListView listView = (ListView) findViewById(R.id.claimantDetailListView);
@@ -109,8 +115,14 @@ public class ClaimantClaimDetailActivity extends Activity {
 	 * @see android.content.Intent
 	 */
 	public void addDestination(View v){
-		Intent intent =new Intent(ClaimantClaimDetailActivity.this,ClaimantAddDestinationActivity.class);
-		startActivity(intent);	
+		try {
+			cadc.addDestination();
+			Intent intent =new Intent(ClaimantClaimDetailActivity.this,ClaimantEditDestinationActivity.class);
+			startActivity(intent);
+		} catch (StatusException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}	
 	}
 
 }

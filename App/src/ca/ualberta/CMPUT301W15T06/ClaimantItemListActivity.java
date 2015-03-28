@@ -34,6 +34,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -154,5 +155,10 @@ public class ClaimantItemListActivity extends Activity {
 	public void addItem(View v){
 		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantAddItemActivity.class);
 		startActivity(intent);		
+	}
+	
+	public void detail(MenuItem m){
+		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantClaimDetailActivity.class);
+		startActivity(intent);
 	}
 }

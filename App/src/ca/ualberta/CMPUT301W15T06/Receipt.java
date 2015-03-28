@@ -57,6 +57,11 @@ public class Receipt extends AppModel {
 	public String getPhotoStr(){
 		return photoStr;
 	}
+@Override
+public boolean getMissValue() {
+	// TODO Auto-generated method stub
+	return false;
+}
 
 
 }

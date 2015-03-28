@@ -40,12 +40,12 @@ public class Destination extends AppModel{
 	/**
 	 * Set private string name to record destination name. 
 	 */
-	private String name;
+	private String name="";
 	/**
 	 * Set private string reason to record the reason of 
 	 * the destination. 
 	 */
-	private String reason;
+	private String reason="";
 	
 	
 	/**
@@ -54,9 +54,8 @@ public class Destination extends AppModel{
 	 * 
 	 * @param name  a String variable
 	 */
-	public Destination(String name){
+	public Destination(){
 		super();
-		this.name=name;
 	}
 	
 	/**
@@ -66,8 +65,12 @@ public class Destination extends AppModel{
 	 * destination or editing a current destination.
 	 * 
 	 * @param name  a String variable
+	 * @throws StatusException 
 	 */
-	public void setName(String name){
+	public void setName(String name) throws StatusException{
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
 		this.name=name;
 		notifyListeners();
 	}
@@ -89,8 +92,12 @@ public class Destination extends AppModel{
 	 * destination or editing the reason of a current destination.
 	 * 
 	 * @param reason  a String variable
+	 * @throws StatusException 
 	 */
-	public void setReason(String reason){
+	public void setReason(String reason) throws StatusException{
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
 		this.reason=reason;
 		notifyListeners();
 	}
@@ -113,6 +120,15 @@ public class Destination extends AppModel{
 	 */
 	public String toString(){
 		return name+'\n'+reason;
+	}
+
+	@Override
+	public boolean getMissValue() {
+		// TODO Auto-generated method stub
+		if (name.equals("")||reason.equals("")){
+			return true;
+		}
+		return false;
 	}
 
 }

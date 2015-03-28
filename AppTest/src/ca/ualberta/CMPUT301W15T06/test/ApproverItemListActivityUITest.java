@@ -34,7 +34,7 @@ import android.view.View;
 import android.widget.TextView;
 import ca.ualberta.CMPUT301W15T06.ApproverItemListActivity;
 import ca.ualberta.CMPUT301W15T06.Claim;
-import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.User;
 import ca.ualberta.CMPUT301W15T06.Item;
 
 public class ApproverItemListActivityUITest extends ActivityInstrumentationTestCase2<ApproverItemListActivity> {

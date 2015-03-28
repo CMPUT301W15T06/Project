@@ -33,10 +33,10 @@ import android.view.Menu;
 /**
 * This <code>ApproverClaimListActivity</code> class is an extended class
 * of <code>Activity</code> class. This class controls the User Interface of 
-* <code>ClaimList</code> for approver. This view displays a list of
+* <code>User</code> for approver. This view displays a list of
 * <code>Claim</code> and creates an option menu and return true as 
 * the boolean value. It will be used when the approver asks to access to 
-* the <code>ClaimList</code> .
+* the <code>User</code> .
 * 
 * @author CMPUT301W15T06
 * @version 03/16/2015

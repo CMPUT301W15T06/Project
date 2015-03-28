@@ -36,7 +36,7 @@
             android:label="@string/title_activity_claimant_approver_info" >
         </activity>
         <activity
-            android:name=".ClaimantAddDestinationActivity"
+            android:name=".ClaimantEditDestinationActivity"
             android:label="@string/title_activity_claimant_destination_reason" >
         </activity>
         <activity

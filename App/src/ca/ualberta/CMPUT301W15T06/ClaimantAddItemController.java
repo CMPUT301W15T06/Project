@@ -96,11 +96,7 @@ public class ClaimantAddItemController {
 		item.setAmount(amount);
 		item.setCurrency(currency);
 		
-		if (date==null||description.equals("")||amount==null){
-			item.setMissValue(true);
-		}else{
-			item.setMissValue(false);
-		}
+
 		
 		item.addModelListener(new Listener() {
 			

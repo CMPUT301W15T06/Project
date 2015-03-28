@@ -18,14 +18,17 @@ governing permissions and limitations under the License.
 package ca.ualberta.CMPUT301W15T06;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Date;
+
 import com.google.gson.JsonElement;
 
 /**
 * This <code>ClaimantClaimListController</code> class controls the action of 
-* <code>ClaimList</code> for claimant. This controller class will displays a 
-* list of <code>Claim</code>, add new <code>Claim</code> to the <code>ClaimList</code>,
+* <code>User</code> for claimant. This controller class will displays a 
+* list of <code>Claim</code>, add new <code>Claim</code> to the <code>User</code>,
 * change the status and delete <code>Claim</code>. It will be used when the 
-* claimant asks to access to the <code>ClaimList</code>.
+* claimant asks to access to the <code>User</code>.
 * 
 * @author CMPUT301W15T06
 * @version 03/16/2015
@@ -35,12 +38,12 @@ import com.google.gson.JsonElement;
 public class ClaimantClaimListController {
 	
 	/**
-	 * Set a <code>ClaimList</code> object claimList with initial 
+	 * Set a <code>User</code> object user with initial 
 	 * default value null.
 	 */
-	private ClaimList claimList=null;
+	private User user=null;
 	/**
-	 * Set a <code>Claim</code> object claimList with initial 
+	 * Set a <code>Claim</code> object user with initial 
 	 * default value null.
 	 */
 	private Claim claim=null;
@@ -57,17 +60,17 @@ public class ClaimantClaimListController {
 	}
 
 	/**
-	 * General construction. Create a new claimList.
+	 * General construction. Create a new user.
 	 * 
-	 * @param claimList  a ClaimList object
+	 * @param user  a User object
 	 */
-	public ClaimantClaimListController(ClaimList claimList) {
+	public ClaimantClaimListController(User user) {
 		// TODO Auto-generated constructor stub
-		this.claimList=claimList;
+		this.user=user;
 	}
 
 	/**
-	 * Add a new claim to the claimList and change status to 
+	 * Add a new claim to the user and change status to 
 	 * "Submitted". It also checks warnings and errors to
 	 * prevent crush.
 	 * 
@@ -84,7 +87,7 @@ public class ClaimantClaimListController {
 	}
 
 	/**
-	 * Remove a claim from the claimList and notify all Listener in listeners.
+	 * Remove a claim from the user and notify all Listener in listeners.
 	 * It also checks warnings and errors to prevent crush.
 	 * 
 	 * @param claim  a Claim object
@@ -97,8 +100,8 @@ public class ClaimantClaimListController {
 			throw new StatusException();					
 		}
 		
-		claimList.getClaimList().remove(claim);
-		claimList.notifyListeners();
+		user.getClaimList().remove(claim);
+		user.notifyListeners();
 		
 	}
 
@@ -113,6 +116,23 @@ public class ClaimantClaimListController {
 		// TODO Auto-generated method stub
 		claim.getTagIDList().remove(l);
 		claim.notifyListeners();
+	}
+
+	public void addClaim() {
+		// TODO Auto-generated method stub
+		Claim claim=new Claim();
+		
+		claim.addModelListener(new Listener() {
+			
+			@Override
+			public void update() {
+				// TODO Auto-generated method stub
+				user.notifyListeners();
+			}
+		});
+		user.getClaimList().add(claim);
+		user.notifyListeners();
+		AppSingleton.getInstance().setCurrentClaim(claim);
 	}
 	
 

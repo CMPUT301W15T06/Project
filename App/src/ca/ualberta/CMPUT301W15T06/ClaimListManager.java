@@ -34,7 +34,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * This <code>ClaimListManager</code> class is a management class of <code>ClaimList</code>.
+ * This <code>ClaimListManager</code> class is a management class of <code>User</code>.
  * By calling this class, the claimList can be loaded and saved.
  * 
  * @author CMPUT301W15T06
@@ -61,7 +61,7 @@ public class ClaimListManager {
 	 * Set a static final type String variable FILENAME with initial default
 	 * value of "data".
 	 */
-	private static final String FILENAME="data";
+	private static final String USER_FILE="usr";
 	/**
 	 * Set a Context object context with default value of null.
 	 * 
@@ -121,16 +121,16 @@ public class ClaimListManager {
 	 * @see java.io.IOException
 	 * @see java.io.InputStreamReader
 	 * @see java.io.OutputStreamWriter
-	 * @return cl  a ClaimList object
+	 * @return cl  a User object
 	 */
-	public ClaimList load(){
+	public User load(String name){
 		Gson gson =new Gson();
-		ClaimList cl=null;
+		User user=null;
 		try {
-			FileInputStream fis = context.openFileInput(FILENAME);
-			Type dataType = new TypeToken<ClaimList>(){}.getType();
+			FileInputStream fis = context.openFileInput(USER_FILE+name);
+			Type dataType = new TypeToken<User>(){}.getType();
 			InputStreamReader isr =new InputStreamReader(fis);
-			cl = gson.fromJson(isr, dataType);
+			user = gson.fromJson(isr, dataType);
 			fis.close();
 		} catch (FileNotFoundException e) {
 			
@@ -138,15 +138,15 @@ public class ClaimListManager {
 			throw new RuntimeException("IOException");
 		}
 
-		if (cl==null){
-			cl=new ClaimList();		
+		if (user==null){
+			user=new User(name);		
 		}
-		return cl;
+		return user;
 		
 	}
 	
 	/**
-	 * This method will save the ClaimList using a <code>OutputStreamWriter</code>.
+	 * This method will save the User using a <code>OutputStreamWriter</code>.
 	 * It also checks exceptions to prevent crush.
 	 * 
 	 * @exception FileNotFoundException
@@ -162,14 +162,14 @@ public class ClaimListManager {
 	 * @see com.google.gson.JsonIOException
 	 * @see com.google.gson.reflect.TypeToken
 	 */
-	public void save(){
+	public void save(String name){
 		Gson gson=new Gson();
 		try {
-			FileOutputStream fos = context.openFileOutput(FILENAME, 0);
+			FileOutputStream fos = context.openFileOutput(USER_FILE+name, 0);
 			OutputStreamWriter osw =new OutputStreamWriter(fos);
-			ClaimList cl=AppSingleton.getInstance().getClaimList();
-			cl.setLastModify(new Date());
-			gson.toJson(cl,osw);
+			User user=AppSingleton.getInstance().getCurrentUser();
+//			user.setLastModify(new Date());
+			gson.toJson(user,osw);
 			osw.flush();
 			fos.close();
 		} catch (FileNotFoundException e) {
