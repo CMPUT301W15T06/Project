@@ -26,12 +26,12 @@ package ca.ualberta.CMPUT301W15T06;
  * @author CMPUT301W15T06
  * @version 03/16/2015
  */
-public class FlagController {
+public class ClaimantItemListController {
 
 	/**
 	 * Set a Item object item with a default value of null.
 	 */
-	private Item item=null;
+	private Claim claim=null;
 	
 	
 	/**
@@ -40,9 +40,9 @@ public class FlagController {
 	 * 
 	 * @param currentItem  an Item object
 	 */
-	public FlagController(Item currentItem) {
+	public ClaimantItemListController(Claim claim) {
 		// TODO Auto-generated constructor stub
-		item=currentItem;
+		this.claim=claim;
 	}
 	
 	/**
@@ -53,15 +53,63 @@ public class FlagController {
 	 * @throws StatusException
 	 */
 	public void changeFlag() throws StatusException{
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		
+		Item item=AppSingleton.getInstance().getCurrentItem();
 		if (item.getFlag()){
 			item.setFlag(false);
 		}else{
 			item.setFlag(true);
 		}
+	}
+
+	public void sumbmit() throws StatusException {
+		// TODO Auto-generated method stub
+		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
+			throw new StatusException();					
+		}	
+		claim.setStatus("Submitted");	
+	}
+
+	public void delete() throws StatusException {
+		// TODO Auto-generated method stub
+		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
+			throw new StatusException();					
+		}	
+		User user=AppSingleton.getInstance().getCurrentUser();
+		user.getClaimList().remove(claim);
+		user.notifyListeners();
+	}
+
+	public void addItem() throws StatusException {
+		// TODO Auto-generated method stub
+		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
+			throw new StatusException();					
+		}	
+		Item item=new Item();
+		
+		item.addModelListener(new Listener() {
+			
+			@Override
+			public void update() {
+				// TODO Auto-generated method stub
+				claim.notifyListeners();
+			}
+		});
+		
+		claim.getItemList().add(item);
+		claim.notifyListeners();
+		AppSingleton.getInstance().setCurrentItem(item);
+	}
+
+	public void addTag(long id) {
+		// TODO Auto-generated method stub
+		claim.getTagIDList().add(id);
+		claim.notifyListeners();
+	}
+
+	public void removeTag(long id) {
+		// TODO Auto-generated method stub
+		claim.getTagIDList().remove(id);
+		claim.notifyListeners();
 	}
 
 }

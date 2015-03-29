@@ -36,6 +36,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
@@ -75,7 +76,7 @@ public class EditDatePickerFragment extends DialogFragment implements DatePicker
 		if (date!=null){
 			c.setTime(date);
 		}
-		
+		Log.i("before set",c.toString());
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
@@ -96,6 +97,7 @@ public class EditDatePickerFragment extends DialogFragment implements DatePicker
 		// Do something with the date chosen by the user
 		Calendar c = Calendar.getInstance();
 		c.set(year,month,day);
+		Log.i("agter set",c.toString());
 		AppSingleton.getInstance().getDateEditText().setText(AppSingleton.getDateFormat().format(c.getTime()));
 	}
 	

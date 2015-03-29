@@ -10,5 +10,28 @@
         android:title="Detail and Destinations" 
         android:onClick="detail">
     </item>
+    <item 
+        android:id="@+id/change_tag"
+        android:title="Change Tags" 
+        android:onClick="changeTag">
+    </item>
+    
+    <item 
+        android:id="@+id/submit"
+        android:title="Submit this Claim" 
+        android:onClick="submitClaim">
+    </item>
+    
+    <item 
+        android:id="@+id/edit"
+        android:title="Edit this Claim" 
+        android:onClick="editClaim">
+    </item>
+    
+    <item 
+        android:id="@+id/delete"
+        android:title="Delete this Claim" 
+        android:onClick="deleteClaim">
+    </item>
 
 </menu>

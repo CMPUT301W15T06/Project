@@ -27,7 +27,10 @@ governing permissions and limitations under the License.
 package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+
+import android.util.Log;
 
 /**
  * The <code>Claim</code> class is an sub-class of <code>AppModel</code>.
@@ -94,8 +97,11 @@ public class Claim extends AppModel{
 		itemList=new ArrayList<Item>();
 		destinationList=new ArrayList<Destination>();
 		tagIDList=new ArrayList<Long>();
-		beginDate=new Date();
-		endDate=new Date();
+		
+		
+		
+		beginDate=AppSingleton.removeTime(new Date());
+		endDate=AppSingleton.removeTime(new Date());
 	}
 	
 
@@ -145,6 +151,8 @@ public class Claim extends AppModel{
 	 * @see java.util.Date
 	 */
 	public void setEndDate(Date endDate) throws StatusException, WrongEndDateException{
+		Log.i("before set",this.endDate.toString());
+		Log.i("end set",endDate.toString());
 		if (status.equals("Submitted")||status.equals("Approved")){
 			throw new StatusException();					
 		}

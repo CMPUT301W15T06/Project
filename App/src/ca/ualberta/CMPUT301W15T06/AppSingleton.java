@@ -26,11 +26,17 @@ governing permissions and limitations under the License.
 
 package ca.ualberta.CMPUT301W15T06;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.util.Log;
 import android.widget.EditText;
 
 /**
@@ -95,12 +101,26 @@ public class AppSingleton {
 	 */
 	private static final DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
+	private Context testContext;
+	
+	private UserList userList;
+	
 	private boolean suc;
+	private Object pg;
 	/**
 	 * This method will load the currentUser by calling <code>ClaimListManager</code>
 	 * and using <code>getInstance()</code> and <code>load()</code>.
 	 */
     private AppSingleton() {  
+    	
+    	
+//    	userList=new ESClient().getUserList();
+//    	for(String name:userList.getUserList()){
+//    		
+//    	}
+    	
+    	
+    	
 //    	Thread thread = new Thread(new Runnable(){
 //		    @Override
 //		    public void run() {
@@ -289,10 +309,41 @@ public class AppSingleton {
 		this.suc = suc;
 	}
 
-	public void setCurrentUser(String name) {
+	public void setCurrentUser(final String name) {
 		// TODO Auto-generated method stub
+		
+		
 		userName=name;
+		
 		currentUser=ClaimListManager.getInstance().load(name);
+		
+	}
+
+	public void setUserList() {
+		// TODO Auto-generated method stub
+		userList=ClaimListManager.getInstance().loadUserList();
+		Log.i("ttttttt","2");
+		if(userList==null){
+			
+			userList=new ESClient().getUserList();
+			if(userList==null){
+				userList=new UserList();
+			}else{
+				Log.i("ttttttt","4");
+				new ESClient().downloadUsers(userList);
+				ClaimListManager.getInstance().saveUserListLocal();
+			}
+					
+		}else if(userList.isNeedSyn()){
+			  	
+	    	try {
+				new ESClient().synByUserList(userList);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				
+			} 	
+		}
 		
 		
 	}
@@ -315,6 +366,31 @@ public class AppSingleton {
 		this.currentDestination = currentDestination;
 	}
 
+	public static Date removeTime(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
+    }
+
+	public Context getTestContext() {
+		return testContext;
+	}
+
+	public void setTestContext(Context testContext) {
+		this.testContext = testContext;
+	}
+
+	public UserList getUserList() {
+		return userList;
+	}
+
+	public void setUserList(UserList userList) {
+		this.userList = userList;
+	}
 	
 //	public static int getYear(String date){
 //		return Integer.valueOf(date.split("-")[0]);

@@ -31,8 +31,10 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -67,11 +69,15 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class ClaimantItemListActivity extends Activity {
 
-	/**
-	 * Set a FlagController object fc with the initial 
-	 * default value of null.
-	 */
-	private FlagController fc=null;
+private static final int PHOTO_RECEIPT = 1;
+private static final int ITEM_DETAIL = 2;
+private static final int CHANGE_FLAG = 0;
+//	/**
+//	 * Set a FlagController object 
+//	 * default value of null.
+//	 */
+	private ClaimantItemListController cilc=null;
+	private Claim claim=null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +85,18 @@ public class ClaimantItemListActivity extends Activity {
 		setContentView(R.layout.activity_claimant_item_list);
 		
 		
+		claim=AppSingleton.getInstance().getCurrentClaim();
+		cilc=new ClaimantItemListController(claim);
+		
+		
+		
 		ListView listView = (ListView) findViewById(R.id.itemListView);
-		final ArrayList<Item> list =AppSingleton.getInstance().getCurrentClaim().getItemList();
+		final ArrayList<Item> list =claim.getItemList();
 		final ArrayAdapter<Item> adapter=new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1,list);
 		listView.setAdapter(adapter);
 		
 		
-		AppSingleton.getInstance().getCurrentClaim().addListener(new Listener() {
+		claim.addListener(new Listener() {
 			
 			@Override
 			public void update() {
@@ -106,36 +117,43 @@ public class ClaimantItemListActivity extends Activity {
 				
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantItemListActivity.this);
 				builder.setTitle(R.string.title_item_dialog);
-				builder.setItems(R.array.item_dialog_array, new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						if (which ==0){
-							fc=new FlagController(list.get(position));
-							try {
-								fc.changeFlag();
-							} catch (StatusException e) {
-								Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-							}
-										
-						}else if (which==1){
-							Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantReceiptActivity.class);
-							startActivity(intent);					
-						
-						}else if (which==2){
-							Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantItemDetailActivity.class);
-							startActivity(intent);
-						}
-						
-					}
-				});
+				itemChoice(builder);
 				builder.create();  
 				builder.show();
 				
 			}
 			
 		});
+	}
+	
+	
+	public void itemChoice(Builder builder){
+		builder.setItems(R.array.item_dialog_array, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				if (which ==CHANGE_FLAG){					
+					changeFlag();							
+				}else if (which==PHOTO_RECEIPT){
+					Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantReceiptActivity.class);
+					startActivity(intent);					
+				
+				}else if (which==ITEM_DETAIL){
+					Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantItemDetailActivity.class);
+					startActivity(intent);
+				}
+				
+			}
+		});
+	}
+	
+	public void changeFlag(){
+		try {
+			cilc.changeFlag();
+		} catch (StatusException e) {
+			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@Override
@@ -153,12 +171,92 @@ public class ClaimantItemListActivity extends Activity {
 	 * @see android.content.Intent
 	 */
 	public void addItem(View v){
-		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantAddItemActivity.class);
-		startActivity(intent);		
+		try {
+			cilc.addItem();
+			Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantEditItemActivity.class);
+			startActivity(intent);	
+		} catch (StatusException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}	
 	}
 	
 	public void detail(MenuItem m){
 		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantClaimDetailActivity.class);
 		startActivity(intent);
 	}
+	
+	public void submitClaim(MenuItem m){
+		if (claim.getMissValue()){
+			AlertDialog.Builder adb = new AlertDialog.Builder(ClaimantItemListActivity.this);
+			adb.setMessage("You are trying to submit an expense claim that there are fields with missing values or there are any incompleteness indicators on the expense items,are you sure you want to submit?");
+			adb.setPositiveButton("Submit", new OnClickListener(){
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					sureSubmit();									
+				}										
+			});
+			adb.setNegativeButton("Cancel", new OnClickListener() {					
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+				}
+			});
+			
+			adb.show();		
+		}else{
+			
+			sureSubmit();	
+		}
+
+	}
+
+
+	public void sureSubmit(){
+		
+		try {
+			cilc.sumbmit();
+		} catch (StatusException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}
+	
+	}
+		
+	public void editClaim(MenuItem m){
+		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantEditClaimActivity.class);
+		startActivity(intent);
+		
+	}
+	public void deleteClaim(MenuItem m){
+		try {
+			cilc.delete();
+			finish();
+		} catch (StatusException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}
+	
+	}
+	public void changeTag(MenuItem m){
+		final User user=AppSingleton.getInstance().getCurrentUser();
+		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantItemListActivity.this);
+		builder.setTitle("Choose the Tags");
+		builder.setMultiChoiceItems(user.toTagList(),claim.toCheckArray(),new DialogInterface.OnMultiChoiceClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				// TODO Auto-generated method stub
+				if (isChecked){
+					cilc.addTag(user.getTagList().get(which).getID());
+				}else if(claim.getTagIDList().contains(user.getTagList().get(which).getID())){
+					cilc.removeTag(user.getTagList().get(which).getID());
+				}
+			}
+		});
+		
+		builder.create();  
+		builder.show();
+	
+	}
+
 }

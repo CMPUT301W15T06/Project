@@ -42,22 +42,7 @@ public class ClaimantClaimListController {
 	 * default value null.
 	 */
 	private User user=null;
-	/**
-	 * Set a <code>Claim</code> object user with initial 
-	 * default value null.
-	 */
-	private Claim claim=null;
-	
-	
-	/**
-	 * General construction. Create a new claim.
-	 * 
-	 * @param claim  a Claim object
-	 */
-	public ClaimantClaimListController(Claim claim) {
-		// TODO Auto-generated constructor stub
-		this.claim=claim;
-	}
+
 
 	/**
 	 * General construction. Create a new user.
@@ -69,54 +54,8 @@ public class ClaimantClaimListController {
 		this.user=user;
 	}
 
-	/**
-	 * Add a new claim to the user and change status to 
-	 * "Submitted". It also checks warnings and errors to
-	 * prevent crush.
-	 * 
-	 * @throws StatusException
-	 * @see java.io.IOException
-	 */
-	public void submit() throws StatusException {
-		// TODO Auto-generated method stub
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		
-		claim.setStatus("Submitted");
-	}
 
-	/**
-	 * Remove a claim from the user and notify all Listener in listeners.
-	 * It also checks warnings and errors to prevent crush.
-	 * 
-	 * @param claim  a Claim object
-	 * @throws StatusException
-	 * @see java.io.IOException
-	 */
-	public void delete(Claim claim) throws StatusException {
-		// TODO Auto-generated method stub
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		
-		user.getClaimList().remove(claim);
-		user.notifyListeners();
-		
-	}
 
-	public void addTag(long l) {
-		// TODO Auto-generated method stub
-		claim.getTagIDList().add(l);
-		claim.notifyListeners();
-		
-	}
-
-	public void removeTag(long l) {
-		// TODO Auto-generated method stub
-		claim.getTagIDList().remove(l);
-		claim.notifyListeners();
-	}
 
 	public void addClaim() {
 		// TODO Auto-generated method stub
@@ -133,6 +72,40 @@ public class ClaimantClaimListController {
 		user.getClaimList().add(claim);
 		user.notifyListeners();
 		AppSingleton.getInstance().setCurrentClaim(claim);
+	}
+
+
+
+
+	public void addTag(long id) {
+		// TODO Auto-generated method stub
+		user.getFilterTagIDList().add(id);
+		user.notifyListeners();
+	}
+
+
+
+
+	public void removeTag(long id) {
+		// TODO Auto-generated method stub
+		user.getFilterTagIDList().remove(id);
+		user.notifyListeners();
+	}
+
+
+
+
+	public void filter() {
+		// TODO Auto-generated method stub
+		user.setFilter(true);
+	}
+
+
+
+
+	public void showAll() {
+		// TODO Auto-generated method stub
+		user.setFilter(false);
 	}
 	
 

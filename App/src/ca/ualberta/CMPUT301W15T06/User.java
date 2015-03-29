@@ -53,10 +53,15 @@ public class User extends AppModel{
 
 	private ArrayList<Tag> tagList;
 	
+	private ArrayList<Long> filterTagIDList;
 	
 	private String userName;
 	
 	private Date lastModify;
+	
+	private boolean filter;
+	
+	private boolean needSyn;
 	
 //	/**
 //	 * General construction. This method Set up the claimList.
@@ -70,7 +75,10 @@ public class User extends AppModel{
 		super();
 		claimList=new ArrayList<Claim>();
 		tagList=new ArrayList<Tag>();
+		filterTagIDList=new ArrayList<Long>();
 		userName=name;
+		filter=false;
+		needSyn=false;
 	}
 
 
@@ -194,5 +202,56 @@ public class User extends AppModel{
 		return false;
 	}
 
+
+	public ArrayList<Long> getFilterTagIDList() {
+		return filterTagIDList;
+	}
+
+
+	public boolean[] toCheckArray() {
+		// TODO Auto-generated method stub
+		
+		boolean[] result = new boolean[tagList.size()];
+		int i=0;
+		for (Tag tag:tagList){
+			if(filterTagIDList.contains(tag.getID())){
+				result[i]=true;
+			}else{
+				result[i]=false;
+			}
+			i++;
+		}
+		return result;
+	}
+
+
+	public boolean isFilter() {
+		return filter;
+	}
+
+
+	public void setFilter(boolean filter) {
+		this.filter = filter;
+		notifyListeners();
+	}
+
+
+	public boolean isNeedSyn() {
+		return needSyn;
+	}
+
+
+	public void setNeedSyn(boolean needSyn) {
+		if(needSyn!=this.needSyn){
+			this.needSyn = needSyn;
+			ClaimListManager.getInstance().saveLocal(this);
+			
+		}
+	}
+	public void setNeedSynSimple(boolean needSyn) {
+
+		this.needSyn = needSyn;
+			
+	}
 
 }

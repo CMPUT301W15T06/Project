@@ -36,6 +36,7 @@ import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -69,8 +70,34 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		
+		Log.i("ttttttt","1");
+
 		ClaimListManager.initial(getApplicationContext());
+		pg =ProgressDialog.show(this, "Pushing Onling...","Please wait patiently :)", true);
+		Thread thread = new Thread(new Runnable(){
+		    @Override
+		    public void run() {    	
+
+		    	AppSingleton.getInstance().setUserList();
+				
+				runOnUiThread(new Runnable() {
+		            @Override
+		            public void run()
+		            {
+		              pg.dismiss();
+		            }
+		          });
+		    }
+		    
+		});
+		thread.start();
+	
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Can't join!");
+		}
 		
 		AppSingleton.getInstance().setCurrentUser("Guest");
 		
@@ -78,6 +105,7 @@ public class MainActivity extends Activity {
 		userName=(TextView) findViewById(R.id.userTextView);
 		userName.setText(user.getUserName());
 		
+		AppSingleton.getInstance().setTestContext(getApplicationContext());
 	}
 
 	@Override

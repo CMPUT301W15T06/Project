@@ -126,7 +126,7 @@ public class ClaimantEditClaimActivity extends Activity {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				
+
 			}
 			
 			@Override
@@ -140,7 +140,7 @@ public class ClaimantEditClaimActivity extends Activity {
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
 				try {
-					cecc.editEnd(beginView.getText().toString());
+					cecc.editEnd(endView.getText().toString());
 				} catch (StatusException e) {
 					// TODO Auto-generated catch block
 					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();

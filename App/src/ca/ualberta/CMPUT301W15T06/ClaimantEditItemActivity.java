@@ -30,8 +30,14 @@ package ca.ualberta.CMPUT301W15T06;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -72,6 +78,7 @@ public class ClaimantEditItemActivity extends Activity {
 	 */
 	private ClaimantEditItemController ceic=null;
 
+	private Item item=null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,35 +86,167 @@ public class ClaimantEditItemActivity extends Activity {
 		setContentView(R.layout.activity_claimant_edit_item);
 		
 
+		item=AppSingleton.getInstance().getCurrentItem();
+		ceic=new ClaimantEditItemController(item);
+		
 		dateView=(EditText) findViewById(R.id.editItemDateEditText);
-		ceic=new ClaimantEditItemController(AppSingleton.getInstance().getCurrentItem());
 		
-		EditText descriptionView=(EditText) findViewById(R.id.editItemDescriptionEditText);
-		EditText amountView=(EditText) findViewById(R.id.editItemAmountEditText);
+		final EditText descriptionView=(EditText) findViewById(R.id.editItemDescriptionEditText);
+		final EditText amountView=(EditText) findViewById(R.id.editItemAmountEditText);
 		
-		dateView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentItem().getDate()));
-		descriptionView.setText(AppSingleton.getInstance().getCurrentItem().getDescription());
 		
-		if (AppSingleton.getInstance().getCurrentItem().getAmount()==null){
+		
+		
+		
+		dateView.setText(AppSingleton.formatDate(item.getDate()));		
+		dateView.addTextChangedListener(new  TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				try {
+					ceic.editDate(dateView.getText().toString());
+				} catch (StatusException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+
+		descriptionView.setText(item.getDescription());
+		descriptionView.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				try {
+					ceic.editDescription(descriptionView.getText().toString());
+				} catch (StatusException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+		
+		if (item.getAmount()==null){
 			amountView.setText("");
 		}else{
-			amountView.setText(String.valueOf(AppSingleton.getInstance().getCurrentItem().getAmount()));
+			amountView.setText(String.valueOf(item.getAmount()));
 		}
 		
+
+		amountView.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				try {
+					Double amount;
+					try {
+						amount=Double.parseDouble(amountView.getText().toString());
+					} catch (NumberFormatException e) {
+						amount=null;
+					}
+					ceic.editAmount(amount);
+				} catch (StatusException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
 		
 		Spinner currency=(Spinner) findViewById(R.id.editCurrencySpinner);
 		ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this,R.array.currency, 
 				android.R.layout.simple_spinner_item);
 		currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		currency.setAdapter(currencyAdapter);
-		currency.setSelection(getCurrencyPosition(AppSingleton.getInstance().getCurrentItem().getCurrency()));
+		currency.setSelection(getCurrencyPosition(item.getCurrency()));
+		currency.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				try {
+					ceic.editCurrency(getCurrency(position));
+				} catch (StatusException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		Spinner category=(Spinner) findViewById(R.id.editCategorySpinner);
 		ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this,R.array.category, 
 				android.R.layout.simple_spinner_item);
 		categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		category.setAdapter(categoryAdapter);
-		category.setSelection(getCategoryPosition(AppSingleton.getInstance().getCurrentItem().getCategory()));
+		category.setSelection(getCategoryPosition(item.getCategory()));
+		category.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				try {
+					ceic.editCategory(getCategory(position));
+				} catch (StatusException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 	@Override
@@ -135,6 +274,12 @@ public class ClaimantEditItemActivity extends Activity {
 		}
 		return 0;
 	}
+	
+	private String getCategory(int i){
+		String [] list={"air fare", "ground transport", "vehicle rental", "private automobile", "fuel", "parking",
+				"registration", "accommodation", "meal","supplies"};
+		return list[i];
+	}
 
 	//used to check the integer position of the input currency
 	/**
@@ -155,42 +300,12 @@ public class ClaimantEditItemActivity extends Activity {
 		return 0;
 	}
 	
-	/**
-	 * This method will create a finish button to trigger the action finishAdd. 
-	 * It will also checks <code>NumberFormatException()</code> and 
-	 * <code>StatusException()</code> warning to prevent crush.
-	 * 
-	 * @param v  a View object
-	 * @see android.view.View
-	 * @see android.widget.EditText
-	 * @see android.widget.Spinner
-	 * @see android.widget.Toast
-	 */
-	public void finishEdit(View v){
-		EditText dateView= (EditText) findViewById(R.id.editItemDateEditText);
-		Spinner category= (Spinner ) findViewById(R.id.editCategorySpinner);
-		EditText descriptionView= (EditText) findViewById(R.id.editItemDescriptionEditText);
-		EditText amountView= (EditText) findViewById(R.id.editItemAmountEditText);
-		Spinner currency=(Spinner) findViewById(R.id.editCurrencySpinner);
-		
-
-		Double amount;
-		try {
-			amount=Double.parseDouble(amountView.getText().toString());
-		} catch (NumberFormatException e) {
-			amount=null;
-		}
-
-
-		try {
-			ceic.editItem(dateView.getText().toString(),category.getSelectedItem().toString(),
-					descriptionView.getText().toString(),amount,
-					currency.getSelectedItem().toString());
-		} catch (StatusException e) {
-			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-		}
-		finish();
+	private String getCurrency(int i){
+		String [] list={"CAD","USD", "EUR", "GBP","CHF","JPY","CNY"};
+		return list[i];
 	}
+
+	
 	
 	/**
 	 * This method will display the DatePickerDialog by calling 
@@ -201,7 +316,7 @@ public class ClaimantEditItemActivity extends Activity {
 	 */
 	public void showDatePickerDialog(View v) {
 		AppSingleton.getInstance().setDateEditText(dateView);
-		AppSingleton.getInstance().setEditDate(AppSingleton.getInstance().getCurrentItem().getDate());
+		AppSingleton.getInstance().setEditDate(item.getDate());
 		DialogFragment newFragment = new EditDatePickerFragment();
 	    newFragment.show(getFragmentManager(), "datePicker");
 	}

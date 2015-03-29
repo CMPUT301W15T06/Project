@@ -55,44 +55,35 @@ public class ClaimantEditItemController {
 		this.item=item;
 	}
 	
-	/**
-	 * This class will allows claimants edit the detail information
-	 * of the claim, including date, category, description, amount
-	 * and currency. It will also checks <code>StatusException()</code> 
-	 * warning to prevent crush.
-	 * 
-	 * @param dateSTR  a String variable
-	 * @param category  a String variable
-	 * @param description  a String variable
-	 * @param amount  a Double variable
-	 * @param currency  a String variable
-	 * @throws StatusException
-	 * @see java.text.DateFormat
-	 * @see java.text.ParseException
-	 * @see java.text.SimpleDateFormat
-	 * @see java.util.Date
-	 */
-	public void editItem(String dateSTR, String category, String description, Double amount, String currency) throws StatusException{	
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		
-		
-		Date date = null;
-		
+
+	public void editDate(String string) throws StatusException {
+		// TODO Auto-generated method stub
+		Date date = null;	
 		try {
-			date = AppSingleton.getDateFormat().parse(dateSTR);
+			date = AppSingleton.getDateFormat().parse(string);
 		} catch (ParseException e) {
 			date=null;
 		}
 		item.setDate(date);
-		item.setCategory(category);
+	}
+
+	public void editDescription(String description) throws StatusException {
+		// TODO Auto-generated method stub
 		item.setDescription(description);
+	}
+
+	public void editAmount(Double amount) throws StatusException {
+		// TODO Auto-generated method stub
 		item.setAmount(amount);
+	}
+
+	public void editCurrency(String currency) throws StatusException {
+		// TODO Auto-generated method stub
 		item.setCurrency(currency);
-		
+	}
 
-
-
+	public void editCategory(String category) throws StatusException {
+		// TODO Auto-generated method stub
+		item.setCategory(category);
 	}
 }
