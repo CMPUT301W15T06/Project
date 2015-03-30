@@ -57,14 +57,14 @@ public class ClaimantClaimListController {
 
 
 
-	public void addClaim() {
+	public void addClaim() throws NetWorkException {
 		// TODO Auto-generated method stub
-		Claim claim=new Claim();
+		Claim claim=new Claim(user.getUserName());
 		
 		claim.addModelListener(new Listener() {
 			
 			@Override
-			public void update() {
+			public void update() throws NetWorkException {
 				// TODO Auto-generated method stub
 				user.notifyListeners();
 			}
@@ -77,7 +77,7 @@ public class ClaimantClaimListController {
 
 
 
-	public void addTag(long id) {
+	public void addTag(long id) throws NetWorkException {
 		// TODO Auto-generated method stub
 		user.getFilterTagIDList().add(id);
 		user.notifyListeners();
@@ -86,7 +86,7 @@ public class ClaimantClaimListController {
 
 
 
-	public void removeTag(long id) {
+	public void removeTag(long id) throws NetWorkException {
 		// TODO Auto-generated method stub
 		user.getFilterTagIDList().remove(id);
 		user.notifyListeners();
@@ -95,7 +95,7 @@ public class ClaimantClaimListController {
 
 
 
-	public void filter() {
+	public void filter() throws NetWorkException {
 		// TODO Auto-generated method stub
 		user.setFilter(true);
 	}
@@ -103,7 +103,7 @@ public class ClaimantClaimListController {
 
 
 
-	public void showAll() {
+	public void showAll() throws NetWorkException {
 		// TODO Auto-generated method stub
 		user.setFilter(false);
 	}

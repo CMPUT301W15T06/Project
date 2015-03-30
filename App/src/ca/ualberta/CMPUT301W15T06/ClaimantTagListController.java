@@ -9,14 +9,14 @@ public class ClaimantTagListController {
 		user=u;
 	}
 
-	public void addTag(String tagName) {
+	public void addTag(String tagName) throws NetWorkException {
 		// TODO Auto-generated method stub
 		Tag tag=new Tag(tagName);
 		user.getTagList().add(tag);
 		tag.addModelListener(new Listener() {
 			
 			@Override
-			public void update() {
+			public void update() throws NetWorkException {
 				// TODO Auto-generated method stub
 				user.notifyListeners();
 			}
@@ -26,7 +26,7 @@ public class ClaimantTagListController {
 		user.notifyListeners();
 	}
 
-	public void delete(Tag tag) {
+	public void delete(Tag tag) throws NetWorkException {
 		// TODO Auto-generated method stub
 		for (Claim claim:user.getClaimList()){
 			claim.getTagIDList().remove(tag.getID());
@@ -36,7 +36,7 @@ public class ClaimantTagListController {
 		user.notifyListeners();
 	}
 
-	public void edit(Tag tag, String string) {
+	public void edit(Tag tag, String string) throws NetWorkException {
 		// TODO Auto-generated method stub
 		tag.setName(string);
 	}

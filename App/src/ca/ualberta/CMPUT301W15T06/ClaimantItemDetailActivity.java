@@ -115,8 +115,11 @@ public class ClaimantItemDetailActivity extends Activity {
 		try {
 			cdic.removeItem(AppSingleton.getInstance().getCurrentItem());
 		} catch (StatusException e) {
-			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-		}
+			Toast.makeText(ClaimantItemDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}catch (NetWorkException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}	
 		finish();
 	}
 	
@@ -128,7 +131,11 @@ public class ClaimantItemDetailActivity extends Activity {
 	 * @see android.content.Intent
 	 */
 	public void editItem(View v){
-		Intent intent =new Intent(ClaimantItemDetailActivity.this,ClaimantEditItemActivity.class);
-		startActivity(intent);		
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			Toast.makeText(ClaimantItemDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();			
+		}else{
+			Intent intent =new Intent(ClaimantItemDetailActivity.this,ClaimantEditItemActivity.class);
+			startActivity(intent);	
+		}
 	}
 }

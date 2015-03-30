@@ -157,6 +157,43 @@ public class MainActivity extends Activity {
 	public void startClaimant(View v){
 		Intent intent =new Intent(MainActivity.this,ClaimantClaimListActivity.class);
 		startActivity(intent);
+		AppSingleton.getInstance().setcMod(true);
+	}
+	
+	
+	public void startApprover(View v){
+		
+		Thread thread = new Thread(new Runnable(){
+		    @Override
+		    public void run() {    	
+
+		    	if(new ESClient().getUserList()==null){
+					AppSingleton.getInstance().setSuc(false);
+		    	}else{
+		    		AppSingleton.getInstance().setSuc(true);
+		    		
+		    	}	
+		    }
+		    
+		});
+		thread.start();
+	
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Can't join!");
+		}
+		
+		if(AppSingleton.getInstance().isSuc()){
+			Intent intent =new Intent(MainActivity.this,ApproverClaimListActivity.class);
+    		startActivity(intent);
+    		AppSingleton.getInstance().setcMod(false);
+		}else{
+			Toast.makeText(MainActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
+		}
+		
+
 	}
 
 }

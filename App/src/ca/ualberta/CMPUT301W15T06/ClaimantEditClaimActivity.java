@@ -111,14 +111,17 @@ public class ClaimantEditClaimActivity extends Activity {
 				} catch (StatusException e) {
 					// TODO Auto-generated catch block
 					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-					beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
+					
 					
 				} catch (WrongEndDateException e) {
 					// TODO Auto-generated catch block
 					Toast.makeText(getApplicationContext(), "Ending Date must after Starting Date!", Toast.LENGTH_LONG).show();
 					beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
 
-				}
+				}catch (NetWorkException e) {
+					// TODO: handle exception
+					throw new RuntimeException(e);
+				}	
 			}
 		});
 		endView.addTextChangedListener(new TextWatcher() {
@@ -145,13 +148,16 @@ public class ClaimantEditClaimActivity extends Activity {
 					// TODO Auto-generated catch block
 					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
 					
-					endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
+					
 				} catch (WrongEndDateException e) {
 					// TODO Auto-generated catch block
 					Toast.makeText(getApplicationContext(), "Ending Date must after Starting Date!", Toast.LENGTH_LONG).show();
 					
 					endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
-				}
+				}catch (NetWorkException e) {
+					// TODO: handle exception
+					throw new RuntimeException(e);
+				}	
 			}
 		});
 	}

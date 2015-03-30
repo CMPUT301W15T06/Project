@@ -97,7 +97,10 @@ public class ClaimantEditDestinationActivity extends Activity {
 				} catch (StatusException e) {
 					// TODO Auto-generated catch block
 					Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-				}
+				}catch (NetWorkException e) {
+					// TODO: handle exception
+					throw new RuntimeException(e);
+				}	
 				
 			}
 		};

@@ -135,7 +135,8 @@ public class ClaimantClaimListActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				AppSingleton.getInstance().setCurrentClaim(list.get(position));
+				AppSingleton.getInstance().setCurrentClaim(adapter.getItem(position));
+				
 				Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantItemListActivity.class);
 				startActivity(intent);
 			}
@@ -202,7 +203,12 @@ public class ClaimantClaimListActivity extends Activity {
 	 * @see android.view.MenuItem
 	 */
 	public void addClaim(MenuItem m){
-		cclc.addClaim();
+		try {
+			cclc.addClaim();
+		} catch (NetWorkException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}	
 		Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantEditClaimActivity.class);
 		startActivity(intent);
 	}
@@ -251,11 +257,16 @@ public class ClaimantClaimListActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 				// TODO Auto-generated method stub
-				if (isChecked){
-					cclc.addTag(user.getTagList().get(which).getID());
-				}else if(user.getFilterTagIDList().contains(user.getTagList().get(which).getID())){
-					cclc.removeTag(user.getTagList().get(which).getID());
-				}
+				try{
+					if (isChecked){
+						cclc.addTag(user.getTagList().get(which).getID());
+					}else if(user.getFilterTagIDList().contains(user.getTagList().get(which).getID())){
+						cclc.removeTag(user.getTagList().get(which).getID());
+					}
+				}catch (NetWorkException e) {
+					// TODO: handle exception
+					throw new RuntimeException(e);
+				}	
 			}
 		});
 		
@@ -283,7 +294,12 @@ public class ClaimantClaimListActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				cclc.filter();
+				try {
+					cclc.filter();
+				} catch (NetWorkException e) {
+					// TODO: handle exception
+					throw new RuntimeException(e);
+				}	
 				dialog.setTitle("Filter Model");
 			}
 		});
@@ -292,7 +308,12 @@ public class ClaimantClaimListActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				cclc.showAll();
+				try {
+					cclc.showAll();
+				} catch (NetWorkException e) {
+					// TODO: handle exception
+					throw new RuntimeException(e);
+				}	
 				dialog.setTitle("Show All Model");
 				
 			}

@@ -95,9 +95,10 @@ public class Item extends AppModel{
 	 * 
 	 * @param itemDate  a Date object
 	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 * @see java.util.Date
 	 */
-	public void setDate(Date itemDate) throws StatusException {
+	public void setDate(Date itemDate) throws StatusException, NetWorkException {
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
 		}
@@ -122,8 +123,9 @@ public class Item extends AppModel{
 	 * 
 	 * @param category  a String variable
 	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setCategory(String category) throws StatusException {
+	public void setCategory(String category) throws StatusException, NetWorkException {
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
 		}
@@ -147,8 +149,9 @@ public class Item extends AppModel{
 	 * 
 	 * @param description  a String variable
 	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setDescription(String description) throws StatusException {
+	public void setDescription(String description) throws StatusException, NetWorkException {
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
 		}
@@ -172,8 +175,9 @@ public class Item extends AppModel{
 	 * 
 	 * @param amount  a Double variable
 	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setAmount(Double amount) throws StatusException {
+	public void setAmount(Double amount) throws StatusException, NetWorkException {
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
 		}
@@ -197,8 +201,9 @@ public class Item extends AppModel{
 	 * 
 	 * @param currency  a String variable
 	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setCurrency(String currency) throws StatusException {
+	public void setCurrency(String currency) throws StatusException, NetWorkException {
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
 		}
@@ -223,8 +228,9 @@ public class Item extends AppModel{
 	 * 
 	 * @param b  a boolean variable
 	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setFlag(boolean b) throws StatusException {
+	public void setFlag(boolean b) throws StatusException, NetWorkException {
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
 		}

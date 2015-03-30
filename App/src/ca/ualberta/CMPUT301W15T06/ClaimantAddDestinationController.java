@@ -67,6 +67,7 @@ public class ClaimantAddDestinationController {
 	 * @param dest  a String variable
 	 * @param reason  a String variable
 	 * @throws StatusException
+	 * @throws NetWorkException 
 	 * @see java.text.DateFormat
 	 * @see java.text.ParseException
 	 * @see java.text.SimpleDateFormat
@@ -74,7 +75,7 @@ public class ClaimantAddDestinationController {
 	 * @see java.util.Date
 	 * @see java.util.Locale
 	 */
-	public void addDestination() throws StatusException {
+	public void addDestination() throws StatusException, NetWorkException {
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
 		}
@@ -85,7 +86,7 @@ public class ClaimantAddDestinationController {
 		destination.addModelListener(new Listener() {
 			
 			@Override
-			public void update() {
+			public void update() throws NetWorkException {
 				// TODO Auto-generated method stub
 				claim.notifyListeners();
 			}

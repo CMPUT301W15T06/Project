@@ -25,17 +25,6 @@
         android:layout_centerVertical="true"
         android:ems="10" />
 
-    <Button
-        android:id="@+id/finishAddDestinationButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="70dp"
-        android:onClick="finishAdd"
-        android:text="Finish" />
-
     <TextView
         android:id="@+id/DestinationTextView"
         android:layout_width="wrap_content"

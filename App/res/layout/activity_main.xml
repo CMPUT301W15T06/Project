@@ -16,6 +16,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/claimantButton"
         android:layout_marginBottom="54dp"
+        android:onClick="startApprover"
         android:text="Approver" />
 
     <Button

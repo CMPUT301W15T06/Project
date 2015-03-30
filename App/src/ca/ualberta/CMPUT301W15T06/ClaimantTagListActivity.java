@@ -106,8 +106,12 @@ public class ClaimantTagListActivity extends Activity {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									// TODO Auto-generated method stub
-									ctlc.edit(list.get(position),input.getText().toString());
-								}
+									try {
+										ctlc.edit(list.get(position),input.getText().toString());
+									} catch (NetWorkException e) {
+										// TODO: handle exception
+										throw new RuntimeException(e);
+									}									}
 							});
 							builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
 								
@@ -120,7 +124,12 @@ public class ClaimantTagListActivity extends Activity {
 							builder.create();  
 							builder.show();
 						}else if (which==1){
-							ctlc.delete(list.get(position));
+							try {
+								ctlc.delete(list.get(position));
+							} catch (NetWorkException e) {
+								// TODO: handle exception
+								throw new RuntimeException(e);
+							}	
 						}
 					}
 				
@@ -140,7 +149,12 @@ public class ClaimantTagListActivity extends Activity {
 	
 	public void addTag(View v){
 		EditText addView=(EditText)findViewById(R.id.addTagEditText);
-		ctlc.addTag(addView.getText().toString());
+		try {
+			ctlc.addTag(addView.getText().toString());
+		} catch (NetWorkException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}	
 		addView.setText("");
 	}
 }

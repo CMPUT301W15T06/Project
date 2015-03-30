@@ -56,7 +56,7 @@ public class ClaimantEditItemController {
 	}
 	
 
-	public void editDate(String string) throws StatusException {
+	public void editDate(String string) throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		Date date = null;	
 		try {
@@ -67,22 +67,22 @@ public class ClaimantEditItemController {
 		item.setDate(date);
 	}
 
-	public void editDescription(String description) throws StatusException {
+	public void editDescription(String description) throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		item.setDescription(description);
 	}
 
-	public void editAmount(Double amount) throws StatusException {
+	public void editAmount(Double amount) throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		item.setAmount(amount);
 	}
 
-	public void editCurrency(String currency) throws StatusException {
+	public void editCurrency(String currency) throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		item.setCurrency(currency);
 	}
 
-	public void editCategory(String category) throws StatusException {
+	public void editCategory(String category) throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		item.setCategory(category);
 	}

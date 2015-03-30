@@ -55,7 +55,10 @@ public class Claim extends AppModel{
 	 * 
 	 *  @see java.util.Date
 	 */
-	private Date beginDate;
+	protected Date beginDate;
+	
+	private String name;
+	
 	private Date endDate;
 	/**
 	 * Set private String status to track whether the Claim travel 
@@ -71,6 +74,8 @@ public class Claim extends AppModel{
 	 */
 	private ArrayList<Item> itemList;
 	private ArrayList<Destination> destinationList;
+	
+	private ArrayList<Comment> commentList;
 	/**
 	 * Set private String approver to track if the claim is approved. Set private
 	 * String comment to add comment to the Claim.
@@ -92,13 +97,14 @@ public class Claim extends AppModel{
 //	 * @param claimName  a String variable
 //	 * @see java.util.ArrayList
 //	 */
-	public Claim() {
+	public Claim(String name) {
 		super();
 		itemList=new ArrayList<Item>();
 		destinationList=new ArrayList<Destination>();
 		tagIDList=new ArrayList<Long>();
+		commentList=new ArrayList<Comment>();
 		
-		
+		this.name=name;
 		
 		beginDate=AppSingleton.removeTime(new Date());
 		endDate=AppSingleton.removeTime(new Date());
@@ -115,9 +121,10 @@ public class Claim extends AppModel{
 	 * @param beginDate  a Date object
 	 * @throws StatusException 
 	 * @throws WrongEndDateException 
+	 * @throws NetWorkException 
 	 * @see java.util.Date
 	 */
-	public void setBeginDate(Date beginDate) throws StatusException, WrongEndDateException{
+	public void setBeginDate(Date beginDate) throws StatusException, WrongEndDateException, NetWorkException{
 		if (status.equals("Submitted")||status.equals("Approved")){
 			throw new StatusException();					
 		}
@@ -148,9 +155,10 @@ public class Claim extends AppModel{
 	 * @param endDate  a Date object
 	 * @throws StatusException 
 	 * @throws WrongEndDateException 
+	 * @throws NetWorkException 
 	 * @see java.util.Date
 	 */
-	public void setEndDate(Date endDate) throws StatusException, WrongEndDateException{
+	public void setEndDate(Date endDate) throws StatusException, WrongEndDateException, NetWorkException{
 		Log.i("before set",this.endDate.toString());
 		Log.i("end set",endDate.toString());
 		if (status.equals("Submitted")||status.equals("Approved")){
@@ -181,8 +189,9 @@ public class Claim extends AppModel{
 	 * value of status is "In progress".
 	 * 
 	 * @param status  a String variable
+	 * @throws NetWorkException 
 	 */
-	public void setStatus(String status){
+	public void setStatus(String status) throws NetWorkException{
 		this.status=status;
 		notifyListeners();
 	}
@@ -228,6 +237,41 @@ public class Claim extends AppModel{
 	 * @return ""  a String object combine with many small String variable
 	 */
 	public String toString(){
+		if(AppSingleton.getInstance().iscMod()){
+			return cToString();
+		}else{
+			return aToString();
+		}
+		
+
+	}
+	
+	
+	
+	
+	private String aToString() {
+		// TODO Auto-generated method stub
+		String dest="";
+		for (Destination d:destinationList){
+			dest+='\n'+"      "+d.getName();
+		}
+		String approver="";
+		ArrayList<String> nal= new ArrayList<String>();
+		for(Comment comment:getCommentList()){
+			if(!nal.contains(comment.getApproverName())){
+				nal.add(comment.getApproverName());
+				approver+='\n'+"      "+comment.getApproverName();
+			}
+		}
+		
+		return "Claimant: "+name+'\n'+"Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+
+				getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY")+'\n'+"Approver(s): "+approver;
+	}
+
+
+
+	private String cToString() {
+		// TODO Auto-generated method stub
 		String dest="";
 		for (Destination d:destinationList){
 			dest+='\n'+"      "+d.getName();
@@ -238,9 +282,10 @@ public class Claim extends AppModel{
 		}
 		return "Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+"Tag(s) : "+tag+'\n'+
 				getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY");
-
 	}
-	
+
+
+
 	/**
 	 * Calculate the total amount and return the value. This method first 
 	 * set up a Double variable total with a default value null, then 
@@ -505,4 +550,27 @@ public class Claim extends AppModel{
 		}
 		return result;		
 	}
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	public ArrayList<Comment> getCommentList() {
+		return commentList;
+	}
+
+
+
+	public void setStatusSimple(String string) {
+		// TODO Auto-generated method stub
+		this.status=string;
+	}
+
+
+
+
 }

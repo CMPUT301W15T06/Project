@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import android.util.Log;
+
 /**
  * The <code>AppModel</code> class can create an ArrayList named
  * listeners, which contains Listener subject. This class can
@@ -106,15 +108,27 @@ public abstract class AppModel{
 	 * in listeners ArrayList and modelListeners ArrayList 
 	 * if there's any update, and the ClaimListManager 
 	 * will save the change 
+	 * @throws NetWorkException 
 	 */
-	public void notifyListeners() {
+	public void notifyListeners() throws NetWorkException {
 		for (Listener  listener : getListeners()) {
 			listener.update();
 		}
 		for (Listener  listener : getModelListeners()) {
 			listener.update();
 		}
-		ClaimListManager.getInstance().save(AppSingleton.getInstance().getUserName());
+		if(AppSingleton.getInstance().iscMod()){
+			ClaimListManager.getInstance().save(AppSingleton.getInstance().getUserName());
+		}else{
+			ClaimListManager.getInstance().approverSave();
+			Log.i("----","suc");
+			if(!AppSingleton.getInstance().isSuc()){
+				throw new NetWorkException();
+			}else{
+				ClaimListManager.getInstance().saveLocal(AppSingleton.getInstance().getTempUser());
+				Log.i("save","suc");
+			}
+		}
 	}
 
 	/**

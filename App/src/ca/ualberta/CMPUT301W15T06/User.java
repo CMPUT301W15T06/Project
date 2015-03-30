@@ -230,7 +230,7 @@ public class User extends AppModel{
 	}
 
 
-	public void setFilter(boolean filter) {
+	public void setFilter(boolean filter) throws NetWorkException {
 		this.filter = filter;
 		notifyListeners();
 	}

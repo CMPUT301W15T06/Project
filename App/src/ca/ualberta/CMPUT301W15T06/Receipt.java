@@ -44,7 +44,7 @@ public class Receipt extends AppModel {
 //	/**
 //	 * This method will set a photo for <code>Receipt</code>.
 //	 */
-	public void setPhotoStr(String photo) throws StatusException{
+	public void setPhotoStr(String photo) throws StatusException, NetWorkException{
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
 		}

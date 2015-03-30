@@ -68,12 +68,13 @@ public class ClaimantEditClaimController {
 	 * @param begin  a String variable
 	 * @throws StatusException
 	 * @throws WrongEndDateException 
+	 * @throws NetWorkException 
 	 * @see java.text.DateFormat
 	 * @see java.text.ParseException
 	 * @see java.text.SimpleDateFormat
 	 * @see java.util.Date
 	 */
-	public void editEnd(String end) throws StatusException, WrongEndDateException {
+	public void editEnd(String end) throws StatusException, WrongEndDateException, NetWorkException {
 		
 		
 		Date endDate = null;
@@ -90,7 +91,7 @@ public class ClaimantEditClaimController {
 		
 	}
 
-	public void editBegin(String begin) throws StatusException, WrongEndDateException {
+	public void editBegin(String begin) throws StatusException, WrongEndDateException, NetWorkException {
 		// TODO Auto-generated method stub
 		Date beginDate = null;
 		try {

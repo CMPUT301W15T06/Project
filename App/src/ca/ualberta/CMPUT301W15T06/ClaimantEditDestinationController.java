@@ -9,7 +9,7 @@ public class ClaimantEditDestinationController {
 		dest=currentDestination;
 	}
 
-	public void editDestination(String name,String reason) throws StatusException{
+	public void editDestination(String name,String reason) throws StatusException, NetWorkException{
 		dest.setName(name);
 		dest.setReason(reason);
 	}

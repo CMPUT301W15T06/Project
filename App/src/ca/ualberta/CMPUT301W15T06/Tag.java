@@ -18,7 +18,7 @@ public class Tag extends AppModel{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) throws NetWorkException {
 		this.name = name;
 		notifyListeners();
 	}

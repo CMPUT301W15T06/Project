@@ -66,8 +66,9 @@ public class Destination extends AppModel{
 	 * 
 	 * @param name  a String variable
 	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setName(String name) throws StatusException{
+	public void setName(String name) throws StatusException, NetWorkException{
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
 		}
@@ -93,8 +94,9 @@ public class Destination extends AppModel{
 	 * 
 	 * @param reason  a String variable
 	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setReason(String reason) throws StatusException{
+	public void setReason(String reason) throws StatusException, NetWorkException{
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
 		}

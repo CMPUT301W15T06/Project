@@ -119,7 +119,10 @@ public class ClaimantReceiptActivity extends Activity {
 			imageView.setImageBitmap(null);
 		} catch (StatusException e) {
 			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-		}
+		}catch (NetWorkException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}	
 		
 	}
 	
@@ -138,7 +141,10 @@ public class ClaimantReceiptActivity extends Activity {
 					throw new RuntimeException(e);
 				} catch (IOException e) {
 					throw new RuntimeException(e);
-				}
+				}catch (NetWorkException e) {
+					// TODO: handle exception
+					throw new RuntimeException(e);
+				}	
             } else if (resultCode == RESULT_CANCELED) {
             	Toast.makeText(getApplicationContext(), "Take photo canceled!", Toast.LENGTH_LONG).show();
             } 

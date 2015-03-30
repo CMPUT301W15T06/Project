@@ -51,8 +51,9 @@ public class ClaimantItemListController {
 	 * <code>AppSinleton</code> class to use shared data.
 	 * 
 	 * @throws StatusException
+	 * @throws NetWorkException 
 	 */
-	public void changeFlag() throws StatusException{
+	public void changeFlag() throws StatusException, NetWorkException{
 		Item item=AppSingleton.getInstance().getCurrentItem();
 		if (item.getFlag()){
 			item.setFlag(false);
@@ -61,7 +62,7 @@ public class ClaimantItemListController {
 		}
 	}
 
-	public void sumbmit() throws StatusException {
+	public void sumbmit() throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
 			throw new StatusException();					
@@ -69,7 +70,7 @@ public class ClaimantItemListController {
 		claim.setStatus("Submitted");	
 	}
 
-	public void delete() throws StatusException {
+	public void delete() throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
 			throw new StatusException();					
@@ -79,7 +80,7 @@ public class ClaimantItemListController {
 		user.notifyListeners();
 	}
 
-	public void addItem() throws StatusException {
+	public void addItem() throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
 			throw new StatusException();					
@@ -89,7 +90,7 @@ public class ClaimantItemListController {
 		item.addModelListener(new Listener() {
 			
 			@Override
-			public void update() {
+			public void update() throws NetWorkException {
 				// TODO Auto-generated method stub
 				claim.notifyListeners();
 			}
@@ -100,13 +101,13 @@ public class ClaimantItemListController {
 		AppSingleton.getInstance().setCurrentItem(item);
 	}
 
-	public void addTag(long id) {
+	public void addTag(long id) throws NetWorkException {
 		// TODO Auto-generated method stub
 		claim.getTagIDList().add(id);
 		claim.notifyListeners();
 	}
 
-	public void removeTag(long id) {
+	public void removeTag(long id) throws NetWorkException {
 		// TODO Auto-generated method stub
 		claim.getTagIDList().remove(id);
 		claim.notifyListeners();

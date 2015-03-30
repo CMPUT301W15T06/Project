@@ -69,9 +69,9 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class ClaimantItemListActivity extends Activity {
 
-private static final int PHOTO_RECEIPT = 1;
-private static final int ITEM_DETAIL = 2;
-private static final int CHANGE_FLAG = 0;
+	private static final int PHOTO_RECEIPT = 1;
+	private static final int ITEM_DETAIL = 2;
+	private static final int CHANGE_FLAG = 0;
 //	/**
 //	 * Set a FlagController object 
 //	 * default value of null.
@@ -152,8 +152,11 @@ private static final int CHANGE_FLAG = 0;
 		try {
 			cilc.changeFlag();
 		} catch (StatusException e) {
-			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-		}
+			Toast.makeText(ClaimantItemListActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}catch (NetWorkException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}	
 	}
 
 	@Override
@@ -177,7 +180,10 @@ private static final int CHANGE_FLAG = 0;
 			startActivity(intent);	
 		} catch (StatusException e) {
 			// TODO Auto-generated catch block
-			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+			Toast.makeText(ClaimantItemListActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}	catch (NetWorkException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
 		}	
 	}
 	
@@ -217,14 +223,21 @@ private static final int CHANGE_FLAG = 0;
 			cilc.sumbmit();
 		} catch (StatusException e) {
 			// TODO Auto-generated catch block
-			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-		}
+			Toast.makeText(ClaimantItemListActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}catch (NetWorkException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}	
 	
 	}
 		
 	public void editClaim(MenuItem m){
-		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantEditClaimActivity.class);
-		startActivity(intent);
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			Toast.makeText(ClaimantItemListActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();			
+		}else{
+			Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantEditClaimActivity.class);
+			startActivity(intent);
+		}
 		
 	}
 	public void deleteClaim(MenuItem m){
@@ -233,8 +246,11 @@ private static final int CHANGE_FLAG = 0;
 			finish();
 		} catch (StatusException e) {
 			// TODO Auto-generated catch block
-			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-		}
+			Toast.makeText(ClaimantItemListActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}catch (NetWorkException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}	
 	
 	}
 	public void changeTag(MenuItem m){
@@ -246,11 +262,16 @@ private static final int CHANGE_FLAG = 0;
 			@Override
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 				// TODO Auto-generated method stub
-				if (isChecked){
-					cilc.addTag(user.getTagList().get(which).getID());
-				}else if(claim.getTagIDList().contains(user.getTagList().get(which).getID())){
-					cilc.removeTag(user.getTagList().get(which).getID());
-				}
+				try{
+					if (isChecked){
+						cilc.addTag(user.getTagList().get(which).getID());
+					}else if(claim.getTagIDList().contains(user.getTagList().get(which).getID())){
+						cilc.removeTag(user.getTagList().get(which).getID());
+					}
+				}catch (NetWorkException e) {
+					// TODO: handle exception
+					throw new RuntimeException(e);
+				}	
 			}
 		});
 		

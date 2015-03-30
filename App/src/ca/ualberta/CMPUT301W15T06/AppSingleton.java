@@ -88,10 +88,9 @@ public class AppSingleton {
 	 * @see java.util.Date
 	 */
 	private Date editDate;
-	/**
-	 * Set a String object status to record the status of <code>Claim</code>.
-	 */
-	private String status;
+	private User tempUser;
+
+	
 	/**
 	 * Set a static final DateFormat object format with Date and Locale to record
 	 * the date and locale of the <code>Claim</code>.
@@ -104,6 +103,13 @@ public class AppSingleton {
 	private Context testContext;
 	
 	private UserList userList;
+	
+	
+	private ArrayList<Claim> needApproveList;
+	
+	private ArrayList<User> approverUserList;
+	
+	private boolean cMod;
 	
 	private boolean suc;
 	private Object pg;
@@ -180,7 +186,7 @@ public class AppSingleton {
   	 */
 	public void setCurrentClaim(Claim claim) {
 		currentClaim=claim;
-		status=claim.getStatus();
+
 	}
 
 	/**
@@ -266,7 +272,7 @@ public class AppSingleton {
 	 * @return status  a String variable
 	 */
 	public String getStatus() {
-		return status;
+		return currentClaim.getStatus();
 
 	}
 	
@@ -391,6 +397,59 @@ public class AppSingleton {
 	public void setUserList(UserList userList) {
 		this.userList = userList;
 	}
+
+	public void setUpApprover() {
+		// TODO Auto-generated method stub
+		needApproveList=new ArrayList<Claim>();
+		approverUserList=new ArrayList<User>();
+		for(String name:userList.getUserList()){
+			User user=ClaimListManager.getInstance().load(name);
+			approverUserList.add(user);
+			for(Claim claim:user.getClaimList()){
+				if (claim.getStatus().equals("Submitted")){
+					needApproveList.add(claim);
+				}
+			}
+
+		}
+	}
+
+	public ArrayList<Claim> getNeedApproveList() {
+		return needApproveList;
+	}
+
+	public boolean iscMod() {
+		return cMod;
+	}
+
+	public void setcMod(boolean cMod) {
+		this.cMod = cMod;
+	}
+
+
+	public User getTempUser() {
+		for (User user:approverUserList){
+			if(user.getUserName().equals(currentClaim.getName())){
+				return user;
+			}
+		}
+		return null;
+	}
+
+	public void setTempUser(String string) {
+		for (User user:approverUserList){
+			if(user.getUserName().equals(string)){
+				tempUser=user;
+			}
+		}
+	}
+
+	public ArrayList<User> getApproverUserList() {
+		return approverUserList;
+	}
+
+	
+	
 	
 //	public static int getYear(String date){
 //		return Integer.valueOf(date.split("-")[0]);

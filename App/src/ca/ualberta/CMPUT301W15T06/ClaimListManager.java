@@ -29,6 +29,7 @@ import java.util.Date;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -337,6 +338,35 @@ public class ClaimListManager {
 			throw new RuntimeException("JsonIOException when save");
 		}catch (IOException e) {
 			throw new RuntimeException();
+		}
+	}
+
+	public void approverSave() {
+		// TODO Auto-generated method stub
+		Thread thread = new Thread(new Runnable(){
+		    @Override
+		    public void run() {
+		    	Log.i("name",AppSingleton.getInstance().getTempUser().getUserName());
+		        try {
+		   
+		        	new ESClient().pushUser(AppSingleton.getInstance().getTempUser());
+		        	AppSingleton.getInstance().setSuc(true);
+		        	
+		        } catch (Exception e) {
+		        	AppSingleton.getInstance().setSuc(false);
+		        }
+		        
+		    }
+
+		});
+		
+		thread.start();
+		
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Can't join!");
 		}
 	}
 }
