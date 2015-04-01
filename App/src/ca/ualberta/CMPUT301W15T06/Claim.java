@@ -90,16 +90,6 @@ public class Claim extends AppModel{
 	private ArrayList<Long> tagIDList;
 	
 
-<<<<<<< HEAD
-	/**
-	 * General construction. This public method sets up a Claim object with
-	 * itemList, destinationList and tagList and name.
-	 * 
-	 * @param claimName  the name of the claim(like "Claim1")
-	 * @see java.util.ArrayList
-	 */
-	public Claim(String claimName) {
-=======
 //	/**
 //	 * General construction. This public method sets up a Claim object with
 //	 * itemList, destinationList and tagList and name.
@@ -108,47 +98,19 @@ public class Claim extends AppModel{
 //	 * @see java.util.ArrayList
 //	 */
 	public Claim(String name) {
->>>>>>> e2cb2f6020ebcdead6487c917139e2c4dfed24f4
 		super();
 		itemList=new ArrayList<Item>();
 		destinationList=new ArrayList<Destination>();
 		tagIDList=new ArrayList<Long>();
-<<<<<<< HEAD
-		name=claimName;
-	}
-	
-	/**
-	 * Set up the name and use <code>notifyListeners()</code> in <code>AppModel</code> 
-	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
-	 * This public method will be used when the claimant entering a name to a new 
-	 * claim or editing a current claim.
-	 * 
-	 * @param name  the full name of the claimant (like "Tom Smith")
-	 */
-	public void setName(String name){
-=======
 		commentList=new ArrayList<Comment>();
 		
->>>>>>> e2cb2f6020ebcdead6487c917139e2c4dfed24f4
 		this.name=name;
 		
 		beginDate=AppSingleton.removeTime(new Date());
 		endDate=AppSingleton.removeTime(new Date());
 	}
 	
-<<<<<<< HEAD
-	/**
-	 * Return the string variable name. This method will be used when 
-	 * other class need to use or display the name. 
-	 * 
-	 * @return the full name of the claimant (like "Tom Smith")
-	 */
-	public String getName() {
-		return name;
-	}
-=======
 
->>>>>>> e2cb2f6020ebcdead6487c917139e2c4dfed24f4
 	
 	/**
 	 * Set up the beginDate and use <code>notifyListeners()</code> in <code>AppModel</code> 
@@ -156,7 +118,7 @@ public class Claim extends AppModel{
 	 * This public method will be used when the claimant entering a travel beginning 
 	 * date to a new claim or editing a current claim.
 	 * 
-	 * @param the date of when the travel started (like "15-Mar-2015")
+	 * @param beginDate  a Date object
 	 * @throws StatusException 
 	 * @throws WrongEndDateException 
 	 * @throws NetWorkException 
@@ -177,7 +139,7 @@ public class Claim extends AppModel{
 	 * Return the Date variable beginDate. This method will be used when 
 	 * other class need to use or display the beginDate. 
 	 * 
-	 * @return the date of when the travel started (like "15-Mar-2015")
+	 * @return beginDate  a Date object
 	 * @see java.util.Date
 	 */
 	public Date getBeginDate() {
@@ -190,7 +152,7 @@ public class Claim extends AppModel{
 	 * This public method will be used when the claimant entering a travel ending 
 	 * date to a new claim or editing a current claim.
 	 * 
-	 * @param endDate  date of when the travel ended (like "31-Mar-2015")
+	 * @param endDate  a Date object
 	 * @throws StatusException 
 	 * @throws WrongEndDateException 
 	 * @throws NetWorkException 
@@ -213,7 +175,7 @@ public class Claim extends AppModel{
 	 * Return the Date variable endDate. This method will be used when 
 	 * other class need to use or display the endDate. 
 	 * 
-	 * @return the date of when the travel ended (like "31-Mar-2015")
+	 * @return endDate  a Date object
 	 * @see java.util.Date
 	 */
 	public Date getEndDate() {
@@ -226,8 +188,7 @@ public class Claim extends AppModel{
 	 * claimant added a new claim or edited a current claim. The default 
 	 * value of status is "In progress".
 	 * 
-
-	 * @param status  the submission status of a claim ("In Progress" or "Submitted")
+	 * @param status  a String variable
 	 * @throws NetWorkException 
 	 */
 	public void setStatus(String status) throws NetWorkException{
@@ -239,7 +200,7 @@ public class Claim extends AppModel{
 	 * Return the string variable status. This method will be used when 
 	 * other class need to use or display the status. 
 	 * 
-	 * @return the submission status of a claim ("In Progress" or "Submitted")
+	 * @return status  a String variable
 	 */
 	public String getStatus(){
 		return status;	
@@ -250,7 +211,7 @@ public class Claim extends AppModel{
 	 * other class need to use or display the itemList. 
 	 * 
 	 * @see java.util.ArrayList
-	 * @return an ArrayList contains all <code>Item</code> objects (like "{Item1, Item2, ...}")
+	 * @return itemList  an ArrayList object.
 	 */
 	public ArrayList<Item> getItemList() {
 		return itemList;
@@ -261,7 +222,7 @@ public class Claim extends AppModel{
 	 * other class need to use or display the destinationList. 
 	 * 
 	 * @see java.util.ArrayList
-	 * @return an ArrayList contains all <code>Destination</code> object (like "{Destination1, Destination2, ...}")
+	 * @return destinationList  an ArrayList object.
 	 */
 	public ArrayList<Destination> getDestinationList() {
 		return destinationList;
@@ -273,7 +234,7 @@ public class Claim extends AppModel{
 	 * Use <code>getCM()</code> to display the amount with corresponding currency. It will 
 	 * be operated when the program need the destinationList and tagList to display.
 	 * 
-	 * @return 
+	 * @return ""  a String object combine with many small String variable
 	 */
 	public String toString(){
 		if(AppSingleton.getInstance().iscMod()){
@@ -331,7 +292,7 @@ public class Claim extends AppModel{
 	 * use <code>getCurrency()</code> and <code>getAmount()</code> method 
 	 * to get a total amount of the claim and return it using <code>toString()</code>. 
 	 * 
-	 * @param currency  the currency to the item expense amount (like "CAD", combine with amount "120CAD")
+	 * @param currency  a String variable
 	 * @return total  a Double variable
 	 */
 	public String getCM(String currency){
@@ -608,8 +569,5 @@ public class Claim extends AppModel{
 		// TODO Auto-generated method stub
 		this.status=string;
 	}
-
-
-
 
 }
