@@ -8,34 +8,65 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:id="@+id/roleTextView"
+    <Button
+        android:id="@+id/approverButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:text="You Are"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignLeft="@+id/claimantButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/claimantButton"
+        android:layout_marginBottom="54dp"
+        android:onClick="startApprover"
+        android:text="Approver" />
 
     <Button
         android:id="@+id/claimantButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/approverButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="20dp"
         android:onClick="startClaimant"
         android:text="Claimant" />
 
-    <Button
-        android:id="@+id/approverButton"
+    <TextView
+        android:id="@+id/roleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/claimantButton"
-        android:layout_marginTop="35dp"
-        android:text="Approver" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="You want to use the App as"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/userTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="66dp"
+        android:text="User Name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/hiTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/userTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:text="Hi,"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/userButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:onClick="changeUser"
+        android:text="Change User" />
 
 </RelativeLayout>

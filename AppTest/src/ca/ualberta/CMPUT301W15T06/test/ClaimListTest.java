@@ -27,7 +27,7 @@ package ca.ualberta.CMPUT301W15T06.test;
 
 import junit.framework.TestCase;
 import ca.ualberta.CMPUT301W15T06.Claim;
-import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.User;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 
 public class ClaimListTest extends TestCase {
@@ -35,7 +35,7 @@ public class ClaimListTest extends TestCase {
 	// US02.01.01 test the display of claim list
 	public void testDisplayList()
 	{
-		ClaimList claimList = new ClaimList();
+		User claimList = new User();
 		ClaimantAddClaimController cacc = new ClaimantAddClaimController(claimList);
 		cacc.addClaim("test", "2014-12-11", "2015-01-05");
 		assertTrue("correctly dispalyed?", claimList.getClaimList()!=null);
@@ -44,7 +44,7 @@ public class ClaimListTest extends TestCase {
 	// US02.02.01 test if the list is ordered
 	public void testOrderedList()
 	{
-		ClaimList claimlist =new ClaimList();
+		User claimlist =new User();
 		Claim c1=new Claim("1");
 		//c1.setBeginDate("20141005");
 		Claim c2=new Claim("2");

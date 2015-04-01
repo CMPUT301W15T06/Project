@@ -30,7 +30,7 @@
 //
 //import junit.framework.TestCase;
 //import ca.ualberta.CMPUT301W15T06.Claim;
-//import ca.ualberta.CMPUT301W15T06.ClaimList;
+//import ca.ualberta.CMPUT301W15T06.User;
 //import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 //import ca.ualberta.CMPUT301W15T06.String;
 //import ca.ualberta.CMPUT301W15T06.TagList;
@@ -65,7 +65,7 @@
 //		String cname = "Travel";
 //		Claim claim = new Claim(cname);
 //		claim.addTag(name);
-//		ClaimList claimList = new ClaimList();
+//		User claimList = new User();
 //		Claim searchResult = claimList.searchByTag(name);
 //		assertTrue("Search by tags does not work", cname.equals(searchResult));		
 //	}
@@ -74,8 +74,8 @@
 //	public void testPushOnline(){
 //		String name = "Travel";
 //		Claim claim = new Claim(name);
-//		ClaimList claimList = new ClaimList();
-//		ClaimantAddClaimController ClaimList = new ClaimantAddClaimController(claimList);
+//		User claimList = new User();
+//		ClaimantAddClaimController User = new ClaimantAddClaimController(claimList);
 //		/*Manager initial*/
 //		/*laimList.addClaim(name,null,null);*/
 //		claimList.pushOnline();

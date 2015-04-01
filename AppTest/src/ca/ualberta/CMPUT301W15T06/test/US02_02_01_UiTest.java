@@ -13,7 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.User;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
@@ -109,7 +109,7 @@ public class US02_02_01_UiTest extends ActivityInstrumentationTestCase2<MainActi
 		String d4 = "2013-12-01";
 		
 		// build new claim list
-		ClaimList cList = new ClaimList();
+		User cList = new User();
 		
 		// get controller
 		ClaimantAddClaimController cacc = new ClaimantAddClaimController(cList);

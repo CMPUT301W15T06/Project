@@ -47,30 +47,11 @@
         android:ems="10"
         android:inputType="number|numberDecimal" />
 
-    <Button
-        android:id="@+id/finishEditItemButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:onClick="finishEdit"
-        android:text="Edit this Item" />
-
-    <Spinner
-        android:id="@+id/editCurrencySpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/finishEditItemButton"
-        android:layout_alignLeft="@+id/editItemCurrencyTextView"
-        android:layout_alignRight="@+id/editItemAmountEditText" />
-
     <TextView
         android:id="@+id/editItemCurrencyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/editCurrencySpinner"
-        android:layout_alignLeft="@+id/finishEditItemButton"
         android:text="Unit of Currency"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -109,5 +90,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/editItemDescriptionTextView"
         android:layout_alignLeft="@+id/editItemDescriptionTextView" />
+
+    <Spinner
+        android:id="@+id/editCurrencySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editItemCurrencyTextView"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="42dp" />
 
 </RelativeLayout>

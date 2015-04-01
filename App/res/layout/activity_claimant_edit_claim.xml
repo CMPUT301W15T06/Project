@@ -5,17 +5,6 @@
     tools:context=".AddClaimAcitivity"
     tools:ignore="HardcodedText,TextFields" >
 
-    <Button
-        android:id="@+id/editClaimFinishButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="48dp"
-        android:onClick="finishEdit"
-        android:text="Finish" />
-
     <TextView
         android:id="@+id/editClaimEndingDateTextView"
         android:layout_width="wrap_content"
@@ -54,35 +43,15 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/editClaimNameEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/editClaimStartingDateTextView"
-        android:layout_alignLeft="@+id/editClaimStartingDateTextView"
-        android:layout_marginBottom="22dp"
-        android:ems="10" />
-
-    <EditText
         android:id="@+id/editClaimEndDateEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editClaimFinishButton"
         android:layout_alignLeft="@+id/editClaimEndingDateTextView"
-        android:layout_marginBottom="32dp"
-        android:digits=""
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="160dp"
         android:ems="10"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:onClick="showDatePickerDialogEnd" />
-
-    <TextView
-        android:id="@+id/editClaimNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/editClaimNameEditText"
-        android:layout_alignLeft="@+id/editClaimNameEditText"
-        android:layout_marginBottom="21dp"
-        android:text="Name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

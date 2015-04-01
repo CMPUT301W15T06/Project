@@ -108,7 +108,7 @@ public class ClaimantClaimListActivityUITest extends
 	 * Test for US04.05.01 Basic Flow 5
 	 */
 	
-	//US01.02.01 & US01.03.01 test ClaimList(ListView) ContextMenu
+	//US01.02.01 & US01.03.01 test User(ListView) ContextMenu
 	public void testContextMenu(){
 		activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView).performLongClick();
 		

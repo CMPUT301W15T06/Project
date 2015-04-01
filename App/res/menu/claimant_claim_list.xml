@@ -12,9 +12,9 @@
         android:onClick="addClaim">
     </item>
     <item 
-        android:id="@+id/push_online"
-        android:title="@string/push_online" 
-        android:onClick="pushOnline">
+        android:id="@+id/filter"
+        android:title="Filter by Tags" 
+        android:onClick="filter">
     </item>
     
     <item 

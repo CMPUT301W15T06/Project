@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import android.util.Log;
+
 /**
  * The <code>AppModel</code> class can create an ArrayList named
  * listeners, which contains Listener subject. This class can
@@ -42,7 +44,7 @@ import java.util.Set;
  * @see java.util.HashSet
  * @see java.util.Set
  */
-public class AppModel{
+public abstract class AppModel{
 	
 	/**
 	 * Set two private ArrayList variable named listeners
@@ -52,11 +54,7 @@ public class AppModel{
 	 */
 	private transient ArrayList<Listener> listeners;
 	private transient ArrayList<Listener> modelListeners;
-	/**
-	 * Set a boolean variable missValue to justify the 
-	 * <code>AppModel</code>
-	 */
-	private boolean missValue;
+
 	
 	
 	/**
@@ -110,15 +108,27 @@ public class AppModel{
 	 * in listeners ArrayList and modelListeners ArrayList 
 	 * if there's any update, and the ClaimListManager 
 	 * will save the change 
+	 * @throws NetWorkException 
 	 */
-	public void notifyListeners() {
+	public void notifyListeners() throws NetWorkException {
 		for (Listener  listener : getListeners()) {
 			listener.update();
 		}
 		for (Listener  listener : getModelListeners()) {
 			listener.update();
 		}
-		ClaimListManager.getInstance().save();
+		if(AppSingleton.getInstance().iscMod()){
+			ClaimListManager.getInstance().save(AppSingleton.getInstance().getUserName());
+		}else{
+			ClaimListManager.getInstance().approverSave();
+			Log.i("----","suc");
+			if(!AppSingleton.getInstance().isSuc()){
+				throw new NetWorkException();
+			}else{
+				ClaimListManager.getInstance().saveLocal(AppSingleton.getInstance().getTempUser());
+				Log.i("save","suc");
+			}
+		}
 	}
 
 	/**
@@ -157,17 +167,6 @@ public class AppModel{
 		return modelListeners;
 	}
 	
-	/**
-	 * Set missValue to b, and notify all Listener in
-	 * listeners ArrayList and modelListeners ArrayList 
-	 * about this update.
-	 *  
-	 * @param b  a boolean type b
-	 */
-	public void setMissValue(boolean b) {
-		missValue=b;
-		notifyListeners();
-	}
 
 	/**
 	 * return the missValue. This method will be used
@@ -176,7 +175,5 @@ public class AppModel{
 	 * 
 	 * @return missValue  a boolean type
 	 */
-	public boolean getMissValue() {
-		return missValue;
-	}
+	public abstract boolean getMissValue();
 }

@@ -1,9 +1,9 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
 
-import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.User;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
-import ca.ualberta.CMPUT301W15T06.ClaimantAddDestinationActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantEditDestinationActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
@@ -133,7 +133,7 @@ ActivityInstrumentationTestCase2<MainActivity> {
 		/*
 		 * Test for US01.02.01 Basic Flow 5
 		 */	
-		//test ClaimList(ListView) ContextMenu	
+		//test User(ListView) ContextMenu	
 		final Context contextMenu = (Context) nextActivity.getBaseContext();
 		assertTrue(contextMenu != null);
 
@@ -155,7 +155,7 @@ ActivityInstrumentationTestCase2<MainActivity> {
 			@Override
 			public void run() {
 				// build controller
-				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new ClaimList());
+				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new User());
 				// get ClaimantClaimListActivity
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(),null, false);
 				final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
@@ -220,7 +220,7 @@ ActivityInstrumentationTestCase2<MainActivity> {
 				});
 
 				// next activity is opened and captured.
-				ClaimantAddDestinationActivity nextActivity2 = (ClaimantAddDestinationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor1, 1000);
+				ClaimantEditDestinationActivity nextActivity2 = (ClaimantEditDestinationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor1, 1000);
 
 				assertNotNull(nextActivity2);
 

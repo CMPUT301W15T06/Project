@@ -16,7 +16,7 @@ public class ClaimantReceiptController {
 		receipt=r;
 	}
 	
-	public void addPhoto(Bitmap bm) throws StatusException{
+	public void addPhoto(Bitmap bm) throws StatusException, NetWorkException{
 
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					
@@ -38,7 +38,7 @@ public class ClaimantReceiptController {
 		
 	}
 
-	public void deletePhoto() throws StatusException {
+	public void deletePhoto() throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
 			throw new StatusException();					

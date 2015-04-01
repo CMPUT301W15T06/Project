@@ -26,17 +26,31 @@ governing permissions and limitations under the License.
 
 package ca.ualberta.CMPUT301W15T06;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.text.method.DigitsKeyListener;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 /**
 * This <code>ApproverClaimListActivity</code> class is an extended class
 * of <code>Activity</code> class. This class controls the User Interface of 
-* <code>ClaimList</code> for approver. This view displays a list of
+* <code>User</code> for approver. This view displays a list of
 * <code>Claim</code> and creates an option menu and return true as 
 * the boolean value. It will be used when the approver asks to access to 
-* the <code>ClaimList</code> .
+* the <code>User</code> .
 * 
 * @author CMPUT301W15T06
 * @version 03/16/2015
@@ -46,10 +60,181 @@ import android.view.Menu;
 */
 public class ApproverClaimListActivity extends Activity {
 
+	private static final int APPROVE = 4;
+	private static final int RETURN = 3;
+	private static final int COMMENT = 2;
+	private static final int ITEM_LIST = 1;
+	private static final int DETAIL_DESTINATION = 0;
+
+	private ApproverClaimListController aclc=null;
+	private User user=null;
+	private Claim claim=null;
+	private ArrayList<Claim> list;
+	private ArrayAdapter<Claim> adapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_approver_claim_list);
+		setContentView(R.layout.activity_claimant_claim_list);
+		
+		AppSingleton.getInstance().setUpApprover();
+		user=AppSingleton.getInstance().getCurrentUser();
+		
+		//set list view of claimlist
+		ListView listView = (ListView) findViewById(R.id.claimListView);
+		list=AppSingleton.getInstance().getNeedApproveList();
+		setList();
+		adapter=new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1,list);
+		adapter.sort(sortClaim());
+		listView.setAdapter(adapter);
+		
+		for(Claim claim:list){
+			claim.addListener(new Listener() {
+				
+				@Override
+				public void update() {
+					// TODO Auto-generated method stub
+					setList();
+					adapter.clear();
+					adapter.addAll(list);
+					adapter.sort(sortClaim());
+					adapter.notifyDataSetChanged();
+				}
+
+			});
+		}
+		listView.setOnItemClickListener(new OnItemClickListener(){
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+		
+				claim=adapter.getItem(position);				
+				aclc=new ApproverClaimListController(claim);
+				AppSingleton.getInstance().setCurrentClaim(claim);
+				
+				AlertDialog.Builder builder = new AlertDialog.Builder(ApproverClaimListActivity.this);
+				builder.setTitle(R.string.title_claim_dialog);
+				builder.setItems(R.array.claim_dialog_array, new DialogInterface.OnClickListener() {
+					
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						if (which ==DETAIL_DESTINATION){
+							Intent intent =new Intent(ApproverClaimListActivity.this,ApproverClaimDetailListActivity.class);
+							startActivity(intent);		
+							
+						}else if (which==ITEM_LIST){
+							Intent intent =new Intent(ApproverClaimListActivity.this,ApproverItemListActivity.class);
+							startActivity(intent);
+						}else if (which==COMMENT){
+							if(user.getUserName().equals(claim.getName())){
+								Toast.makeText(ApproverClaimListActivity.this, "Cant't added comment to your own claim!", Toast.LENGTH_LONG).show();
+
+							}else{
+								if(claim.getCommentList().size()==0||claim.getCommentList().get(claim.getCommentList().size()-1).isFinish()){
+									AlertDialog.Builder builder = new AlertDialog.Builder(ApproverClaimListActivity.this);
+									builder.setTitle("Enter the Comment");
+									final EditText input=new EditText(ApproverClaimListActivity.this);							
+									builder.setView(input);
+									builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+										
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											// TODO Auto-generated method stub
+											try {
+												aclc.addComment(input.getText().toString());
+											} catch (NetWorkException e) {
+												// TODO Auto-generated catch block
+												Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
+	
+											}
+										}
+									});
+									builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+										
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											// TODO Auto-generated method stub
+											
+										}
+									});
+									builder.create();  
+									builder.show();
+								}else{
+									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
+											+" has commited this claim, need him to return or approve this claim!", Toast.LENGTH_LONG).show();
+	
+								}
+							}
+						}else if (which ==RETURN){
+							if(user.getUserName().equals(claim.getName())){
+								Toast.makeText(ApproverClaimListActivity.this, "Cant't return your own claim!", Toast.LENGTH_LONG).show();
+							}else{
+								try {
+									aclc.returnClaim();
+								} catch (NetWorkException e) {
+									// TODO Auto-generated catch block
+									Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
+								}catch (WrongApproverException e) {
+									// TODO Auto-generated catch block
+									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
+											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
+
+								}
+							}
+							
+						}else if (which==APPROVE){
+							if(user.getUserName().equals(claim.getName())){
+								Toast.makeText(ApproverClaimListActivity.this, "Cant't approve your own claim!", Toast.LENGTH_LONG).show();
+							}else{
+								try {
+									aclc.approveClaim();
+								} catch (NetWorkException e) {
+									// TODO Auto-generated catch block
+									Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
+								}catch (WrongApproverException e) {
+									// TODO Auto-generated catch block
+									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
+											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
+
+								}
+							}
+						}
+						
+					}
+				});
+				builder.create();  
+				builder.show();
+			}
+			
+		});
+	}
+
+	private Comparator<? super Claim> sortClaim() {
+		// TODO Auto-generated method stub
+		return new Comparator<Claim>() {
+			
+			@Override
+			public int compare(Claim lhs, Claim rhs) {
+				// TODO Auto-generated method stub
+				return lhs.getBeginDate().compareTo(rhs.getBeginDate());			
+				
+			}
+		};
+	}
+
+	private void setList() {
+		// TODO Auto-generated method stub
+		ArrayList<Claim> cl = new ArrayList<Claim>();
+		for(Claim claim:list){
+			if(claim.getStatus().equals("Submitted")){
+				cl.add(claim);
+			}
+		}
+		list=cl;
 	}
 
 	@Override

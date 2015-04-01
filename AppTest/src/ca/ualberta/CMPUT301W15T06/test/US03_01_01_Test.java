@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
 import ca.ualberta.CMPUT301W15T06.Claim;
-import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.User;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
@@ -84,7 +84,7 @@ public class US03_01_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 			@Override
 			public void run() {
 				// build controller
-				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new ClaimList());
+				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new User());
 				
 				// add new claim, position: index 0
 				cacc.addClaim("test", "2014-12-11", "2015-01-05");

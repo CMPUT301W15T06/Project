@@ -26,9 +26,20 @@ governing permissions and limitations under the License.
 
 package ca.ualberta.CMPUT301W15T06;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
 /**
  * This <code>ApproverItemListActivity</code> class is an extended class
@@ -45,11 +56,68 @@ import android.view.Menu;
  * @see android.view.Menu
  */
 public class ApproverItemListActivity extends Activity {
+	
+	private static final int PHOTO_RECEIPT = 1;
+	private static final int ITEM_DETAIL = 0;
+	private static final int CHANGE_FLAG = 3;
+	private Claim claim;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_approver_item_list);
+		
+		claim=AppSingleton.getInstance().getCurrentClaim();
+		
+		
+		
+		
+		ListView listView = (ListView) findViewById(R.id.approverItemListView);
+		final ArrayList<Item> list =claim.getItemList();
+		final ArrayAdapter<Item> adapter=new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1,list);
+		listView.setAdapter(adapter);
+		
+		
+		
+		
+		
+
+
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+				AppSingleton.getInstance().setCurrentItem(list.get(position));
+				
+				AlertDialog.Builder builder = new AlertDialog.Builder(ApproverItemListActivity.this);
+				builder.setTitle(R.string.title_item_dialog);
+				itemChoice(builder);
+				builder.create();  
+				builder.show();
+				
+			}
+			
+		});
+	}
+	
+	public void itemChoice(Builder builder){
+		builder.setItems(R.array.item_dialog_array, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				if (which==PHOTO_RECEIPT){
+//					Intent intent =new Intent(ApproverItemListActivity.this,ClaimantReceiptActivity.class);
+//					startActivity(intent);					
+				
+				}else if (which==ITEM_DETAIL){
+//					Intent intent =new Intent(ApproverItemListActivity.this,ClaimantItemDetailActivity.class);
+//					startActivity(intent);
+				}
+				
+			}
+		});
 	}
 
 	@Override

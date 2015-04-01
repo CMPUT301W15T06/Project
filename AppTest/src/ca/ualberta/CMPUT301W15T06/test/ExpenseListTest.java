@@ -27,7 +27,7 @@ package ca.ualberta.CMPUT301W15T06.test;
 
 import junit.framework.TestCase;
 import ca.ualberta.CMPUT301W15T06.Claim;
-import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.User;
 import ca.ualberta.CMPUT301W15T06.ClaimantDeleteItemController;
 import ca.ualberta.CMPUT301W15T06.Item;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddItemController;

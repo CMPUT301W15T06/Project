@@ -18,7 +18,7 @@ public class Tag extends AppModel{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name) throws NetWorkException {
 		this.name = name;
 		notifyListeners();
 	}
@@ -30,6 +30,13 @@ public class Tag extends AppModel{
 
 	public long getID() {
 		return ID;
+	}
+
+
+	@Override
+	public boolean getMissValue() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

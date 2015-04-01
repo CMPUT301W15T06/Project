@@ -23,6 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import android.util.Log;
+
 /**
  * This <code>ClaimantEditClaimController</code> is a controller class
  * of <code>Claim</code>. By calling this class, user(claimant) can edit 
@@ -64,42 +66,40 @@ public class ClaimantEditClaimController {
 	 * 
 	 * @param name  a String variable
 	 * @param begin  a String variable
-	 * @param end  a String variable
 	 * @throws StatusException
+	 * @throws WrongEndDateException 
+	 * @throws NetWorkException 
 	 * @see java.text.DateFormat
 	 * @see java.text.ParseException
 	 * @see java.text.SimpleDateFormat
 	 * @see java.util.Date
 	 */
-	public void editClaim(String name, String begin, String end) throws StatusException {
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
+	public void editEnd(String end) throws StatusException, WrongEndDateException, NetWorkException {
 		
 		
-		Date beginDate = null;
 		Date endDate = null;
-		try {
-			beginDate = AppSingleton.getDateFormat().parse(begin);	
-		} catch (ParseException e) {
-			beginDate=null;
-		}
+
 		try {
 			endDate = AppSingleton.getDateFormat().parse(end);
 		} catch (ParseException e) {
 			endDate=null;
 		}
 
-		claim.setName(name);
-		claim.setBeginDate(beginDate);
+		
 		claim.setEndDate(endDate);
+		Log.i("editClaimController","setEnd suc");
 		
-		if (name.equals("")||begin==null||end==null){
-			claim.setMissValue(true);
-		}else{
-			claim.setMissValue(false);
+	}
+
+	public void editBegin(String begin) throws StatusException, WrongEndDateException, NetWorkException {
+		// TODO Auto-generated method stub
+		Date beginDate = null;
+		try {
+			beginDate = AppSingleton.getDateFormat().parse(begin);	
+		} catch (ParseException e) {
+			beginDate=null;
 		}
-		
+		claim.setBeginDate(beginDate);
 	}
 	
 	

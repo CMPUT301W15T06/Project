@@ -24,17 +24,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Date;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * This <code>ClaimListManager</code> class is a management class of <code>ClaimList</code>.
+ * This <code>ClaimListManager</code> class is a management class of <code>User</code>.
  * By calling this class, the claimList can be loaded and saved.
  * 
  * @author CMPUT301W15T06
@@ -61,7 +63,7 @@ public class ClaimListManager {
 	 * Set a static final type String variable FILENAME with initial default
 	 * value of "data".
 	 */
-	private static final String FILENAME="data";
+	private static final String USER_FILE="usr";
 	/**
 	 * Set a Context object context with default value of null.
 	 * 
@@ -121,16 +123,16 @@ public class ClaimListManager {
 	 * @see java.io.IOException
 	 * @see java.io.InputStreamReader
 	 * @see java.io.OutputStreamWriter
-	 * @return cl  a ClaimList object
+	 * @return cl  a User object
 	 */
-	public ClaimList load(){
+	public User load(String name){
 		Gson gson =new Gson();
-		ClaimList cl=null;
+		User user=null;
 		try {
-			FileInputStream fis = context.openFileInput(FILENAME);
-			Type dataType = new TypeToken<ClaimList>(){}.getType();
+			FileInputStream fis = context.openFileInput(USER_FILE+name);
+			Type dataType = new TypeToken<User>(){}.getType();
 			InputStreamReader isr =new InputStreamReader(fis);
-			cl = gson.fromJson(isr, dataType);
+			user = gson.fromJson(isr, dataType);
 			fis.close();
 		} catch (FileNotFoundException e) {
 			
@@ -138,15 +140,25 @@ public class ClaimListManager {
 			throw new RuntimeException("IOException");
 		}
 
-		if (cl==null){
-			cl=new ClaimList();		
+		if (user==null){
+			user=new User(name);	
+			UserList userList = AppSingleton.getInstance().getUserList();
+			if(!userList.getUserList().contains(name)){
+				userList.getUserList().add(name);
+				saveUserList(user);
+			}
+			
+			
 		}
-		return cl;
+		return user;
 		
 	}
 	
+	
+	
+	
 	/**
-	 * This method will save the ClaimList using a <code>OutputStreamWriter</code>.
+	 * This method will save the User using a <code>OutputStreamWriter</code>.
 	 * It also checks exceptions to prevent crush.
 	 * 
 	 * @exception FileNotFoundException
@@ -162,14 +174,162 @@ public class ClaimListManager {
 	 * @see com.google.gson.JsonIOException
 	 * @see com.google.gson.reflect.TypeToken
 	 */
-	public void save(){
+	public void save(String name){
+		
+		Gson gson=new Gson();
+		final User user=AppSingleton.getInstance().getCurrentUser();
+		
+		Thread thread = new Thread(new Runnable(){
+		    @Override
+		    public void run() {
+		  
+		        try {
+		        	new ESClient().pushUser(user);
+		        	user.setNeedSyn(false);
+		        	if(AppSingleton.getInstance().getUserList().isNeedSynList()){
+		        		new ESClient().pushUserList(AppSingleton.getInstance().getUserList());
+		        		AppSingleton.getInstance().getUserList().setNeedSynList(false);
+		        		saveUserListLocal();
+		        	}
+		        	if(AppSingleton.getInstance().getUserList().isNeedSyn()){
+		        		syn();        		
+		        	}
+		        	
+		        } catch (Exception e) {
+		        	user.setNeedSyn(true);
+		        
+		        }
+		        
+		    }
+
+		});
+		
+		thread.start();
+		
+		try {
+			FileOutputStream fos = context.openFileOutput(USER_FILE+name, 0);
+			OutputStreamWriter osw =new OutputStreamWriter(fos);
+			
+//			user.setLastModify(new Date());
+			gson.toJson(user,osw);
+			osw.flush();
+			fos.close();
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException("FileNotFoundException when save");
+		}catch (JsonIOException e) {
+			throw new RuntimeException("JsonIOException when save");
+		}catch (IOException e) {
+			throw new RuntimeException();
+		}
+		
+		
+	}
+
+	public void saveLocal(User user){
 		Gson gson=new Gson();
 		try {
-			FileOutputStream fos = context.openFileOutput(FILENAME, 0);
+			FileOutputStream fos = context.openFileOutput(USER_FILE+user.getUserName(), 0);
+			OutputStreamWriter osw =new OutputStreamWriter(fos);		
+//			user.setLastModify(new Date());
+			gson.toJson(user,osw);
+			osw.flush();
+			fos.close();
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException("FileNotFoundException when save");
+		}catch (JsonIOException e) {
+			throw new RuntimeException("JsonIOException when save");
+		}catch (IOException e) {
+			throw new RuntimeException();
+		}
+	}
+	
+	
+	private void saveUserList(final User user) {
+		Thread thread = new Thread(new Runnable(){
+		    @Override
+		    public void run() {    	
+
+				try {
+					user.setNeedSyn(false);
+					new ESClient().pushUserList(AppSingleton.getInstance().getUserList());
+					new ESClient().pushUser(user);
+					saveUserListLocal();
+					saveLocal(user);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					user.setNeedSyn(true);
+					AppSingleton.getInstance().getUserList().setNeedSynList(true);
+					saveUserListLocal();
+					saveLocal(user);
+				}
+				
+		    }
+		});
+		thread.start();
+		
+	}
+
+	public UserList loadUserList(){
+		Gson gson =new Gson();
+		UserList userList=null;
+		try {
+			FileInputStream fis = context.openFileInput("usrList");
+			Type dataType = new TypeToken<UserList>(){}.getType();
+			InputStreamReader isr =new InputStreamReader(fis);
+			userList = gson.fromJson(isr, dataType);
+			fis.close();
+		} catch (FileNotFoundException e) {
+
+		} catch (IOException e) {
+			throw new RuntimeException("IOException");
+		}
+
+		return userList;
+		
+	}
+	private void syn() {
+		// TODO Auto-generated method stub
+		for (String name:AppSingleton.getInstance().getUserList().getUserList()){
+			final User user=load(name);
+			if(user.isNeedSyn()){
+				Thread thread = new Thread(new Runnable(){
+				    @Override
+				    public void run() {			  
+				        try {
+				        	new ESClient().pushUser(user); 
+				        	user.setNeedSyn(false);
+				        } catch (Exception e) {
+				        	user.setNeedSyn(true);
+				        }
+				        
+				    }
+
+				});
+				
+				thread.start();
+			
+			}
+		}
+	}
+
+	public void saveUsers(ArrayList<User> ul) {
+		// TODO Auto-generated method stub
+		for(User user:ul){
+			user.setNeedSynSimple(false);
+			saveLocal(user);
+		}
+	}
+
+	public void saveUserListLocal() {
+		// TODO Auto-generated method stub
+		Gson gson=new Gson();
+		final UserList userList=AppSingleton.getInstance().getUserList();
+		try {
+			FileOutputStream fos = context.openFileOutput("usrList", 0);
 			OutputStreamWriter osw =new OutputStreamWriter(fos);
-			ClaimList cl=AppSingleton.getInstance().getClaimList();
-			cl.setLastModify(new Date());
-			gson.toJson(cl,osw);
+			
+//			user.setLastModify(new Date());
+			gson.toJson(userList,osw);
 			osw.flush();
 			fos.close();
 		} catch (FileNotFoundException e) {
@@ -181,4 +341,32 @@ public class ClaimListManager {
 		}
 	}
 
+	public void approverSave() {
+		// TODO Auto-generated method stub
+		Thread thread = new Thread(new Runnable(){
+		    @Override
+		    public void run() {
+		    	Log.i("name",AppSingleton.getInstance().getTempUser().getUserName());
+		        try {
+		   
+		        	new ESClient().pushUser(AppSingleton.getInstance().getTempUser());
+		        	AppSingleton.getInstance().setSuc(true);
+		        	
+		        } catch (Exception e) {
+		        	AppSingleton.getInstance().setSuc(false);
+		        }
+		        
+		    }
+
+		});
+		
+		thread.start();
+		
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Can't join!");
+		}
+	}
 }

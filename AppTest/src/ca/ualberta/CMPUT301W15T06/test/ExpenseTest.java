@@ -33,7 +33,7 @@ import android.widget.Spinner;
 import junit.framework.TestCase;
 import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddItemController;
-import ca.ualberta.CMPUT301W15T06.FlagController;
+import ca.ualberta.CMPUT301W15T06.ClaimantItemListController;
 import ca.ualberta.CMPUT301W15T06.Item;
 import ca.ualberta.CMPUT301W15T06.R;
 import ca.ualberta.CMPUT301W15T06.StatusException;
@@ -120,7 +120,7 @@ public class ExpenseTest extends TestCase {
 		claim.addItem("2015-01-05","vehicle rental","travel purpose",3000.00,"CNY");
 
 		assertTrue("no flag",testExpenseFlag.getFlag());		
-		FlagController fc = new FlagController(testExpenseFlag);		
+		ClaimantItemListController fc = new ClaimantItemListController(testExpenseFlag);		
 		fc.changeFlag();
 		assertTrue("has flag", testExpenseFlag.getFlag());		
 	}

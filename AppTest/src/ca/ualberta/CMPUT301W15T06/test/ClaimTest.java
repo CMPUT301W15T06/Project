@@ -28,7 +28,7 @@ package ca.ualberta.CMPUT301W15T06.test;
 
 import junit.framework.TestCase;
 import ca.ualberta.CMPUT301W15T06.Claim;
-import ca.ualberta.CMPUT301W15T06.ClaimList;
+import ca.ualberta.CMPUT301W15T06.User;
 import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
 import ca.ualberta.CMPUT301W15T06.Destination;
 
@@ -82,7 +82,7 @@ public class ClaimTest extends TestCase {
 	// US01.04.01 test if a new claim can be successfully added
 	public void testEditClaim()
 	{
-		ClaimList claimList = new ClaimList();
+		User claimList = new User();
 		ClaimantAddClaimController cacc = new ClaimantAddClaimController(claimList);
 		cacc.addClaim("test", "2014-12-11", "2015-01-05");
 		assertTrue("correctly added?", claimList.getClaimList()!=null);
@@ -91,7 +91,7 @@ public class ClaimTest extends TestCase {
 	// US01.05.01 test if a claim can be successfully removed
 	public void testDeleteClaim()
 	{
-		ClaimList claimList = new ClaimList();
+		User claimList = new User();
 		ClaimantAddClaimController cacc = new ClaimantAddClaimController(claimList);
 		cacc.addClaim("test", "2014-12-11", "2015-01-05");
 		// cacc.removeClaim(0);
@@ -101,7 +101,7 @@ public class ClaimTest extends TestCase {
 	// US01.06.01 test if the claim can be saved and push online
 	public void testSavePushOnline(){
 		String name = "Travel";
-		ClaimList claimList = new ClaimList();
+		User claimList = new User();
 		ClaimantAddClaimController cacc = new ClaimantAddClaimController(claimList);
 		cacc.addClaim("test", "2014-12-11", "2015-01-05");
 		//cacc.pushOnline();

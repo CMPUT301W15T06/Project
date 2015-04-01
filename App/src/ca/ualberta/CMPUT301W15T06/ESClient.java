@@ -43,11 +43,11 @@ public class ESClient {
 	 * @throws IOException 
 	 * @throws IllegalStateException 
 	 */
-	public void insertClaimList(ClaimList claimList) throws IllegalStateException, IOException{
-		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301w15t06/app/4");
+	public void pushUser(User user) throws IllegalStateException, IOException {
+		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/usr/"+user.getUserName());
 		StringEntity stringentity = null;
 		try {
-			stringentity = new StringEntity(gson.toJson(claimList));
+			stringentity = new StringEntity(gson.toJson(user));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e.getMessage());
@@ -61,9 +61,6 @@ public class ESClient {
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e.getMessage());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e.getMessage());
 		}
 
 		String status = response.getStatusLine().toString();
@@ -74,22 +71,24 @@ public class ESClient {
 	 * Consumes the Get operation of the service
 	 * @return sr.getSource
 	 */
-	public ClaimList getClaimList(){
-		Hit<ClaimList> sr = null;
+	public User getUser(String string){
+		Hit<User> sr = null;
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet("http://cmput301.softwareprocess.es:8080/cmput301w15t06/app/4");
+		HttpGet httpGet = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/usr/"+string);
 
 		HttpResponse response = null;
 
 		try {
 			response = httpClient.execute(httpGet);
 		} catch (ClientProtocolException e) {
-			throw new RuntimeException(e.getMessage());
+			throw new RuntimeException(e);
+			
 		} catch (IOException e) {
+//			throw new RuntimeException("can't find2");
 			return null;
 		}
 		
-		Type HitType = new TypeToken<Hit<ClaimList>>() {}.getType();
+		Type HitType = new TypeToken<Hit<User>>() {}.getType();
 
 		try {
 			sr = gson.fromJson(
@@ -107,6 +106,86 @@ public class ESClient {
 
 		return sr.getSource();
 	}
+
+	public UserList getUserList() {
+		// TODO Auto-generated method stub
+		Hit<UserList> sr = null;
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/usrlist/usrlist");
+
+		HttpResponse response = null;
+		try {
+			response = httpClient.execute(httpGet);
+		} catch (ClientProtocolException e) {
+			throw new RuntimeException(e.getMessage());
+		} catch (IOException e) {
+			return null;
+		}
+		
+		Type HitType = new TypeToken<Hit<UserList>>() {}.getType();
+
+		try {
+			sr = gson.fromJson(
+					new InputStreamReader(response.getEntity().getContent()),
+					HitType);
+		} catch (JsonIOException e) {
+			throw new RuntimeException(e);
+		} catch (JsonSyntaxException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalStateException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		return sr.getSource();
+	}
+
+	public void synByUserList(UserList userList) throws IllegalStateException, IOException {
+		// TODO Auto-generated method stub
+		for (String name:userList.getUserList()){
+			User user=ClaimListManager.getInstance().load(name);
+			if(user.isNeedSyn()){
+				pushUser(user);
+				user.setNeedSyn(false);
+			}
+		}	
+	}
+
+	public void downloadUsers(UserList userList) {
+		// TODO Auto-generated method stub
+		ArrayList<User> ul=new ArrayList<User>();
+		for (String name:userList.getUserList()){
+			ul.add(getUser(name));
+		}
+		ClaimListManager.getInstance().saveUsers(ul);
+	}
+
+	public void pushUserList(UserList userList) throws IllegalStateException, IOException {
+		// TODO Auto-generated method stub
+		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/usrlist/usrlist");
+		StringEntity stringentity = null;
+		try {
+			stringentity = new StringEntity(gson.toJson(userList));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		}
+		httpPost.setHeader("Accept","application/json");
+
+		httpPost.setEntity(stringentity);
+		HttpResponse response = null;
+		try {
+			response = httpclient.execute(httpPost);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e.getMessage());
+		} 
+
+		String status = response.getStatusLine().toString();
+		Log.i("insert", status);
+	}
+
 
 //	
 //

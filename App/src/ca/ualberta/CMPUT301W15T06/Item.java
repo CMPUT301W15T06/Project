@@ -80,6 +80,13 @@ public class Item extends AppModel{
 
 	public Item() {	
 		receipt=new Receipt();
+		
+		date=AppSingleton.removeTime(new Date());
+		
+		category="air fare";
+		currency="CAD";
+		
+		description="";
 	}
 	
 	/**
@@ -87,9 +94,14 @@ public class Item extends AppModel{
 	 * notify Listener in listeners about this update.
 	 * 
 	 * @param itemDate  a Date object
+	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 * @see java.util.Date
 	 */
-	public void setDate(Date itemDate) {
+	public void setDate(Date itemDate) throws StatusException, NetWorkException {
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
 		date=itemDate;
 		notifyListeners();
 	}
@@ -110,8 +122,13 @@ public class Item extends AppModel{
 	 * notify Listener in listeners about this update.
 	 * 
 	 * @param category  a String variable
+	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setCategory(String category) {
+	public void setCategory(String category) throws StatusException, NetWorkException {
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
 		this.category=category;
 		notifyListeners();
 	}
@@ -131,8 +148,13 @@ public class Item extends AppModel{
 	 * notify Listener in listeners about this update.
 	 * 
 	 * @param description  a String variable
+	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setDescription(String description) {
+	public void setDescription(String description) throws StatusException, NetWorkException {
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
 		this.description=description;
 		notifyListeners();
 	}
@@ -152,8 +174,13 @@ public class Item extends AppModel{
 	 * notify Listener in listeners about this update.
 	 * 
 	 * @param amount  a Double variable
+	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setAmount(Double amount) {
+	public void setAmount(Double amount) throws StatusException, NetWorkException {
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
 		this.amount=amount;
 		notifyListeners();
 	}
@@ -173,8 +200,13 @@ public class Item extends AppModel{
 	 * expenses and notify Listener in listeners about this update.
 	 * 
 	 * @param currency  a String variable
+	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setCurrency(String currency) {
+	public void setCurrency(String currency) throws StatusException, NetWorkException {
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
 		this.currency=currency;
 		notifyListeners();
 	}
@@ -195,8 +227,13 @@ public class Item extends AppModel{
 	 * expenses and notify Listener in listeners about this update.
 	 * 
 	 * @param b  a boolean variable
+	 * @throws StatusException 
+	 * @throws NetWorkException 
 	 */
-	public void setFlag(boolean b) {
+	public void setFlag(boolean b) throws StatusException, NetWorkException {
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
 		flag=b;
 		notifyListeners();
 	}
@@ -326,6 +363,25 @@ public class Item extends AppModel{
 	public void setIncomplete() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean getMissValue() {
+		boolean result=receipt.getMissValue();
+		
+		if(amount==null){
+			result=true;
+		}
+		
+		if(description.equals("")){
+			result=true;
+		}
+		
+		if(flag==true){
+			result=true;
+		}
+			
+		return result;	
 	}
 
 	

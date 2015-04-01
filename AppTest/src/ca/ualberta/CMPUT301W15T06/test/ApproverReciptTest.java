@@ -2,7 +2,7 @@
 //
 //import android.view.View;
 //import ca.ualberta.CMPUT301W15T06.Claim;
-//import ca.ualberta.CMPUT301W15T06.ClaimList;
+//import ca.ualberta.CMPUT301W15T06.User;
 //import ca.ualberta.CMPUT301W15T06.Item;
 //import ca.ualberta.CMPUT301W15T06.Recipt;
 //import junit.framework.TestCase;
@@ -12,7 +12,7 @@
 //	// system gets photographic receipt for the item
 //	public void testRecipt() {
 //		// build a claim list
-//		ClaimList cList = new ClaimList();
+//		User cList = new User();
 //
 //		// build new claim
 //		Claim test = new Claim("A");

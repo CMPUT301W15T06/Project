@@ -35,5 +35,5 @@ package ca.ualberta.CMPUT301W15T06;
  * @version 03/16/2015
  */
 public interface Listener {
-	public void update();
+	public void update() throws NetWorkException;
 }

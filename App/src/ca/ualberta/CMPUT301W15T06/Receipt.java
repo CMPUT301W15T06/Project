@@ -44,7 +44,10 @@ public class Receipt extends AppModel {
 //	/**
 //	 * This method will set a photo for <code>Receipt</code>.
 //	 */
-	public void setPhotoStr(String photo){
+	public void setPhotoStr(String photo) throws StatusException, NetWorkException{
+		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+			throw new StatusException();					
+		}
 		photoStr=photo;
 		notifyListeners();
 	}
@@ -56,6 +59,11 @@ public class Receipt extends AppModel {
 //	 */
 	public String getPhotoStr(){
 		return photoStr;
+	}
+	@Override
+	public boolean getMissValue() {
+		// TODO Auto-generated method stub
+		return photoStr==null;
 	}
 
 

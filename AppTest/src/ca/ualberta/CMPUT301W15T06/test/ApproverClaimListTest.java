@@ -3,7 +3,7 @@
 //import junit.framework.TestCase;
 //import android.view.View;
 //import ca.ualberta.CMPUT301W15T06.Claim;
-//import ca.ualberta.CMPUT301W15T06.ClaimList;
+//import ca.ualberta.CMPUT301W15T06.User;
 //import ca.ualberta.CMPUT301W15T06.Item;
 //
 ///*
@@ -24,7 +24,7 @@
 //	public void testSubmittedClaimList() {
 //
 //		// build claim list
-//		ClaimList cList = new ClaimList();
+//		User cList = new User();
 //		
 //		// build new claim
 //		Claim test = new Claim("A");
@@ -75,7 +75,7 @@
 //		String d4 = "2013-12-01";
 //		
 //		// build new claim list
-//		ClaimList cList = new ClaimList();
+//		User cList = new User();
 //		
 //		// add new claim, date is d1
 //		Claim test1 = new Claim("A");
@@ -117,7 +117,7 @@
 //	// approver add comment for claim
 //	public void testAddComment() {
 //		// build a claim list
-//		ClaimList cList = new ClaimList();
+//		User cList = new User();
 //
 //		// add claim
 //		Claim test = new Claim("A");
@@ -134,7 +134,7 @@
 //	// change the state of one claim to "return"
 //	public void testReturnClaim() {
 //		// build a claim list
-//		ClaimList cList = new ClaimList();
+//		User cList = new User();
 //
 //		// build new claim
 //		Claim test = new Claim("A");
@@ -158,7 +158,7 @@
 //	// change the state of one claim to "approved"
 //	public void testApproveClaim() {
 //		// build a claim list
-//		ClaimList cList = new ClaimList();
+//		User cList = new User();
 //
 //		// build new claim
 //		Claim test = new Claim("A");
@@ -187,7 +187,7 @@
 //	// refuse claimants' request of changing claim status
 //	public void testRefuseClaimantChangingState () {
 //		// build a claim list
-//		ClaimList cList = new ClaimList();
+//		User cList = new User();
 //
 //		// build new claim
 //		Claim test = new Claim("A");

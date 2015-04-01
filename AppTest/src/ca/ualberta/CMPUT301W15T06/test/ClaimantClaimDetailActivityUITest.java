@@ -1,7 +1,7 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
 
-import ca.ualberta.CMPUT301W15T06.ClaimantAddDestinationActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantEditDestinationActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity;
 import ca.ualberta.CMPUT301W15T06.R;
 import android.app.Activity;
@@ -88,7 +88,7 @@ public class ClaimantClaimDetailActivityUITest extends
 	//US01.02.01 test button activity
 	public void testOpenNextActivity() {
 		  // register next activity that need to be monitored.
-		  ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantAddDestinationActivity.class.getName(), null, false);
+		  ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantEditDestinationActivity.class.getName(), null, false);
 
 		  // open current activity.
 		  ClaimantClaimDetailActivity myActivity = getActivity();
@@ -101,7 +101,7 @@ public class ClaimantClaimDetailActivityUITest extends
 		    }
 		  });
 
-		  ClaimantAddDestinationActivity nextActivity = (ClaimantAddDestinationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5);
+		  ClaimantEditDestinationActivity nextActivity = (ClaimantEditDestinationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 5);
 		  // next activity is opened and captured.
 		  assertNotNull(nextActivity);
 		  nextActivity .finish();

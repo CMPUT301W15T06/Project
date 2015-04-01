@@ -18,14 +18,17 @@ governing permissions and limitations under the License.
 package ca.ualberta.CMPUT301W15T06;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Date;
+
 import com.google.gson.JsonElement;
 
 /**
 * This <code>ClaimantClaimListController</code> class controls the action of 
-* <code>ClaimList</code> for claimant. This controller class will displays a 
-* list of <code>Claim</code>, add new <code>Claim</code> to the <code>ClaimList</code>,
+* <code>User</code> for claimant. This controller class will displays a 
+* list of <code>Claim</code>, add new <code>Claim</code> to the <code>User</code>,
 * change the status and delete <code>Claim</code>. It will be used when the 
-* claimant asks to access to the <code>ClaimList</code>.
+* claimant asks to access to the <code>User</code>.
 * 
 * @author CMPUT301W15T06
 * @version 03/16/2015
@@ -35,84 +38,74 @@ import com.google.gson.JsonElement;
 public class ClaimantClaimListController {
 	
 	/**
-	 * Set a <code>ClaimList</code> object claimList with initial 
+	 * Set a <code>User</code> object user with initial 
 	 * default value null.
 	 */
-	private ClaimList claimList=null;
+	private User user=null;
+
+
 	/**
-	 * Set a <code>Claim</code> object claimList with initial 
-	 * default value null.
-	 */
-	private Claim claim=null;
-	
-	
-	/**
-	 * General construction. Create a new claim.
+	 * General construction. Create a new user.
 	 * 
-	 * @param claim  a Claim object
+	 * @param user  a User object
 	 */
-	public ClaimantClaimListController(Claim claim) {
+	public ClaimantClaimListController(User user) {
 		// TODO Auto-generated constructor stub
-		this.claim=claim;
+		this.user=user;
 	}
 
-	/**
-	 * General construction. Create a new claimList.
-	 * 
-	 * @param claimList  a ClaimList object
-	 */
-	public ClaimantClaimListController(ClaimList claimList) {
-		// TODO Auto-generated constructor stub
-		this.claimList=claimList;
-	}
 
-	/**
-	 * Add a new claim to the claimList and change status to 
-	 * "Submitted". It also checks warnings and errors to
-	 * prevent crush.
-	 * 
-	 * @throws StatusException
-	 * @see java.io.IOException
-	 */
-	public void submit() throws StatusException {
+
+
+	public void addClaim() throws NetWorkException {
 		// TODO Auto-generated method stub
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
+		Claim claim=new Claim(user.getUserName());
 		
-		claim.setStatus("Submitted");
+		claim.addModelListener(new Listener() {
+			
+			@Override
+			public void update() throws NetWorkException {
+				// TODO Auto-generated method stub
+				user.notifyListeners();
+			}
+		});
+		user.getClaimList().add(claim);
+		user.notifyListeners();
+		AppSingleton.getInstance().setCurrentClaim(claim);
 	}
 
-	/**
-	 * Remove a claim from the claimList and notify all Listener in listeners.
-	 * It also checks warnings and errors to prevent crush.
-	 * 
-	 * @param claim  a Claim object
-	 * @throws StatusException
-	 * @see java.io.IOException
-	 */
-	public void delete(Claim claim) throws StatusException {
+
+
+
+	public void addTag(long id) throws NetWorkException {
 		// TODO Auto-generated method stub
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		
-		claimList.getClaimList().remove(claim);
-		claimList.notifyListeners();
-		
+		user.getFilterTagIDList().add(id);
+		user.notifyListeners();
 	}
 
-	public void addTag(long l) {
+
+
+
+	public void removeTag(long id) throws NetWorkException {
 		// TODO Auto-generated method stub
-		claim.getTagIDList().add(l);
-		claim.notifyListeners();
-		
+		user.getFilterTagIDList().remove(id);
+		user.notifyListeners();
 	}
 
-	public void removeTag(long l) {
+
+
+
+	public void filter() throws NetWorkException {
 		// TODO Auto-generated method stub
-		claim.getTagIDList().remove(l);
-		claim.notifyListeners();
+		user.setFilter(true);
+	}
+
+
+
+
+	public void showAll() throws NetWorkException {
+		// TODO Auto-generated method stub
+		user.setFilter(false);
 	}
 	
 

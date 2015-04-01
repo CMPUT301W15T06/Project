@@ -20,11 +20,11 @@
     <string name="title_item_dialog">Choose what you want to do</string>
 
     <string-array name="claim_dialog_array">
-        <item>Details</item>
-        <item>Change tags</item>
-        <item>Submit this claim</item>
-        <item>Edit this claim</item>
-        <item>Delete this claim</item>
+        <item>Detail and Destinations</item>
+        <item>Expense Items</item>
+        <item>Add Comment</item>
+        <item>Return this claim</item>
+        <item>Approve this claim</item>
     </string-array>
     <string-array name="item_dialog_array">
         <item>Flag/Deflag for Incompleteness</item>
@@ -67,4 +67,6 @@
     <string name="add_photo">Add a Photographic Receipt</string>
     <string name="delete_photo">Delete this Photographic Receipt</string>
     <string name="manage_tag">Manage Tag</string>
+    <string name="title_activity_map">MapActivity</string>
+
 </resources>

@@ -26,9 +26,14 @@ governing permissions and limitations under the License.
 
 package ca.ualberta.CMPUT301W15T06;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 /**
 * This <code>ApproverClaimDetailListActivity</code> class is an extended class
@@ -46,10 +51,25 @@ import android.view.Menu;
 */
 public class ApproverClaimDetailListActivity extends Activity {
 
+	private Claim claim;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_approver_claim_detail_list);
+		
+		claim=AppSingleton.getInstance().getCurrentClaim();
+		
+		
+		TextView beginView=(TextView) findViewById(R.id.startDateValueClaimDetailTextView);
+		TextView endView=(TextView) findViewById(R.id.endingDateValueClaimDetailTextView);
+		beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
+		endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
+		ListView listView = (ListView) findViewById(R.id.detailListView);
+		ArrayList<Destination> list =AppSingleton.getInstance().getCurrentClaim().getDestinationList();
+		final ArrayAdapter<Destination> adapter=new ArrayAdapter<Destination>(this, android.R.layout.simple_list_item_1,list);
+		listView.setAdapter(adapter);
+		
 	}
 
 	@Override

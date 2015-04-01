@@ -36,7 +36,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/StartDateApprover"
+        android:id="@+id/startDateValueClaimDetailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ApproverStartDate"
@@ -48,25 +48,25 @@
         android:id="@+id/ApproverEndingDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/StartDateApprover"
+        android:layout_below="@+id/startDateValueClaimDetailTextView"
         android:text="Ending Date"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/EndDateApprover"
+        android:id="@+id/endingDateValueClaimDetailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/StartDateApprover"
+        android:layout_alignRight="@+id/startDateValueClaimDetailTextView"
         android:layout_below="@+id/ApproverEndingDate"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ListView
-        android:id="@+id/DestinationListApprover"
+        android:id="@+id/detailListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/EndDateApprover"
-        android:layout_below="@+id/EndDateApprover" >
+        android:layout_alignLeft="@+id/endingDateValueClaimDetailTextView"
+        android:layout_below="@+id/endingDateValueClaimDetailTextView" >
     </ListView>
 
 </RelativeLayout>

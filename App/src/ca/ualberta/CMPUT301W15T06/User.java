@@ -31,9 +31,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * The <code>ClaimList</code> class is an sub-class of <code>AppModel</code>.
- * This class can set up a ArrayList named ClaimList which contains Claim.
- * The ClaimList can also be pushed online and pulled online, sort and search 
+ * The <code>User</code> class is an sub-class of <code>AppModel</code>.
+ * This class can set up a ArrayList named User which contains Claim.
+ * The User can also be pushed online and pulled online, sort and search 
  * Claim. This class is associated with <code>Claim</code> for Claim information, 
  * <code>Tag</code> and <code>TagList</code> for searching by Tag names.
  * 
@@ -41,7 +41,7 @@ import java.util.Date;
  * @version 03/07/2015
  * @see java.util.ArrayList
  */
-public class ClaimList extends AppModel{
+public class User extends AppModel{
 
 	/**
 	 * Set a ArrayList named claimList which records the information
@@ -53,21 +53,35 @@ public class ClaimList extends AppModel{
 
 	private ArrayList<Tag> tagList;
 	
+	private ArrayList<Long> filterTagIDList;
+	
+	private String userName;
 	
 	private Date lastModify;
 	
-	/**
-	 * General construction. This method Set up the claimList.
-	 * 
-	 * @see java.util.ArrayList
-	 */
-	public ClaimList(){
+	private boolean filter;
+	
+	private boolean needSyn;
+	
+//	/**
+//	 * General construction. This method Set up the claimList.
+//	 * 
+//	 * @see java.util.ArrayList
+//	 */
+
+			
+	public User(String name) {
+		// TODO Auto-generated constructor stub
 		super();
 		claimList=new ArrayList<Claim>();
 		tagList=new ArrayList<Tag>();
+		filterTagIDList=new ArrayList<Long>();
+		userName=name;
+		filter=false;
+		needSyn=false;
 	}
-	
-			
+
+
 	/**
 	 * Return the ArrayList claimList. This method will be used when 
 	 * other class need to use or display the claimList. 
@@ -169,5 +183,75 @@ public class ClaimList extends AppModel{
 		return null;
 	}
 
+
+	
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+	@Override
+	public boolean getMissValue() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public ArrayList<Long> getFilterTagIDList() {
+		return filterTagIDList;
+	}
+
+
+	public boolean[] toCheckArray() {
+		// TODO Auto-generated method stub
+		
+		boolean[] result = new boolean[tagList.size()];
+		int i=0;
+		for (Tag tag:tagList){
+			if(filterTagIDList.contains(tag.getID())){
+				result[i]=true;
+			}else{
+				result[i]=false;
+			}
+			i++;
+		}
+		return result;
+	}
+
+
+	public boolean isFilter() {
+		return filter;
+	}
+
+
+	public void setFilter(boolean filter) throws NetWorkException {
+		this.filter = filter;
+		notifyListeners();
+	}
+
+
+	public boolean isNeedSyn() {
+		return needSyn;
+	}
+
+
+	public void setNeedSyn(boolean needSyn) {
+		if(needSyn!=this.needSyn){
+			this.needSyn = needSyn;
+			ClaimListManager.getInstance().saveLocal(this);
+			
+		}
+	}
+	public void setNeedSynSimple(boolean needSyn) {
+
+		this.needSyn = needSyn;
+			
+	}
 
 }
