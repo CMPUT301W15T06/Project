@@ -156,15 +156,10 @@ public class Claim extends AppModel{
 	 * This public method will be used when the claimant entering a travel beginning 
 	 * date to a new claim or editing a current claim.
 	 * 
-<<<<<<< HEAD
 	 * @param the date of when the travel started (like "15-Mar-2015")
-	 * 
-=======
-	 * @param beginDate  a Date object
 	 * @throws StatusException 
 	 * @throws WrongEndDateException 
 	 * @throws NetWorkException 
->>>>>>> e2cb2f6020ebcdead6487c917139e2c4dfed24f4
 	 * @see java.util.Date
 	 */
 	public void setBeginDate(Date beginDate) throws StatusException, WrongEndDateException, NetWorkException{
@@ -195,14 +190,10 @@ public class Claim extends AppModel{
 	 * This public method will be used when the claimant entering a travel ending 
 	 * date to a new claim or editing a current claim.
 	 * 
-<<<<<<< HEAD
 	 * @param endDate  date of when the travel ended (like "31-Mar-2015")
-=======
-	 * @param endDate  a Date object
 	 * @throws StatusException 
 	 * @throws WrongEndDateException 
 	 * @throws NetWorkException 
->>>>>>> e2cb2f6020ebcdead6487c917139e2c4dfed24f4
 	 * @see java.util.Date
 	 */
 	public void setEndDate(Date endDate) throws StatusException, WrongEndDateException, NetWorkException{
@@ -235,12 +226,9 @@ public class Claim extends AppModel{
 	 * claimant added a new claim or edited a current claim. The default 
 	 * value of status is "In progress".
 	 * 
-<<<<<<< HEAD
+
 	 * @param status  the submission status of a claim ("In Progress" or "Submitted")
-=======
-	 * @param status  a String variable
 	 * @throws NetWorkException 
->>>>>>> e2cb2f6020ebcdead6487c917139e2c4dfed24f4
 	 */
 	public void setStatus(String status) throws NetWorkException{
 		this.status=status;
