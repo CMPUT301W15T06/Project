@@ -48,7 +48,7 @@ public class AppModel{
 	 * Set two private ArrayList variable named listeners
 	 * and modelListeners to contain Listener subject
 	 * 
-	 * @see java.util.ArrayList;
+	 * @see java.util.ArrayList
 	 */
 	private transient ArrayList<Listener> listeners;
 	private transient ArrayList<Listener> modelListeners;

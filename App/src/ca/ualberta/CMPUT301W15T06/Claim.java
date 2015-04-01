@@ -89,7 +89,7 @@ public class Claim extends AppModel{
 	 * General construction. This public method sets up a Claim object with
 	 * itemList, destinationList and tagList and name.
 	 * 
-	 * @param claimName  a String variable
+	 * @param claimName  the name of the claim(like "Claim1")
 	 * @see java.util.ArrayList
 	 */
 	public Claim(String claimName) {
@@ -106,7 +106,7 @@ public class Claim extends AppModel{
 	 * This public method will be used when the claimant entering a name to a new 
 	 * claim or editing a current claim.
 	 * 
-	 * @param name  a String variable
+	 * @param name  the full name of the claimant (like "Tom Smith")
 	 */
 	public void setName(String name){
 		this.name=name;
@@ -117,7 +117,7 @@ public class Claim extends AppModel{
 	 * Return the string variable name. This method will be used when 
 	 * other class need to use or display the name. 
 	 * 
-	 * @return name  a String variable
+	 * @return the full name of the claimant (like "Tom Smith")
 	 */
 	public String getName() {
 		return name;
@@ -129,7 +129,8 @@ public class Claim extends AppModel{
 	 * This public method will be used when the claimant entering a travel beginning 
 	 * date to a new claim or editing a current claim.
 	 * 
-	 * @param beginDate  a Date object
+	 * @param the date of when the travel started (like "15-Mar-2015")
+	 * 
 	 * @see java.util.Date
 	 */
 	public void setBeginDate(Date beginDate){
@@ -141,7 +142,7 @@ public class Claim extends AppModel{
 	 * Return the Date variable beginDate. This method will be used when 
 	 * other class need to use or display the beginDate. 
 	 * 
-	 * @return beginDate  a Date object
+	 * @return the date of when the travel started (like "15-Mar-2015")
 	 * @see java.util.Date
 	 */
 	public Date getBeginDate() {
@@ -154,7 +155,7 @@ public class Claim extends AppModel{
 	 * This public method will be used when the claimant entering a travel ending 
 	 * date to a new claim or editing a current claim.
 	 * 
-	 * @param endDate  a Date object
+	 * @param endDate  date of when the travel ended (like "31-Mar-2015")
 	 * @see java.util.Date
 	 */
 	public void setEndDate(Date endDate){
@@ -166,7 +167,7 @@ public class Claim extends AppModel{
 	 * Return the Date variable endDate. This method will be used when 
 	 * other class need to use or display the endDate. 
 	 * 
-	 * @return endDate  a Date object
+	 * @return the date of when the travel ended (like "31-Mar-2015")
 	 * @see java.util.Date
 	 */
 	public Date getEndDate() {
@@ -179,7 +180,7 @@ public class Claim extends AppModel{
 	 * claimant added a new claim or edited a current claim. The default 
 	 * value of status is "In progress".
 	 * 
-	 * @param status  a String variable
+	 * @param status  the submission status of a claim ("In Progress" or "Submitted")
 	 */
 	public void setStatus(String status){
 		this.status=status;
@@ -190,7 +191,7 @@ public class Claim extends AppModel{
 	 * Return the string variable status. This method will be used when 
 	 * other class need to use or display the status. 
 	 * 
-	 * @return status  a String variable
+	 * @return the submission status of a claim ("In Progress" or "Submitted")
 	 */
 	public String getStatus(){
 		return status;	
@@ -201,7 +202,7 @@ public class Claim extends AppModel{
 	 * other class need to use or display the itemList. 
 	 * 
 	 * @see java.util.ArrayList
-	 * @return itemList  an ArrayList object.
+	 * @return an ArrayList contains all <code>Item</code> objects (like "{Item1, Item2, ...}")
 	 */
 	public ArrayList<Item> getItemList() {
 		return itemList;
@@ -212,7 +213,7 @@ public class Claim extends AppModel{
 	 * other class need to use or display the destinationList. 
 	 * 
 	 * @see java.util.ArrayList
-	 * @return destinationList  an ArrayList object.
+	 * @return an ArrayList contains all <code>Destination</code> object (like "{Destination1, Destination2, ...}")
 	 */
 	public ArrayList<Destination> getDestinationList() {
 		return destinationList;
@@ -224,7 +225,7 @@ public class Claim extends AppModel{
 	 * Use <code>getCM()</code> to display the amount with corresponding currency. It will 
 	 * be operated when the program need the destinationList and tagList to display.
 	 * 
-	 * @return ""  a String object combine with many small String variable
+	 * @return 
 	 */
 	public String toString(){
 		String dest="";
@@ -246,7 +247,7 @@ public class Claim extends AppModel{
 	 * use <code>getCurrency()</code> and <code>getAmount()</code> method 
 	 * to get a total amount of the claim and return it using <code>toString()</code>. 
 	 * 
-	 * @param currency  a String variable
+	 * @param currency  the currency to the item expense amount (like "CAD", combine with amount "120CAD")
 	 * @return total  a Double variable
 	 */
 	public String getCM(String currency){
