@@ -33,10 +33,12 @@ import java.util.Set;
 import android.util.Log;
 
 /**
- * The <code>AppModel</code> class can create an ArrayList named
- * listeners, which contains Listener subject. This class can
- * set up listeners, add a Listener to listeners, remove a listener
+ * <p>
+ * The <code>AppModel</code> class can create an ArrayList named 
+ * listeners, which contains Listener subject. This class can 
+ * set up listeners, add a Listener to listeners, remove a listener 
  * from listeners, notify listeners for updates, set up missValue.
+ * <p>
  * 
  * @author CMPUT301W15T06
  * @version 03/16/2015
@@ -47,8 +49,7 @@ import android.util.Log;
 public abstract class AppModel{
 	
 	/**
-	 * Set two private ArrayList variable named listeners
-	 * and modelListeners to contain Listener subject
+	 * Set two private ArrayList variable named listeners and modelListeners to contain Listener object
 	 * 
 	 * @see java.util.ArrayList
 	 */
@@ -58,9 +59,7 @@ public abstract class AppModel{
 	
 	
 	/**
-	 * General construction. This method creates an ArrayList 
-	 * listeners and an ArrayList modelListers for listeners 
-	 * that records all Listener.
+	 * General construction. This method creates an ArrayList listeners and an ArrayList modelListers for listeners that records all Listener.
 	 */
 	public AppModel(){
 		listeners=new ArrayList<Listener>();
@@ -68,10 +67,9 @@ public abstract class AppModel{
 	}
 	
 	/**
-	 * This method allows user to add a Listener to the 
-	 * ArrayList listeners
+	 * This method allows user to add a Listener to the ArrayList listeners
 	 * 
-	 * @param l  a Listener type
+	 * @param l  a observer that watches all the updates of objects
 	 */
 	public void addListener(Listener l){
 		if (!getListeners().contains(l)){
@@ -80,20 +78,18 @@ public abstract class AppModel{
 	}
 	
 	/**
-	 * This method allows user to remove a Listener from
-	 * the listeners ArrayList.
+	 * This method allows user to remove a Listener from the listeners ArrayList.
 	 * 
-	 * @param l  a Listener type
+	 * @param l  a observer that watches all the updates of objects
 	 */
 	public void removeListener(Listener l){
 		getListeners().remove(l);
 	}
 	
 	/**
-	 * This method checks if there's any listeners ArrayList, 
-	 * if not, set up a new one and return it for further use
+	 * This method checks if there's any listeners ArrayList, if not, set up a new one and return it for further use
 	 * 
-	 * @return listeners  an ArrayList type
+	 * @return an ArrayList which contains Listeners object to track all the updates of objects
 	 */
 	protected ArrayList<Listener> getListeners(){
 		if (listeners==null){
@@ -104,10 +100,13 @@ public abstract class AppModel{
 	
 
 	/**
+	 * <p>
 	 * This method is design for notifying all Listener 
 	 * in listeners ArrayList and modelListeners ArrayList 
 	 * if there's any update, and the ClaimListManager 
-	 * will save the change 
+	 * will save the change.
+	 * <p>
+	 * 
 	 * @throws NetWorkException 
 	 */
 	public void notifyListeners() throws NetWorkException {
@@ -132,11 +131,9 @@ public abstract class AppModel{
 	}
 
 	/**
-	 * This method allows user to add a Listener to the 
-	 * modelListeners if the model does not contains 
-	 * a Listener l
+	 * This method allows user to add a Listener to the modelListeners if the model does not contains a Listener l
 	 * 
-	 * @param l  a Listener type
+	 * @param l  a observer that watches all the updates of objects
 	 */
 	public void addModelListener(Listener l){
 		if (!getModelListeners().contains(l)){
@@ -145,20 +142,18 @@ public abstract class AppModel{
 	}
 	
 	/**
-	 * This method is designed to remove a Listener from
-	 * the modelListeners ArrayList
+	 * This method is designed to remove a Listener from the modelListeners ArrayList
 	 * 
-	 * @param l  a Listener type
+	 * @param l  a observer that watches all the updates of objects
 	 */
 	public void removeModelListener(Listener l){
 		getModelListeners().remove(l);
 	}
 	
 	/**
-	 * This method will create a new ArrayList modelListeners 
-	 * if there's none and return the new modelListeners
+	 * This method will create a new ArrayList modelListeners if there's none and return the new modelListeners
 	 * 
-	 * @return modelListners  an ArrayList type
+	 * @return modelListners  an ArrayList contains all the listeners to check all model objects
 	 */
 	protected ArrayList<Listener> getModelListeners(){
 		if (modelListeners==null){
@@ -169,11 +164,9 @@ public abstract class AppModel{
 	
 
 	/**
-	 * return the missValue. This method will be used
-	 * when user needs to use the value of missValue 
-	 * to justify the <code>AppModel</code>.
+	 * return the missValue. This method will be used when user needs to use the value of missValue to justify the <code>AppModel</code>.
 	 * 
-	 * @return missValue  a boolean type
+	 * @return a boolean variable to check if there is a miss value
 	 */
 	public abstract boolean getMissValue();
 }
