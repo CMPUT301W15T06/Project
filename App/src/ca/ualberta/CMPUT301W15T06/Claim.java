@@ -110,7 +110,10 @@ public class Claim extends AppModel{
 		endDate=AppSingleton.removeTime(new Date());
 	}
 	
-
+	public Claim(Claim oldClaim) {
+		super();
+	}
+	
 	
 	/**
 	 * Set up the beginDate and use <code>notifyListeners()</code> in <code>AppModel</code> 
@@ -524,11 +527,7 @@ public class Claim extends AppModel{
 		boolean[] result = new boolean[tl.size()];
 		int i=0;
 		for (Tag tag:tl){
-			if(tagIDList.contains(tag.getID())){
-				result[i]=true;
-			}else{
-				result[i]=false;
-			}
+			result[i] = tagIDList.contains(tag.getID()); 
 			i++;
 		}
 		return result;
