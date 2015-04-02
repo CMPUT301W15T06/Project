@@ -569,7 +569,4 @@ public class Claim extends AppModel{
 		this.status=string;
 	}
 
-
-
-
 }
