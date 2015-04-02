@@ -155,6 +155,8 @@ public class MainActivity extends Activity {
 	 * @see android.content.Intent
 	 */
 	public void startClaimant(View v){
+//		Intent intent =new Intent(MainActivity.this,GetLocationByMapActivity.class);
+//		startActivity(intent);
 		Intent intent =new Intent(MainActivity.this,ClaimantClaimListActivity.class);
 		startActivity(intent);
 		AppSingleton.getInstance().setcMod(true);

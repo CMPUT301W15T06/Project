@@ -18,14 +18,14 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <receiver android:name=".NetworkStateReceiver" >
+        <receiver android:name="ca.ualberta.CMPUT301W15T06.NetworkStateReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name=".MainActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,76 +34,80 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ClaimantClaimDetailActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity"
             android:label="@string/title_activity_claimant_add_destination" >
         </activity>
         <activity
-            android:name=".ClaimantApproverInfoActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantApproverInfoActivity"
             android:label="@string/title_activity_claimant_approver_info" >
         </activity>
         <activity
-            android:name=".ClaimantEditDestinationActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantEditDestinationActivity"
             android:label="@string/title_activity_claimant_destination_reason" >
         </activity>
         <activity
-            android:name=".ClaimantReciptActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantReciptActivity"
             android:label="@string/title_activity_claimant_recipt" >
         </activity>
         <activity
-            android:name=".ClaimantTagListActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantTagListActivity"
             android:label="@string/title_activity_claimant_tag_list" >
         </activity>
         <activity
-            android:name=".ApproverClaimListActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ApproverClaimListActivity"
             android:label="@string/title_activity_approver_claim_list" >
         </activity>
         <activity
-            android:name=".ApproverItemListActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ApproverItemListActivity"
             android:label="@string/title_activity_approver_item_list" >
         </activity>
         <activity
-            android:name=".ApproverClaimDetailListActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ApproverClaimDetailListActivity"
             android:label="@string/title_activity_approver_claim_detail_list" >
         </activity>
         <activity
-            android:name=".ApproverReciptActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ApproverReciptActivity"
             android:label="@string/title_activity_approver_recipt" >
         </activity>
         <activity
-            android:name=".ClaimantClaimListActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity"
             android:label="@string/title_activity_claimant_claim_list" >
         </activity>
         <activity
-            android:name=".ClaimantAddClaimActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantAddClaimActivity"
             android:label="@string/title_activity_claimant_add_claim" >
         </activity>
         <activity
-            android:name=".ClaimantItemListActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity"
             android:label="@string/title_activity_claimant_item_list" >
         </activity>
         <activity
-            android:name=".ClaimantAddItemActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantAddItemActivity"
             android:label="@string/title_activity_claimant_add_item" >
         </activity>
         <activity
-            android:name=".ClaimantItemDetailActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantItemDetailActivity"
             android:label="@string/title_activity_claimant_item_detail" >
         </activity>
         <activity
-            android:name=".ClaimantEditItemActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantEditItemActivity"
             android:label="@string/title_activity_claimant_edit_item" >
         </activity>
         <activity
-            android:name=".ClaimantEditClaimActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantEditClaimActivity"
             android:label="@string/title_activity_claimant_edit_claim" >
         </activity>
         <activity
-            android:name=".ClaimantReceiptActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.ClaimantReceiptActivity"
             android:label="@string/title_activity_claimant_receipt" >
         </activity>
         <activity
-            android:name=".MapActivity"
+            android:name="ca.ualberta.CMPUT301W15T06.MapActivity"
             android:label="@string/title_activity_map" >
+        </activity>
+        <activity
+            android:name="ca.ualberta.CMPUT301W15T06.GetLocationByMapActivity"
+            android:label="@string/title_activity_get_location_by_map" >
         </activity>
     </application>
 

@@ -30,14 +30,19 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 /**
 * This <code>ClaimantClaimDetailActivity</code> class is an extended class
@@ -64,8 +69,11 @@ import android.widget.Toast;
 public class ClaimantClaimDetailActivity extends Activity {
 
 	
+	private static final int SET_LOCATION_BY_GPS = 0;
+	private static final int SET_LOCATION_BY_MAP = 1;
 	private ClaimantAddDestinationController cadc=null;
 	private Claim claim;
+	private ArrayList<Destination> list;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,12 +88,12 @@ public class ClaimantClaimDetailActivity extends Activity {
 		beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
 		endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
 		ListView listView = (ListView) findViewById(R.id.claimantDetailListView);
-		ArrayList<Destination> list =AppSingleton.getInstance().getCurrentClaim().getDestinationList();
+		list =AppSingleton.getInstance().getCurrentClaim().getDestinationList();
 		final ArrayAdapter<Destination> adapter=new ArrayAdapter<Destination>(this, android.R.layout.simple_list_item_1,list);
 		listView.setAdapter(adapter);
 		
 
-		AppSingleton.getInstance().getCurrentClaim().addListener(new Listener() {
+		claim.addListener(new Listener() {
 			
 			@Override
 			public void update() {
@@ -94,10 +102,51 @@ public class ClaimantClaimDetailActivity extends Activity {
 			}
 		});
 		
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+				AppSingleton.getInstance().setCurrentDestination(list.get(position));
+				
+				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimDetailActivity.this);
+				itemChoice(builder);
+				builder.create();  
+				builder.show();
+				
+			}
+
+			
+		});
 
 		
 	}
 
+	
+	private void itemChoice(Builder builder) {
+		// TODO Auto-generated method stub
+		builder.setItems(R.array.dest_dialog_array, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				if (which ==SET_LOCATION_BY_GPS){
+					
+										
+				}else if (which==SET_LOCATION_BY_MAP){
+					Intent intent =new Intent(ClaimantClaimDetailActivity.this,GetLocationByMapActivity.class);
+					startActivity(intent);					
+				
+				}else if (which==2){
+//					Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantItemDetailActivity.class);
+//					startActivity(intent);
+				}
+				
+			}
+		});
+	}
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
