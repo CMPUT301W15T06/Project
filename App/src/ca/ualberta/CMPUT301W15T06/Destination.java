@@ -38,14 +38,14 @@ package ca.ualberta.CMPUT301W15T06;
 public class Destination extends AppModel{
 	
 	/**
-	 * Set private string name to record destination name. 
+	 * Set protected string name to record destination name. 
 	 */
-	private String name="";
+	protected String name="";
 	/**
-	 * Set private string reason to record the reason of 
+	 * Set protected string reason to record the reason of 
 	 * the destination. 
 	 */
-	private String reason="";
+	protected String reason="";
 	
 	
 	/**
@@ -58,24 +58,13 @@ public class Destination extends AppModel{
 		super();
 	}
 	
-	/**
-	 * Set up the name and use <code>notifyListeners()</code> in <code>AppModel</code> 
-	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
-	 * This public method will be used when the claimant entering a name to a new 
-	 * destination or editing a current destination.
-	 * 
-	 * @param name  a String variable
-	 * @throws StatusException 
-	 * @throws NetWorkException 
-	 */
-	public void setName(String name) throws StatusException, NetWorkException{
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		this.name=name;
-		notifyListeners();
+	public Destination(Destination dest) {
+		// TODO Auto-generated constructor stub
+		super(dest);
+		name=dest.getName();
+		reason=dest.getReason();
 	}
-	
+
 	/**
 	 * Return the string variable name. This method will be used when 
 	 * other class need to use or display the name. 
@@ -84,24 +73,6 @@ public class Destination extends AppModel{
 	 */
 	public String getName(){		
 		return name;
-	}
-	
-	/**
-	 * Set up the reason and use <code>notifyListeners()</code> in <code>AppModel</code> 
-	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
-	 * This public method will be used when the claimant entering a reason to a new 
-	 * destination or editing the reason of a current destination.
-	 * 
-	 * @param reason  a String variable
-	 * @throws StatusException 
-	 * @throws NetWorkException 
-	 */
-	public void setReason(String reason) throws StatusException, NetWorkException{
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		this.reason=reason;
-		notifyListeners();
 	}
 	
 	/**

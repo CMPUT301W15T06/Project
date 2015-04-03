@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import android.util.Log;
 
 /**
  * <p>
@@ -52,41 +51,36 @@ import android.util.Log;
 public class Claim extends AppModel{
 
 	/**
-	 * Set private Date beginDate and endDate to record the beginning and ending date for travel.
+	 * Set protected Date beginDate and endDate to record the beginning and ending date for travel.
 	 * 
 	 *  @see java.util.Date
 	 */
 	protected Date beginDate;
 	
-	private String name;
+	protected String name;
 	
-	private Date endDate;
+	protected Date endDate;
 	/**
-	 * Set private String status to track whether the Claim travel status and the default value is "In progress".
+	 * Set protected String status to track whether the Claim travel status and the default value is "In progress".
 	 */
-	private String status="In progress";
+	protected String status;
 	/**
 	 * Set an ArrayList named itemList to contain all the Item within the Claim.
 	 * Set an ArrayList named destinationList to record all the Destination information, including location and reason. 
 	 * 
 	 * @see java.util.ArrayList
 	 */
-	private ArrayList<Item> itemList;
-	private ArrayList<Destination> destinationList;
+	protected ArrayList<Item> itemList;
+	protected ArrayList<Destination> destinationList;
 	
-	private ArrayList<Comment> commentList;
+//	protected ArrayList<Comment> commentList;
+	protected Comments comments;
 	/**
-	 * Set private String approver to track if the claim is approved. Set private
-	 * String comment to add comment to the Claim.
-	 */
-	private String approver;
-	private String comment;	
-	/**
-	 * Set private ArrayList named tagIDList.
+	 * Set protected ArrayList named tagIDList.
 	 * 
 	 * @see java.util.ArrayList
 	 */
-	private ArrayList<Long> tagIDList;
+	protected ArrayList<Long> tagIDList;
 	
 
 	/**
@@ -100,42 +94,24 @@ public class Claim extends AppModel{
 		itemList=new ArrayList<Item>();
 		destinationList=new ArrayList<Destination>();
 		tagIDList=new ArrayList<Long>();
-		commentList=new ArrayList<Comment>();
+		comments=new Comments();
 		
 		this.name=name;
+		
+		status="In progress";
 		
 		beginDate=AppSingleton.removeTime(new Date());
 		endDate=AppSingleton.removeTime(new Date());
 	}
 	
-	public Claim(Claim oldClaim) {
-		super();
-	}
-	
-	
-	/**
-	 * <p>
-	 * Set up the beginDate and use <code>notifyListeners()</code> in <code>AppModel</code> 
-	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
-	 * This public method will be used when the claimant entering a travel beginning 
-	 * date to a new claim or editing a current claim.
-	 * <p>
-	 * 
-	 * @param beginDate  the date of when the travel started (like "15-Mar-2015")
-	 * @throws StatusException 
-	 * @throws WrongEndDateException 
-	 * @throws NetWorkException 
-	 * @see java.util.Date
-	 */
-	public void setBeginDate(Date beginDate) throws StatusException, WrongEndDateException, NetWorkException{
-		if (status.equals("Submitted")||status.equals("Approved")){
-			throw new StatusException();					
-		}
-		if (beginDate.after(endDate)){
-			throw new WrongEndDateException();
-		}
-		this.beginDate=beginDate;
-		notifyListeners();
+	public Claim(Claim oldClaim,String status) {
+		super(oldClaim);
+		beginDate=oldClaim.getBeginDate();
+		name=oldClaim.getName();
+		endDate=oldClaim.getEndDate();
+		this.status=status;
+		comments=oldClaim.getComments();
+		tagIDList=oldClaim.getTagIDList();
 	}
 	
 	/**
@@ -146,33 +122,6 @@ public class Claim extends AppModel{
 	 */
 	public Date getBeginDate() {
 		return beginDate;
-	}
-	
-	/**
-	 * <p>
-	 * Set up the endDate and use <code>notifyListeners()</code> in <code>AppModel</code> 
-	 * to notify all the Listener in both listeners and modelListeners ArrayList. 
-	 * This public method will be used when the claimant entering a travel ending 
-	 * date to a new claim or editing a current claim.
-	 * <p>
-	 * 
-	 * @param endDate  the date of when the travel ended (like "31-Mar-2015")
-	 * @throws StatusException 
-	 * @throws WrongEndDateException 
-	 * @throws NetWorkException 
-	 * @see java.util.Date
-	 */
-	public void setEndDate(Date endDate) throws StatusException, WrongEndDateException, NetWorkException{
-		Log.i("before set",this.endDate.toString());
-		Log.i("end set",endDate.toString());
-		if (status.equals("Submitted")||status.equals("Approved")){
-			throw new StatusException();					
-		}
-		if (beginDate.after(endDate)){
-			throw new WrongEndDateException();
-		}
-		this.endDate=endDate;
-		notifyListeners();
 	}
 	
 	/**
@@ -253,7 +202,7 @@ public class Claim extends AppModel{
 	/**
 	 * 
 	 */
-	private String aToString() {
+	protected String aToString() {
 		// TODO Auto-generated method stub
 		String dest="";
 		for (Destination d:destinationList){
@@ -275,7 +224,7 @@ public class Claim extends AppModel{
 	/**
 	 * 
 	 */
-	private String cToString() {
+	protected String cToString() {
 		// TODO Auto-generated method stub
 		String dest="";
 		for (Destination d:destinationList){
@@ -355,52 +304,7 @@ public class Claim extends AppModel{
 		}
 	}
 	
-	/**
-	 * Return the ArrayList cLaimDetail as null. This method will be used when other class need to use or display the detail of the claim. 
-	 * 
-	 * @see java.util.ArrayList
-	 * @return an ArrayList contains claim detail information (like "{ClaimDetail1, ClaimDetail2, ...}"), null as default
-	 */
-	public ArrayList<Item> getClaimDetail() {
-		return null;
-		
-	}
-	
-	/**
-	 * Set the approver using a String variable name.
-	 * 
-	 * @param name  the full name of approver (like "Tom Smith")
-	 */
-	public void setApprover(String name){
-		
-	}
-	
-	/**
-	 * Return the approver as null. This method will be used when other class need to use the approver. 
-	 * 
-	 * @return the full name of approver (like "Tom Smith"), null as default
-	 */
-	public String getApprover(){
-		return null;
-	}
-	
-	/**
-	 * Set comment to a String comment.
-	 * 
-	 * @param comment  comment of the claim, like ("Travel Descriptions")
-	 */
-	public void setComment(String comment){
-		
-	}
-	
-	/**
-	 * Return the String comment as null. This method will be used when other class need to use or display the comment. 
-	 * 
-	 * @return comment of the claim, like ("Travel Descriptions"), null as default
-	 */
-	public String getComment(){
-		return null;
-	}
+
 	
 
 	
@@ -414,80 +318,7 @@ public class Claim extends AppModel{
 		return tagIDList;
 	}	
 
-	/**
-	 * Return a boolean variable as false. This method will be used when other class need to justify whether the Claim can be edited or not. 
-	 * 
-	 * @return a boolean variable to check if the claim is ediable, false as default
-	 */
-	public boolean getEdiable(){
-		return false;
-	}
 
-	/**
-	 * Return the String string as null. This method will be used when other class need to use or display the item. 
-	 * 
-	 * @param string  a descriptive string to represent a item
-	 * @return the descriptive string to represent a item, null as default
-	 */
-	public Object getItem(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * Return the Item object itemDate as null. This method will be used when other class need to use or display the date of the item expense. 
-	 * 
-	 * @param expenseTest1  an expense item of the travel claim
-	 * @return the date of the expense item of the travel claim, null as default
-	 */
-	public Object getItemDate(Item expenseTest1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	/**
-	 * Return the String itemCategory as null. This method will be used when other class need to use or display the category of the item expense. 
-	 * 
-	 * @param expenseTest1  an expense item of the travel claim
-	 * @return the category of the expense item of the travel claim, null as default
-	 */
-	public String getItemCategory(Item expenseTest1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * Return the Item object itemAmount as null. This method will be used when other class need to use or display the amount of the item expense. 
-	 * 
-	 * @param expenseTest1  an expense item of the travel claim
-	 * @return the amount of the expense item of the travel claim, null as default
-	 */
-	public Object getItemAmount(Item expenseTest1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * Return the String itemCurrency as null. This method will be used when other class need to use or display the currency of the item expense. 
-	 * 
-	 * @param expenseTest1  an expense item of the travel claim
-	 * @return the currency of the expense item of the travel claim, null as default
-	 */
-	public String getItemCurrency(Item expenseTest1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * Return the String itemDescription as null. This method will be used when other class need to use or display the description of the item expense. 
-	 * 
-	 * @param expenseTest1  an expense item of the travel claim
-	 * @return the description of the expense item of the travel claim, null as default
-	 */
-	public String getItemDescription(Item expenseTest1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/**
 	 * Return the integer itemSize. This method will be used when other class need to use or display the size of the item. 
@@ -545,12 +376,6 @@ public class Claim extends AppModel{
 		return name;
 	}
 
-	/**
-	 * 
-	 */
-	public ArrayList<Comment> getCommentList() {
-		return commentList;
-	}
 
 	/**
 	 * 
@@ -559,5 +384,11 @@ public class Claim extends AppModel{
 		// TODO Auto-generated method stub
 		this.status=string;
 	}
+
+	public Comments getComments() {
+		return comments;
+	}
+
+
 
 }

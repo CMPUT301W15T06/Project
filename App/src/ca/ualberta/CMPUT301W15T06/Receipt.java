@@ -38,19 +38,14 @@ public class Receipt extends AppModel {
 //	/**
 //	 * Set a private field photo String.
 //	 */
-	private String photoStr=null;
+	protected String photoStr=null;
 	
 	
-//	/**
-//	 * This method will set a photo for <code>Receipt</code>.
-//	 */
-	public void setPhotoStr(String photo) throws StatusException, NetWorkException{
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		photoStr=photo;
-		notifyListeners();
+	public Receipt(Receipt receipt){
+		super(receipt);
+		photoStr=receipt.getPhotoStr();
 	}
+	
 //	/**
 //	 * This method will return a photo <code>Receipt</code> for display or 
 //	 * further use.

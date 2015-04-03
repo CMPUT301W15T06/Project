@@ -45,40 +45,41 @@ public class Item extends AppModel{
 	 * 
 	 * @see java.util.Date
 	 */
-	private Date date;
+	protected Date date;
 	/**
 	 * Set a String variable category to record the category of 
 	 * the <code>Item</code> expenses.
 	 */
-	private String category;
+	protected String category;
 	/**
 	 * Set a String variable description to add a comment description to the
 	 * <code>Item</code> expenses.
 	 */
-	private String description;
+	protected String description;
 	/**
 	 * Set a Double object amount to record the <code>Item</code> expenses
 	 * amount.
 	 */
-	private Double amount;
+	protected Double amount;
 	/**
 	 * Set a String variable currency to record the appropriate currency of
 	 * the <code>Item</code> expenses.
 	 */
-	private String currency;
+	protected String currency;
 	/**
 	 * Set a Receipt object receipt to create a receipt of the 
 	 * <code>Item</code> expenses. The initial default value is null.
 	 */
-	private Receipt receipt=null;
+	protected Receipt receipt=null;
 	/**
 	 * Set a boolean variable flag to add flag to the <code>Item</code> expenses.
 	 * The initial default value is false.
 	 */
-	private boolean flag=false;
+	protected boolean flag=false;
 	
 
-	public Item() {	
+	public Item() {
+		super();
 		receipt=new Receipt();
 		
 		date=AppSingleton.removeTime(new Date());
@@ -89,21 +90,15 @@ public class Item extends AppModel{
 		description="";
 	}
 	
-	/**
-	 * This method will set the date of <code>Item</code> expenses and 
-	 * notify Listener in listeners about this update.
-	 * 
-	 * @param itemDate  a Date object
-	 * @throws StatusException 
-	 * @throws NetWorkException 
-	 * @see java.util.Date
-	 */
-	public void setDate(Date itemDate) throws StatusException, NetWorkException {
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		date=itemDate;
-		notifyListeners();
+	public Item(Item item) {
+		// TODO Auto-generated constructor stub
+		super(item);
+		date=item.getDate();
+		category=item.getCategory();
+		description=item.getDescription();
+		amount=item.getAmount();
+		currency=item.getCurrency();
+		flag=item.getFlag();
 	}
 
 	/**
@@ -118,22 +113,6 @@ public class Item extends AppModel{
 	}
 
 	/**
-	 * This method will set the category of <code>Item</code> expenses and 
-	 * notify Listener in listeners about this update.
-	 * 
-	 * @param category  a String variable
-	 * @throws StatusException 
-	 * @throws NetWorkException 
-	 */
-	public void setCategory(String category) throws StatusException, NetWorkException {
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		this.category=category;
-		notifyListeners();
-	}
-
-	/**
 	 * Return the String variable category. This method will be used when other 
 	 * class need to use or display the category of <code>Item</code> expenses. 
 	 * 
@@ -141,22 +120,6 @@ public class Item extends AppModel{
 	 */
 	public String getCategory() {
 		return category;
-	}
-
-	/**
-	 * This method will add a description to <code>Item</code> expenses and 
-	 * notify Listener in listeners about this update.
-	 * 
-	 * @param description  a String variable
-	 * @throws StatusException 
-	 * @throws NetWorkException 
-	 */
-	public void setDescription(String description) throws StatusException, NetWorkException {
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		this.description=description;
-		notifyListeners();
 	}
 
 	/**
@@ -170,22 +133,6 @@ public class Item extends AppModel{
 	}
 
 	/**
-	 * This method will set an amount to <code>Item</code> expenses and 
-	 * notify Listener in listeners about this update.
-	 * 
-	 * @param amount  a Double variable
-	 * @throws StatusException 
-	 * @throws NetWorkException 
-	 */
-	public void setAmount(Double amount) throws StatusException, NetWorkException {
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		this.amount=amount;
-		notifyListeners();
-	}
-
-	/**
 	 * Return the Double variable amount. This method will be used when other 
 	 * class need to use or display the amount of <code>Item</code> expenses. 
 	 * 
@@ -193,22 +140,6 @@ public class Item extends AppModel{
 	 */
 	public Double getAmount() {
 		return amount;
-	}
-
-	/**
-	 * This method will set a currency to the amount of <code>Item</code> 
-	 * expenses and notify Listener in listeners about this update.
-	 * 
-	 * @param currency  a String variable
-	 * @throws StatusException 
-	 * @throws NetWorkException 
-	 */
-	public void setCurrency(String currency) throws StatusException, NetWorkException {
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		this.currency=currency;
-		notifyListeners();
 	}
 
 	/**
@@ -222,22 +153,6 @@ public class Item extends AppModel{
 		return currency;
 	}
 	
-	/**
-	 * This method will set a flag to the <code>Item</code> 
-	 * expenses and notify Listener in listeners about this update.
-	 * 
-	 * @param b  a boolean variable
-	 * @throws StatusException 
-	 * @throws NetWorkException 
-	 */
-	public void setFlag(boolean b) throws StatusException, NetWorkException {
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
-		flag=b;
-		notifyListeners();
-	}
-
 	/**
 	 * Return the boolean variable flag. This method will be used when other 
 	 * class need to use or display the flag of <code>Item</code> expenses.
@@ -262,15 +177,15 @@ public class Item extends AppModel{
 				"Photographic Receipt: "+(receipt.getPhotoStr()==null?"Not Have":"Have")+'\n'+"Incompleteness: "+(flag?"YES":"NO");	
 	}
 	
-	/**
-	 * This method will create a receipt for the <code>Item</code> 
-	 * expenses.
-	 * 
-	 * @param receipt  a Receipt object
-	 */
-	public void setRecipt(Receipt receipt) {
-		this.receipt=receipt;
-	}
+//	/**
+//	 * This method will create a receipt for the <code>Item</code> 
+//	 * expenses.
+//	 * 
+//	 * @param receipt  a Receipt object
+//	 */
+//	public void setRecipt(Receipt receipt) {
+//		this.receipt=receipt;
+//	}
 	
 	/**
 	 * Return the Receipt object receipt as default value null. This method 
@@ -301,69 +216,7 @@ public class Item extends AppModel{
 		receipt.addModelListener(l);
 	}
 	
-	/**
-	 * This method will justify if the program has taken a photo of the 
-	 * <code>Item</code> expenses detail. The default value of the boolean 
-	 * variable is false.
-	 * 
-	 * @return false  a boolean variable
-	 */
-	public boolean takePhoto(){
-		return false;
-	}
-	
-	/**
-	 * This method will justify if the program can get the photo of the 
-	 * <code>Item</code> expenses detail. The default value of the boolean 
-	 * variable is false.
-	 * 
-	 * @return false  a boolean variable
-	 */
-	public static boolean getPhoto(){
-		return false;
-	}
-	
-	/**
-	 * This method will justify if the program can delete the photo of the 
-	 * <code>Item</code> expenses detail. The default value of the boolean 
-	 * variable is false. 
-	 * 
-	 * @return false  a boolean variable
-	 */
-	public boolean deletePhoto(){
-		return false;
-	}
-	
-	/**
-	 * This method will return the size of the photo. It will be called when 
-	 * other classes need to use or display the size of the photo. The default 
-	 * value is 0.
-	 * 
-	 * @return 0  an integer variable
-	 */
-	public static int photoSize(){
-		return 0;
-	}
-	public void savePhoto(){
-		
-	}
 
-	/**
-	 * Check if the information of the item is fulfilled and return a
-	 * boolean value with default as false. This method will be used 
-	 * when user finished editing Item.
-	 * 
-	 * @return false  a boolean value
-	 */
-	public boolean infoComplete() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public void setIncomplete() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public boolean getMissValue() {

@@ -66,6 +66,12 @@ public abstract class AppModel{
 		modelListeners=new ArrayList<Listener>();
 	}
 	
+	public AppModel(AppModel app) {
+		// TODO Auto-generated constructor stub
+		listeners=app.getListeners();
+		modelListeners=app.getModelListeners();
+	}
+
 	/**
 	 * This method allows user to add a Listener to the ArrayList listeners
 	 * 
