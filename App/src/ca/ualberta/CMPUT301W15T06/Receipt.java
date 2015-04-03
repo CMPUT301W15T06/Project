@@ -33,13 +33,18 @@ package ca.ualberta.CMPUT301W15T06;
  * @author CMPUT301W15T06
  * @version 03/07/2015
  */
-public class Receipt extends AppModel {
+public abstract class Receipt extends AppModel {
 	
 //	/**
 //	 * Set a private field photo String.
 //	 */
 	protected String photoStr=null;
 	
+	
+	public Receipt(){
+		super();
+		
+	}
 	
 	public Receipt(Receipt receipt){
 		super(receipt);
@@ -60,6 +65,6 @@ public class Receipt extends AppModel {
 		// TODO Auto-generated method stub
 		return photoStr==null;
 	}
-
+	public abstract void setPhotoStr(String photo) throws StatusException, NetWorkException;
 
 }

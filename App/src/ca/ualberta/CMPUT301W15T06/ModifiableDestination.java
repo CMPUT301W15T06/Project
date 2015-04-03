@@ -7,6 +7,9 @@ public class ModifiableDestination extends Destination {
 		super(dest);
 	}
 
+	public ModifiableDestination(){
+		super();
+	}
 	public void setName(String name) throws NetWorkException {
 		this.name=name;
 		notifyListeners();

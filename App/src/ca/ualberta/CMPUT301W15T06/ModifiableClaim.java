@@ -14,26 +14,32 @@ public class ModifiableClaim extends Claim {
 		}
 		
 		for (Destination dest:oldClaim.getDestinationList()){
-			itemList.add(new ModifiableDestination(dest));
+			destinationList.add(new ModifiableDestination(dest));
 		}
 	}
 
-	public void setBeginDate(Date beginDate) throws 
-			WrongEndDateException, NetWorkException {
-				if (beginDate.after(endDate)){
-					throw new WrongEndDateException();
-				}
-				this.beginDate=beginDate;
-				notifyListeners();
-			}
+	public ModifiableClaim(String name){
+		super(name);		
+	}
+	
+	public ModifiableClaim(){
+		super();		
+	}
+	public void setBeginDate(Date beginDate) throws WrongEndDateException, NetWorkException {
+		if (beginDate.after(endDate)){
+			throw new WrongEndDateException();
+		}
+		this.beginDate=beginDate;
+		notifyListeners();
+	}
 
 	public void setEndDate(Date endDate) throws WrongEndDateException, NetWorkException {
-				if (beginDate.after(endDate)){
-					throw new WrongEndDateException();
-				}
-				this.endDate=endDate;
-				notifyListeners();
-			}
+		if (beginDate.after(endDate)){
+			throw new WrongEndDateException();
+		}
+		this.endDate=endDate;
+		notifyListeners();
+	}
 
 
 

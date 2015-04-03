@@ -11,6 +11,10 @@ public class ModifiableItem extends Item {
 		receipt=new ModifiableReceipt(item.getRecipt());
 	}
 
+	public ModifiableItem() {
+		// TODO Auto-generated constructor stub
+		super();	
+	}
 
 	public void setDate(Date itemDate) throws NetWorkException {
 			date=itemDate;

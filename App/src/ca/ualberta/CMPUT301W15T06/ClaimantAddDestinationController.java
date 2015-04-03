@@ -80,7 +80,7 @@ public class ClaimantAddDestinationController {
 			throw new StatusException();					
 		}
 
-		Destination destination=new Destination();
+		ModifiableDestination destination=new ModifiableDestination();
 
 		
 		destination.addModelListener(new Listener() {

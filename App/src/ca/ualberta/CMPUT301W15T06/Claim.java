@@ -48,7 +48,7 @@ import java.util.Date;
  * @see java.util.ArrayList
  * @see java.util.Date
  */
-public class Claim extends AppModel{
+public abstract class Claim extends AppModel{
 
 	/**
 	 * Set protected Date beginDate and endDate to record the beginning and ending date for travel.
@@ -89,6 +89,10 @@ public class Claim extends AppModel{
 	 * @param name  the full name of the claimant (like "Tom Smith")
 	 * @see java.util.ArrayList
 	 */
+	
+	public Claim(){
+		super();
+	}
 	public Claim(String name) {
 		super();
 		itemList=new ArrayList<Item>();
@@ -112,6 +116,8 @@ public class Claim extends AppModel{
 		this.status=status;
 		comments=oldClaim.getComments();
 		tagIDList=oldClaim.getTagIDList();
+		itemList=new ArrayList<Item>();
+		destinationList=new ArrayList<Destination>();
 	}
 	
 	/**
@@ -209,13 +215,13 @@ public class Claim extends AppModel{
 			dest+='\n'+"      "+d.getName();
 		}
 		String approver="";
-		ArrayList<String> nal= new ArrayList<String>();
-		for(Comment comment:getCommentList()){
-			if(!nal.contains(comment.getApproverName())){
-				nal.add(comment.getApproverName());
-				approver+='\n'+"      "+comment.getApproverName();
-			}
-		}
+//		ArrayList<String> nal= new ArrayList<String>();
+//		for(Comment comment:getCommentList()){
+//			if(!nal.contains(comment.getApproverName())){
+//				nal.add(comment.getApproverName());
+//				approver+='\n'+"      "+comment.getApproverName();
+//			}
+//		}
 		
 		return "Claimant: "+name+'\n'+"Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+
 				getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY")+'\n'+"Approver(s): "+approver;
@@ -390,5 +396,8 @@ public class Claim extends AppModel{
 	}
 
 
+	public abstract void setBeginDate(Date beginDate) throws WrongEndDateException, NetWorkException, StatusException;
+
+	public abstract void setEndDate(Date endDate) throws StatusException, WrongEndDateException, NetWorkException;
 
 }

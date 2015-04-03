@@ -134,7 +134,7 @@ public class ApproverClaimListActivity extends Activity {
 								Toast.makeText(ApproverClaimListActivity.this, "Cant't added comment to your own claim!", Toast.LENGTH_LONG).show();
 
 							}else{
-								if(claim.getCommentList().size()==0||claim.getCommentList().get(claim.getCommentList().size()-1).isFinish()){
+								if(true){//claim.getCommentList().size()==0||claim.getCommentList().get(claim.getCommentList().size()-1).isFinish()){
 									AlertDialog.Builder builder = new AlertDialog.Builder(ApproverClaimListActivity.this);
 									builder.setTitle("Enter the Comment");
 									final EditText input=new EditText(ApproverClaimListActivity.this);							
@@ -164,8 +164,8 @@ public class ApproverClaimListActivity extends Activity {
 									builder.create();  
 									builder.show();
 								}else{
-									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
-											+" has commited this claim, need him to return or approve this claim!", Toast.LENGTH_LONG).show();
+//									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
+//											+" has commited this claim, need him to return or approve this claim!", Toast.LENGTH_LONG).show();
 	
 								}
 							}
@@ -180,8 +180,8 @@ public class ApproverClaimListActivity extends Activity {
 									Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
 								}catch (WrongApproverException e) {
 									// TODO Auto-generated catch block
-									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
-											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
+//									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
+//											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
 
 								}
 							}
@@ -197,8 +197,8 @@ public class ApproverClaimListActivity extends Activity {
 									Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
 								}catch (WrongApproverException e) {
 									// TODO Auto-generated catch block
-									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
-											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
+//									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
+//											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
 
 								}
 							}

@@ -38,7 +38,7 @@ import java.util.Date;
  * @version 03/16/2015
  * @see java.util.Date
  */
-public class Item extends AppModel{
+public abstract class Item extends AppModel{
 
 	/**
 	 * Set a Date object date to record the date of the <code>Item</code> expenses.
@@ -80,7 +80,7 @@ public class Item extends AppModel{
 
 	public Item() {
 		super();
-		receipt=new Receipt();
+		receipt=new ModifiableReceipt();;
 		
 		date=AppSingleton.removeTime(new Date());
 		
@@ -238,6 +238,20 @@ public class Item extends AppModel{
 	}
 
 	
-	
+	public abstract void setDate(Date itemDate) throws StatusException, NetWorkException;
+
+
+	public abstract void setCategory(String category) throws StatusException, NetWorkException;
+
+
+	public abstract void setDescription(String description) throws StatusException, NetWorkException;
+
+
+	public abstract void setAmount(Double amount) throws StatusException, NetWorkException;
+
+
+	public abstract void setCurrency(String currency) throws StatusException, NetWorkException;
+
+	public abstract void setFlag(boolean b) throws StatusException, NetWorkException;
 	
 }

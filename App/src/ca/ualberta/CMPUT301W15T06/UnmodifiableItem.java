@@ -12,8 +12,8 @@ public class UnmodifiableItem extends Item {
 
 
 	public void setDate(Date itemDate) throws StatusException{
-				throw new StatusException();					
-			}
+		throw new StatusException();					
+	}
 
 
 	public void setCategory(String category) throws StatusException{

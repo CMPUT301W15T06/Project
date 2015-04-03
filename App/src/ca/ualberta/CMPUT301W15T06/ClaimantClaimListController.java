@@ -59,7 +59,7 @@ public class ClaimantClaimListController {
 
 	public void addClaim() throws NetWorkException {
 		// TODO Auto-generated method stub
-		Claim claim=new Claim(user.getUserName());
+		ModifiableClaim claim=new ModifiableClaim(user.getUserName());
 		
 		claim.addModelListener(new Listener() {
 			

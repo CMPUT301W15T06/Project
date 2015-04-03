@@ -15,11 +15,14 @@ public class UnmodifiableClaim extends Claim {
 		}
 		
 		for (Destination dest:oldClaim.getDestinationList()){
-			itemList.add(new UnmodifiableDestination(dest));
+			destinationList.add(new UnmodifiableDestination(dest));
 		}	
 		
 	}
 
+	public UnmodifiableClaim() {
+		super();
+	}
 	public void setBeginDate(Date beginDate) throws StatusException{
 		throw new StatusException();							
 	}

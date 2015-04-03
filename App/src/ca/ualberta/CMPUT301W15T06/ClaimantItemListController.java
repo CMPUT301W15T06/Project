@@ -67,7 +67,12 @@ public class ClaimantItemListController {
 		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
 			throw new StatusException();					
 		}	
-		claim.setStatus("Submitted");	
+		User user=AppSingleton.getInstance().getCurrentUser();
+		user.getClaimList().remove(claim);
+		claim=new UnmodifiableClaim(claim,"Submitted");
+		user.getClaimList().add(claim);
+		user.notifyListeners();
+		
 	}
 
 	public void delete() throws StatusException, NetWorkException {
@@ -85,7 +90,7 @@ public class ClaimantItemListController {
 		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
 			throw new StatusException();					
 		}	
-		Item item=new Item();
+		ModifiableItem item=new ModifiableItem();
 		
 		item.addModelListener(new Listener() {
 			
