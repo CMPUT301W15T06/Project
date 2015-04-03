@@ -131,7 +131,7 @@ public class ClaimantItemDetailActivity extends Activity {
 	 * @see android.content.Intent
 	 */
 	public void editItem(View v){
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+		if (!AppSingleton.getInstance().isEditable()){
 			Toast.makeText(ClaimantItemDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();			
 		}else{
 			Intent intent =new Intent(ClaimantItemDetailActivity.this,ClaimantEditItemActivity.class);

@@ -116,12 +116,6 @@ public abstract class AppModel{
 	 * @throws NetWorkException 
 	 */
 	public void notifyListeners() throws NetWorkException {
-		for (Listener  listener : getListeners()) {
-			listener.update();
-		}
-		for (Listener  listener : getModelListeners()) {
-			listener.update();
-		}
 		if(AppSingleton.getInstance().iscMod()){
 			ClaimListManager.getInstance().save(AppSingleton.getInstance().getUserName());
 		}else{
@@ -134,6 +128,13 @@ public abstract class AppModel{
 				Log.i("save","suc");
 			}
 		}
+		for (Listener  listener : getListeners()) {
+			listener.update();
+		}
+		for (Listener  listener : getModelListeners()) {
+			listener.update();
+		}
+		
 	}
 
 	/**

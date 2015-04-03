@@ -215,13 +215,13 @@ public class Claim extends AppModel{
 			dest+='\n'+"      "+d.getName();
 		}
 		String approver="";
-//		ArrayList<String> nal= new ArrayList<String>();
-//		for(Comment comment:getCommentList()){
-//			if(!nal.contains(comment.getApproverName())){
-//				nal.add(comment.getApproverName());
-//				approver+='\n'+"      "+comment.getApproverName();
-//			}
-//		}
+		ArrayList<String> nal= new ArrayList<String>();
+		for(Comment comment:comments.getCommentList()){
+			if(!nal.contains(comment.getApproverName())){
+				nal.add(comment.getApproverName());
+				approver+='\n'+"      "+comment.getApproverName();
+			}
+		}
 		
 		return "Claimant: "+name+'\n'+"Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+
 				getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY")+'\n'+"Approver(s): "+approver;

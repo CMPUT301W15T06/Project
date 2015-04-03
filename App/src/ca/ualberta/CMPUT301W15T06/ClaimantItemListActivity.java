@@ -232,7 +232,7 @@ public class ClaimantItemListActivity extends Activity {
 	}
 		
 	public void editClaim(MenuItem m){
-		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
+		if (!AppSingleton.getInstance().isEditable()){
 			Toast.makeText(ClaimantItemListActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();			
 		}else{
 			Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantEditClaimActivity.class);

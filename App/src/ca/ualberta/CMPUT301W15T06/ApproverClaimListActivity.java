@@ -83,7 +83,7 @@ public class ApproverClaimListActivity extends Activity {
 		//set list view of claimlist
 		ListView listView = (ListView) findViewById(R.id.claimListView);
 		list=AppSingleton.getInstance().getNeedApproveList();
-		setList();
+
 		adapter=new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1,list);
 		adapter.sort(sortClaim());
 		listView.setAdapter(adapter);
@@ -94,9 +94,7 @@ public class ApproverClaimListActivity extends Activity {
 				@Override
 				public void update() {
 					// TODO Auto-generated method stub
-					setList();
-					adapter.clear();
-					adapter.addAll(list);
+
 					adapter.sort(sortClaim());
 					adapter.notifyDataSetChanged();
 				}
@@ -132,9 +130,8 @@ public class ApproverClaimListActivity extends Activity {
 						}else if (which==COMMENT){
 							if(user.getUserName().equals(claim.getName())){
 								Toast.makeText(ApproverClaimListActivity.this, "Cant't added comment to your own claim!", Toast.LENGTH_LONG).show();
-
 							}else{
-								if(true){//claim.getCommentList().size()==0||claim.getCommentList().get(claim.getCommentList().size()-1).isFinish()){
+								if(claim.getComments().isFinish()){
 									AlertDialog.Builder builder = new AlertDialog.Builder(ApproverClaimListActivity.this);
 									builder.setTitle("Enter the Comment");
 									final EditText input=new EditText(ApproverClaimListActivity.this);							
@@ -164,8 +161,8 @@ public class ApproverClaimListActivity extends Activity {
 									builder.create();  
 									builder.show();
 								}else{
-//									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
-//											+" has commited this claim, need him to return or approve this claim!", Toast.LENGTH_LONG).show();
+									Toast.makeText(ApproverClaimListActivity.this, claim.getComments().getUnFinishedComment().getApproverName()
+											+" has commited this claim, need him to return or approve this claim!", Toast.LENGTH_LONG).show();
 	
 								}
 							}
@@ -180,8 +177,8 @@ public class ApproverClaimListActivity extends Activity {
 									Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
 								}catch (WrongApproverException e) {
 									// TODO Auto-generated catch block
-//									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
-//											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
+									Toast.makeText(ApproverClaimListActivity.this, claim.getComments().getUnFinishedComment().getApproverName()
+											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
 
 								}
 							}
@@ -197,8 +194,8 @@ public class ApproverClaimListActivity extends Activity {
 									Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
 								}catch (WrongApproverException e) {
 									// TODO Auto-generated catch block
-//									Toast.makeText(ApproverClaimListActivity.this, claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName()
-//											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
+									Toast.makeText(ApproverClaimListActivity.this, claim.getComments().getUnFinishedComment().getApproverName()
+											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
 
 								}
 							}
@@ -226,16 +223,6 @@ public class ApproverClaimListActivity extends Activity {
 		};
 	}
 
-	private void setList() {
-		// TODO Auto-generated method stub
-		ArrayList<Claim> cl = new ArrayList<Claim>();
-		for(Claim claim:list){
-			if(claim.getStatus().equals("Submitted")){
-				cl.add(claim);
-			}
-		}
-		list=cl;
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

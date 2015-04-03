@@ -96,20 +96,24 @@ public class ClaimantReceiptActivity extends Activity {
 	
 	//https://eclass.srv.ualberta.ca/mod/resource/view.php?id=1314790 Author:Unknow
 	public void addPhoto(MenuItem m) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        
-        String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp";
-        File folderF = new File(folder);
-        if (!folderF.exists()) {
-            folderF.mkdir();
-        }
-        
-        String imageFilePath = folder + "/" + String.valueOf(System.currentTimeMillis()) + ".jpeg";
-        File imageFile = new File(imageFilePath);
-        imageFileUri = Uri.fromFile(imageFile);
-        
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
-        startActivityForResult(intent,ADD_PHOTO_RQ);
+		if(!AppSingleton.getInstance().isEditable()){
+			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+		}else{
+	        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	        
+	        String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp";
+	        File folderF = new File(folder);
+	        if (!folderF.exists()) {
+	            folderF.mkdir();
+	        }
+	        
+	        String imageFilePath = folder + "/" + String.valueOf(System.currentTimeMillis()) + ".jpeg";
+	        File imageFile = new File(imageFilePath);
+	        imageFileUri = Uri.fromFile(imageFile);
+	        
+	        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+	        startActivityForResult(intent,ADD_PHOTO_RQ);
+		}
         
     }
 	

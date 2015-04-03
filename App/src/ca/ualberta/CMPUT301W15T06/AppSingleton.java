@@ -88,7 +88,7 @@ public class AppSingleton {
 	 * @see java.util.Date
 	 */
 	private Date editDate;
-	private User tempUser;
+	
 
 	
 	/**
@@ -111,6 +111,7 @@ public class AppSingleton {
 	
 	private boolean cMod;
 	
+	private boolean editable;
 	private boolean suc;
 	private Object pg;
 	/**
@@ -119,40 +120,6 @@ public class AppSingleton {
 	 */
     private AppSingleton() {  
     	
-    	
-//    	userList=new ESClient().getUserList();
-//    	for(String name:userList.getUserList()){
-//    		
-//    	}
-    	
-    	
-    	
-//    	Thread thread = new Thread(new Runnable(){
-//		    @Override
-//		    public void run() {
-//		    	User online=new ESClient().getClaimList();
-//		    	User local=ClaimListManager.getInstance().load();
-//		    	if (online ==null){
-//		    		currentUser=local;	    		
-//		    	}else if (online.getLastModify()==null){
-//		    		currentUser=local;
-//		    	}else if (local.getLastModify()==null){
-//		    		currentUser=online;
-//		    	}else if (local.getLastModify().after(online.getLastModify())){
-//		    		currentUser=local;
-//		    	}else{
-//		    		currentUser=online;
-//		    	}
-//		    }
-//		});
-//
-//		thread.start();
-//		try {
-//			thread.join();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			throw new RuntimeException(e.getMessage());
-//		}
     }  
     
     /**
@@ -265,16 +232,6 @@ public class AppSingleton {
 		return editDate;
 	}
 
-	/**
-	 * Return the a String variable status. This method will be used when 
-	 * other class need to use or display the status.
-	 * 
-	 * @return status  a String variable
-	 */
-	public String getStatus() {
-		return currentClaim.getStatus();
-
-	}
 	
 	/**
 	 * This method will provide a standard format for Date object and 
@@ -436,31 +393,19 @@ public class AppSingleton {
 		return null;
 	}
 
-	public void setTempUser(String string) {
-		for (User user:approverUserList){
-			if(user.getUserName().equals(string)){
-				tempUser=user;
-			}
-		}
-	}
 
 	public ArrayList<User> getApproverUserList() {
 		return approverUserList;
 	}
 
+	public boolean isEditable() {
+		return currentClaim.getStatus().equals("In progress")||currentClaim.getStatus().equals("Returned");
+	}
+
+
+	
+
 	
 	
-	
-//	public static int getYear(String date){
-//		return Integer.valueOf(date.split("-")[0]);
-//	}
-//	
-//	public static int getMonth(String date){
-//		return Integer.valueOf(date.split("-")[1]);
-//	}
-//	
-//	public static int getDay(String date){
-//		return Integer.valueOf(date.split("-")[2]);
-//	}
     
 }

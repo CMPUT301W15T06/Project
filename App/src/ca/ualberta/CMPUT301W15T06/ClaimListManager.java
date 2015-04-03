@@ -354,7 +354,7 @@ public class ClaimListManager {
 		Thread thread = new Thread(new Runnable(){
 		    @Override
 		    public void run() {
-		    	Log.i("name",AppSingleton.getInstance().getTempUser().getUserName());
+		    	
 		        try {
 		   
 		        	new ESClient().pushUser(AppSingleton.getInstance().getTempUser());

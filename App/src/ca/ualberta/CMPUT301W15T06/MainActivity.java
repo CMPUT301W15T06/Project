@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		Log.i("ttttttt","1");
+
 
 		ClaimListManager.initial(getApplicationContext());
 		pg =ProgressDialog.show(this, "Pushing Onling...","Please wait patiently :)", true);

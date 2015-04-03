@@ -1,5 +1,7 @@
 package ca.ualberta.CMPUT301W15T06;
 
+import android.util.Log;
+
 public class ApproverClaimListController {
 
 	private Claim claim;
@@ -14,54 +16,68 @@ public class ApproverClaimListController {
 		Comment comment=new Comment(string);
 		
 	
-//		claim.getCommentList().add(comment);
-//		try {
-//			claim.notifyListeners();
-//		} catch (NetWorkException e) {
-//			// TODO Auto-generated catch block
-//			claim.getCommentList().remove(comment);
-//			throw new NetWorkException();
-//		}
+		claim.getComments().getCommentList().add(comment);
+		try {
+			claim.notifyListeners();
+		} catch (NetWorkException e) {
+			// TODO Auto-generated catch block
+			claim.getComments().getCommentList().remove(comment);
+			throw new NetWorkException();
+		}
 		
 	}
 
 	public void returnClaim() throws NetWorkException, WrongApproverException {
 		// TODO Auto-generated method stub
-//		if(!claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName().equals(AppSingleton.getInstance().getUserName())){
-//			throw new WrongApproverException();
-//		}
-//		if(claim.getCommentList().size()==0||claim.getCommentList().get(claim.getCommentList().size()-1).isFinish()){
-//			addComment("The Approver didn't give comments.");
-//		}
-//		try {
-//			claim.getCommentList().get(claim.getCommentList().size()-1).setFinish(true);
-//			claim.setStatus("Returned");
-//		} catch (NetWorkException e) {
-//			// TODO Auto-generated catch block
-//			claim.getCommentList().get(claim.getCommentList().size()-1).setFinish(false);
-//			claim.setStatusSimple("Submitted");
-//			throw new NetWorkException();
-//		}
+
+		if(claim.getComments().isFinish()){
+			addComment("The Approver didn't give comments.");
+		}else if(!claim.getComments().getUnFinishedComment().getApproverName().equals(AppSingleton.getInstance().getUserName())){
+			throw new WrongApproverException();
+		}
+		User user =AppSingleton.getInstance().getTempUser();
+
+		user.getClaimList().remove(claim);
+		ModifiableClaim modifiableClaim=new ModifiableClaim(claim,"Returned");
+		user.getClaimList().add(modifiableClaim);
+		modifiableClaim.getComments().getUnFinishedComment().setFinish(true);
+		try {			
+			claim.notifyListeners();
+			AppSingleton.getInstance().getNeedApproveList().remove(claim);
+			claim=modifiableClaim;
+			AppSingleton.getInstance().setCurrentClaim(modifiableClaim);
+
+		} catch (NetWorkException e) {
+			// TODO Auto-generated catch block
+			user.getClaimList().add(claim);
+			user.getClaimList().remove(modifiableClaim);
+			throw new NetWorkException();
+		}
+		
 	
 	}
 
 	public void approveClaim() throws NetWorkException, WrongApproverException {
 		// TODO Auto-generated method stub
-//		if(!claim.getCommentList().get(claim.getCommentList().size()-1).getApproverName().equals(AppSingleton.getInstance().getUserName())){
-//			throw new WrongApproverException();
-//		}
-//		if(claim.getCommentList().size()==0||claim.getCommentList().get(claim.getCommentList().size()-1).isFinish()){
-//			addComment("The Approver didn't give comments.");
-//		}
-//		try {
-//			claim.getCommentList().get(claim.getCommentList().size()-1).setFinish(true);
-//			claim.setStatus("Approved");
-//		} catch (NetWorkException e) {
-//			// TODO Auto-generated catch block
-//			claim.getCommentList().get(claim.getCommentList().size()-1).setFinish(false);
-//			claim.setStatusSimple("Submitted");
-//			throw new NetWorkException();
-//		}
+
+		if(claim.getComments().isFinish()){
+			addComment("The Approver didn't give comments.");
+		}else if(!claim.getComments().getUnFinishedComment().getApproverName().equals(AppSingleton.getInstance().getUserName())){
+			throw new WrongApproverException();
+		}
+		
+	
+		
+		try {
+			claim.getComments().getUnFinishedComment().setFinish(true);
+			claim.setStatus("Approved");
+			AppSingleton.getInstance().getNeedApproveList().remove(claim);
+		} catch (NetWorkException e) {
+			// TODO Auto-generated catch block
+			claim.getComments().getUnFinishedComment().setFinish(false);
+			claim.setStatusSimple("Submitted");
+			throw new NetWorkException();
+		}
 		
 	}
 

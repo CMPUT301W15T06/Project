@@ -53,7 +53,9 @@ public class ClaimantDeleteItemController {
 	 * @throws NetWorkException 
 	 */
 	public void removeItem(Item item) throws StatusException, NetWorkException{
-
+		if (!AppSingleton.getInstance().isEditable()){
+			throw new StatusException();					
+		}
 		claim.getItemList().remove(item);
 		claim.notifyListeners();
 	}

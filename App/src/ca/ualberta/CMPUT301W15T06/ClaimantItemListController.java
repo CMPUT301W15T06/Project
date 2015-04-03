@@ -64,20 +64,21 @@ public class ClaimantItemListController {
 
 	public void sumbmit() throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
-		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
+		if (!AppSingleton.getInstance().isEditable()){
 			throw new StatusException();					
 		}	
 		User user=AppSingleton.getInstance().getCurrentUser();
 		user.getClaimList().remove(claim);
 		claim=new UnmodifiableClaim(claim,"Submitted");
 		user.getClaimList().add(claim);
+		AppSingleton.getInstance().setCurrentClaim(claim);
 		user.notifyListeners();
 		
 	}
 
 	public void delete() throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
-		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
+		if (!AppSingleton.getInstance().isEditable()){
 			throw new StatusException();					
 		}	
 		User user=AppSingleton.getInstance().getCurrentUser();
@@ -87,7 +88,7 @@ public class ClaimantItemListController {
 
 	public void addItem() throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
-		if (claim.getStatus().equals("Submitted")||claim.getStatus().equals("Approved")){
+		if (!AppSingleton.getInstance().isEditable()){
 			throw new StatusException();					
 		}	
 		ModifiableItem item=new ModifiableItem();

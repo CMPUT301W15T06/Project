@@ -18,7 +18,7 @@ public class ClaimantReceiptController {
 	
 	public void addPhoto(Bitmap bm) throws StatusException, NetWorkException{
 
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+		if (!AppSingleton.getInstance().isEditable()){
 			throw new StatusException();					
 		}
 		String encoded =null;
@@ -40,7 +40,7 @@ public class ClaimantReceiptController {
 
 	public void deletePhoto() throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+		if (!AppSingleton.getInstance().isEditable()){
 			throw new StatusException();					
 		}
 		receipt.setPhotoStr(null);

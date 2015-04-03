@@ -76,7 +76,7 @@ public class ClaimantAddDestinationController {
 	 * @see java.util.Locale
 	 */
 	public void addDestination() throws StatusException, NetWorkException {
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
+		if (!AppSingleton.getInstance().isEditable()){
 			throw new StatusException();					
 		}
 
