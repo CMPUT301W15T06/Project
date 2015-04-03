@@ -25,6 +25,7 @@ import org.apache.http.util.EntityUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -35,9 +36,18 @@ public class ESClient {
 	private HttpClient httpclient = new DefaultHttpClient();
 
 	// JSON Utilities
-	private Gson gson = new Gson();
-
-
+	private Gson gson;
+	
+	
+	
+	public ESClient(){
+		gson=new GsonBuilder()
+	    .registerTypeAdapter(Claim.class, new GsonAdapter<Claim>())
+	    .registerTypeAdapter(Item.class, new GsonAdapter<Item>())
+	    .registerTypeAdapter(Destination.class, new GsonAdapter<Destination>())
+	    .registerTypeAdapter(Receipt.class, new GsonAdapter<Receipt>())
+	    .create();
+	}
 	/**
 	 * Consumes the POST/Insert operation of the service
 	 * @throws IOException 

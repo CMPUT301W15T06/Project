@@ -53,9 +53,7 @@ public class ClaimantDeleteItemController {
 	 * @throws NetWorkException 
 	 */
 	public void removeItem(Item item) throws StatusException, NetWorkException{
-		if (AppSingleton.getInstance().getStatus().equals("Submitted")||AppSingleton.getInstance().getStatus().equals("Approved")){
-			throw new StatusException();					
-		}
+
 		claim.getItemList().remove(item);
 		claim.notifyListeners();
 	}

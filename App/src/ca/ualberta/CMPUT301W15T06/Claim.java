@@ -48,7 +48,7 @@ import java.util.Date;
  * @see java.util.ArrayList
  * @see java.util.Date
  */
-public abstract class Claim extends AppModel{
+public class Claim extends AppModel{
 
 	/**
 	 * Set protected Date beginDate and endDate to record the beginning and ending date for travel.
@@ -396,8 +396,10 @@ public abstract class Claim extends AppModel{
 	}
 
 
-	public abstract void setBeginDate(Date beginDate) throws WrongEndDateException, NetWorkException, StatusException;
+	public void setBeginDate(Date beginDate) throws WrongEndDateException, NetWorkException, StatusException {
+	}
 
-	public abstract void setEndDate(Date endDate) throws StatusException, WrongEndDateException, NetWorkException;
+	public void setEndDate(Date endDate) throws StatusException, WrongEndDateException, NetWorkException {
+	}
 
 }

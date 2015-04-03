@@ -38,7 +38,7 @@ import java.util.Date;
  * @version 03/16/2015
  * @see java.util.Date
  */
-public abstract class Item extends AppModel{
+public class Item extends AppModel{
 
 	/**
 	 * Set a Date object date to record the date of the <code>Item</code> expenses.
@@ -238,20 +238,26 @@ public abstract class Item extends AppModel{
 	}
 
 	
-	public abstract void setDate(Date itemDate) throws StatusException, NetWorkException;
+	public void setDate(Date itemDate) throws StatusException, NetWorkException {
+	}
 
 
-	public abstract void setCategory(String category) throws StatusException, NetWorkException;
+	public  void setCategory(String category) throws StatusException, NetWorkException {
+	}
 
 
-	public abstract void setDescription(String description) throws StatusException, NetWorkException;
+	public  void setDescription(String description) throws StatusException, NetWorkException {
+	}
 
 
-	public abstract void setAmount(Double amount) throws StatusException, NetWorkException;
+	public  void setAmount(Double amount) throws StatusException, NetWorkException {
+	}
 
 
-	public abstract void setCurrency(String currency) throws StatusException, NetWorkException;
+	public  void setCurrency(String currency) throws StatusException, NetWorkException {
+	}
 
-	public abstract void setFlag(boolean b) throws StatusException, NetWorkException;
+	public  void setFlag(boolean b) throws StatusException, NetWorkException {
+	}
 	
 }

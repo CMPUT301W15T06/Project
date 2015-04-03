@@ -32,6 +32,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.reflect.TypeToken;
 
@@ -70,17 +71,24 @@ public class ClaimListManager {
 	 * @see android.content.Context
 	 */
 	private Context context=null;
+	private Gson gson;
 	
-	
-	/**
-	 * General construction. Set a Context context as the context that user
-	 * entered.
-	 * 
-	 * @param context  a Context object
-	 * @see android.content.Context
-	 */
+//	
+//	/**
+//	 * General construction. Set a Context context as the context that user
+//	 * entered.
+//	 * 
+//	 * @param context  a Context object
+//	 * @see android.content.Context
+//	 */
 	private ClaimListManager(Context context){
 		this.context=context;
+		gson = new GsonBuilder()
+	    .registerTypeAdapter(Claim.class, new GsonAdapter<Claim>())
+	    .registerTypeAdapter(Item.class, new GsonAdapter<Item>())
+	    .registerTypeAdapter(Destination.class, new GsonAdapter<Destination>())
+	    .registerTypeAdapter(Receipt.class, new GsonAdapter<Receipt>())
+	    .create();
 	}
 	
 	/**
@@ -126,7 +134,7 @@ public class ClaimListManager {
 	 * @return cl  a User object
 	 */
 	public User load(String name){
-		Gson gson =new Gson();
+		
 		User user=null;
 		try {
 			FileInputStream fis = context.openFileInput(USER_FILE+name);
@@ -176,7 +184,7 @@ public class ClaimListManager {
 	 */
 	public void save(String name){
 		
-		Gson gson=new Gson();
+		
 		final User user=AppSingleton.getInstance().getCurrentUser();
 		
 		Thread thread = new Thread(new Runnable(){
@@ -226,7 +234,7 @@ public class ClaimListManager {
 	}
 
 	public void saveLocal(User user){
-		Gson gson=new Gson();
+		
 		try {
 			FileOutputStream fos = context.openFileOutput(USER_FILE+user.getUserName(), 0);
 			OutputStreamWriter osw =new OutputStreamWriter(fos);		
@@ -270,7 +278,7 @@ public class ClaimListManager {
 	}
 
 	public UserList loadUserList(){
-		Gson gson =new Gson();
+		
 		UserList userList=null;
 		try {
 			FileInputStream fis = context.openFileInput("usrList");
@@ -322,7 +330,7 @@ public class ClaimListManager {
 
 	public void saveUserListLocal() {
 		// TODO Auto-generated method stub
-		Gson gson=new Gson();
+		
 		final UserList userList=AppSingleton.getInstance().getUserList();
 		try {
 			FileOutputStream fos = context.openFileOutput("usrList", 0);

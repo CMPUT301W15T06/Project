@@ -35,7 +35,7 @@ package ca.ualberta.CMPUT301W15T06;
  * @author CMPUT301W15T06
  * @version 03/16/2015
  */
-public abstract class Destination extends AppModel{
+public class Destination extends AppModel{
 	
 	/**
 	 * Set protected string name to record destination name. 
@@ -105,8 +105,10 @@ public abstract class Destination extends AppModel{
 	}
 
 	
-	public abstract void setName(String name) throws StatusException, NetWorkException;
+	public void setName(String name) throws StatusException, NetWorkException {
+	}
 
 
-	public abstract void setReason(String reason) throws StatusException, NetWorkException;
+	public void setReason(String reason) throws StatusException, NetWorkException {
+	}
 }

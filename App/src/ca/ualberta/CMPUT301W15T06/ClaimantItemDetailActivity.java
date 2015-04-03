@@ -114,13 +114,13 @@ public class ClaimantItemDetailActivity extends Activity {
 	public void deleteItem(View v){
 		try {
 			cdic.removeItem(AppSingleton.getInstance().getCurrentItem());
+			finish();
 		} catch (StatusException e) {
 			Toast.makeText(ClaimantItemDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
 		}catch (NetWorkException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
 		}	
-		finish();
 	}
 	
 	/**
