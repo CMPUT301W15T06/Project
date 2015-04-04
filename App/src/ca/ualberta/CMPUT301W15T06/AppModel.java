@@ -120,12 +120,10 @@ public abstract class AppModel{
 			ClaimListManager.getInstance().save(AppSingleton.getInstance().getUserName());
 		}else{
 			ClaimListManager.getInstance().approverSave();
-			Log.i("----","suc");
 			if(!AppSingleton.getInstance().isSuc()){
 				throw new NetWorkException();
 			}else{
 				ClaimListManager.getInstance().saveLocal(AppSingleton.getInstance().getTempUser());
-				Log.i("save","suc");
 			}
 		}
 		for (Listener  listener : getListeners()) {

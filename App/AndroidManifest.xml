@@ -69,7 +69,7 @@
         </activity>
         <activity
             android:name=".ApproverReciptActivity"
-            android:label="@string/title_activity_approver_recipt" >
+            android:label="@string/title_activity_claimant_recipt" >
         </activity>
         <activity
             android:name=".ClaimantClaimListActivity"

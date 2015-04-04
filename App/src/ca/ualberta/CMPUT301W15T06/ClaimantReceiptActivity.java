@@ -90,8 +90,12 @@ public class ClaimantReceiptActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_recipt, menu);
-		return true;
+		if(AppSingleton.getInstance().iscMod()){
+			getMenuInflater().inflate(R.menu.claimant_recipt, menu);
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	//https://eclass.srv.ualberta.ca/mod/resource/view.php?id=1314790 Author:Unknow

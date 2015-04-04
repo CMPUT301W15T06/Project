@@ -39,6 +39,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 /**
@@ -57,9 +58,9 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class ApproverItemListActivity extends Activity {
 	
-	private static final int PHOTO_RECEIPT = 1;
-	private static final int ITEM_DETAIL = 0;
-	private static final int CHANGE_FLAG = 3;
+	private static final int PHOTO_RECEIPT = 0;
+	private static final int LOCATION = 1;
+
 	private Claim claim;
 
 	@Override
@@ -88,7 +89,7 @@ public class ApproverItemListActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					final int position, long id) {
-				AppSingleton.getInstance().setCurrentItem(list.get(position));
+				AppSingleton.getInstance().setCurrentItem(adapter.getItem(position));
 				
 				AlertDialog.Builder builder = new AlertDialog.Builder(ApproverItemListActivity.this);
 				builder.setTitle(R.string.title_item_dialog);
@@ -102,18 +103,23 @@ public class ApproverItemListActivity extends Activity {
 	}
 	
 	public void itemChoice(Builder builder){
-		builder.setItems(R.array.item_dialog_array, new DialogInterface.OnClickListener() {
+		builder.setItems(R.array.approver_item_dialog_array, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				if (which==PHOTO_RECEIPT){
-//					Intent intent =new Intent(ApproverItemListActivity.this,ClaimantReceiptActivity.class);
-//					startActivity(intent);					
+					Intent intent =new Intent(ApproverItemListActivity.this,ClaimantReceiptActivity.class);
+					startActivity(intent);					
 				
-				}else if (which==ITEM_DETAIL){
-//					Intent intent =new Intent(ApproverItemListActivity.this,ClaimantItemDetailActivity.class);
-//					startActivity(intent);
+				}else if (which==LOCATION){
+					if(AppSingleton.getInstance().getCurrentItem().getLocation()==null){
+						Toast.makeText( ApproverItemListActivity.this, "This item doesn't have geolocation!", Toast.LENGTH_LONG).show();		
+					}else{
+						AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentItem().getLocation());
+						Intent intent =new Intent(ApproverItemListActivity.this,ShowLocationActivity.class);
+						startActivity(intent);
+					}
 				}
 				
 			}

@@ -30,10 +30,16 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 /**
 * This <code>ApproverClaimDetailListActivity</code> class is an extended class
@@ -69,6 +75,25 @@ public class ApproverClaimDetailListActivity extends Activity {
 		ArrayList<Destination> list =AppSingleton.getInstance().getCurrentClaim().getDestinationList();
 		final ArrayAdapter<Destination> adapter=new ArrayAdapter<Destination>(this, android.R.layout.simple_list_item_1,list);
 		listView.setAdapter(adapter);
+		
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+				AppSingleton.getInstance().setCurrentDestination(adapter.getItem(position));
+				if(AppSingleton.getInstance().getCurrentDestination().getLocation()==null){
+					Toast.makeText( ApproverClaimDetailListActivity.this, "This destination doesn't have geolocation!", Toast.LENGTH_LONG).show();		
+				}else{
+					AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentDestination().getLocation());
+					Intent intent =new Intent(ApproverClaimDetailListActivity.this,ShowLocationActivity.class);
+					startActivity(intent);
+				}
+				
+			}
+
+			
+		});
 		
 	}
 

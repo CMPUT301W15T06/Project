@@ -33,6 +33,10 @@
         <item>Attach a geolocation</item>
         <item>View the geolocation</item>
     </string-array>
+    <string-array name="approver_item_dialog_array">
+        <item>Photo Recipt</item>
+        <item>View the geolocation</item>
+    </string-array>
     <string-array name="dest_dialog_array">
         <item>Attach a geolocation</item>
         <item>View the geolocation</item>
