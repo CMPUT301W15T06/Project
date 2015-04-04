@@ -100,6 +100,7 @@ public final class R {
         public static final int itemDescriptionTextView=0x7f09002d;
         public static final int itemDescriptionVTextView=0x7f09002e;
         public static final int itemListView=0x7f090007;
+        public static final int llTextView=0x7f09003a;
         public static final int manage_tag=0x7f090044;
         public static final int nameClaimantClaimDetailTextView=0x7f09000b;
         public static final int nameValueClaimantClaimDetailTextView=0x7f09000c;
@@ -111,7 +112,6 @@ public final class R {
         public static final int submit=0x7f090047;
         public static final int tagListView=0x7f090038;
         public static final int takephoto=0x7f09004a;
-        public static final int textView1=0x7f09003a;
         public static final int userButton=0x7f090040;
         public static final int userTextView=0x7f09003e;
     }
@@ -133,6 +133,7 @@ public final class R {
         public static final int activity_get_location_by_map=0x7f03000e;
         public static final int activity_main=0x7f03000f;
         public static final int activity_map=0x7f030010;
+        public static final int activity_show_location=0x7f030011;
     }
     public static final class menu {
         public static final int approver_claim_detail_list=0x7f080000;
@@ -153,6 +154,7 @@ public final class R {
         public static final int item=0x7f08000f;
         public static final int main=0x7f080010;
         public static final int map=0x7f080011;
+        public static final int show_location=0x7f080012;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -182,6 +184,7 @@ public final class R {
         public static final int title_activity_claimant_tag_list=0x7f050007;
         public static final int title_activity_get_location_by_map=0x7f05001c;
         public static final int title_activity_map=0x7f05001b;
+        public static final int title_activity_show_location=0x7f05001d;
         public static final int title_claim_dialog=0x7f05000f;
         public static final int title_item_dialog=0x7f050010;
     }

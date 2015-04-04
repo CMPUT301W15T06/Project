@@ -28,11 +28,16 @@ package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
 
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -69,11 +74,15 @@ import android.widget.AdapterView.OnItemClickListener;
 public class ClaimantClaimDetailActivity extends Activity {
 
 	
+	private static final int SHOW_LOCATION = 2;
 	private static final int SET_LOCATION_BY_GPS = 0;
 	private static final int SET_LOCATION_BY_MAP = 1;
-	private ClaimantAddDestinationController cadc=null;
+	private ClaimantClaimDetailController ccdc=null;
 	private Claim claim;
 	private ArrayList<Destination> list;
+	private AlertDialog.Builder adb;
+	private AlertDialog dia;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,7 +90,7 @@ public class ClaimantClaimDetailActivity extends Activity {
 		
 
 		claim=AppSingleton.getInstance().getCurrentClaim();
-		cadc=new ClaimantAddDestinationController(claim);
+		ccdc=new ClaimantClaimDetailController(claim);
 		
 		TextView beginView=(TextView) findViewById(R.id.startDateValueClaimantClaimDetailTextView);
 		TextView endView=(TextView) findViewById(R.id.endingDateValueClaimantClaimDetailTextView);
@@ -127,19 +136,70 @@ public class ClaimantClaimDetailActivity extends Activity {
 		// TODO Auto-generated method stub
 		builder.setItems(R.array.dest_dialog_array, new DialogInterface.OnClickListener() {
 			
+
+
+			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				if (which ==SET_LOCATION_BY_GPS){
+					final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+					Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			
 					
+					adb = new AlertDialog.Builder(ClaimantClaimDetailActivity.this);
+					adb.setMessage("Please send a location!");
+					adb.setPositiveButton("Stop waiting for location", new OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							lm.removeUpdates(listener);
+						}
+					});
+					dia=adb.create();  
+					dia.show();
+					if (location != null){
+						
+						try {
+							ccdc.setLocation(location);
+							dia.setMessage("Location set as:\n Lat: " + location.getLatitude()
+									+ "\nLong: " + location.getLongitude());
+						} catch (NetWorkException e) {
+							// TODO Auto-generated catch block
+							throw new RuntimeException(e);
+						} catch (StatusException e) {
+							// TODO Auto-generated catch block
+							Toast.makeText( ClaimantClaimDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+						}
+						
+					
+					}				
+					
+					lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, listener);
+
 										
 				}else if (which==SET_LOCATION_BY_MAP){
+					AppSingleton.getInstance().setMapController(new MapController() {
+						
+						@Override
+						public void setLocation(Location location) throws NetWorkException, StatusException {
+							// TODO Auto-generated method stub
+							AppSingleton.getInstance().getCurrentDestination().setLocation(location);
+						}
+					});
 					Intent intent =new Intent(ClaimantClaimDetailActivity.this,GetLocationByMapActivity.class);
 					startActivity(intent);					
 				
-				}else if (which==2){
-//					Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantItemDetailActivity.class);
-//					startActivity(intent);
+				}else if (which==SHOW_LOCATION){
+					if(AppSingleton.getInstance().getCurrentDestination().getLocation()==null){
+						Toast.makeText( ClaimantClaimDetailActivity.this, "This destination doesn't have geolocation!", Toast.LENGTH_LONG).show();		
+					}else{
+						AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentDestination().getLocation());
+						Intent intent =new Intent(ClaimantClaimDetailActivity.this,ShowLocationActivity.class);
+						startActivity(intent);
+					}
 				}
 				
 			}
@@ -165,16 +225,47 @@ public class ClaimantClaimDetailActivity extends Activity {
 	 */
 	public void addDestination(View v){
 		try {
-			cadc.addDestination();
+			ccdc.addDestination();
 			Intent intent =new Intent(ClaimantClaimDetailActivity.this,ClaimantEditDestinationActivity.class);
 			startActivity(intent);
 		} catch (StatusException e) {
 			// TODO Auto-generated catch block
-			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+			Toast.makeText( ClaimantClaimDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
 		}catch (NetWorkException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
 		}	
 	}
+	
+	private final LocationListener listener = new LocationListener() {
+		public void onLocationChanged (Location location) {
+
+			if (location != null) {
+				try {
+					ccdc.setLocation(location);
+					dia.setMessage("Location set as:\n Lat: " + location.getLatitude()
+							+ "\nLong: " + location.getLongitude());
+				} catch (NetWorkException e) {
+					// TODO Auto-generated catch block
+					throw new RuntimeException(e);
+				} catch (StatusException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText( ClaimantClaimDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+				}
+			}
+		}
+		
+		public void onProviderDisabled (String provider) {
+			
+		}
+		
+		public  void onProviderEnabled (String provider) {
+			
+		}
+		
+		public void onStatusChanged (String provider, int status, Bundle extras) {
+			
+		}
+	};
 
 }

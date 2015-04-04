@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".GetLocationByMapActivity" >
+    tools:context="ca.ualberta.CMPUT301W15T06.ShowLocationActivity" >
 
     <ImageView
         android:id="@+id/getLocationImageView"
@@ -25,6 +25,5 @@
         android:layout_below="@+id/getLocationImageView"
         android:layout_marginLeft="66dp"
         android:layout_marginTop="62dp"
-        android:text="Click on the location \n you want to choose " />
-
+        android:text="TextView" />
 </RelativeLayout>

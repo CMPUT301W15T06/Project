@@ -36,6 +36,7 @@ import java.util.Locale;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.location.Location;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -89,8 +90,9 @@ public class AppSingleton {
 	 */
 	private Date editDate;
 	
+	private MapController mapController;
 
-	
+	private Location location;
 	/**
 	 * Set a static final DateFormat object format with Date and Locale to record
 	 * the date and locale of the <code>Claim</code>.
@@ -400,6 +402,22 @@ public class AppSingleton {
 
 	public boolean isEditable() {
 		return currentClaim.getStatus().equals("In progress")||currentClaim.getStatus().equals("Returned");
+	}
+
+	public MapController getMapController() {
+		return mapController;
+	}
+
+	public void setMapController(MapController mapController) {
+		this.mapController = mapController;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 
 

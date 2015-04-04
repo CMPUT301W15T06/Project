@@ -74,5 +74,6 @@
     <string name="manage_tag">Manage Tag</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_get_location_by_map">GetLocationByMapActivity</string>
+    <string name="title_activity_show_location">ShowLocationActivity</string>
 
 </resources>
