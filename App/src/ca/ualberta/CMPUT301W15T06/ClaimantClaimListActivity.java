@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
@@ -31,12 +32,16 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.Loader;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.text.Html;
 import android.text.method.DigitsKeyListener;
 import android.text.style.BulletSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -112,7 +117,29 @@ public class ClaimantClaimListActivity extends Activity {
 		//set list view of claimlist
 		ListView listView = (ListView) findViewById(R.id.claimListView);
 		setList();
-		final ArrayAdapter<Claim> adapter=new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1,list);
+		final ArrayAdapter<Claim> adapter=new ArrayAdapter<Claim>(this, android.R.layout.simple_list_item_1,list){
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent){
+				TextView tv =  (TextView) super.getView(position, convertView, parent);
+				String str = tv.getText().toString();
+				int count=0;
+				for (int i = 0; i < str.length(); i++) {
+				    if (str.charAt(i) == '*') {
+				        count++;
+				    }
+				}
+				str=str+"</font>";
+				str = str.replace(" ", "&#160;");
+				str = new StringBuilder(str).insert(str.indexOf("Distance&#160;to&#160;first&#160;Destionation:"), "<font color="+getColor(count)+">").toString();
+				str = str.replace("\n", "<br />");
+				tv.setText(Html.fromHtml(str));
+				tv.setBackgroundColor(Color.rgb(178, 190, 181));
+				return tv;	
+			}
+
+				
+		};
+		
 		adapter.sort(sortClaim());
 		listView.setAdapter(adapter);
 
@@ -143,6 +170,33 @@ public class ClaimantClaimListActivity extends Activity {
 			
 		});
 		
+	}
+
+	private String getColor(int count) {
+		// TODO Auto-generated method stub
+		if(count==0){
+			return "#000000";
+		}else if(count>=5){	
+			int c=((10-count)*255)/5;
+			if(c<0){
+				c=0;
+			}
+			String hex = transHex(c);
+			return "#ff"+hex+"00";
+		}else{
+			int c=(count*255)/5;
+			String hex = transHex(c);
+			return "#"+hex+"ff00";
+		}
+	}
+
+	private String transHex(int c) {
+		// TODO Auto-generated method stub
+		String hex = Integer.toHexString(c);
+		if(hex.length()==1){
+			hex='0'+hex;
+		}
+		return hex;
 	}
 
 	private void setList() {
@@ -213,40 +267,7 @@ public class ClaimantClaimListActivity extends Activity {
 		startActivity(intent);
 	}
 
-	//http://stackoverflow.com/questions/9814821/show-progressdialog-android Author:dldnh
-	public void pushOnline(MenuItem m){
-		pg =ProgressDialog.show(this, "Pushing Onling...","Please wait patiently :)", true);
-		Thread thread = new Thread(new Runnable(){
-		    @Override
-		    public void run() {
-		  
-		        try {
-		        	new ESClient().pushUser(AppSingleton.getInstance().getCurrentUser());
-		        	AppSingleton.getInstance().setSuc(true);
-		        	
-		        } catch (Exception e) {
-		        	AppSingleton.getInstance().setSuc(false);
-		        
-		        }
-		        
-		    }
-		});
 
-		thread.start();
-		
-		try {
-			thread.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e.getMessage());
-		}
-		if(AppSingleton.getInstance().isSuc()){
-			Toast.makeText(getApplicationContext(), "Push online successfully!", Toast.LENGTH_LONG).show();
-		}else{
-			Toast.makeText(getApplicationContext(), "Push Online Failed,No Internet Connection!", Toast.LENGTH_LONG).show();
-		}
-		
-	}
 	
 	
 	public void filter(MenuItem m){
@@ -325,7 +346,30 @@ public class ClaimantClaimListActivity extends Activity {
 		startActivity(intent);	
 	}
 
-	
+	public void setHomeLocation(MenuItem m){
+		AppSingleton.getInstance().setMapController(new MapController() {
+			
+			@Override
+			public void setLocation(Location location) throws NetWorkException{
+				// TODO Auto-generated method stub
+				user.setHomeLocation(location);
+			}
+		});
+		Intent intent =new Intent(ClaimantClaimListActivity.this,GetLocationByMapActivity.class);
+		startActivity(intent);					
+
+	}
+	public void showHomeLocation(MenuItem m){
+		if(user.getHomeLocation()==null){
+			Toast.makeText( ClaimantClaimListActivity.this, "You haven't set home geolocation yet!", Toast.LENGTH_LONG).show();		
+		}else{
+			AppSingleton.getInstance().setLocation(user.getHomeLocation());
+			Intent intent =new Intent(ClaimantClaimListActivity.this,ShowLocationActivity.class);
+			startActivity(intent);
+		}
+	}
+
+
 	/**
 	 * Return the Dialog object dialog. This method will be used when 
 	 * other class need to use or display the dialog. 

@@ -74,9 +74,9 @@ import android.widget.AdapterView.OnItemClickListener;
 public class ClaimantClaimDetailActivity extends Activity {
 
 	
-	private static final int SHOW_LOCATION = 2;
-	private static final int SET_LOCATION_BY_GPS = 0;
-	private static final int SET_LOCATION_BY_MAP = 1;
+	private static final int SHOW_LOCATION = 1;
+
+	private static final int SET_LOCATION = 0;
 	private ClaimantClaimDetailController ccdc=null;
 	private Claim claim;
 	private ArrayList<Destination> list;
@@ -143,44 +143,7 @@ public class ClaimantClaimDetailActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				if (which ==SET_LOCATION_BY_GPS){
-					final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-					Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-			
-					
-					adb = new AlertDialog.Builder(ClaimantClaimDetailActivity.this);
-					adb.setMessage("Please send a location!");
-					adb.setPositiveButton("Stop waiting for location", new OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							lm.removeUpdates(listener);
-						}
-					});
-					dia=adb.create();  
-					dia.show();
-					if (location != null){
-						
-						try {
-							ccdc.setLocation(location);
-							dia.setMessage("Location set as:\n Lat: " + location.getLatitude()
-									+ "\nLong: " + location.getLongitude());
-						} catch (NetWorkException e) {
-							// TODO Auto-generated catch block
-							throw new RuntimeException(e);
-						} catch (StatusException e) {
-							// TODO Auto-generated catch block
-							Toast.makeText( ClaimantClaimDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-						}
-						
-					
-					}				
-					
-					lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, listener);
-
-										
-				}else if (which==SET_LOCATION_BY_MAP){
+				if (which==SET_LOCATION){
 					AppSingleton.getInstance().setMapController(new MapController() {
 						
 						@Override
@@ -236,36 +199,6 @@ public class ClaimantClaimDetailActivity extends Activity {
 			throw new RuntimeException(e);
 		}	
 	}
-	
-	private final LocationListener listener = new LocationListener() {
-		public void onLocationChanged (Location location) {
 
-			if (location != null) {
-				try {
-					ccdc.setLocation(location);
-					dia.setMessage("Location set as:\n Lat: " + location.getLatitude()
-							+ "\nLong: " + location.getLongitude());
-				} catch (NetWorkException e) {
-					// TODO Auto-generated catch block
-					throw new RuntimeException(e);
-				} catch (StatusException e) {
-					// TODO Auto-generated catch block
-					Toast.makeText( ClaimantClaimDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
-				}
-			}
-		}
-		
-		public void onProviderDisabled (String provider) {
-			
-		}
-		
-		public  void onProviderEnabled (String provider) {
-			
-		}
-		
-		public void onStatusChanged (String provider, int status, Bundle extras) {
-			
-		}
-	};
 
 }

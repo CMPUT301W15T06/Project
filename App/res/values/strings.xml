@@ -30,11 +30,12 @@
         <item>Flag/Deflag for Incompleteness</item>
         <item>Photo Recipt</item>
         <item>Details</item>
+        <item>Attach a geolocation</item>
+        <item>View the geolocation</item>
     </string-array>
     <string-array name="dest_dialog_array">
-        <item>Attach a geolocation by GPS</item>
-        <item>Attach a geolocation by Map</item>
-        <item>View the geolocation by Map</item>
+        <item>Attach a geolocation</item>
+        <item>View the geolocation</item>
     </string-array>
     <string-array name="tag_dialog_array">
         <item>Edit</item>

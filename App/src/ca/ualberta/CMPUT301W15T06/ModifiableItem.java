@@ -2,6 +2,8 @@ package ca.ualberta.CMPUT301W15T06;
 
 import java.util.Date;
 
+import android.location.Location;
+
 public class ModifiableItem extends Item {
 
 
@@ -17,36 +19,40 @@ public class ModifiableItem extends Item {
 	}
 
 	public void setDate(Date itemDate) throws NetWorkException {
-			date=itemDate;
-			notifyListeners();
-		}
+		date=itemDate;
+		notifyListeners();
+	}
 
 
 	public void setCategory(String category) throws NetWorkException {
-				this.category=category;
-				notifyListeners();
-			}
+		this.category=category;
+		notifyListeners();
+	}
 
 
 	public void setDescription(String description) throws NetWorkException {
-				this.description=description;
-				notifyListeners();
-			}
+		this.description=description;
+		notifyListeners();
+	}
 
 	public void setAmount(Double amount) throws NetWorkException {
-				this.amount=amount;
-				notifyListeners();
-			}
+		this.amount=amount;
+		notifyListeners();
+	}
 
 
 	public void setCurrency(String currency) throws NetWorkException {
-				this.currency=currency;
-				notifyListeners();
-			}
+		this.currency=currency;
+		notifyListeners();
+	}
 
 	public void setFlag(boolean b) throws NetWorkException {
-				flag=b;
-				notifyListeners();
-			}
+		flag=b;
+		notifyListeners();
+	}
 
+	public void setLocation(Location location) throws NetWorkException {
+		this.location = location;
+		notifyListeners();
+	}
 }

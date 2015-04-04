@@ -68,11 +68,7 @@ public class Destination extends AppModel{
 		super(dest);
 		name=dest.getName();
 		reason=dest.getReason();
-		if(dest.getLocation()!=null){
-			location=dest.getLocation();
-		}else{
-			location=null;
-		}
+		location=dest.getLocation();
 		
 	}
 

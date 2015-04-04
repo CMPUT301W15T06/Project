@@ -30,6 +30,8 @@ package ca.ualberta.CMPUT301W15T06;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.location.Location;
+
 /**
  * The <code>User</code> class is an sub-class of <code>AppModel</code>.
  * This class can set up a ArrayList named User which contains Claim.
@@ -62,6 +64,7 @@ public class User extends AppModel{
 	private boolean filter;
 	
 	private boolean needSyn;
+	private Location homeLocation;
 	
 //	/**
 //	 * General construction. This method Set up the claimList.
@@ -79,6 +82,7 @@ public class User extends AppModel{
 		userName=name;
 		filter=false;
 		needSyn=false;
+		homeLocation=null;
 	}
 
 
@@ -252,6 +256,17 @@ public class User extends AppModel{
 
 		this.needSyn = needSyn;
 			
+	}
+
+
+	public Location getHomeLocation() {
+		return homeLocation;
+	}
+
+
+	public void setHomeLocation(Location homeLocation) throws NetWorkException {
+		this.homeLocation = homeLocation;
+		notifyListeners();
 	}
 
 }

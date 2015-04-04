@@ -99,7 +99,4 @@ public class ClaimantClaimDetailController {
 		AppSingleton.getInstance().setCurrentDestination(destination);
 	}
 	
-	public void setLocation(Location location) throws NetWorkException, StatusException{
-		AppSingleton.getInstance().getCurrentDestination().setLocation(location);	
-	}
 }

@@ -28,6 +28,8 @@ package ca.ualberta.CMPUT301W15T06;
 
 import java.util.Date;
 
+import android.location.Location;
+
 /**
  * The <code>Item</code> class is an sub-class of <code>AppModel</code>.
  * The class allows the user to call <code>ClaimantAddItemController</code> 
@@ -76,6 +78,7 @@ public class Item extends AppModel{
 	 * The initial default value is false.
 	 */
 	protected boolean flag=false;
+	protected Location location;
 	
 
 	public Item() {
@@ -88,6 +91,7 @@ public class Item extends AppModel{
 		currency="CAD";
 		
 		description="";
+		location=null;
 	}
 	
 	public Item(Item item) {
@@ -99,6 +103,8 @@ public class Item extends AppModel{
 		amount=item.getAmount();
 		currency=item.getCurrency();
 		flag=item.getFlag();
+		location=item.getLocation();
+		
 	}
 
 	/**
@@ -174,7 +180,8 @@ public class Item extends AppModel{
 	 */
 	public String toString(){
 		return "Date: "+AppSingleton.formatDate(date)+'\n'+"Category: "+category+'\n'+"Description: "+description+'\n'+"Spend: "+(amount==null?"   ":amount)+' '+currency+'\n'+
-				"Photographic Receipt: "+(receipt.getPhotoStr()==null?"Not Have":"Have")+'\n'+"Incompleteness: "+(flag?"YES":"NO");	
+				"Photographic Receipt: "+(receipt.getPhotoStr()==null?"Not Have":"Have")+'\n'+"Incompleteness: "+(flag?"YES":"NO")
+				+'\n'+"Geolocation: "+(location!=null?"HAVE":"NOT HAVE");	
 	}
 	
 //	/**
@@ -236,7 +243,12 @@ public class Item extends AppModel{
 			
 		return result;	
 	}
-
+	public Location getLocation() {
+		return location;
+	}
+	
+	public void setLocation(Location location) throws NetWorkException, StatusException {
+	}
 	
 	public void setDate(Date itemDate) throws StatusException, NetWorkException {
 	}

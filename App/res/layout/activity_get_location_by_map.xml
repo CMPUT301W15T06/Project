@@ -18,13 +18,22 @@
         android:src="@drawable/worldmap" />
 
     <TextView
-        android:id="@+id/llTextView"
+        android:id="@+id/staticTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/getLocationImageView"
         android:layout_below="@+id/getLocationImageView"
-        android:layout_marginLeft="66dp"
-        android:layout_marginTop="62dp"
-        android:text="Click on the location \n you want to choose " />
+        android:layout_marginTop="16dp"
+        android:text="The location initially be set as the recent sent location. You can click on the above map or send GPS location to set location." />
+
+    <TextView
+        android:id="@+id/llTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/staticTextView"
+        android:layout_below="@+id/staticTextView"
+        android:layout_marginLeft="62dp"
+        android:layout_marginTop="47dp"
+        android:text="Did not recieved GPS location yet" />
 
 </RelativeLayout>

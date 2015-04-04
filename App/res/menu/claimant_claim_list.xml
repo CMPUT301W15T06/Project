@@ -22,5 +22,18 @@
         android:title="@string/manage_tag" 
         android:onClick="manageTag">
     </item>
+    
+    <item 
+        android:id="@+id/set_home_location"
+        android:title="Set home geolocation" 
+        android:onClick="setHomeLocation">
+    </item>
+    
+     <item 
+        android:id="@+id/show_home_location"
+        android:title="View home geolocation" 
+        android:onClick="showHomeLocation">
+    </item>
+   
 
 </menu>
