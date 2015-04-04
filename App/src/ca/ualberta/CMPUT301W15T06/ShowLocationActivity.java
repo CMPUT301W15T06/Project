@@ -24,6 +24,7 @@ public class ShowLocationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_location);
 		
+		setTitle("Geolocation");
 		ImageView image=(ImageView)findViewById(R.id.getLocationImageView);
 		TextView tv=(TextView)findViewById(R.id.llTextView);
 		

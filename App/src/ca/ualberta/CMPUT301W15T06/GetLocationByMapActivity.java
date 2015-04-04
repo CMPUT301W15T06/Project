@@ -31,6 +31,10 @@ public class GetLocationByMapActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_get_location_by_map);
 		
+		setTitle("User: "+AppSingleton.getInstance().getUserName());
+
+
+		
 		final ImageView image=(ImageView)findViewById(R.id.getLocationImageView);
 		ViewTreeObserver vto = image.getViewTreeObserver();
 		vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {

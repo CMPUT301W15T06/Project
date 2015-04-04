@@ -76,6 +76,7 @@ public class ClaimantEditClaimActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_edit_claim);
 		
+		setTitle("User: "+AppSingleton.getInstance().getUserName());
 		cecc=new ClaimantEditClaimController(AppSingleton.getInstance().getCurrentClaim());
 
 		

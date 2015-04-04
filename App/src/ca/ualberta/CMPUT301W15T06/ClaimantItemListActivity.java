@@ -88,6 +88,9 @@ public class ClaimantItemListActivity extends Activity {
 		setContentView(R.layout.activity_claimant_item_list);
 		
 		
+		setTitle(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+				+"<-"+AppSingleton.getInstance().getUserName());
+
 		claim=AppSingleton.getInstance().getCurrentClaim();
 		cilc=new ClaimantItemListController(claim);
 		

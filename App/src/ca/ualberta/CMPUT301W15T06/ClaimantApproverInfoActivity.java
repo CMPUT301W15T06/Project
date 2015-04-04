@@ -58,6 +58,8 @@ public class ClaimantApproverInfoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_approver_info);
 		
+		setTitle(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+				+"<-"+AppSingleton.getInstance().getUserName());
 		comments=AppSingleton.getInstance().getCurrentClaim().getComments();
 
 		

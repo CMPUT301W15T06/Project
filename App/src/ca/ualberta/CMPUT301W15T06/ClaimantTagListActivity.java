@@ -68,6 +68,8 @@ public class ClaimantTagListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_tag_list);
 		
+		setTitle("User: "+AppSingleton.getInstance().getUserName());
+		
 		ctlc=new ClaimantTagListController(AppSingleton.getInstance().getCurrentUser());
 		
 		ListView listView = (ListView) findViewById(R.id.tagListView);

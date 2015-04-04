@@ -78,6 +78,11 @@ public class ApproverClaimListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_claim_list);
 		
+		
+		setTitle("Approver: "+AppSingleton.getInstance().getUserName());
+		
+		
+		
 		AppSingleton.getInstance().setUpApprover();
 		user=AppSingleton.getInstance().getCurrentUser();
 		

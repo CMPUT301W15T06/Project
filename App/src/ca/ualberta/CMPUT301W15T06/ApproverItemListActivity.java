@@ -68,6 +68,9 @@ public class ApproverItemListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_approver_item_list);
 		
+		setTitle(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+				+"<-"+AppSingleton.getInstance().getCurrentClaim().getName()+"<-"+"Approver: "+AppSingleton.getInstance().getUserName());
+
 		claim=AppSingleton.getInstance().getCurrentClaim();
 	
 		ListView listView = (ListView) findViewById(R.id.approverItemListView);

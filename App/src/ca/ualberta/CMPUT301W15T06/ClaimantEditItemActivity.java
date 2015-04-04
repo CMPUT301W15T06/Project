@@ -86,6 +86,10 @@ public class ClaimantEditItemActivity extends Activity {
 		setContentView(R.layout.activity_claimant_edit_item);
 		
 
+		setTitle(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+				+"<-"+AppSingleton.getInstance().getUserName());
+
+		
 		item=AppSingleton.getInstance().getCurrentItem();
 		ceic=new ClaimantEditItemController(item);
 		

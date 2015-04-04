@@ -111,6 +111,8 @@ public class ClaimantClaimListActivity extends Activity {
 		setContentView(R.layout.activity_claimant_claim_list);
 		
 		
+		setTitle("User: "+AppSingleton.getInstance().getUserName());
+		
 		user=AppSingleton.getInstance().getCurrentUser();
 		cclc=new ClaimantClaimListController(user);
 		
@@ -323,6 +325,7 @@ public class ClaimantClaimListActivity extends Activity {
 			}
 		});
 	}
+	
 	
 	
 	private void setMutiChoice(Builder builder) {

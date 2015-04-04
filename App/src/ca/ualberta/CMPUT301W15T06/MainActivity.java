@@ -34,6 +34,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Color;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
@@ -72,6 +73,8 @@ public class MainActivity extends Activity {
 		
 
 
+		setTitle("HINT: Title Bar will Show Path");
+		setTitleColor(Color.RED);
 		ClaimListManager.initial(getApplicationContext());
 		pg =ProgressDialog.show(this, "Loading Data...","Please wait patiently :)", true);
 		Thread thread = new Thread(new Runnable(){

@@ -64,6 +64,10 @@ public class ClaimantEditDestinationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_destination_reason);
 		
+		setTitle(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+				+"<-"+AppSingleton.getInstance().getUserName());
+
+		
 		dest=AppSingleton.getInstance().getCurrentDestination();
 		cedc=new ClaimantEditDestinationController(dest);
 		

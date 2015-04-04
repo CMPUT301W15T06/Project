@@ -64,9 +64,12 @@ public class ApproverClaimDetailListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_approver_claim_detail_list);
 		
+		setTitle("Approver: "+AppSingleton.getInstance().getUserName());
+		
 		claim=AppSingleton.getInstance().getCurrentClaim();
 		
-		
+		TextView name=(TextView) findViewById(R.id.SeeNameForApprover);
+		name.setText(claim.getName());
 		TextView beginView=(TextView) findViewById(R.id.startDateValueClaimDetailTextView);
 		TextView endView=(TextView) findViewById(R.id.endingDateValueClaimDetailTextView);
 		beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));

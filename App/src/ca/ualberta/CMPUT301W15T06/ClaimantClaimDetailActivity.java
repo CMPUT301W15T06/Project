@@ -90,8 +90,11 @@ public class ClaimantClaimDetailActivity extends Activity {
 		claim=AppSingleton.getInstance().getCurrentClaim();
 		ccdc=new ClaimantClaimDetailController(claim);
 		
+		TextView name=(TextView) findViewById(R.id.nameValueClaimantClaimDetailTextView);
+		name.setText(claim.getName());
 		TextView beginView=(TextView) findViewById(R.id.startDateValueClaimantClaimDetailTextView);
 		TextView endView=(TextView) findViewById(R.id.endingDateValueClaimantClaimDetailTextView);
+		
 		beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
 		endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
 		ListView listView = (ListView) findViewById(R.id.claimantDetailListView);

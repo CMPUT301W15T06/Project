@@ -67,6 +67,10 @@ public class ClaimantItemDetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_item_detail);
 		
+		setTitle(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+				+"<-"+AppSingleton.getInstance().getUserName());
+
+		
 		cdic=new ClaimantDeleteItemController(AppSingleton.getInstance().getCurrentClaim());
 		
 		final TextView dateView=(TextView) findViewById(R.id.itemDateVTextView);
