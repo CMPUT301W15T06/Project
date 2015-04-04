@@ -244,6 +244,7 @@ public class ClaimantItemListActivity extends Activity {
 		
 		try {
 			cilc.sumbmit();
+			finish();
 		} catch (StatusException e) {
 			// TODO Auto-generated catch block
 			Toast.makeText(ClaimantItemListActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
@@ -302,5 +303,10 @@ public class ClaimantItemListActivity extends Activity {
 		builder.show();
 	
 	}
+	public void approverInfo(MenuItem m){
+		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantApproverInfoActivity.class);
+		startActivity(intent);
+	}
+	
 
 }

@@ -26,9 +26,14 @@ governing permissions and limitations under the License.
 
 package ca.ualberta.CMPUT301W15T06;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 /**
 * This <code>ClaimantApproverInfoActivity</code> class is an extended class
@@ -46,10 +51,36 @@ import android.view.Menu;
 */
 public class ClaimantApproverInfoActivity extends Activity {
 
+	private Comments comments;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_approver_info);
+		
+		comments=AppSingleton.getInstance().getCurrentClaim().getComments();
+		
+		
+		
+		
+		ListView listView = (ListView) findViewById(R.id.approverListView);
+		final ArrayList<Comment> list =comments.getCommentList();
+		final ArrayAdapter<Comment> adapter=new ArrayAdapter<Comment>(this, android.R.layout.simple_list_item_1,list);
+		adapter.sort(sortComments());
+		listView.setAdapter(adapter);
+	}
+
+	private Comparator<? super Comment> sortComments() {
+		// TODO Auto-generated method stub
+		return new Comparator<Comment>() {
+			
+			@Override
+			public int compare(Comment lhs, Comment rhs) {
+				// TODO Auto-generated method stub
+				return rhs.getDate().compareTo(lhs.getDate());			
+				
+			}
+		};
 	}
 
 	@Override

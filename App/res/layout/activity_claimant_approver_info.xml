@@ -8,44 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ClaimantApproverInfoActivity" >
     
-    <TextView 
-        android:id="@+id/approvername" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignBottom="@+id/Comments" 
-        android:layout_centerHorizontal="true" 
-        android:layout_marginBottom="83dp" 
-        android:text="Approver Name" 
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
-    
-    <TextView 
-        android:id="@+id/SeeNameForApprover" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignTop="@+id/approvername" 
-        android:layout_centerHorizontal="true" 
-        android:layout_marginTop="38dp" 
-        android:text="Large Text" 
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
-    
-    <TextView 
-        android:id="@+id/Comments" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignParentTop="true" 
-        android:layout_alignRight="@+id/SeeNameForApprover" 
-        android:layout_marginTop="198dp" 
-        android:text="Comments" 
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
-    <TextView 
-        android:id="@+id/SeeComment" 
-        android:layout_width="wrap_content" 
-        android:layout_height="wrap_content" 
-        android:layout_alignLeft="@+id/Comments" 
-        android:layout_below="@+id/approvername" 
-        android:layout_marginTop="18dp" 
-        android:text="Large Text" 
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
-    
+    <ListView
+        android:id="@+id/approverListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
 
+    </ListView>
 </RelativeLayout>

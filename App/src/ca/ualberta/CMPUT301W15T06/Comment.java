@@ -50,5 +50,8 @@ public class Comment extends AppModel {
 		this.finish = finish;
 	}
 
+	public String toString(){
+		return "Approver: "+approverName+"\n Comment: "+comment;
+	}
 
 }

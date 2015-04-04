@@ -33,5 +33,11 @@
         android:title="Delete this Claim" 
         android:onClick="deleteClaim">
     </item>
+    
+    <item 
+        android:id="@+id/approver_info"
+        android:title="Approvers and Comments" 
+        android:onClick="approverInfo">
+    </item>
 
 </menu>
