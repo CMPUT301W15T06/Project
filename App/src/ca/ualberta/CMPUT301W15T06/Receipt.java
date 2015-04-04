@@ -60,11 +60,13 @@ public class Receipt extends AppModel {
 	public String getPhotoStr(){
 		return photoStr;
 	}
+	
 	@Override
 	public boolean getMissValue() {
 		// TODO Auto-generated method stub
 		return photoStr==null;
 	}
+	
 	public void setPhotoStr(String photo) throws StatusException, NetWorkException {
 	}
 

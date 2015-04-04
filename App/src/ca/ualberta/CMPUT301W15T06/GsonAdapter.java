@@ -32,8 +32,6 @@ public class GsonAdapter<T> implements JsonSerializer<T>, JsonDeserializer<T>{
 	}
 
 
-
-
 	@Override
 	public T deserialize(JsonElement json, Type type,
 			JsonDeserializationContext context) throws JsonParseException {

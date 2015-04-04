@@ -22,7 +22,7 @@ public class NetworkStateReceiver extends BroadcastReceiver {
         }
      }
      if(intent.getExtras().getBoolean(ConnectivityManager.EXTRA_NO_CONNECTIVITY,Boolean.FALSE)) {
-            Log.d("app","There's no network connectivity");
+           
      }
    }
 }

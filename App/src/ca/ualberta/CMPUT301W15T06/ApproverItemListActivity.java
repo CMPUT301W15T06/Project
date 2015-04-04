@@ -69,18 +69,11 @@ public class ApproverItemListActivity extends Activity {
 		setContentView(R.layout.activity_approver_item_list);
 		
 		claim=AppSingleton.getInstance().getCurrentClaim();
-		
-		
-		
-		
+	
 		ListView listView = (ListView) findViewById(R.id.approverItemListView);
 		final ArrayList<Item> list =claim.getItemList();
 		final ArrayAdapter<Item> adapter=new ArrayAdapter<Item>(this, android.R.layout.simple_list_item_1,list);
 		listView.setAdapter(adapter);
-		
-		
-		
-		
 		
 
 
@@ -108,29 +101,34 @@ public class ApproverItemListActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				if (which==PHOTO_RECEIPT){
-					Intent intent =new Intent(ApproverItemListActivity.this,ClaimantReceiptActivity.class);
-					startActivity(intent);					
-				
-				}else if (which==LOCATION){
-					if(AppSingleton.getInstance().getCurrentItem().getLocation()==null){
-						Toast.makeText( ApproverItemListActivity.this, "This item doesn't have geolocation!", Toast.LENGTH_LONG).show();		
-					}else{
-						AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentItem().getLocation());
-						Intent intent =new Intent(ApproverItemListActivity.this,ShowLocationActivity.class);
-						startActivity(intent);
-					}
-				}
-				
+				click(which);			
 			}
+
+			
 		});
 	}
-
+	
+	private void click(int which) {
+		if (which==PHOTO_RECEIPT){
+			Intent intent =new Intent(ApproverItemListActivity.this,ClaimantReceiptActivity.class);
+			startActivity(intent);					
+		
+		}else if (which==LOCATION){
+			if(AppSingleton.getInstance().getCurrentItem().getLocation()==null){
+				Toast.makeText( ApproverItemListActivity.this, "This item doesn't have geolocation!", Toast.LENGTH_LONG).show();		
+			}else{
+				AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentItem().getLocation());
+				Intent intent =new Intent(ApproverItemListActivity.this,ShowLocationActivity.class);
+				startActivity(intent);
+			}
+		}
+	}
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.approver_item_list, menu);
-		return true;
+		// Inflate the menu; this adds items to the action bar if it is present.	
+		return false;
 	}
 
 }

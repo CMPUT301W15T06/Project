@@ -59,8 +59,6 @@ public class User extends AppModel{
 	
 	private String userName;
 	
-	private Date lastModify;
-	
 	private boolean filter;
 	
 	private boolean needSyn;
@@ -96,36 +94,7 @@ public class User extends AppModel{
 		return claimList;
 	}
 		
-	/**
-	 * Push the claimList to the Internet. Do nothing
-	 * right know, but may have further use.
-	 */
-	public void pushOnline(){	
-	}
-	
-	/**
-	 * Return the Claim object as null. This method will be used when 
-	 * claimant wants to get the online data of the claimList. 
-	 * 
-	 * @return null  a Claim object
-	 */
-	public Claim pullOnline(){
-		return null;
-		
-	}
-	
-	/**
-	 * Use the string variable tagName to do the search method 
-	 * and return a Claim object with default value null.. T
-	 * his method will be used when other class need to use 
-	 * or display. 
-	 * 
-	 * @param tagName  a String variable
-	 * @return null  a Claim object
-	 */
-	public Claim searchByTag(String tagName){
-		return null;
-	}
+
 	
 	/**
 	 * This method allows user to add a Listener to the 
@@ -144,22 +113,6 @@ public class User extends AppModel{
 			tag.addListener(l);
 		}
 		
-	}
-	/**
-	 * Sort the claimList. The method does nothing here, but may
-	 * have further use.
-	 */
-	public void sort() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Date getLastModify() {
-		return lastModify;
-	}
-
-	public void setLastModify(Date lastModify) {
-		this.lastModify = lastModify;
 	}
 
 	public ArrayList<Tag> getTagList() {

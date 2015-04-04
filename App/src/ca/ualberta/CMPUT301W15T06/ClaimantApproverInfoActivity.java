@@ -59,9 +59,7 @@ public class ClaimantApproverInfoActivity extends Activity {
 		setContentView(R.layout.activity_claimant_approver_info);
 		
 		comments=AppSingleton.getInstance().getCurrentClaim().getComments();
-		
-		
-		
+
 		
 		ListView listView = (ListView) findViewById(R.id.approverListView);
 		final ArrayList<Comment> list =comments.getCommentList();
@@ -85,9 +83,8 @@ public class ClaimantApproverInfoActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_approver_info, menu);
-		return true;
+		// Inflate the menu; this adds items to the action bar if it is present.	
+		return false;
 	}
 
 }

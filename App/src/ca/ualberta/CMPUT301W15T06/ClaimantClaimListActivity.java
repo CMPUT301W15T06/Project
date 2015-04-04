@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -101,7 +102,6 @@ public class ClaimantClaimListActivity extends Activity {
 	 */
 	private Dialog dialog;
 	
-	private ProgressDialog pg =null;
 	
 	private ArrayList<Claim> list=null;
 	
@@ -273,24 +273,7 @@ public class ClaimantClaimListActivity extends Activity {
 	public void filter(MenuItem m){
 		final AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimListActivity.this);
 		builder.setTitle(user.isFilter()?"Filter Model":"Show All Model");
-		builder.setMultiChoiceItems(user.toTagList(),user.toCheckArray(),new DialogInterface.OnMultiChoiceClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-				// TODO Auto-generated method stub
-				try{
-					if (isChecked){
-						cclc.addTag(user.getTagList().get(which).getID());
-					}else if(user.getFilterTagIDList().contains(user.getTagList().get(which).getID())){
-						cclc.removeTag(user.getTagList().get(which).getID());
-					}
-				}catch (NetWorkException e) {
-					// TODO: handle exception
-					throw new RuntimeException(e);
-				}	
-			}
-		});
-		
+		setMutiChoice(builder);
 		builder.setPositiveButton("Filter Model",
 				new OnClickListener() {
 			
@@ -341,6 +324,28 @@ public class ClaimantClaimListActivity extends Activity {
 		});
 	}
 	
+	
+	private void setMutiChoice(Builder builder) {
+		// TODO Auto-generated method stub
+		builder.setMultiChoiceItems(user.toTagList(),user.toCheckArray(),new DialogInterface.OnMultiChoiceClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				// TODO Auto-generated method stub
+				try{
+					if (isChecked){
+						cclc.addTag(user.getTagList().get(which).getID());
+					}else if(user.getFilterTagIDList().contains(user.getTagList().get(which).getID())){
+						cclc.removeTag(user.getTagList().get(which).getID());
+					}
+				}catch (NetWorkException e) {
+					// TODO: handle exception
+					throw new RuntimeException(e);
+				}	
+			}
+		});	
+	}
+
 	public void manageTag(MenuItem m){
 		Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantTagListActivity.class);
 		startActivity(intent);	

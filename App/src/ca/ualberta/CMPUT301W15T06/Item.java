@@ -184,16 +184,6 @@ public class Item extends AppModel{
 				+'\n'+"Geolocation: "+(location!=null?"HAVE":"NOT HAVE");	
 	}
 	
-//	/**
-//	 * This method will create a receipt for the <code>Item</code> 
-//	 * expenses.
-//	 * 
-//	 * @param receipt  a Receipt object
-//	 */
-//	public void setRecipt(Receipt receipt) {
-//		this.receipt=receipt;
-//	}
-	
 	/**
 	 * Return the Receipt object receipt as default value null. This method 
 	 * will be used when other class need to use or display the receipt of 

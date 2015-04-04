@@ -146,16 +146,11 @@ public class ClaimantItemListActivity extends Activity {
 					Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantItemDetailActivity.class);
 					startActivity(intent);
 				}else if (which==SET_LOCATION){
-					AppSingleton.getInstance().setMapController(new MapController() {
-						
-						@Override
-						public void setLocation(Location location) throws NetWorkException, StatusException {
-							// TODO Auto-generated method stub
-							AppSingleton.getInstance().getCurrentItem().setLocation(location);
-						}
-					});
-					Intent intent =new Intent(ClaimantItemListActivity.this,GetLocationByMapActivity.class);
-					startActivity(intent);					
+					if(AppSingleton.getInstance().isEditable()){
+						setLocation();	
+					}else{
+						Toast.makeText(ClaimantItemListActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+					}
 				
 				}else if (which==SHOW_LOCATION){
 					if(AppSingleton.getInstance().getCurrentItem().getLocation()==null){
@@ -171,6 +166,21 @@ public class ClaimantItemListActivity extends Activity {
 		});
 	}
 	
+	private void setLocation() {
+		// TODO Auto-generated method stub
+		AppSingleton.getInstance().setMapController(new MapController() {
+			
+			@Override
+			public void setLocation(Location location) throws NetWorkException, StatusException {
+				// TODO Auto-generated method stub
+				AppSingleton.getInstance().getCurrentItem().setLocation(location);
+			}
+		});
+		Intent intent =new Intent(ClaimantItemListActivity.this,GetLocationByMapActivity.class);
+		startActivity(intent);
+	}
+
+
 	public void changeFlag(){
 		try {
 			cilc.changeFlag();

@@ -75,7 +75,6 @@ public class Claim extends AppModel{
 	protected ArrayList<Item> itemList;
 	protected ArrayList<Destination> destinationList;
 	
-//	protected ArrayList<Comment> commentList;
 	protected Comments comments;
 	/**
 	 * Set protected ArrayList named tagIDList.
@@ -203,8 +202,6 @@ public class Claim extends AppModel{
 		}else{
 			return aToString();
 		}
-		
-
 	}
 
 	/**
@@ -245,7 +242,7 @@ public class Claim extends AppModel{
 		if(AppSingleton.getInstance().getCurrentUser().getHomeLocation()==null){
 			return "You haven't set home location yet!";
 		}else if(!hasFirstDestLoca()){
-			return "You haven't set the location of the first destination!";
+			return "You haven't set the location \n  of the first destination!";
 		}
 		
 		float distance = AppSingleton.getInstance().getCurrentUser().getHomeLocation().distanceTo(getFirstDestLoca());
@@ -255,10 +252,12 @@ public class Claim extends AppModel{
 
 
 	}
+	
 	private Location getFirstDestLoca() {
 		// TODO Auto-generated method stub
 		return destinationList.get(0).getLocation();
 	}
+	
 	private boolean hasFirstDestLoca() {
 		// TODO Auto-generated method stub
 		if(destinationList.size()==0){
@@ -268,6 +267,7 @@ public class Claim extends AppModel{
 		}
 		return true;
 	}
+	
 	private String sameReturn(){
 		return "Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+destToString()+'\n'
 				+"Status: "+status+'\n'+getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'

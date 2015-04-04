@@ -82,14 +82,7 @@ public class ApproverClaimDetailListActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					final int position, long id) {
 				AppSingleton.getInstance().setCurrentDestination(adapter.getItem(position));
-				if(AppSingleton.getInstance().getCurrentDestination().getLocation()==null){
-					Toast.makeText( ApproverClaimDetailListActivity.this, "This destination doesn't have geolocation!", Toast.LENGTH_LONG).show();		
-				}else{
-					AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentDestination().getLocation());
-					Intent intent =new Intent(ApproverClaimDetailListActivity.this,ShowLocationActivity.class);
-					startActivity(intent);
-				}
-				
+				showLocation();			
 			}
 
 			
@@ -97,11 +90,20 @@ public class ApproverClaimDetailListActivity extends Activity {
 		
 	}
 
+	
+	public void showLocation(){
+		if(AppSingleton.getInstance().getCurrentDestination().getLocation()==null){
+			Toast.makeText( ApproverClaimDetailListActivity.this, "This destination doesn't have geolocation!", Toast.LENGTH_LONG).show();		
+		}else{
+			AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentDestination().getLocation());
+			Intent intent =new Intent(ApproverClaimDetailListActivity.this,ShowLocationActivity.class);
+			startActivity(intent);
+		}
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.approver_claim_detail_list, menu);
-		return true;
+		return false;
 	}
 
 }

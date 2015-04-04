@@ -154,12 +154,9 @@ public class ClaimListManager {
 			if(!userList.getUserList().contains(name)){
 				userList.getUserList().add(name);
 				saveUserList(user);
-			}
-			
-			
+			}	
 		}
-		return user;
-		
+		return user;	
 	}
 	
 	
@@ -184,32 +181,13 @@ public class ClaimListManager {
 	 */
 	public void save(String name){
 		
-		
 		final User user=AppSingleton.getInstance().getCurrentUser();
 		
 		Thread thread = new Thread(new Runnable(){
 		    @Override
-		    public void run() {
-		  
-		        try {
-		        	new ESClient().pushUser(user);
-		        	user.setNeedSyn(false);
-		        	if(AppSingleton.getInstance().getUserList().isNeedSynList()){
-		        		new ESClient().pushUserList(AppSingleton.getInstance().getUserList());
-		        		AppSingleton.getInstance().getUserList().setNeedSynList(false);
-		        		saveUserListLocal();
-		        	}
-		        	if(AppSingleton.getInstance().getUserList().isNeedSyn()){
-		        		syn();        		
-		        	}
-		        	
-		        } catch (Exception e) {
-		        	user.setNeedSyn(true);
-		        
-		        }
-		        
+		    public void run() {		  
+		       pushOL(user);	        
 		    }
-
 		});
 		
 		thread.start();
@@ -217,8 +195,6 @@ public class ClaimListManager {
 		try {
 			FileOutputStream fos = context.openFileOutput(USER_FILE+name, 0);
 			OutputStreamWriter osw =new OutputStreamWriter(fos);
-			
-//			user.setLastModify(new Date());
 			gson.toJson(user,osw);
 			osw.flush();
 			fos.close();
@@ -229,16 +205,33 @@ public class ClaimListManager {
 		}catch (IOException e) {
 			throw new RuntimeException();
 		}
-		
-		
+	
 	}
 
-	public void saveLocal(User user){
-		
+	private void pushOL(User user) {
+		// TODO Auto-generated method stub
+		 try {
+        	new ESClient().pushUser(user);
+        	user.setNeedSyn(false);
+        	if(AppSingleton.getInstance().getUserList().isNeedSynList()){
+        		new ESClient().pushUserList(AppSingleton.getInstance().getUserList());
+        		AppSingleton.getInstance().getUserList().setNeedSynList(false);
+        		saveUserListLocal();
+        	}
+        	if(AppSingleton.getInstance().getUserList().isNeedSyn()){
+        		syn();        		
+        	}
+        	
+        } catch (Exception e) {
+        	user.setNeedSyn(true);
+        
+        }
+	}
+
+	public void saveLocal(User user){		
 		try {
 			FileOutputStream fos = context.openFileOutput(USER_FILE+user.getUserName(), 0);
 			OutputStreamWriter osw =new OutputStreamWriter(fos);		
-//			user.setLastModify(new Date());
 			gson.toJson(user,osw);
 			osw.flush();
 			fos.close();
@@ -256,29 +249,30 @@ public class ClaimListManager {
 		Thread thread = new Thread(new Runnable(){
 		    @Override
 		    public void run() {    	
-
-				try {
-					user.setNeedSyn(false);
-					new ESClient().pushUserList(AppSingleton.getInstance().getUserList());
-					new ESClient().pushUser(user);
-					saveUserListLocal();
-					saveLocal(user);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					user.setNeedSyn(true);
-					AppSingleton.getInstance().getUserList().setNeedSynList(true);
-					saveUserListLocal();
-					saveLocal(user);
-				}
-				
+				usrlistOL(user);		
 		    }
 		});
-		thread.start();
-		
+		thread.start();		
 	}
 
-	public UserList loadUserList(){
-		
+	private void usrlistOL(User user) {
+		// TODO Auto-generated method stub
+		try {
+			user.setNeedSyn(false);
+			new ESClient().pushUserList(AppSingleton.getInstance().getUserList());
+			new ESClient().pushUser(user);
+			saveUserListLocal();
+			saveLocal(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			user.setNeedSyn(true);
+			AppSingleton.getInstance().getUserList().setNeedSynList(true);
+			saveUserListLocal();
+			saveLocal(user);
+		}
+	}
+
+	public UserList loadUserList(){		
 		UserList userList=null;
 		try {
 			FileInputStream fis = context.openFileInput("usrList");
@@ -295,29 +289,31 @@ public class ClaimListManager {
 		return userList;
 		
 	}
+	
 	private void syn() {
 		// TODO Auto-generated method stub
 		for (String name:AppSingleton.getInstance().getUserList().getUserList()){
 			final User user=load(name);
 			if(user.isNeedSyn()){
-				Thread thread = new Thread(new Runnable(){
-				    @Override
-				    public void run() {			  
-				        try {
-				        	new ESClient().pushUser(user); 
-				        	user.setNeedSyn(false);
-				        } catch (Exception e) {
-				        	user.setNeedSyn(true);
-				        }
-				        
-				    }
-
-				});
-				
-				thread.start();
-			
+				threadRunSyn(user);		
 			}
 		}
+	}
+
+	private void threadRunSyn(final User user) {
+		// TODO Auto-generated method stub
+		Thread thread = new Thread(new Runnable(){
+		    @Override
+		    public void run() {			  
+		        try {
+		        	new ESClient().pushUser(user); 
+		        	user.setNeedSyn(false);
+		        } catch (Exception e) {
+		        	user.setNeedSyn(true);
+		        }			        
+		    }
+		});
+		thread.start();
 	}
 
 	public void saveUsers(ArrayList<User> ul) {
@@ -335,8 +331,6 @@ public class ClaimListManager {
 		try {
 			FileOutputStream fos = context.openFileOutput("usrList", 0);
 			OutputStreamWriter osw =new OutputStreamWriter(fos);
-			
-//			user.setLastModify(new Date());
 			gson.toJson(userList,osw);
 			osw.flush();
 			fos.close();
@@ -353,10 +347,8 @@ public class ClaimListManager {
 		// TODO Auto-generated method stub
 		Thread thread = new Thread(new Runnable(){
 		    @Override
-		    public void run() {
-		    	
-		        try {
-		   
+		    public void run() {		    	
+		        try {		   
 		        	new ESClient().pushUser(AppSingleton.getInstance().getTempUser());
 		        	AppSingleton.getInstance().setSuc(true);
 		        	

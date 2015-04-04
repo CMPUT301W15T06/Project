@@ -73,20 +73,11 @@ public class MainActivity extends Activity {
 
 
 		ClaimListManager.initial(getApplicationContext());
-		pg =ProgressDialog.show(this, "Pushing Onling...","Please wait patiently :)", true);
+		pg =ProgressDialog.show(this, "Loading Data...","Please wait patiently :)", true);
 		Thread thread = new Thread(new Runnable(){
 		    @Override
 		    public void run() {    	
-
-		    	AppSingleton.getInstance().setUserList();
-				
-				runOnUiThread(new Runnable() {
-		            @Override
-		            public void run()
-		            {
-		              pg.dismiss();
-		            }
-		          });
+		    	threadLoad();
 		    }
 		    
 		});
@@ -104,15 +95,25 @@ public class MainActivity extends Activity {
 		user=AppSingleton.getInstance().getCurrentUser();
 		userName=(TextView) findViewById(R.id.userTextView);
 		userName.setText(user.getUserName());
+	}
+
+	private void threadLoad() {
+		// TODO Auto-generated method stub
+		AppSingleton.getInstance().setUserList();
 		
-		AppSingleton.getInstance().setTestContext(getApplicationContext());
+		runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+              pg.dismiss();
+            }
+          });
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		return false;
 	}
 	
 	
@@ -155,8 +156,6 @@ public class MainActivity extends Activity {
 	 * @see android.content.Intent
 	 */
 	public void startClaimant(View v){
-//		Intent intent =new Intent(MainActivity.this,GetLocationByMapActivity.class);
-//		startActivity(intent);
 		Intent intent =new Intent(MainActivity.this,ClaimantClaimListActivity.class);
 		startActivity(intent);
 		AppSingleton.getInstance().setcMod(true);
@@ -165,10 +164,24 @@ public class MainActivity extends Activity {
 	
 	public void startApprover(View v){
 		
+		checkInternet();
+		
+		if(AppSingleton.getInstance().isSuc()){
+			Intent intent =new Intent(MainActivity.this,ApproverClaimListActivity.class);
+    		startActivity(intent);
+    		AppSingleton.getInstance().setcMod(false);
+		}else{
+			Toast.makeText(MainActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
+		}
+		
+
+	}
+
+	private void checkInternet() {
+		// TODO Auto-generated method stub
 		Thread thread = new Thread(new Runnable(){
 		    @Override
 		    public void run() {    	
-
 		    	if(new ESClient().getUserList()==null){
 					AppSingleton.getInstance().setSuc(false);
 		    	}else{
@@ -186,16 +199,6 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated catch block
 			throw new RuntimeException("Can't join!");
 		}
-		
-		if(AppSingleton.getInstance().isSuc()){
-			Intent intent =new Intent(MainActivity.this,ApproverClaimListActivity.class);
-    		startActivity(intent);
-    		AppSingleton.getInstance().setcMod(false);
-		}else{
-			Toast.makeText(MainActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
-		}
-		
-
 	}
 
 }

@@ -80,8 +80,6 @@ public class ClaimantClaimDetailActivity extends Activity {
 	private ClaimantClaimDetailController ccdc=null;
 	private Claim claim;
 	private ArrayList<Destination> list;
-	private AlertDialog.Builder adb;
-	private AlertDialog dia;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -121,11 +119,8 @@ public class ClaimantClaimDetailActivity extends Activity {
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimDetailActivity.this);
 				itemChoice(builder);
 				builder.create();  
-				builder.show();
-				
-			}
-
-			
+				builder.show();				
+			}			
 		});
 
 		
@@ -135,46 +130,55 @@ public class ClaimantClaimDetailActivity extends Activity {
 	private void itemChoice(Builder builder) {
 		// TODO Auto-generated method stub
 		builder.setItems(R.array.dest_dialog_array, new DialogInterface.OnClickListener() {
-			
-
-
-			
-
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				if (which==SET_LOCATION){
-					AppSingleton.getInstance().setMapController(new MapController() {
-						
-						@Override
-						public void setLocation(Location location) throws NetWorkException, StatusException {
-							// TODO Auto-generated method stub
-							AppSingleton.getInstance().getCurrentDestination().setLocation(location);
-						}
-					});
-					Intent intent =new Intent(ClaimantClaimDetailActivity.this,GetLocationByMapActivity.class);
-					startActivity(intent);					
-				
-				}else if (which==SHOW_LOCATION){
-					if(AppSingleton.getInstance().getCurrentDestination().getLocation()==null){
-						Toast.makeText( ClaimantClaimDetailActivity.this, "This destination doesn't have geolocation!", Toast.LENGTH_LONG).show();		
-					}else{
-						AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentDestination().getLocation());
-						Intent intent =new Intent(ClaimantClaimDetailActivity.this,ShowLocationActivity.class);
-						startActivity(intent);
-					}
-				}
+				click(which);
 				
 			}
 		});
 	}
 	
 	
+	private void click(int which) {
+		// TODO Auto-generated method stub
+		if (which==SET_LOCATION){
+			if(AppSingleton.getInstance().isEditable()){
+				setLocation();	
+			}else{
+				Toast.makeText( ClaimantClaimDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+			}
+		}else if (which==SHOW_LOCATION){
+			if(AppSingleton.getInstance().getCurrentDestination().getLocation()==null){
+				Toast.makeText( ClaimantClaimDetailActivity.this, "This destination doesn't have geolocation!", Toast.LENGTH_LONG).show();		
+			}else{
+				AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentDestination().getLocation());
+				Intent intent =new Intent(ClaimantClaimDetailActivity.this,ShowLocationActivity.class);
+				startActivity(intent);
+			}
+		}
+	}
+
+
+	private void setLocation() {
+		// TODO Auto-generated method stub
+		AppSingleton.getInstance().setMapController(new MapController() {
+			
+			@Override
+			public void setLocation(Location location) throws NetWorkException, StatusException {
+				// TODO Auto-generated method stub
+				AppSingleton.getInstance().getCurrentDestination().setLocation(location);
+			}
+		});
+		Intent intent =new Intent(ClaimantClaimDetailActivity.this,GetLocationByMapActivity.class);
+		startActivity(intent);
+	}
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_add_destination, menu);
-		return true;
+		return false;
 	}
 	
 	/**
