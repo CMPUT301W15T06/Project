@@ -99,10 +99,7 @@ public class US04_07_01_Test extends
 		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
-		
-		/*
-		 * Test for US 04.07.01 Basic Flow 1
-		 */
+
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();
 		// layout of claim list
@@ -127,7 +124,11 @@ public class US04_07_01_Test extends
 				claimList.getChildAt(0).performClick();
 				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
 				assertNotNull(thirdActivity);
-	
+				
+				/*
+				 * Test for US 04.07.01 Basic Flow 1
+				 */
+				// get item list
 				final View decorView2 = nextActivity.getWindow().getDecorView();
 				ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				// check if it is on screen
@@ -136,10 +137,12 @@ public class US04_07_01_Test extends
 				/*
 				 * Test for US 04.07.01 Basic Flow 2
 				 */
+				// get item list
 				final ListView itemlist = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				thirdActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
+						// click on item
 						itemlist.getChildAt(0).performClick();		
 					}
 				});
@@ -147,7 +150,7 @@ public class US04_07_01_Test extends
 				/*
 				 * Test for US 04.07.01 Basic Flow 3
 				 */
-				//check click
+				// check option menu
 				AlertDialog d = (AlertDialog) thirdActivity.getDialog();
 				assertNotNull(d);
 				
@@ -157,9 +160,12 @@ public class US04_07_01_Test extends
 				/*
 				 * Test for US 04.07.01 Basic Flow 4
 				 */
+				// click "Details"
 				choose.getChildAt(2).performClick();
+				// start claimant item detail activity
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantItemDetailActivity.class.getName(), null, false);
 				ClaimantItemDetailActivity bbb = (ClaimantItemDetailActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+				// check if the activity is started
 				assertNotNull(bbb);
 				
 				/*
@@ -189,16 +195,19 @@ public class US04_07_01_Test extends
 					//open edit item layout
 					@Override
 					public void run() {
-					delete.performClick();
-					ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
-					ClaimantItemListActivity ccc = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
-					assertNotNull(ccc); 
+						// click "Delete"
+						delete.performClick();
+						// check clicking menu
+						ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
+						ClaimantItemListActivity ccc = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+						assertNotNull(ccc); 
 					}
 				});
 				/*
 				 * Test for US 04.07.01 Basic Flow 7
 				 */
-				
+				// check length of item list
+				// length should increase by 1
 				int count2 = claim.getItemList().size();
 				assertEquals(count1,count2+1);
 				

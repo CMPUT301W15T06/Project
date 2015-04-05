@@ -70,7 +70,7 @@ public class US04_04_01_Test extends
 	cclc = new ClaimantClaimListController(u);
 	}
 	
-	public void test040101() {
+	public void test040401() {
 
 		activity.runOnUiThread(new Runnable(){
 
@@ -101,10 +101,7 @@ public class US04_04_01_Test extends
 		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
-		
-		/*
-		 * Test for US 04.04.01 Basic Flow 1
-		 */
+
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();
 		// layout of claim list
@@ -139,7 +136,10 @@ public class US04_04_01_Test extends
 				
 				Claim claim = new Claim();
 				int count_before = claim.getItemList().size();
-	
+				
+				/*
+				 * Test for US 04.04.01 Basic Flow 1
+				 */
 				final View decorView2 = nextActivity.getWindow().getDecorView();
 				ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				// check if it is on screen
@@ -147,27 +147,39 @@ public class US04_04_01_Test extends
 				
 				
 				/*
-				 * Test for US 04.04.01 Basic Flow 3,4
+				 * Test for US 04.04.01 Basic Flow 2
 				 */
+				// get item list view
 				final ListView itemlist = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				thirdActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
+						// click item
 						itemlist.getChildAt(0).performClick();		
 					}
 				});
-				//check click
+				
+				
+				/*
+				 * Test for US 04.04.01 Basic Flow 3
+				 */
+				// check option array
 				AlertDialog d = (AlertDialog) thirdActivity.getDialog();
 				assertNotNull(d);
 				
 				ListView choose = (ListView) ilv.findViewById(ca.ualberta.CMPUT301W15T06.R.array.item_dialog_array);
 				assertNotNull(choose);
+				
+				/*
+				 * Test for US 04.04.01 Basic Flow 4
+				 */
+				// perform click option
 				choose.getChildAt(0).performClick();
 				
 				/*
 				 * Test for US 04.04.01 Basic Flow 5
 				 */
-
+				// the size of claim list won't change
 				int count_af = claim.getItemList().size();
 				assertEquals(count_before,count_af);
 				

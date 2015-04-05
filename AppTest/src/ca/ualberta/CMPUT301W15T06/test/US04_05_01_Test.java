@@ -70,7 +70,7 @@ public class US04_05_01_Test extends
 	cclc = new ClaimantClaimListController(u);
 	}
 	
-	public void test040101() {
+	public void test040501() {
 
 		activity.runOnUiThread(new Runnable(){
 
@@ -101,10 +101,7 @@ public class US04_05_01_Test extends
 		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
-		
-		/*
-		 * Test for US 04.04.01 Basic Flow 1
-		 */
+
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();
 		// layout of claim list
@@ -139,7 +136,10 @@ public class US04_05_01_Test extends
 				
 				Claim claim = new Claim();
 				int count_before = claim.getItemList().size();
-	
+				
+				/*
+				 * Test for US 04.05.01 Basic Flow 1
+				 */
 				final View decorView2 = nextActivity.getWindow().getDecorView();
 				ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				// check if it is on screen
@@ -147,29 +147,41 @@ public class US04_05_01_Test extends
 				
 				
 				/*
-				 * Test for US 04.04.01 Basic Flow 3,4
+				 * Test for US 04.05.01 Basic Flow 2
 				 */
+				// get item list layout
 				final ListView itemlist = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				thirdActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
+						// click list view
 						itemlist.getChildAt(0).performClick();		
 					}
 				});
+				
+				
+				/*
+				 * Test for US 04.05.01 Basic Flow 3
+				 */
 				//check click
 				AlertDialog d = (AlertDialog) thirdActivity.getDialog();
 				assertNotNull(d);
-				
+				// check option array layout
 				ListView choose = (ListView) ilv.findViewById(ca.ualberta.CMPUT301W15T06.R.array.item_dialog_array);
 				assertNotNull(choose);
-				choose.getChildAt(2).performClick();
 				
+				/*
+				 * Test for US 04.05.01 Basic Flow 4
+				 */
+				choose.getChildAt(2).performClick();
+				// start claimant item detail activity
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantItemDetailActivity.class.getName(), null, false);
 				ClaimantItemDetailActivity ccc = (ClaimantItemDetailActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+				// check if the activity is started
 				assertNotNull(ccc);
 				
 				/*
-				 * Test for US 04.04.01 Basic Flow 5
+				 * Test for US 04.05.01 Basic Flow 5
 				 */
 				final View ddvv = ccc.getWindow().getDecorView();
 				TextView Date = (TextView) ccc.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemDateTextView);
