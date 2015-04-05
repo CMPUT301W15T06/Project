@@ -1,11 +1,13 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import ca.ualberta.CMPUT301W15T06.AppSingleton;
 import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.ClaimantEditDestinationActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
+import ca.ualberta.CMPUT301W15T06.R;
 import ca.ualberta.CMPUT301W15T06.ShowLocationActivity;
 import ca.ualberta.CMPUT301W15T06.User;
 import android.annotation.SuppressLint;
@@ -14,6 +16,9 @@ import android.app.AlertDialog;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
 import android.view.Menu;
@@ -22,6 +27,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ListView;
 
@@ -70,56 +76,9 @@ public class US01_07_01_Test<Final> extends
 
 	}
 
-	public void testUS010201() {
-		/*
-		* Test for US01.07.01 Basic Flow 1
-		*/
-		// test button layouts
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton));
- 
-		//test "Approver" button layout
-		final View decorView = activity.getWindow().getDecorView();
-
-		ViewAsserts.assertOnScreen(decorView, ApproverButton);
-
-		final ViewGroup.LayoutParams layoutParams =
-				ApproverButton.getLayoutParams();
-		assertNotNull(layoutParams);
-		assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-		assertEquals("Incorrect label of the button", "Approver", view.getText());
+	public void testUS010701() {
 		
-		//test "Claimant" button layout
-		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
-
-		final ViewGroup.LayoutParams layoutParams1 =
-				ClaimantButton.getLayoutParams();
-		assertNotNull(layoutParams1);
-		assertEquals(layoutParams1.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams1.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view1 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-		assertEquals("Incorrect label of the button", "Claimant", view1.getText());
-		
-		//test "Change User" button layout
-		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
-
-		final ViewGroup.LayoutParams layoutParams2 =
-				UserButton.getLayoutParams();
-		assertNotNull(layoutParams1);
-		assertEquals(layoutParams2.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams2.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
-		assertEquals("Incorrect label of the button", "Change User", view2.getText());
-
-
 		//User click "Change User"
-
 		activity.runOnUiThread(new Runnable(){
 
 			@Override
@@ -137,28 +96,6 @@ public class US01_07_01_Test<Final> extends
 				//test opening a dialog
 		    	// access the alert dialog using the getDialog() method created in the activity
 				AlertDialog d = (AlertDialog) activity.getDialog();
-
-//				// check layout
-//		    	assertTrue(d.isShowing());
-//		    	
-//		    	Button p = d.getButton(AlertDialog.BUTTON_POSITIVE);
-//		    	Button n = d.getButton(AlertDialog.BUTTON_NEGATIVE);
-//		    	
-//		    	final View decorView = activity.getWindow().getDecorView();
-//				ViewAsserts.assertOnScreen(decorView, p);
-//				ViewAsserts.assertOnScreen(decorView, n);
-//				
-//				/*
-//				 * Test for US 01.02.01 Basic Flow 4 
-//				 */
-//				// set text
-//				EditText et = activity.getInputField();
-//				assertNotNull(et);
-//				
-//				et.setText("NewUser");
-//				
-//				assertTrue(p.performClick());
-
 				
 				}	
 		});
@@ -210,6 +147,9 @@ public class US01_07_01_Test<Final> extends
 				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
 				assertNotNull(thirdActivity);
 	
+				/*
+				 * Test for US 01.07.01 Basic Flow 1
+				 */
 				ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				// check if it is on screen
 				ViewAsserts.assertOnScreen(decorView1, ilv);
@@ -223,7 +163,6 @@ public class US01_07_01_Test<Final> extends
 				/*
 				 * Test for US 01.07.01 Basic Flow 2
 				 */			
-
 				//test 'Add a Destination' button layout
 				Button addDestination = (Button) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);
 				final View dv = forthActivity.getWindow().getDecorView();
@@ -252,9 +191,9 @@ public class US01_07_01_Test<Final> extends
 						assertNotNull(fifthActivity);
 						
 						
-					/*
-					 * test US01.07.01 Basic Flow 3
-					 */
+						/*
+						 * Test for US 01.07.01 Basic Flow 3
+						 */
 						//test interface
 						EditText claimant_des = ((EditText) fifthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.DestinationEditText));
 						EditText claimant_reason = ((EditText) fifthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.ReasonEditText));
@@ -266,41 +205,72 @@ public class US01_07_01_Test<Final> extends
 						ViewAsserts.assertOnScreen(dv1, claimant_reason);
 						assertTrue(View.GONE == claimant_reason.getVisibility());	
 						
-						
-					/*
-					 * test US01.07.01 Basic Flow 4
-					 */
+						/*
+						 * Test for US 01.07.01 Basic Flow 4
+						 */
 						//fill blank
 						String claimantDes = "a";
 						String claimantReason = "b";
 						claimant_des.setText(claimantDes);
 						claimant_reason.setText(claimantReason);
-						
-						
-					/*
-					 * test US01.07.01 Basic Flow 5
-					 */
+
 						//finish the activity and go back
 						fifthActivity.finish();
 					}
 				});
-				int count2 = claim.getDestinationList().size();
-				assertEquals(count1,count2-1);
 				
 				/*
-				 * test US01.07.01 Basic Flow 6,7,,9
+				 * Test for US 01.07.01 Basic Flow 5
 				 */
+				int count2 = claim.getDestinationList().size();
+				assertEquals(count1,count2-1);
+
 				final ListView detailListView = (ListView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.detailListView);
 				forthActivity.runOnUiThread(new Runnable() {
 					//test add button works
 					@Override
 					public void run() {
+						
+						/*
+						 * test US01.07.01 Basic Flow 6
+						 */
 						ListView geoArray = (ListView) detailListView.findViewById(ca.ualberta.CMPUT301W15T06.R.array.dest_dialog_array);
 						assertNotNull(geoArray);
 						geoArray.getChildAt(0).performClick();
+						
+						/*
+						 * test US01.07.01 Basic Flow 7
+						 */
 						ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ShowLocationActivity.class.getName(), null, false);
+						
+						/*
+						 * test US01.07.01 Basic Flow 8
+						 */
 						ShowLocationActivity aaa = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 						assertNotNull(aaa);
+						
+						/*
+						 * test US01.07.01 Basic Flow 9
+						 */
+						ImageView image=(ImageView)aaa.findViewById(R.drawable.worldmap);
+						assertNotNull(image);
+						
+						TextView tv=(TextView)aaa.findViewById(R.id.llTextView);
+						assertNotNull(tv);
+						
+						
+						/*
+						 * test US01.07.01 Basic Flow 10
+						 */
+						boolean clickMap = image.performClick();
+						assertTrue(clickMap);
+						
+						/*
+						 * test US01.07.01 Basic Flow 11
+						 */
+						Location location=AppSingleton.getInstance().getLocation();
+						tv.setText("Lat: " + location.getLatitude()
+								+ "\nLong: " + location.getLongitude());
 					}
 				});
 				
