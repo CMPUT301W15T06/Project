@@ -23,7 +23,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class US03_02_01_Test extends
+public class US03_03_01_Test extends
 		ActivityInstrumentationTestCase2<MainActivity> {
 
 
@@ -50,7 +50,7 @@ public class US03_02_01_Test extends
 	Object test_tag;
 	Object update_list;
 
-	public US03_02_01_Test() {
+	public US03_03_01_Test() {
 		super(MainActivity.class);
 	}
 
@@ -179,104 +179,19 @@ public class US03_02_01_Test extends
 				assertEquals(layoutParams11.height, WindowManager.LayoutParams.WRAP_CONTENT);	
 				
 			/*
-			 * Test for US03.02.01 Basic Flow 2,3
+			 * Test for US03.02.01 Basic Flow 2,3,4
 			 */
 				// Click the menu option
 				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantTagListActivity.class.getName(), null, false);
-				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.manage_tag, 1);
+				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.filter, 1);
 				ClaimantTagListActivity thirdActivity = (ClaimantTagListActivity) getInstrumentation().waitForMonitorWithTimeout(am,10000);
 				assertNotNull(thirdActivity);
 				
-			/*
-			 * Test for US03.02.01 Basic Flow 4
-			 */	
-				final ListView itemlv = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
-				// check if it is on screen
-				ViewAsserts.assertOnScreen(decorView1, itemlv);
-				// check whether the Button object's width and height attributes match the expected values
-				final ViewGroup.LayoutParams lp = listView.getLayoutParams();
-				/*assertNotNull(layoutParams);*/
-				assertEquals(lp.width, WindowManager.LayoutParams.MATCH_PARENT);
-				assertEquals(lp.height, WindowManager.LayoutParams.WRAP_CONTENT);
-
-			/*
-			 * Test for US03.02.01 Basic Flow 5
-			 */	
-				//test "add" button layout
-				final Button add = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addTagButton);
-				assertNotNull(add);
-				final View dv = thirdActivity.getWindow().getDecorView();
-				ViewAsserts.assertOnScreen(dv, add);
-
-				final ViewGroup.LayoutParams layoutParams =add.getLayoutParams();
-				assertNotNull(layoutParams);
-				assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
-				assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-				assertEquals("Incorrect label of the button", "Add", add.getText());
 				
-				//"Add" button activity
-				final String tag = "a";
-				EditText add_tag_text = ((EditText) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addTagEditText));
-				add_tag_text.setText(tag);
-				final int count_before = u.getTagList().size();
-				thirdActivity.runOnUiThread(new Runnable() {
-					//test add button works
-					@Override
-					public void run() {
-						add.performClick();
-						int count_after = u.getTagList().size();
-						assertEquals(count_before,count_after-1);
-					}
-				});
 				
-				//test rename function
-				//click item on item list
-				thirdActivity.runOnUiThread(new Runnable() {
-					//test add button works
-					@Override
-					public void run() {
-						itemlv.getChildAt(0).performClick();
-						ListView tagArray  = (ListView) itemlv.findViewById(ca.ualberta.CMPUT301W15T06.R.array.tag_dialog_array);
-						assertNotNull(tagArray);
-						tagArray.getChildAt(0).performClick();						
-					}
-				});
-				
-				AlertDialog d = (AlertDialog) thirdActivity.getDialog();
-				assertNotNull(d);
-				//OK button
-				Button positiveButton = d.getButton(DialogInterface.BUTTON_POSITIVE);
-				assertNotNull(positiveButton);
-				positiveButton.performClick();
-				int count_re = u.getTagList().size();
-				assertEquals(count_before,count_re);
-				//cancel button
-				Button negativeButton = d.getButton(DialogInterface.BUTTON_NEGATIVE);
-				assertNotNull(negativeButton);
-				negativeButton.performClick();
-				assertNotNull(thirdActivity);
-				
-				//test delete function
-				thirdActivity.runOnUiThread(new Runnable() {
-					//test add button works
-					@Override
-					public void run() {
-						itemlv.getChildAt(0).performClick();
-						ListView tagArray  = (ListView) itemlv.findViewById(ca.ualberta.CMPUT301W15T06.R.array.tag_dialog_array);
-						assertNotNull(tagArray);
-						tagArray.getChildAt(1).performClick();	
-						int count_d = u.getTagList().size();
-						assertEquals(count_before,count_d-1);
-						
-					}
-				});
-				
-				//finish activity
-				thirdActivity.finish();
-				nextActivity.finish();
 			}
-
 		});
-		activity.finish();
+		
 	}
+	
 }
