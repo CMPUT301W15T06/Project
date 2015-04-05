@@ -102,7 +102,7 @@ public class US07_01_01_Test extends
 		assertNotNull(nextActivity);
 		
 		/*
-		 * Test for US 04.01.01 Basic Flow 1,2
+		 * Test for US 07.01.01 Basic Flow 1,2
 		 */
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();
@@ -124,7 +124,7 @@ public class US07_01_01_Test extends
 			public void run() {
 				
 				/*
-				 * Test for US 04.01.01 Basic Flow 3,4,5
+				 * Test for US 07.01.01 Basic Flow 3,4,5
 				 */
 				// click the list open next activity.
 				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
