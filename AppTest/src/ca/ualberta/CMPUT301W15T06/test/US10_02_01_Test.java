@@ -31,7 +31,7 @@ import android.widget.TextView;
 import android.widget.ListView;
 
 @SuppressLint("CutPasteId")
-public class US10_01_01_Test extends
+public class US10_02_01_Test extends
 			ActivityInstrumentationTestCase2<MainActivity> {
 
 	Button ApproverButton;
@@ -55,7 +55,7 @@ public class US10_01_01_Test extends
 	User u;
 
 
-	public US10_01_01_Test() {
+	public US10_02_01_Test() {
 		super(MainActivity.class);
 	}
 
@@ -158,9 +158,6 @@ public class US10_01_01_Test extends
 			}	
 		});
 
-		/*
-		* Test for US10.01.01 Basic Flow 1
-		*/
 		//click "Claimant" button and create next activity
 		final Button button = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		activity.runOnUiThread(new Runnable() {
@@ -196,7 +193,7 @@ public class US10_01_01_Test extends
 					
 					
 				/*
-				* Test for US10.01.01 Basic Flow 2,3,4
+				* Test for US10.02.01 Basic Flow 1,2
 				*/
 				// after claimant request to add new claim, a new claim should be added into list
 				int count1 = u.getClaimList().size();
@@ -213,7 +210,7 @@ public class US10_01_01_Test extends
 				ShowLocationActivity aaa = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 				assertNotNull(aaa);
 				/*
-				* Test for US10.01.01 Basic Flow 5,6,7
+				* Test for US10.02.01 Basic Flow 3
 				*/
 				ImageView image=(ImageView)aaa.findViewById(ca.ualberta.CMPUT301W15T06.R.drawable.worldmap);
 				assertNotNull(image);
