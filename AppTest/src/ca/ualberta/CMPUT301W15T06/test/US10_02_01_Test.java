@@ -224,7 +224,11 @@ public class US10_02_01_Test extends
 				Location location=AppSingleton.getInstance().getLocation();
 				tv.setText("Lat: " + location.getLatitude()
 				+ "\nLong: " + location.getLongitude());
+				
+				aaa.finish();
+				nextActivity.finish();
 			}
 		});
+		activity.finish();
 	}
 }
