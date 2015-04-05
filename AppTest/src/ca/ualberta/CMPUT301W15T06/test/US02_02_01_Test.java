@@ -66,10 +66,14 @@ public class US02_02_01_Test<Final> extends
 	}
 
 	/*
-	 * Test for US01.01.01 Basic Flow 1
+	 * Test for US02.02.01 Basic Flow 1
 	 */
 	// test button exists
-	public void testLayout() {
+	public void test020201() {
+		/*
+		 * Test for US02.01.01 Basic Flow 1
+		 */
+		// test button exists
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton));
@@ -102,10 +106,9 @@ public class US02_02_01_Test<Final> extends
 		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
 		assertEquals("Incorrect label of the button", "Change User",view2.getText());
 
-	/*
-	 * Test for US 01.01.01 Basic Flow 2 Test for US 01.01.01 Basic Flow 3
-	 * Test for US 01.01.01 Basic Flow 4 Test for US 01.01.01 Basic Flow 5
-	 */
+		/*
+		 * Test for US02.02.01 Basic Flow 2
+		 */
 		// User click "Change User"
 
 		 activity.runOnUiThread(new Runnable(){
@@ -118,14 +121,18 @@ public class US02_02_01_Test<Final> extends
 			 }
 		 });
 
-	/*
-	 * Test for US 01.01.01 Basic Flow 6
-	 */
+		/*
+		 * Test for US 02.02.01 Basic Flow 5
+		 */
 		// click "Claimant" button and create next activity
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
 		// open current activity
 		MainActivity myActivity = getActivity();
 		final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		
+		/*
+		 * Test for US 02.02.01 Basic Flow 6
+		 */
 		myActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -138,9 +145,9 @@ public class US02_02_01_Test<Final> extends
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
 
-	/*
-	 * Test Case for US01.01.01 Basic Flow 7
-	 */
+		/*
+		 * Test for US 02.02.01 Basic Flow 7
+		 */
 		// view which is expected to be present on the screen
 		final View decorView1 = nextActivity.getWindow().getDecorView();
 		listView = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
@@ -152,37 +159,6 @@ public class US02_02_01_Test<Final> extends
 		/* assertNotNull(layoutParams); */
 		assertEquals(layoutParams11.width,WindowManager.LayoutParams.MATCH_PARENT);
 		assertEquals(layoutParams11.height,WindowManager.LayoutParams.WRAP_CONTENT);
-		
-		// test if the list is ordered
-		// 4 new dates
-//		String d1 = "2013-10-10";
-//		String d2 = "2012-03-27";
-//		String d3 = "2014-05-12";
-//		String d4 = "2013-12-01";
-//
-//		// add new claim, date is d1
-//		Claim claim = new Claim();
-//		claim.setBeginDate(d1);
-//		cclc.addClaim();
-//		// add new claim, date is d2
-//		cacc.addClaim("B", d2, d2);
-//		// add new claim, date is d3
-//		cacc.addClaim("C", d3, d3);
-//		// add new claim, date is d4
-//		cacc.addClaim("D", d4, d4);
-//		// get length of claim list
-//		int length = cList.getClaimList().size();
-//		// initialize date
-//		Date last_date = cList.getClaimList().get(0).getBeginDate();
-//		Date new_date = last_date;
-//		// date should be sorted from the oldest one to the nearest one
-//		int i = 0;
-//		while (i < length){
-//		new_date = cList.getClaimList().get(i).getBeginDate();
-//		// It's an error now because our function returns null
-//		assertTrue("new date is larger than or equal to old date", new_date.compareTo(last_date)>=0);
-//		i++;
-//		}
 
 	}
 }

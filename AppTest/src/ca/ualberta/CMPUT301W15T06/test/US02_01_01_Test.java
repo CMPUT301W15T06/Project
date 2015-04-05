@@ -64,11 +64,12 @@ public class US02_01_01_Test<Final> extends
 		cclc = new ClaimantClaimListController(u);
 	}
 
-	/*
-	 * Test for US01.01.01 Basic Flow 1
-	 */
-	// test button exists
-	public void testLayout() {
+
+	public void test020101() {
+		/*
+		 * Test for US02.01.01 Basic Flow 1
+		 */
+		// test button exists
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton));
@@ -101,10 +102,9 @@ public class US02_01_01_Test<Final> extends
 		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
 		assertEquals("Incorrect label of the button", "Change User",view2.getText());
 
-	/*
-	 * Test for US 01.01.01 Basic Flow 2 Test for US 01.01.01 Basic Flow 3
-	 * Test for US 01.01.01 Basic Flow 4 Test for US 01.01.01 Basic Flow 5
-	 */
+		/*
+		 * Test for US02.01.01 Basic Flow 2
+		 */
 		// User click "Change User"
 
 		 activity.runOnUiThread(new Runnable(){
@@ -116,34 +116,19 @@ public class US02_01_01_Test<Final> extends
 			 
 			 }
 		 });
-		
-		// // test opening a dialog
-		// AlertDialog dialog = (AlertDialog) ((MainActivity)
-		// activity).getDialog();
-		// assertNotNull(dialog);
-		//
-		// //write the user name
-		//
-		//
-		// //test button on dialog
-		// Button PositiveButton =
-		// dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-		// assertNotNull(PositiveButton);
-		// Button NegativeButton =
-		// dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-		// assertNotNull(NegativeButton);
-		//
-		// //click "OK" button
-		// PositiveButton.performClick();
 
-	/*
-	 * Test for US 01.01.01 Basic Flow 6
-	 */
+		/*
+		 * Test for US 02.01.01 Basic Flow 5
+		 */
 		// click "Claimant" button and create next activity
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
 		// open current activity
 		MainActivity myActivity = getActivity();
 		final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		
+		/*
+		 * Test for US 02.01.01 Basic Flow 6
+		 */
 		myActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -156,9 +141,9 @@ public class US02_01_01_Test<Final> extends
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
 
-	/*
-	 * Test Case for US01.01.01 Basic Flow 7
-	 */
+		/*
+		 * Test for US 02.01.01 Basic Flow 7
+		 */
 		// view which is expected to be present on the screen
 		final View decorView1 = nextActivity.getWindow().getDecorView();
 		listView = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
