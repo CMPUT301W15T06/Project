@@ -68,6 +68,7 @@ public class MainActivity extends Activity {
 	private TextView userName;
 	
 	private Dialog dialog;
+	private EditText inputET;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +130,7 @@ public class MainActivity extends Activity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 		builder.setTitle("Enter your Name");
 		final EditText input=new EditText(MainActivity.this);
+		inputET = input;
 		input.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);			
 		builder.setView(input);
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -216,5 +218,9 @@ public class MainActivity extends Activity {
 	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
 		super.onPrepareDialog(id, dialog, args);
 		this.dialog = dialog;
+	}
+	
+	public EditText getInputField() {
+		return inputET;
 	}
 }

@@ -136,9 +136,25 @@ public class US01_01_01_Test extends
 				AlertDialog d = (AlertDialog) activity.getDialog();
 		    	assertNotNull(d);
 
+		    	assertTrue(d.isShowing());
+		    	
+		    	Button p = d.getButton(AlertDialog.BUTTON_POSITIVE);
+		    	Button n = d.getButton(AlertDialog.BUTTON_NEGATIVE);
+		    	
+		    	final View decorView = activity.getWindow().getDecorView();
+				ViewAsserts.assertOnScreen(decorView, p);
+				ViewAsserts.assertOnScreen(decorView, n);
+				
+				EditText et = activity.getInputField();
+				assertNotNull(et);
+				
+				et.setText("NewUser");
+				
+				assertTrue(p.performClick());
+				assertTrue(n.performClick());
+				
 			}	
 		});
-
 
     	
     	
