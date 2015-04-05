@@ -4,6 +4,7 @@ import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
 import android.content.Intent;
@@ -24,7 +25,7 @@ public class US01_03_01_Test extends
 	Button ClaimantButton;
 	Button UserButton;
 	Instrumentation instrumentation;
-	Activity activity;
+	MainActivity activity;
 	EditText textInput;
 	Intent intent;
 	Button AddDestination;
@@ -49,12 +50,12 @@ public class US01_03_01_Test extends
 		UserButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
 		intent = new Intent(getInstrumentation().getTargetContext(),MainActivity.class);
 	}
-	
-	/*
-	 * Test for US01.03.01 Basic Flow 1,2,3,4,5
-	 */
-	// test button exists
-	public void testLayout() {
+ 
+	public void testUS010301() {
+		/*
+		 * Test for US01.03.01 Basic Flow 1
+		 */
+		// test button layouts
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton));
@@ -98,41 +99,67 @@ public class US01_03_01_Test extends
 		assertEquals("Incorrect label of the button", "Change User", view2.getText());
 
 
+		/*
+		 * Test for US01.03.01 Basic Flow 1
+		 */
 		//User click "Change User"
 
-//		activity.runOnUiThread(new Runnable(){
-//
-//			@Override
-//			public void run() {
-//				//open the dialog
-//				UserButton.performClick();
-//				}	
-//		});
-//			
-//		// test opening a dialog
-//		AlertDialog dialog = (AlertDialog) ((MainActivity) activity).getDialog();
-//		assertNotNull(dialog);
-//		
-//		//write the user name
-//
-//		
-//		//test button on dialog
-//		Button PositiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-//		assertNotNull(PositiveButton);
-//		Button NegativeButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-//		assertNotNull(NegativeButton);
-//
-//		//click "OK" button
-//		PositiveButton.performClick();
+		activity.runOnUiThread(new Runnable(){
 
-	/*
-	 * Test Case for US01.03.01 Basic Flow 6
-	 */
-					
+			@Override
+			public void run() {
+				/*
+				* Test for US 01.03.01 Basic Flow 2
+				*/
+				// click button to start another activity
+				assertTrue(UserButton.performClick());	
+				
+				/*
+				 * Test for US 01.03.01 Basic Flow 3
+				 */
+				//test opening a dialog
+		    	// access the alert dialog using the getDialog() method created in the activity
+				AlertDialog d = (AlertDialog) activity.getDialog();
+
+//				// check layout
+//		    	assertTrue(d.isShowing());
+//		    	
+//		    	Button p = d.getButton(AlertDialog.BUTTON_POSITIVE);
+//		    	Button n = d.getButton(AlertDialog.BUTTON_NEGATIVE);
+//		    	
+//		    	final View decorView = activity.getWindow().getDecorView();
+//				ViewAsserts.assertOnScreen(decorView, p);
+//				ViewAsserts.assertOnScreen(decorView, n);
+//				
+//				/*
+//				 * Test for US 01.03.01 Basic Flow 4 
+//				 */
+//				// set text
+//				EditText et = activity.getInputField();
+//				assertNotNull(et);
+//				
+//				et.setText("NewUser");
+//				
+//				assertTrue(p.performClick());
+
+				}	
+		});
+			
+
+
+		/*
+		 * Test Case for US01.03.01 Basic Flow 5
+		 */
+				
 		//click "Claimant" button and create next activity
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
 		//open current activity
 		MainActivity myActivity = getActivity();
+		
+		/*
+		 * Test Case for US01.03.01 Basic Flow 6
+		 */
+				
 		final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		myActivity.runOnUiThread(new Runnable() {
 			@Override
@@ -145,11 +172,12 @@ public class US01_03_01_Test extends
 		ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
- 
-	/*
-	 * Test Case for US01.03.01 Basic Flow 7	
-	 */
-			
+
+		 
+		/*
+		 * Test Case for US01.03.01 Basic Flow 7	
+		 */
+				
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();
 		 
@@ -161,13 +189,11 @@ public class US01_03_01_Test extends
 		/*assertNotNull(layoutParams);*/
 		assertEquals(layoutParams11.width, WindowManager.LayoutParams.MATCH_PARENT);
 		assertEquals(layoutParams11.height, WindowManager.LayoutParams.WRAP_CONTENT);	 
-			
-		//add a new claim
-		// TODO Auto-generated method stub
-			
-	/*
-	 * Test for US 01.01.01 Basic Flow 8
-	 */
+
+
+		/*
+		 * Test for US 01.03.01 Basic Flow 8
+		 */
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		//get next activity
 		nextActivity.runOnUiThread(new Runnable() {
@@ -179,9 +205,10 @@ public class US01_03_01_Test extends
 				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 1000);
 				assertNotNull(thirdActivity);	
 				
+				
 			/*
 		     * Test for US 01.01.01 Basic Flow 9
-			 */		
+			 */	
 				ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				// check if it is on screen
 				ViewAsserts.assertOnScreen(decorView1, ilv);
