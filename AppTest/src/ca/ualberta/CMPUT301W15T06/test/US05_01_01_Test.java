@@ -105,39 +105,12 @@ public class US05_01_01_Test extends
 
 			@Override
 			public void run() {
-				/*
-				* Test for US 01.03.01 Basic Flow 2
-				*/
 				// click button to start another activity
 				assertTrue(UserButton.performClick());	
 				
-				/*
-				 * Test for US 01.03.01 Basic Flow 3
-				 */
 				//test opening a dialog
 		    	// access the alert dialog using the getDialog() method created in the activity
 				AlertDialog d = (AlertDialog) activity.getDialog();
-
-//				// check layout
-//		    	assertTrue(d.isShowing());
-//		    	
-//		    	Button p = d.getButton(AlertDialog.BUTTON_POSITIVE);
-//		    	Button n = d.getButton(AlertDialog.BUTTON_NEGATIVE);
-//		    	
-//		    	final View decorView = activity.getWindow().getDecorView();
-//				ViewAsserts.assertOnScreen(decorView, p);
-//				ViewAsserts.assertOnScreen(decorView, n);
-//				
-//				/*
-//				 * Test for US 01.03.01 Basic Flow 4 
-//				 */
-//				// set text
-//				EditText et = activity.getInputField();
-//				assertNotNull(et);
-//				
-//				et.setText("NewUser");
-//				
-//				assertTrue(p.performClick());
 
 				}	
 		});
@@ -180,7 +153,7 @@ public class US05_01_01_Test extends
 
 
 		/*
-		 * Test for US US05.01.01 Basic Flow 2,3
+		 * Test for US US05.01.01 Basic Flow 2
 		 */
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		//get next activity
@@ -193,7 +166,9 @@ public class US05_01_01_Test extends
 				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 1000);
 				assertNotNull(thirdActivity);	
 				
-
+				/*
+				 * Test for US US05.01.01 Basic Flow 3
+				 */
 				ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				// check if it is on screen
 				ViewAsserts.assertOnScreen(decorView1, ilv);
