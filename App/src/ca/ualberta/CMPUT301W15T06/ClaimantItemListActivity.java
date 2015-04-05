@@ -32,6 +32,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -70,6 +71,8 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class ClaimantItemListActivity extends Activity {
 
+	private Dialog dialog;
+	
 	private static final int PHOTO_RECEIPT = 1;
 	private static final int ITEM_DETAIL = 2;
 	private static final int CHANGE_FLAG = 0;
@@ -321,5 +324,15 @@ public class ClaimantItemListActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	public Dialog getDialog() {
+		return dialog;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
+		super.onPrepareDialog(id, dialog, args);
+		this.dialog = dialog;
+	}
 
 }
