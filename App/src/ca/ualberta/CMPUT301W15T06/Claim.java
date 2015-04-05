@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.location.Location;
+
 
 /**
  * <p>
@@ -73,7 +75,6 @@ public class Claim extends AppModel{
 	protected ArrayList<Item> itemList;
 	protected ArrayList<Destination> destinationList;
 	
-//	protected ArrayList<Comment> commentList;
 	protected Comments comments;
 	/**
 	 * Set protected ArrayList named tagIDList.
@@ -203,8 +204,6 @@ public class Claim extends AppModel{
 		}else{
 			return aToString();
 		}
-		
-
 	}
 
 	/**
@@ -219,10 +218,6 @@ public class Claim extends AppModel{
 	 */
 	protected String aToString() {
 		// TODO Auto-generated method stub
-		String dest="";
-		for (Destination d:destinationList){
-			dest+='\n'+"      "+d.getName();
-		}
 		String approver="";
 		ArrayList<String> nal= new ArrayList<String>();
 		for(Comment comment:comments.getCommentList()){
@@ -232,10 +227,10 @@ public class Claim extends AppModel{
 			}
 		}
 		
-		return "Claimant: "+name+'\n'+"Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+
-				getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY")+'\n'+"Approver(s): "+approver;
+		return "Claimant: "+name+'\n'+sameReturn()+"Approver(s): "+approver;
 	}
 
+	
 	/**
 	 * <p>
 	 * This method will change the subclass. It translates Destination startDate and endDate 
@@ -249,20 +244,60 @@ public class Claim extends AppModel{
 	 */
 	protected String cToString() {
 		// TODO Auto-generated method stub
-		String dest="";
-		for (Destination d:destinationList){
-			dest+='\n'+"      "+d.getName();
-		}
+		
 		String tag="";
 		for (Long l:tagIDList){
 			tag+='\n'+"      "+AppSingleton.getInstance().getCurrentUser().getTagByID(l).getName();
 		}
-		return "Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+dest+'\n'+"Status: "+status+'\n'+"Tag(s) : "+tag+'\n'+
-				getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY");
+		return sameReturn()+"Tag(s) : "+tag+'\n'+"Distance to first Destionation:"+"\n    "+colorDistance();
 	}
 
 
 
+	private String colorDistance() {
+		// TODO Auto-generated method stub
+		if(AppSingleton.getInstance().getCurrentUser().getHomeLocation()==null){
+			return "You haven't set home location yet!";
+		}else if(!hasFirstDestLoca()){
+			return "You haven't set the location \n  of the first destination!";
+		}
+		
+		float distance = AppSingleton.getInstance().getCurrentUser().getHomeLocation().distanceTo(getFirstDestLoca());
+		int i=(int) (distance/2003900);
+		String star=new String(new char[i+1]).replace('\0', '*');
+		return (String.valueOf(distance)+" meters\n    "+star);
+
+
+	}
+	
+	private Location getFirstDestLoca() {
+		// TODO Auto-generated method stub
+		return destinationList.get(0).getLocation();
+	}
+	
+	private boolean hasFirstDestLoca() {
+		// TODO Auto-generated method stub
+		if(destinationList.size()==0){
+			return false;
+		}else if(destinationList.get(0).getLocation()==null){
+			return false;
+		}
+		return true;
+	}
+	
+	private String sameReturn(){
+		return "Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+destToString()+'\n'
+				+"Status: "+status+'\n'+getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'
+				+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY")+'\n';
+	}
+	
+	private String destToString(){
+		String dest="";
+		for (Destination d:destinationList){
+			dest+='\n'+"      "+d.getName();
+		}
+		return dest;
+	}
 	/**
 	 * <p>
 	 * Calculate the total amount and return the value. This method first 

@@ -64,6 +64,10 @@ public class ClaimantEditDestinationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_destination_reason);
 		
+		setTitle(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+				+"<-"+AppSingleton.getInstance().getUserName());
+
+		
 		dest=AppSingleton.getInstance().getCurrentDestination();
 		cedc=new ClaimantEditDestinationController(dest);
 		
@@ -114,8 +118,7 @@ public class ClaimantEditDestinationActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_destination_reason, menu);
-		return true;
+		return false;
 	}
 	
 	

@@ -14,18 +14,15 @@ public class NetworkStateReceiver extends BroadcastReceiver {
 
 	public void onReceive(Context context, Intent intent) {
 	 
-     Log.d("app","Network connectivity change");
-//     Toast.makeText(AppSingleton.getInstance().getTestContext(), "Network connectivity change", Toast.LENGTH_LONG).show();
+
      if(intent.getExtras()!=null) {
         NetworkInfo ni=(NetworkInfo) intent.getExtras().get(ConnectivityManager.EXTRA_NETWORK_INFO);
         if(ni!=null && ni.getState()==NetworkInfo.State.CONNECTED) {
-            Log.i("app","Network "+ni.getTypeName()+" connected");
-//            Toast.makeText(AppSingleton.getInstance().getTestContext(), "connected", Toast.LENGTH_LONG).show();
+            ClaimListManager.getInstance().save(AppSingleton.getInstance().getUserName());
         }
      }
      if(intent.getExtras().getBoolean(ConnectivityManager.EXTRA_NO_CONNECTIVITY,Boolean.FALSE)) {
-            Log.d("app","There's no network connectivity");
-//            Toast.makeText(AppSingleton.getInstance().getTestContext(), "no network connectivity", Toast.LENGTH_LONG).show();
+           
      }
    }
 }

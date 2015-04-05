@@ -75,6 +75,18 @@ public class ClaimantReceiptActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_receipt);
 		
+		
+		if(AppSingleton.getInstance().iscMod()){
+			setTitle(AppSingleton.getInstance().getCurrentItem().getDescription()+"<-"
+					+AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+					+"<-"+AppSingleton.getInstance().getUserName());
+		}else{
+			setTitle(AppSingleton.getInstance().getCurrentItem().getDescription()+"<-"+
+					AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+					+"<-"+AppSingleton.getInstance().getCurrentClaim().getName()+"<-"+"Approver: "+AppSingleton.getInstance().getUserName());
+		}
+	
+		
 		receipt=AppSingleton.getInstance().getCurrentItem().getRecipt();
 		crc=new ClaimantReceiptController(receipt);
 		imageView = (ImageView) findViewById(R.id.photoReciptImageView);
@@ -90,8 +102,12 @@ public class ClaimantReceiptActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_recipt, menu);
-		return true;
+		if(AppSingleton.getInstance().iscMod()){
+			getMenuInflater().inflate(R.menu.claimant_recipt, menu);
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	//https://eclass.srv.ualberta.ca/mod/resource/view.php?id=1314790 Author:Unknow

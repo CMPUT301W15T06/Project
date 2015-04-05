@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
@@ -59,11 +61,17 @@ import android.widget.ListView;
  */
 public class ClaimantTagListActivity extends Activity {
 
+	private Dialog dialog;
+	
+	private static final int DELETE = 1;
+	private static final int EDIT = 0;
 	private ClaimantTagListController ctlc=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_tag_list);
+		
+		setTitle("User: "+AppSingleton.getInstance().getUserName());
 		
 		ctlc=new ClaimantTagListController(AppSingleton.getInstance().getCurrentUser());
 		
@@ -89,61 +97,71 @@ public class ClaimantTagListActivity extends Activity {
 				// TODO Auto-generated method stub
 				
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantTagListActivity.this);
-				builder.setItems(R.array.tag_dialog_array, new DialogInterface.OnClickListener() {
+				setItem(builder,list,position);
+				builder.create();  
+				builder.show();
+			}
+		});
+	}
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						if (which==0){
-							AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantTagListActivity.this);
-							builder.setTitle("Edit the Tag Name");
-							final EditText input=new EditText(ClaimantTagListActivity.this);
-							input.setText(list.get(position).getName());
-							input.setKeyListener(DigitsKeyListener.getInstance("0123456789zxcvbnmasdfghjklqwertyuiop"));				
-							builder.setView(input);
-							builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-								
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-									try {
-										ctlc.edit(list.get(position),input.getText().toString());
-									} catch (NetWorkException e) {
-										// TODO: handle exception
-										throw new RuntimeException(e);
-									}									}
-							});
-							builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-								
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-									
-								}
-							});
-							builder.create();  
-							builder.show();
-						}else if (which==1){
-							try {
-								ctlc.delete(list.get(position));
-							} catch (NetWorkException e) {
-								// TODO: handle exception
-								throw new RuntimeException(e);
-							}	
-						}
-					}
+	private void setItem(Builder builder, final ArrayList<Tag> list, final int position) {
+		// TODO Auto-generated method stub
+		builder.setItems(R.array.tag_dialog_array, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				if (which==EDIT){
+					edit(list,position);
+				}else if (which==DELETE){
+					try {
+						ctlc.delete(list.get(position));
+					} catch (NetWorkException e) {
+						// TODO: handle exception
+						throw new RuntimeException(e);
+					}	
+				}
+			}
+		
+	});
+	}
+
+	private void edit(final ArrayList<Tag> list, final int position) {
+		// TODO Auto-generated method stub
+		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantTagListActivity.this);
+		builder.setTitle("Edit the Tag Name");
+		final EditText input=new EditText(ClaimantTagListActivity.this);
+		input.setText(list.get(position).getName());
+		input.setKeyListener(DigitsKeyListener.getInstance("0123456789zxcvbnmasdfghjklqwertyuiop"));				
+		builder.setView(input);
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				try {
+					ctlc.edit(list.get(position),input.getText().toString());
+				} catch (NetWorkException e) {
+					// TODO: handle exception
+					throw new RuntimeException(e);
+				}									}
+		});
+		builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
 				
-			});
-			builder.create();  
-			builder.show();
-		}});
+			}
+		});
+		builder.create();  
+		builder.show();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_tag_list, menu);
-		return true;
+		return false;
 	}
 
 	
@@ -156,5 +174,16 @@ public class ClaimantTagListActivity extends Activity {
 			throw new RuntimeException(e);
 		}	
 		addView.setText("");
+	}
+	
+	public Dialog getDialog() {
+		return dialog;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
+		super.onPrepareDialog(id, dialog, args);
+		this.dialog = dialog;
 	}
 }

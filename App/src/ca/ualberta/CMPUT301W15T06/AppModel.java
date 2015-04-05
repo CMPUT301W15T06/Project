@@ -27,10 +27,7 @@ governing permissions and limitations under the License.
 package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
-import android.util.Log;
 
 /**
  * <p>
@@ -116,18 +113,8 @@ public abstract class AppModel{
 	 * @throws NetWorkException 
 	 */
 	public void notifyListeners() throws NetWorkException {
-		if(AppSingleton.getInstance().iscMod()){
-			ClaimListManager.getInstance().save(AppSingleton.getInstance().getUserName());
-		}else{
-			ClaimListManager.getInstance().approverSave();
-			Log.i("----","suc");
-			if(!AppSingleton.getInstance().isSuc()){
-				throw new NetWorkException();
-			}else{
-				ClaimListManager.getInstance().saveLocal(AppSingleton.getInstance().getTempUser());
-				Log.i("save","suc");
-			}
-		}
+		save();
+		
 		for (Listener  listener : getListeners()) {
 			listener.update();
 		}
@@ -135,6 +122,19 @@ public abstract class AppModel{
 			listener.update();
 		}
 		
+	}
+	
+	private void save() throws NetWorkException{
+		if(AppSingleton.getInstance().iscMod()){
+			ClaimListManager.getInstance().save(AppSingleton.getInstance().getUserName());
+		}else{
+			ClaimListManager.getInstance().approverSave();
+			if(!AppSingleton.getInstance().isSuc()){
+				throw new NetWorkException();
+			}else{
+				ClaimListManager.getInstance().saveLocal(AppSingleton.getInstance().getTempUser());
+			}
+		}
 	}
 
 	/**

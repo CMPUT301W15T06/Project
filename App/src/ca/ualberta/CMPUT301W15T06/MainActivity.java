@@ -30,10 +30,12 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Color;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.util.Log;
@@ -64,6 +66,9 @@ public class MainActivity extends Activity {
 	private ProgressDialog pg;
 	private User user;
 	private TextView userName;
+	
+	private Dialog dialog;
+	private EditText inputET;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,21 +77,14 @@ public class MainActivity extends Activity {
 		
 
 
+		setTitle("HINT: Title Bar will Show Path");
+		setTitleColor(Color.RED);
 		ClaimListManager.initial(getApplicationContext());
-		pg =ProgressDialog.show(this, "Pushing Onling...","Please wait patiently :)", true);
+		pg =ProgressDialog.show(this, "Loading Data...","Please wait patiently :)", true);
 		Thread thread = new Thread(new Runnable(){
 		    @Override
 		    public void run() {    	
-
-		    	AppSingleton.getInstance().setUserList();
-				
-				runOnUiThread(new Runnable() {
-		            @Override
-		            public void run()
-		            {
-		              pg.dismiss();
-		            }
-		          });
+		    	threadLoad();
 		    }
 		    
 		});
@@ -104,15 +102,25 @@ public class MainActivity extends Activity {
 		user=AppSingleton.getInstance().getCurrentUser();
 		userName=(TextView) findViewById(R.id.userTextView);
 		userName.setText(user.getUserName());
+	}
+
+	private void threadLoad() {
+		// TODO Auto-generated method stub
+		AppSingleton.getInstance().setUserList();
 		
-		AppSingleton.getInstance().setTestContext(getApplicationContext());
+		runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+              pg.dismiss();
+            }
+          });
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		return false;
 	}
 	
 	
@@ -122,6 +130,7 @@ public class MainActivity extends Activity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 		builder.setTitle("Enter your Name");
 		final EditText input=new EditText(MainActivity.this);
+		inputET = input;
 		input.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);			
 		builder.setView(input);
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -141,8 +150,8 @@ public class MainActivity extends Activity {
 				
 			}
 		});
-		builder.create();  
-		builder.show();
+		final AlertDialog dialog =builder.create();  
+		dialog.show();
 		
 	}
 	
@@ -155,8 +164,6 @@ public class MainActivity extends Activity {
 	 * @see android.content.Intent
 	 */
 	public void startClaimant(View v){
-//		Intent intent =new Intent(MainActivity.this,GetLocationByMapActivity.class);
-//		startActivity(intent);
 		Intent intent =new Intent(MainActivity.this,ClaimantClaimListActivity.class);
 		startActivity(intent);
 		AppSingleton.getInstance().setcMod(true);
@@ -165,10 +172,24 @@ public class MainActivity extends Activity {
 	
 	public void startApprover(View v){
 		
+		checkInternet();
+		
+		if(AppSingleton.getInstance().isSuc()){
+			Intent intent =new Intent(MainActivity.this,ApproverClaimListActivity.class);
+    		startActivity(intent);
+    		AppSingleton.getInstance().setcMod(false);
+		}else{
+			Toast.makeText(MainActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
+		}
+		
+
+	}
+
+	private void checkInternet() {
+		// TODO Auto-generated method stub
 		Thread thread = new Thread(new Runnable(){
 		    @Override
 		    public void run() {    	
-
 		    	if(new ESClient().getUserList()==null){
 					AppSingleton.getInstance().setSuc(false);
 		    	}else{
@@ -186,16 +207,20 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated catch block
 			throw new RuntimeException("Can't join!");
 		}
-		
-		if(AppSingleton.getInstance().isSuc()){
-			Intent intent =new Intent(MainActivity.this,ApproverClaimListActivity.class);
-    		startActivity(intent);
-    		AppSingleton.getInstance().setcMod(false);
-		}else{
-			Toast.makeText(MainActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
-		}
-		
-
 	}
 
+	public Dialog getDialog() {
+		return dialog;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
+		super.onPrepareDialog(id, dialog, args);
+		this.dialog = dialog;
+	}
+	
+	public EditText getInputField() {
+		return inputET;
+	}
 }

@@ -28,11 +28,16 @@ package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
 
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -69,11 +74,13 @@ import android.widget.AdapterView.OnItemClickListener;
 public class ClaimantClaimDetailActivity extends Activity {
 
 	
-	private static final int SET_LOCATION_BY_GPS = 0;
-	private static final int SET_LOCATION_BY_MAP = 1;
-	private ClaimantAddDestinationController cadc=null;
+	private static final int SHOW_LOCATION = 1;
+
+	private static final int SET_LOCATION = 0;
+	private ClaimantClaimDetailController ccdc=null;
 	private Claim claim;
 	private ArrayList<Destination> list;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,10 +88,13 @@ public class ClaimantClaimDetailActivity extends Activity {
 		
 
 		claim=AppSingleton.getInstance().getCurrentClaim();
-		cadc=new ClaimantAddDestinationController(claim);
+		ccdc=new ClaimantClaimDetailController(claim);
 		
+		TextView name=(TextView) findViewById(R.id.nameValueClaimantClaimDetailTextView);
+		name.setText(claim.getName());
 		TextView beginView=(TextView) findViewById(R.id.startDateValueClaimantClaimDetailTextView);
 		TextView endView=(TextView) findViewById(R.id.endingDateValueClaimantClaimDetailTextView);
+		
 		beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
 		endView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getEndDate()));
 		ListView listView = (ListView) findViewById(R.id.claimantDetailListView);
@@ -112,11 +122,8 @@ public class ClaimantClaimDetailActivity extends Activity {
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimDetailActivity.this);
 				itemChoice(builder);
 				builder.create();  
-				builder.show();
-				
-			}
-
-			
+				builder.show();				
+			}			
 		});
 
 		
@@ -126,32 +133,55 @@ public class ClaimantClaimDetailActivity extends Activity {
 	private void itemChoice(Builder builder) {
 		// TODO Auto-generated method stub
 		builder.setItems(R.array.dest_dialog_array, new DialogInterface.OnClickListener() {
-			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				if (which ==SET_LOCATION_BY_GPS){
-					
-										
-				}else if (which==SET_LOCATION_BY_MAP){
-					Intent intent =new Intent(ClaimantClaimDetailActivity.this,GetLocationByMapActivity.class);
-					startActivity(intent);					
-				
-				}else if (which==2){
-//					Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantItemDetailActivity.class);
-//					startActivity(intent);
-				}
+				click(which);
 				
 			}
 		});
 	}
 	
 	
+	private void click(int which) {
+		// TODO Auto-generated method stub
+		if (which==SET_LOCATION){
+			if(AppSingleton.getInstance().isEditable()){
+				setLocation();	
+			}else{
+				Toast.makeText( ClaimantClaimDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+			}
+		}else if (which==SHOW_LOCATION){
+			if(AppSingleton.getInstance().getCurrentDestination().getLocation()==null){
+				Toast.makeText( ClaimantClaimDetailActivity.this, "This destination doesn't have geolocation!", Toast.LENGTH_LONG).show();		
+			}else{
+				AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentDestination().getLocation());
+				Intent intent =new Intent(ClaimantClaimDetailActivity.this,ShowLocationActivity.class);
+				startActivity(intent);
+			}
+		}
+	}
+
+
+	private void setLocation() {
+		// TODO Auto-generated method stub
+		AppSingleton.getInstance().setMapController(new MapController() {
+			
+			@Override
+			public void setLocation(Location location) throws NetWorkException, StatusException {
+				// TODO Auto-generated method stub
+				AppSingleton.getInstance().getCurrentDestination().setLocation(location);
+			}
+		});
+		Intent intent =new Intent(ClaimantClaimDetailActivity.this,GetLocationByMapActivity.class);
+		startActivity(intent);
+	}
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_add_destination, menu);
-		return true;
+		return false;
 	}
 	
 	/**
@@ -165,16 +195,17 @@ public class ClaimantClaimDetailActivity extends Activity {
 	 */
 	public void addDestination(View v){
 		try {
-			cadc.addDestination();
+			ccdc.addDestination();
 			Intent intent =new Intent(ClaimantClaimDetailActivity.this,ClaimantEditDestinationActivity.class);
 			startActivity(intent);
 		} catch (StatusException e) {
 			// TODO Auto-generated catch block
-			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+			Toast.makeText( ClaimantClaimDetailActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
 		}catch (NetWorkException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
 		}	
 	}
+
 
 }

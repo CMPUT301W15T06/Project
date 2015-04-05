@@ -67,6 +67,10 @@ public class ClaimantItemDetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_item_detail);
 		
+		setTitle(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+				+"<-"+AppSingleton.getInstance().getUserName());
+
+		
 		cdic=new ClaimantDeleteItemController(AppSingleton.getInstance().getCurrentClaim());
 		
 		final TextView dateView=(TextView) findViewById(R.id.itemDateVTextView);
@@ -97,8 +101,7 @@ public class ClaimantItemDetailActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_item_detail, menu);
-		return true;
+		return false;
 	}
 
 	/**

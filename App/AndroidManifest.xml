@@ -12,20 +12,22 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <receiver android:name="ca.ualberta.CMPUT301W15T06.NetworkStateReceiver" >
+        <receiver android:name=".NetworkStateReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,80 +36,84 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity"
+            android:name=".ClaimantClaimDetailActivity"
             android:label="@string/title_activity_claimant_add_destination" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantApproverInfoActivity"
+            android:name=".ClaimantApproverInfoActivity"
             android:label="@string/title_activity_claimant_approver_info" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantEditDestinationActivity"
+            android:name=".ClaimantEditDestinationActivity"
             android:label="@string/title_activity_claimant_destination_reason" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantReciptActivity"
+            android:name=".ClaimantReciptActivity"
             android:label="@string/title_activity_claimant_recipt" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantTagListActivity"
+            android:name=".ClaimantTagListActivity"
             android:label="@string/title_activity_claimant_tag_list" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ApproverClaimListActivity"
+            android:name=".ApproverClaimListActivity"
             android:label="@string/title_activity_approver_claim_list" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ApproverItemListActivity"
+            android:name=".ApproverItemListActivity"
             android:label="@string/title_activity_approver_item_list" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ApproverClaimDetailListActivity"
+            android:name=".ApproverClaimDetailListActivity"
             android:label="@string/title_activity_approver_claim_detail_list" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ApproverReciptActivity"
-            android:label="@string/title_activity_approver_recipt" >
+            android:name=".ApproverReciptActivity"
+            android:label="@string/title_activity_claimant_recipt" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity"
+            android:name=".ClaimantClaimListActivity"
             android:label="@string/title_activity_claimant_claim_list" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantAddClaimActivity"
+            android:name=".ClaimantAddClaimActivity"
             android:label="@string/title_activity_claimant_add_claim" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity"
+            android:name=".ClaimantItemListActivity"
             android:label="@string/title_activity_claimant_item_list" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantAddItemActivity"
+            android:name=".ClaimantAddItemActivity"
             android:label="@string/title_activity_claimant_add_item" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantItemDetailActivity"
+            android:name=".ClaimantItemDetailActivity"
             android:label="@string/title_activity_claimant_item_detail" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantEditItemActivity"
+            android:name=".ClaimantEditItemActivity"
             android:label="@string/title_activity_claimant_edit_item" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantEditClaimActivity"
+            android:name=".ClaimantEditClaimActivity"
             android:label="@string/title_activity_claimant_edit_claim" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.ClaimantReceiptActivity"
+            android:name=".ClaimantReceiptActivity"
             android:label="@string/title_activity_claimant_receipt" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.MapActivity"
+            android:name=".MapActivity"
             android:label="@string/title_activity_map" >
         </activity>
         <activity
-            android:name="ca.ualberta.CMPUT301W15T06.GetLocationByMapActivity"
+            android:name=".GetLocationByMapActivity"
             android:label="@string/title_activity_get_location_by_map" >
+        </activity>
+        <activity
+            android:name=".ShowLocationActivity"
+            android:label="@string/title_activity_show_location" >
         </activity>
     </application>
 

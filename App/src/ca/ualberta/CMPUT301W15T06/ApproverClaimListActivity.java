@@ -35,6 +35,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.method.DigitsKeyListener;
+import android.view.InputEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -76,6 +77,11 @@ public class ApproverClaimListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_claimant_claim_list);
+		
+		
+		setTitle("Approver: "+AppSingleton.getInstance().getUserName());
+		
+		
 		
 		AppSingleton.getInstance().setUpApprover();
 		user=AppSingleton.getInstance().getCurrentUser();
@@ -120,87 +126,7 @@ public class ApproverClaimListActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// TODO Auto-generated method stub
-						if (which ==DETAIL_DESTINATION){
-							Intent intent =new Intent(ApproverClaimListActivity.this,ApproverClaimDetailListActivity.class);
-							startActivity(intent);		
-							
-						}else if (which==ITEM_LIST){
-							Intent intent =new Intent(ApproverClaimListActivity.this,ApproverItemListActivity.class);
-							startActivity(intent);
-						}else if (which==COMMENT){
-							if(user.getUserName().equals(claim.getName())){
-								Toast.makeText(ApproverClaimListActivity.this, "Cant't added comment to your own claim!", Toast.LENGTH_LONG).show();
-							}else{
-								if(claim.getComments().isFinish()){
-									AlertDialog.Builder builder = new AlertDialog.Builder(ApproverClaimListActivity.this);
-									builder.setTitle("Enter the Comment");
-									final EditText input=new EditText(ApproverClaimListActivity.this);							
-									builder.setView(input);
-									builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-										
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											// TODO Auto-generated method stub
-											try {
-												aclc.addComment(input.getText().toString());
-											} catch (NetWorkException e) {
-												// TODO Auto-generated catch block
-												Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
-	
-											}
-										}
-									});
-									builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-										
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											// TODO Auto-generated method stub
-											
-										}
-									});
-									builder.create();  
-									builder.show();
-								}else{
-									Toast.makeText(ApproverClaimListActivity.this, claim.getComments().getUnFinishedComment().getApproverName()
-											+" has commited this claim, need him to return or approve this claim!", Toast.LENGTH_LONG).show();
-	
-								}
-							}
-						}else if (which ==RETURN){
-							if(user.getUserName().equals(claim.getName())){
-								Toast.makeText(ApproverClaimListActivity.this, "Cant't return your own claim!", Toast.LENGTH_LONG).show();
-							}else{
-								try {
-									aclc.returnClaim();
-								} catch (NetWorkException e) {
-									// TODO Auto-generated catch block
-									Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
-								}catch (WrongApproverException e) {
-									// TODO Auto-generated catch block
-									Toast.makeText(ApproverClaimListActivity.this, claim.getComments().getUnFinishedComment().getApproverName()
-											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
-
-								}
-							}
-							
-						}else if (which==APPROVE){
-							if(user.getUserName().equals(claim.getName())){
-								Toast.makeText(ApproverClaimListActivity.this, "Cant't approve your own claim!", Toast.LENGTH_LONG).show();
-							}else{
-								try {
-									aclc.approveClaim();
-								} catch (NetWorkException e) {
-									// TODO Auto-generated catch block
-									Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
-								}catch (WrongApproverException e) {
-									// TODO Auto-generated catch block
-									Toast.makeText(ApproverClaimListActivity.this, claim.getComments().getUnFinishedComment().getApproverName()
-											+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
-
-								}
-							}
-						}
-						
+						itemChoice(which);						
 					}
 				});
 				builder.create();  
@@ -224,11 +150,115 @@ public class ApproverClaimListActivity extends Activity {
 	}
 
 
+	private void itemChoice(int which){
+		if (which ==DETAIL_DESTINATION){
+			Intent intent =new Intent(ApproverClaimListActivity.this,ApproverClaimDetailListActivity.class);
+			startActivity(intent);				
+		}else if (which==ITEM_LIST){
+			Intent intent =new Intent(ApproverClaimListActivity.this,ApproverItemListActivity.class);
+			startActivity(intent);
+		}else if (which==COMMENT){
+			comment();
+		}else if (which ==RETURN){
+			returnClaim();		
+		}else if (which==APPROVE){
+			approve();
+		}
+	}
+	
+	private void approve() {
+		// TODO Auto-generated method stub
+		if(user.getUserName().equals(claim.getName())){
+			Toast.makeText(ApproverClaimListActivity.this, "Cant't approve your own claim!", Toast.LENGTH_LONG).show();
+		}else{
+			try {
+				aclc.approveClaim();
+			} catch (NetWorkException e) {
+				// TODO Auto-generated catch block
+				Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
+			}catch (WrongApproverException e) {
+				// TODO Auto-generated catch block
+				Toast.makeText(ApproverClaimListActivity.this, claim.getComments().getUnFinishedComment().getApproverName()
+						+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
+
+			}
+		}
+	}
+
+	private void returnClaim() {
+		// TODO Auto-generated method stub
+		if(user.getUserName().equals(claim.getName())){
+			Toast.makeText(ApproverClaimListActivity.this, "Cant't return your own claim!", Toast.LENGTH_LONG).show();
+		}else{
+			try {
+				aclc.returnClaim();
+			} catch (NetWorkException e) {
+				// TODO Auto-generated catch block
+				Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
+			}catch (WrongApproverException e) {
+				// TODO Auto-generated catch block
+				Toast.makeText(ApproverClaimListActivity.this, claim.getComments().getUnFinishedComment().getApproverName()
+						+" has commited this claim, so only he can return or approve this claim!", Toast.LENGTH_LONG).show();
+
+			}
+		}
+	}
+
+	private void comment() {
+		// TODO Auto-generated method stub
+		if(user.getUserName().equals(claim.getName())){
+			Toast.makeText(ApproverClaimListActivity.this, "Cant't added comment to your own claim!", Toast.LENGTH_LONG).show();
+		}else{
+			if(claim.getComments().isFinish()){
+				addComment();
+			}else{
+				Toast.makeText(ApproverClaimListActivity.this, claim.getComments().getUnFinishedComment().getApproverName()
+						+" has commited this claim, need him to return or approve this claim!", Toast.LENGTH_LONG).show();
+
+			}
+		}
+	}
+
+	private void addComment() {
+		// TODO Auto-generated method stub
+		AlertDialog.Builder builder = new AlertDialog.Builder(ApproverClaimListActivity.this);
+		builder.setTitle("Enter the Comment");
+		final EditText input=new EditText(ApproverClaimListActivity.this);							
+		builder.setView(input);
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				comment(input);
+			}
+		});
+		builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		builder.create();  
+		builder.show();
+	}
+
+	private void comment(EditText input) {
+		// TODO Auto-generated method stub
+		try {
+			aclc.addComment(input.getText().toString());
+		} catch (NetWorkException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(ApproverClaimListActivity.this, "Can't work as Approver when offline!", Toast.LENGTH_LONG).show();
+		}
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.approver_claim_list, menu);
-		return true;
+		return false;
 	}
 
 }

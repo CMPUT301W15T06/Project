@@ -32,6 +32,10 @@ import com.google.gson.reflect.TypeToken;
 
 //https://github.com/joshua2ua/AndroidElasticSearch Author: Joshua Campbell
 public class ESClient {
+	private static final String USER_LIST = "http://cmput301.softwareprocess.es:8080/testing/usrlist/usrlist";
+
+	private static final String USER = "http://cmput301.softwareprocess.es:8080/testing/usr/";
+
 	// Http Connector
 	private HttpClient httpclient = new DefaultHttpClient();
 
@@ -54,7 +58,7 @@ public class ESClient {
 	 * @throws IllegalStateException 
 	 */
 	public void pushUser(User user) throws IllegalStateException, IOException {
-		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/usr/"+user.getUserName());
+		HttpPost httpPost = new HttpPost(USER+user.getUserName());
 		StringEntity stringentity = null;
 		try {
 			stringentity = new StringEntity(gson.toJson(user));
@@ -84,7 +88,7 @@ public class ESClient {
 	public User getUser(String string){
 		Hit<User> sr = null;
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/usr/"+string);
+		HttpGet httpGet = new HttpGet(USER+string);
 
 		HttpResponse response = null;
 
@@ -94,7 +98,6 @@ public class ESClient {
 			throw new RuntimeException(e);
 			
 		} catch (IOException e) {
-//			throw new RuntimeException("can't find2");
 			return null;
 		}
 		
@@ -121,7 +124,7 @@ public class ESClient {
 		// TODO Auto-generated method stub
 		Hit<UserList> sr = null;
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet("http://cmput301.softwareprocess.es:8080/testing/usrlist/usrlist");
+		HttpGet httpGet = new HttpGet(USER_LIST);
 
 		HttpResponse response = null;
 		try {
@@ -173,7 +176,7 @@ public class ESClient {
 
 	public void pushUserList(UserList userList) throws IllegalStateException, IOException {
 		// TODO Auto-generated method stub
-		HttpPost httpPost = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/usrlist/usrlist");
+		HttpPost httpPost = new HttpPost(USER_LIST);
 		StringEntity stringentity = null;
 		try {
 			stringentity = new StringEntity(gson.toJson(userList));
@@ -195,34 +198,6 @@ public class ESClient {
 		String status = response.getStatusLine().toString();
 		Log.i("insert", status);
 	}
-
-
-//	
-//
-//
-//	/**
-//	 * delete an entry specified by the id
-//	 */
-//	public void deleteClaimList() throws IOException {
-//		HttpDelete httpDelete = new HttpDelete("http://cmput301.softwareprocess.es:8080/testing/lab02/1");
-//		httpDelete.addHeader("Accept","application/json");
-//
-//		HttpResponse response = httpclient.execute(httpDelete);
-//
-//		String status = response.getStatusLine().toString();
-//		System.out.println(status);
-//
-//		HttpEntity entity = response.getEntity();
-//		BufferedReader br = new BufferedReader(new InputStreamReader(entity.getContent()));
-//		String output;
-//		System.err.println("Output from Server -> ");
-//		while ((output = br.readLine()) != null) {
-//			System.err.println(output);
-//		}
-//		EntityUtils.consume(entity);
-//
-//		httpDelete.releaseConnection();
-//	}
 
 
 }

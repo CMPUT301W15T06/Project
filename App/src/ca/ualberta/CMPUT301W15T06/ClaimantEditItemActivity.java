@@ -86,6 +86,10 @@ public class ClaimantEditItemActivity extends Activity {
 		setContentView(R.layout.activity_claimant_edit_item);
 		
 
+		setTitle(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+				+"<-"+AppSingleton.getInstance().getUserName());
+
+		
 		item=AppSingleton.getInstance().getCurrentItem();
 		ceic=new ClaimantEditItemController(item);
 		
@@ -267,8 +271,7 @@ public class ClaimantEditItemActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claimant_edit_item, menu);
-		return true;
+		return false;
 	}
 
 	/**

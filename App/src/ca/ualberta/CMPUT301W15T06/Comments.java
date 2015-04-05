@@ -5,10 +5,7 @@ import java.util.ArrayList;
 public class Comments extends AppModel{
 
 	ArrayList<Comment> commentList;
-	
-	
-	
-	
+
 	
 	public Comments(){
 		commentList=new ArrayList<Comment>();

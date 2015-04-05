@@ -14,5 +14,4 @@ public class ClaimantEditDestinationController {
 		dest.setReason(reason);
 	}
 
-
 }

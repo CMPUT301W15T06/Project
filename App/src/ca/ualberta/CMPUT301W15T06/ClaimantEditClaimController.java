@@ -87,7 +87,6 @@ public class ClaimantEditClaimController {
 
 		
 		claim.setEndDate(endDate);
-		Log.i("editClaimController","setEnd suc");
 		
 	}
 

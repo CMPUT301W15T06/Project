@@ -28,9 +28,11 @@ package ca.ualberta.CMPUT301W15T06;
 
 import java.util.ArrayList;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -69,9 +71,13 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class ClaimantItemListActivity extends Activity {
 
+	private Dialog dialog;
+	
 	private static final int PHOTO_RECEIPT = 1;
 	private static final int ITEM_DETAIL = 2;
 	private static final int CHANGE_FLAG = 0;
+	protected static final int SET_LOCATION = 3;
+	protected static final int SHOW_LOCATION = 4;
 //	/**
 //	 * Set a FlagController object 
 //	 * default value of null.
@@ -85,6 +91,9 @@ public class ClaimantItemListActivity extends Activity {
 		setContentView(R.layout.activity_claimant_item_list);
 		
 		
+		setTitle(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate())
+				+"<-"+AppSingleton.getInstance().getUserName());
+
 		claim=AppSingleton.getInstance().getCurrentClaim();
 		cilc=new ClaimantItemListController(claim);
 		
@@ -142,12 +151,42 @@ public class ClaimantItemListActivity extends Activity {
 				}else if (which==ITEM_DETAIL){
 					Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantItemDetailActivity.class);
 					startActivity(intent);
+				}else if (which==SET_LOCATION){
+					if(AppSingleton.getInstance().isEditable()){
+						setLocation();	
+					}else{
+						Toast.makeText(ClaimantItemListActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
+					}
+				
+				}else if (which==SHOW_LOCATION){
+					if(AppSingleton.getInstance().getCurrentItem().getLocation()==null){
+						Toast.makeText( ClaimantItemListActivity.this, "This item doesn't have geolocation!", Toast.LENGTH_LONG).show();		
+					}else{
+						AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentItem().getLocation());
+						Intent intent =new Intent(ClaimantItemListActivity.this,ShowLocationActivity.class);
+						startActivity(intent);
+					}
 				}
 				
 			}
 		});
 	}
 	
+	private void setLocation() {
+		// TODO Auto-generated method stub
+		AppSingleton.getInstance().setMapController(new MapController() {
+			
+			@Override
+			public void setLocation(Location location) throws NetWorkException, StatusException {
+				// TODO Auto-generated method stub
+				AppSingleton.getInstance().getCurrentItem().setLocation(location);
+			}
+		});
+		Intent intent =new Intent(ClaimantItemListActivity.this,GetLocationByMapActivity.class);
+		startActivity(intent);
+	}
+
+
 	public void changeFlag(){
 		try {
 			cilc.changeFlag();
@@ -221,6 +260,7 @@ public class ClaimantItemListActivity extends Activity {
 		
 		try {
 			cilc.sumbmit();
+			finish();
 		} catch (StatusException e) {
 			// TODO Auto-generated catch block
 			Toast.makeText(ClaimantItemListActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
@@ -278,6 +318,21 @@ public class ClaimantItemListActivity extends Activity {
 		builder.create();  
 		builder.show();
 	
+	}
+	public void approverInfo(MenuItem m){
+		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantApproverInfoActivity.class);
+		startActivity(intent);
+	}
+	
+	public Dialog getDialog() {
+		return dialog;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
+		super.onPrepareDialog(id, dialog, args);
+		this.dialog = dialog;
 	}
 
 }

@@ -30,10 +30,16 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 /**
 * This <code>ApproverClaimDetailListActivity</code> class is an extended class
@@ -58,9 +64,12 @@ public class ApproverClaimDetailListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_approver_claim_detail_list);
 		
+		setTitle("Approver: "+AppSingleton.getInstance().getUserName());
+		
 		claim=AppSingleton.getInstance().getCurrentClaim();
 		
-		
+		TextView name=(TextView) findViewById(R.id.SeeNameForApprover);
+		name.setText(claim.getName());
 		TextView beginView=(TextView) findViewById(R.id.startDateValueClaimDetailTextView);
 		TextView endView=(TextView) findViewById(R.id.endingDateValueClaimDetailTextView);
 		beginView.setText(AppSingleton.formatDate(AppSingleton.getInstance().getCurrentClaim().getBeginDate()));
@@ -70,13 +79,34 @@ public class ApproverClaimDetailListActivity extends Activity {
 		final ArrayAdapter<Destination> adapter=new ArrayAdapter<Destination>(this, android.R.layout.simple_list_item_1,list);
 		listView.setAdapter(adapter);
 		
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+				AppSingleton.getInstance().setCurrentDestination(adapter.getItem(position));
+				showLocation();			
+			}
+
+			
+		});
+		
 	}
 
+	
+	public void showLocation(){
+		if(AppSingleton.getInstance().getCurrentDestination().getLocation()==null){
+			Toast.makeText( ApproverClaimDetailListActivity.this, "This destination doesn't have geolocation!", Toast.LENGTH_LONG).show();		
+		}else{
+			AppSingleton.getInstance().setLocation(AppSingleton.getInstance().getCurrentDestination().getLocation());
+			Intent intent =new Intent(ApproverClaimDetailListActivity.this,ShowLocationActivity.class);
+			startActivity(intent);
+		}
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.approver_claim_detail_list, menu);
-		return true;
+		return false;
 	}
 
 }

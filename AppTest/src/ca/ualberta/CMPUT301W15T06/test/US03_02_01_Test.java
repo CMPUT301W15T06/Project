@@ -1,16 +1,16 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import java.lang.reflect.Array;
+
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
-import ca.ualberta.CMPUT301W15T06.ClaimantEditDestinationActivity;
-import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantTagListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
 import ca.ualberta.CMPUT301W15T06.User;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
@@ -20,12 +20,13 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.ListView;
+import android.widget.TextView;
 
-@SuppressLint("CutPasteId")
-public class US03_01_01_Test<Final> extends
-			ActivityInstrumentationTestCase2<MainActivity> {
+public class US03_02_01_Test extends
+		ActivityInstrumentationTestCase2<MainActivity> {
+
+
 
 	Button ApproverButton;
 	Button ClaimantButton;
@@ -49,7 +50,7 @@ public class US03_01_01_Test<Final> extends
 	Object test_tag;
 	Object update_list;
 
-	public US03_01_01_Test() {
+	public US03_02_01_Test() {
 		super(MainActivity.class);
 	}
 
@@ -70,7 +71,7 @@ public class US03_01_01_Test<Final> extends
 
 
 	/*
-	* Test for US03.01.01 Basic Flow 1
+	* Test for US03.02.01 Basic Flow 1
 	*/
 	// test button exists
 	public void testLayout() {
@@ -83,8 +84,7 @@ public class US03_01_01_Test<Final> extends
 
 		ViewAsserts.assertOnScreen(decorView, ApproverButton);
 
-		final ViewGroup.LayoutParams layoutParams =
-				ApproverButton.getLayoutParams();
+		final ViewGroup.LayoutParams layoutParams =ApproverButton.getLayoutParams();
 		assertNotNull(layoutParams);
 		assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
 		assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
@@ -155,13 +155,13 @@ public class US03_01_01_Test<Final> extends
 		//click "Claimant" button and create next activity
 		//open current activity			
 		MainActivity myActivity = getActivity();
-		final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+
 		myActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				ActivityMonitor activityMonitor00 = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
 				// click button and open next activity.
-				button.performClick();
+				ClaimantButton.performClick();
 				ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor00, 10000);
 				// next activity is opened and captured.
 				assertNotNull(nextActivity);
@@ -176,62 +176,107 @@ public class US03_01_01_Test<Final> extends
 				final ViewGroup.LayoutParams layoutParams11 = listView.getLayoutParams();
 				/*assertNotNull(layoutParams);*/
 				assertEquals(layoutParams11.width, WindowManager.LayoutParams.MATCH_PARENT);
-				assertEquals(layoutParams11.height, WindowManager.LayoutParams.WRAP_CONTENT);	 
-					
-				//add a new claim
-				// TODO Auto-generated method stub
+				assertEquals(layoutParams11.height, WindowManager.LayoutParams.WRAP_CONTENT);	
 				
 			/*
-			 * Test for US03.01.01 Basic Flow 2
+			 * Test for US03.02.01 Basic Flow 2,3
+			 */
+				// Click the menu option
+				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantTagListActivity.class.getName(), null, false);
+				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.manage_tag, 1);
+				ClaimantTagListActivity thirdActivity = (ClaimantTagListActivity) getInstrumentation().waitForMonitorWithTimeout(am,10000);
+				assertNotNull(thirdActivity);
+				
+			/*
+			 * Test for US03.02.01 Basic Flow 4
 			 */	
-				final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-					
-				//get next activity
-				nextActivity.runOnUiThread(new Runnable() {
+				final ListView itemlv = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
+				// check if it is on screen
+				ViewAsserts.assertOnScreen(decorView1, itemlv);
+				// check whether the Button object's width and height attributes match the expected values
+				final ViewGroup.LayoutParams lp = listView.getLayoutParams();
+				/*assertNotNull(layoutParams);*/
+				assertEquals(lp.width, WindowManager.LayoutParams.MATCH_PARENT);
+				assertEquals(lp.height, WindowManager.LayoutParams.WRAP_CONTENT);
+
+			/*
+			 * Test for US03.02.01 Basic Flow 5
+			 */	
+				//test "add" button layout
+				final Button add = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addTagButton);
+				assertNotNull(add);
+				final View dv = thirdActivity.getWindow().getDecorView();
+				ViewAsserts.assertOnScreen(dv, add);
+
+				final ViewGroup.LayoutParams layoutParams =add.getLayoutParams();
+				assertNotNull(layoutParams);
+				assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
+				assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
+				assertEquals("Incorrect label of the button", "Add", add.getText());
+				
+				//"Add" button activity
+				final String tag = "a";
+				EditText add_tag_text = ((EditText) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addTagEditText));
+				add_tag_text.setText(tag);
+				final int count_before = u.getTagList().size();
+				thirdActivity.runOnUiThread(new Runnable() {
+					//test add button works
 					@Override
 					public void run() {
-						update_list = null;
-						// click the list open next activity.
-						ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
-						claimList.getChildAt(0).performClick();
-						ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
-						assertNotNull(thirdActivity);
-							
-				/*
-				 * Test for US 03.01.01 Basic Flow 3
-				 */		
-						ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
-						// check if it is on screen
-						ViewAsserts.assertOnScreen(decorView1, ilv);
-							
-				/*
-				 * Test for US 03.01.01 Basic Flow 4,5,6
-				 */	
-						// Click the menu option;
-						getInstrumentation().invokeMenuActionSync(thirdActivity,ca.ualberta.CMPUT301W15T06.R.id.change_tag, 1);
-						//open the alertDialog
-						AlertDialog d = (AlertDialog) thirdActivity.getDialog();
-						assertNotNull(d);
-						
-				/*
-				 * Test for US 03.01.01 Basic Flow 7,8
-				 */							
-						assertEquals(d.getContext(), test_tag);
-						View diaReturn = d.getCurrentFocus();
-						assertEquals(diaReturn, update_list );
-						
-						//finish activity
-						thirdActivity.finish();
-						
-						}
-					});
+						add.performClick();
+						int count_after = u.getTagList().size();
+						assertEquals(count_before,count_after-1);
+					}
+				});
 				
+				//test rename function
+				//click item on item list
+				thirdActivity.runOnUiThread(new Runnable() {
+					//test add button works
+					@Override
+					public void run() {
+						itemlv.getChildAt(0).performClick();
+						ListView tagArray  = (ListView) itemlv.findViewById(ca.ualberta.CMPUT301W15T06.R.array.tag_dialog_array);
+						assertNotNull(tagArray);
+						tagArray.getChildAt(0).performClick();						
+					}
+				});
+				
+				AlertDialog d = (AlertDialog) thirdActivity.getDialog();
+				assertNotNull(d);
+				//OK button
+				Button positiveButton = d.getButton(DialogInterface.BUTTON_POSITIVE);
+				assertNotNull(positiveButton);
+				positiveButton.performClick();
+				int count_re = u.getTagList().size();
+				assertEquals(count_before,count_re);
+				//cancel button
+				Button negativeButton = d.getButton(DialogInterface.BUTTON_NEGATIVE);
+				assertNotNull(negativeButton);
+				negativeButton.performClick();
+				assertNotNull(thirdActivity);
+				
+				//test delete function
+				thirdActivity.runOnUiThread(new Runnable() {
+					//test add button works
+					@Override
+					public void run() {
+						itemlv.getChildAt(0).performClick();
+						ListView tagArray  = (ListView) itemlv.findViewById(ca.ualberta.CMPUT301W15T06.R.array.tag_dialog_array);
+						assertNotNull(tagArray);
+						tagArray.getChildAt(1).performClick();	
+						int count_d = u.getTagList().size();
+						assertEquals(count_before,count_d-1);
+						
+					}
+				});
+				
+				//finish activity
+				thirdActivity.finish();
 				nextActivity.finish();
-				
-
 			}
+
 		});
 		activity.finish();
 	}
 }
-

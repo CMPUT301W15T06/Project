@@ -2,6 +2,8 @@ package ca.ualberta.CMPUT301W15T06;
 
 import java.util.Date;
 
+import android.location.Location;
+
 public class UnmodifiableItem extends Item {
 
 	public UnmodifiableItem(Item item) {
@@ -38,6 +40,10 @@ public class UnmodifiableItem extends Item {
 
 	public void setFlag(boolean b) throws StatusException{
 		throw new StatusException();					
+	}
+	
+	public void setLocation(Location location) throws StatusException {
+		throw new StatusException();
 	}
 
 }

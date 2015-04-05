@@ -1,11 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings">
-    </item>
     <item 
         android:id="@+id/add_new_claim"
         android:title="@string/add_new_claim" 
@@ -22,5 +15,18 @@
         android:title="@string/manage_tag" 
         android:onClick="manageTag">
     </item>
+    
+    <item 
+        android:id="@+id/set_home_location"
+        android:title="Set home geolocation" 
+        android:onClick="setHomeLocation">
+    </item>
+    
+     <item 
+        android:id="@+id/show_home_location"
+        android:title="View home geolocation" 
+        android:onClick="showHomeLocation">
+    </item>
+   
 
 </menu>

@@ -36,6 +36,7 @@ import java.util.Locale;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.location.Location;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -89,8 +90,9 @@ public class AppSingleton {
 	 */
 	private Date editDate;
 	
+	private MapController mapController;
 
-	
+	private Location location;
 	/**
 	 * Set a static final DateFormat object format with Date and Locale to record
 	 * the date and locale of the <code>Claim</code>.
@@ -100,7 +102,6 @@ public class AppSingleton {
 	 */
 	private static final DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
-	private Context testContext;
 	
 	private UserList userList;
 	
@@ -111,9 +112,7 @@ public class AppSingleton {
 	
 	private boolean cMod;
 	
-	private boolean editable;
 	private boolean suc;
-	private Object pg;
 	/**
 	 * This method will load the currentUser by calling <code>ClaimListManager</code>
 	 * and using <code>getInstance()</code> and <code>load()</code>.
@@ -272,43 +271,34 @@ public class AppSingleton {
 		this.suc = suc;
 	}
 
-	public void setCurrentUser(final String name) {
-		// TODO Auto-generated method stub
-		
-		
+	public void setCurrentUser(String name) {
+		// TODO Auto-generated method stub	
 		userName=name;
 		
-		currentUser=ClaimListManager.getInstance().load(name);
-		
+		currentUser=ClaimListManager.getInstance().load(name);		
 	}
 
 	public void setUserList() {
 		// TODO Auto-generated method stub
 		userList=ClaimListManager.getInstance().loadUserList();
-		Log.i("ttttttt","2");
-		if(userList==null){
-			
+
+		if(userList==null){		
 			userList=new ESClient().getUserList();
 			if(userList==null){
 				userList=new UserList();
 			}else{
-				Log.i("ttttttt","4");
 				new ESClient().downloadUsers(userList);
 				ClaimListManager.getInstance().saveUserListLocal();
 			}
 					
-		}else if(userList.isNeedSyn()){
-			  	
+		}else if(userList.isNeedSyn()){			  	
 	    	try {
-				new ESClient().synByUserList(userList);
-				
+				new ESClient().synByUserList(userList);				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				
+				// TODO Auto-generated catch block			
 			} 	
 		}
-		
-		
+	
 	}
 
 	public String getUserName() {
@@ -339,14 +329,6 @@ public class AppSingleton {
         return cal.getTime();
     }
 
-	public Context getTestContext() {
-		return testContext;
-	}
-
-	public void setTestContext(Context testContext) {
-		this.testContext = testContext;
-	}
-
 	public UserList getUserList() {
 		return userList;
 	}
@@ -367,7 +349,6 @@ public class AppSingleton {
 					needApproveList.add(claim);
 				}
 			}
-
 		}
 	}
 
@@ -402,10 +383,21 @@ public class AppSingleton {
 		return currentClaim.getStatus().equals("In progress")||currentClaim.getStatus().equals("Returned");
 	}
 
+	public MapController getMapController() {
+		return mapController;
+	}
 
-	
+	public void setMapController(MapController mapController) {
+		this.mapController = mapController;
+	}
 
-	
-	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
     
 }

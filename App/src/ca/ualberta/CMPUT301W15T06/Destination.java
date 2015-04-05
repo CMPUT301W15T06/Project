@@ -26,6 +26,8 @@ governing permissions and limitations under the License.
 
 package ca.ualberta.CMPUT301W15T06;
 
+import android.location.Location;
+
 /**
  * The <code>Destination</code> class is an sub-class of <code>AppModel</code>.
  * This class can set up a <code>Destination</code> with a name and a reason. 
@@ -40,14 +42,14 @@ public class Destination extends AppModel{
 	/**
 	 * Set protected string name to record destination name. 
 	 */
-	protected String name="";
+	protected String name;
 	/**
 	 * Set protected string reason to record the reason of 
 	 * the destination. 
 	 */
-	protected String reason="";
+	protected String reason;
 	
-	
+	protected Location location;
 	/**
 	 * General construction. This public method sets up a 
 	 * Destination object with name.
@@ -56,6 +58,9 @@ public class Destination extends AppModel{
 	 */
 	public Destination(){
 		super();
+		name="";
+		reason="";
+		location=null;
 	}
 	
 	public Destination(Destination dest) {
@@ -63,6 +68,8 @@ public class Destination extends AppModel{
 		super(dest);
 		name=dest.getName();
 		reason=dest.getReason();
+		location=dest.getLocation();
+		
 	}
 
 	/**
@@ -110,5 +117,12 @@ public class Destination extends AppModel{
 
 
 	public void setReason(String reason) throws StatusException, NetWorkException {
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+	
+	public void setLocation(Location location) throws NetWorkException, StatusException {
 	}
 }
