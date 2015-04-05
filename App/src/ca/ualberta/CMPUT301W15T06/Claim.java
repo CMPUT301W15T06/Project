@@ -84,15 +84,18 @@ public class Claim extends AppModel{
 	
 
 	/**
-	 * General construction. This public method sets up a Claim object with itemList, destinationList and tagList, name, begin and end date.
+	 * General construction.
+	 */	
+	public Claim(){
+		super();
+	}
+	
+	/**
+	 * This public method sets up a Claim object with itemList, destinationList and tagList, name, begin and end date.
 	 * 
 	 * @param name  the full name of the claimant (like "Tom Smith")
 	 * @see java.util.ArrayList
 	 */
-	
-	public Claim(){
-		super();
-	}
 	public Claim(String name) {
 		super();
 		itemList=new ArrayList<Item>();
@@ -108,6 +111,12 @@ public class Claim extends AppModel{
 		endDate=AppSingleton.removeTime(new Date());
 	}
 	
+	/**
+	 * This method 
+	 * 
+	 * @param oldClaim
+	 * @param status
+	 */
 	public Claim(Claim oldClaim,String status) {
 		super(oldClaim);
 		beginDate=oldClaim.getBeginDate();
@@ -186,14 +195,7 @@ public class Claim extends AppModel{
 	}
 	
 	/**
-	 * <p>
-	 * This method translates Destination startDate and endDate from Date object to String object. 
-	 * Then combines all Destination in destinationList and Tag in tagList to a big String. 
-	 * Use <code>getCM()</code> to display the amount with corresponding currency. It will 
-	 * be operated when the program need the destinationList and tagList to display.
-	 * <p>
-	 * 
-	 * @return a String object combine with many small String variable
+	 * This method will choose to go to one of two different subclass, <code>aToString()</code> or <code>cToString()</code>
 	 */
 	public String toString(){
 		if(AppSingleton.getInstance().iscMod()){
@@ -206,7 +208,14 @@ public class Claim extends AppModel{
 	}
 
 	/**
+	 * <p>
+	 * This method translates Destination startDate and endDate from Date object to String object. 
+	 * Then combines all Destination in destinationList and comment in commentList to a big String. 
+	 * Use <code>getCM()</code> to display the amount with corresponding currency. It will 
+	 * be operated when the program need the destinationList and tagList to display.
+	 * <p>
 	 * 
+	 * @return a String that combine with many small String variable
 	 */
 	protected String aToString() {
 		// TODO Auto-generated method stub
@@ -228,7 +237,15 @@ public class Claim extends AppModel{
 	}
 
 	/**
+	 * <p>
+	 * This method will change the subclass. It translates Destination startDate and endDate 
+	 * from Date object to String object. Then combines all Destination in destinationList 
+	 * and Tag in tagList to a big String. Use <code>getCM()</code> to display the amount 
+	 * with corresponding currency. It will be operated when the program need the 
+	 * destinationList and tagList to display.
+	 * <p>
 	 * 
+	 * @return a String that combine with many small String variable
 	 */
 	protected String cToString() {
 		// TODO Auto-generated method stub
@@ -376,7 +393,9 @@ public class Claim extends AppModel{
 	}
 
 	/**
+	 * Return a String variable name for the claimant. This method will be used when other class need to use or display the beginDate. 
 	 * 
+	 * @return the full name of the claimant (like "Tom Smith")
 	 */
 	public String getName() {
 		return name;
