@@ -69,105 +69,23 @@ public class US04_01_01_Test<Final> extends
 	cclc = new ClaimantClaimListController(u);
 	}
 	
-	public void test() {
-		/*
-		* Test for US04.01.01 Basic Flow 1
-		*/
-		// test button layouts
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton));
- 
-		//test "Approver" button layout
-		final View decorView = activity.getWindow().getDecorView();
-
-		ViewAsserts.assertOnScreen(decorView, ApproverButton);
-
-		final ViewGroup.LayoutParams layoutParams =
-				ApproverButton.getLayoutParams();
-		assertNotNull(layoutParams);
-		assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-		assertEquals("Incorrect label of the button", "Approver", view.getText());
-		
-		//test "Claimant" button layout
-		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
-
-		final ViewGroup.LayoutParams layoutParams1 =
-				ClaimantButton.getLayoutParams();
-		assertNotNull(layoutParams1);
-		assertEquals(layoutParams1.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams1.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view1 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-		assertEquals("Incorrect label of the button", "Claimant", view1.getText());
-		
-		//test "Change User" button layout
-		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
-
-		final ViewGroup.LayoutParams layoutParams2 =
-				UserButton.getLayoutParams();
-		assertNotNull(layoutParams1);
-		assertEquals(layoutParams2.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams2.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
-		assertEquals("Incorrect label of the button", "Change User", view2.getText());
-
-		/*
-		 * Test for US01.02.01 Basic Flow 2
-		 */
-		//User click "Change User"
+	public void test040101() {
 
 		activity.runOnUiThread(new Runnable(){
 
 			@Override
 			public void run() {
-
-				/*
-				* Test for US 01.02.01 Basic Flow 2
-				*/
-				// click button to start another activity
+				// click user button
 				assertTrue(UserButton.performClick());	
-				
-				/*
-				 * Test for US 01.02.01 Basic Flow 3
-				 */
-				//test opening a dialog
-		    	// access the alert dialog using the getDialog() method created in the activity
-				AlertDialog d = (AlertDialog) activity.getDialog();
 
-//				// check layout
-//		    	assertTrue(d.isShowing());
-//		    	
-//		    	Button p = d.getButton(AlertDialog.BUTTON_POSITIVE);
-//		    	Button n = d.getButton(AlertDialog.BUTTON_NEGATIVE);
-//		    	
-//		    	final View decorView = activity.getWindow().getDecorView();
-//				ViewAsserts.assertOnScreen(decorView, p);
-//				ViewAsserts.assertOnScreen(decorView, n);
-//				
-//				/*
-//				 * Test for US 01.02.01 Basic Flow 4 
-//				 */
-//				// set text
-//				EditText et = activity.getInputField();
-//				assertNotNull(et);
-//				
-//				et.setText("NewUser");
-//				
-//				assertTrue(p.performClick());
-
-				
-				}	
+			}	
 		});
 
 
-		//click "Claimant" button and create next activity
+		// click "Claimant" button and create next activity
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
-		//open current activity			
+		
+		// get current activity			
 		MainActivity myActivity = getActivity();
 		final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		myActivity.runOnUiThread(new Runnable() {
@@ -175,52 +93,56 @@ public class US04_01_01_Test<Final> extends
 			public void run() {
 				// click button and open next activity.
 				button.performClick();
-				}
+			}
 		});
 
-		ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+		// start next activity
+		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
 		
+		/*
+		 * Test for US 04.01.01 Basic Flow 1
+		 */
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();
-	 
+		// layout of claim list
 		listView = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		// check if it is on screen
 		ViewAsserts.assertOnScreen(decorView1, listView);
+		
 		// check whether the Button object's width and height attributes match the expected values
 		final ViewGroup.LayoutParams layoutParams11 = listView.getLayoutParams();
-		/*assertNotNull(layoutParams);*/
 		assertEquals(layoutParams11.width, WindowManager.LayoutParams.MATCH_PARENT);
 		assertEquals(layoutParams11.height, WindowManager.LayoutParams.WRAP_CONTENT);	 
 		
-		/*
-		 * Test for US 04.01.01 Basic Flow 2
-		 */
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		
 		//get next activity
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
+				
+				/*
+				 * Test for US 04.01.01 Basic Flow 2
+				 */
 				// click the list open next activity.
 				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
 				claimList.getChildAt(0).performClick();
 				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
 				assertNotNull(thirdActivity);
 
-				
-			/*
-			 * Test for US 04.01.01 Basic Flow 3
-			 */		
+				/*
+				 * Test for US 04.01.01 Basic Flow 3
+				 */		
+				final View decorView2 = nextActivity.getWindow().getDecorView();
 				ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				// check if it is on screen
-				ViewAsserts.assertOnScreen(decorView1, ilv);
+				ViewAsserts.assertOnScreen(decorView2, ilv);
 				
-				
-			/*
-			 * Test for US 04.01.01 Basic Flow 4
-			 */		
+				/*
+				 * Test for US 04.01.01 Basic Flow 4
+				 */		
 				//test "Add an item" button layout
 				final Button addItem = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addItemButton);
 				assertNotNull(addItem);
@@ -235,6 +157,7 @@ public class US04_01_01_Test<Final> extends
 
 				Claim claim = new Claim();
 				int count_before = claim.getItemList().size();
+				
 				//test button activity
 				thirdActivity.runOnUiThread(new Runnable() {
 					@Override
@@ -245,9 +168,9 @@ public class US04_01_01_Test<Final> extends
 						assertNotNull(forthActivity);
 					
 						
-				/*
-				 * Test for US 04.01.01 Basic Flow 5
-				 */	
+						/*
+						 * Test for US 04.01.01 Basic Flow 5
+						 */
 						//test TextView
 						final View ddvv = forthActivity.getWindow().getDecorView();
 						TextView Date = (TextView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemDateTextView);
@@ -280,9 +203,9 @@ public class US04_01_01_Test<Final> extends
 						EditText am = ((EditText) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemAmountEditText));
 						assertNotNull(am);
 						
-					/*
-					 * Test for US 04.01.01 Basic Flow 6
-					 */	
+						/*
+						 * Test for US 04.01.01 Basic Flow 6
+						 */
 						//fill blank
 						//test spinner
 						Spinner spinner = (Spinner) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editCategorySpinner);
@@ -304,10 +227,9 @@ public class US04_01_01_Test<Final> extends
 					}				
 				});
 				
-			/*
-			 * Test for US 04.01.01 Basic Flow 7
-			 */	
-				
+				/*
+				 * Test for US 04.01.01 Basic Flow 7
+				 */
 				int count_after = claim.getItemList().size();
 				assertEquals(count_before,count_after-1);
 			
