@@ -70,11 +70,12 @@ public class US01_01_01_Test extends
 	}
 
 
-	/*
-	* Test for US01.01.01 Basic Flow 1
-	*/
-	// test button exists
-	public void testLayout() {
+	public void testUS010101() {
+
+		/*
+		* Test for US01.01.01 Basic Flow 1
+		*/
+		// test button exists
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton));
@@ -117,25 +118,29 @@ public class US01_01_01_Test extends
 		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
 		assertEquals("Incorrect label of the button", "Change User", view2.getText());
 
-	/*
-	* Test for US 01.01.01 Basic Flow 2
-	* Test for US 01.01.01 Basic Flow 3
-	* Test for US 01.01.01 Basic Flow 4
-	* Test for US 01.01.01 Basic Flow 5
-	*/
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
+		
 		//User click "Change User"
 		activity.runOnUiThread(new Runnable(){
 
 			@Override
 			public void run() {
-				assertTrue(UserButton.performClick());	
+				
 
+				/*
+				* Test for US 01.01.01 Basic Flow 2
+				*/
+				// click button to start another activity
+				assertTrue(UserButton.performClick());	
+				
+				/*
+				 * Test for US 01.01.01 Basic Flow 3
+				 */
 				//test opening a dialog
 		    	// access the alert dialog using the getDialog() method created in the activity
 				AlertDialog d = (AlertDialog) activity.getDialog();
-		    	assertNotNull(d);
 
+				// check layout
 		    	assertTrue(d.isShowing());
 		    	
 		    	Button p = d.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -145,38 +150,33 @@ public class US01_01_01_Test extends
 				ViewAsserts.assertOnScreen(decorView, p);
 				ViewAsserts.assertOnScreen(decorView, n);
 				
+				/*
+				 * Test for US 01.01.01 Basic Flow 4 
+				 */
+				// set text
 				EditText et = activity.getInputField();
 				assertNotNull(et);
 				
 				et.setText("NewUser");
 				
 				assertTrue(p.performClick());
-				assertTrue(n.performClick());
+
 				
 			}	
 		});
 
-    	
-    	
-    	//Button submit = (Button) dialog.getButton(0);
-    	
-		
-		//input name
-		
-		//click "OK" and goes back to main page
-		
-		
-	/*
-	* Test for US 01.01.01 Basic Flow 6
-	*/
+		/*
+		 * Test for US 01.01.01 Basic Flow 5
+		 */
 		//click "Claimant" button and create next activity
-		//ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
-		//open current activity
-		//MainActivity myActivity = getActivity();
 		final Button button = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
+				
+				/*
+				 * Test for US 01.01.01 Basic Flow 6
+				 */
 				// click button and open next activity.
 				button.performClick();
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
@@ -187,71 +187,89 @@ public class US01_01_01_Test extends
 				/*
 				 * Test Case for US01.01.01 Basic Flow 7
 				 */
-					// view which is expected to be present on the screen
-					final View decorView1 = nextActivity.getWindow().getDecorView();
-			 
-					listView = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-					// check if it is on screen
-					ViewAsserts.assertOnScreen(decorView1, listView);
-					// check whether the Button object's width and height attributes match the expected values
-					final ViewGroup.LayoutParams layoutParams11 = listView.getLayoutParams();
-					/*assertNotNull(layoutParams);*/
-					assertEquals(layoutParams11.width, WindowManager.LayoutParams.MATCH_PARENT);
-					assertEquals(layoutParams11.height, WindowManager.LayoutParams.WRAP_CONTENT);	
+				// view which is expected to be present on the screen
+				// test claim list layout
+				final View decorView1 = nextActivity.getWindow().getDecorView();
+
+				listView = (ListView) nextActivity
+						.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
+				// check if it is on screen
+				ViewAsserts.assertOnScreen(decorView1, listView);
+				// check whether the Button object's width and height attributes
+				// match the expected values
+				final ViewGroup.LayoutParams layoutParams11 = listView
+						.getLayoutParams();
+				/* assertNotNull(layoutParams); */
+				assertEquals(layoutParams11.width,
+						WindowManager.LayoutParams.MATCH_PARENT);
+				assertEquals(layoutParams11.height,
+						WindowManager.LayoutParams.WRAP_CONTENT);
 					
 					
-					/*
-					 * Test for US01.01.01 Basic Flow 8,9,10,11,12
-				   	 */
-						int count1 = u.getClaimList().size();
-						assertEquals(count1, 0);
-						// Click the menu option
-						//open third activity by options menu
-						ActivityMonitor am = getInstrumentation().addMonitor(ClaimantEditClaimActivity.class.getName(), null, false);
-						// Click the menu option
-						//getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
-						getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.add_new_claim, 1);
-						Activity a =   getInstrumentation().waitForMonitorWithTimeout(am, 10000);
-						//ClaimantAddClaimActivity a = (ClaimantAddClaimActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
-						assertNotNull(a);
-						try {
-							cclc.addClaim();
-						} catch (NetWorkException e) {
-						}
-						input_start = (TextView) a.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateTextView);
-						input_end = (TextView) a.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimEndingDateTextView);
-						final View decorView11 = a.getWindow().getDecorView();
-						// test text view: createClaimStartingDateEditText
-						ViewAsserts.assertOnScreen(decorView11, input_start);
-						assertNotNull(input_start.getVisibility());   
-						// test textView: createClaimEndDateEditText
-						ViewAsserts.assertOnScreen(decorView11, input_end);
-						assertNotNull(input_end.getVisibility());
-						
-						int count2 = u.getClaimList().size()-1;
-						assertEquals("count2 = count1", count2, count1);
-						// fill blank 
-						final String start_date = "2014-01-01";
-						final String end_date = "2014-02-01";
-				 		claimant_starting_date = ((EditText) a.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateEditText));
-				 		claimant_ending_date = ((EditText) a.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimEndDateEditText));
-				 		a.runOnUiThread(new Runnable() {
-							@Override
-							public void run() {
-								claimant_starting_date.setText(start_date);
-								claimant_ending_date.setText(end_date);				
-							}		
-					});
+				/*
+				 * Test for US01.01.01 Basic Flow 8 & 9 & 10
+				 */
+				// after claimant request to add new claim, a new claim should be added into list
+				int count1 = u.getClaimList().size();
+				assertEquals(count1, 0);
+				// Click the menu option
+				// open third activity by options menu
+				ActivityMonitor am = getInstrumentation().addMonitor(
+						ClaimantEditClaimActivity.class.getName(), null, false);
+				
+				// Click the menu option
+				// getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
+				getInstrumentation().invokeMenuActionSync(nextActivity,
+						ca.ualberta.CMPUT301W15T06.R.id.add_new_claim, 1);
+				Activity a = getInstrumentation().waitForMonitorWithTimeout(am,
+						10000);
+				assertNotNull(a);
+				
+				/*
+				 * Test for US 01.01.01 Basic Flow 11
+				 */
+				// test layout
+				try {
+					cclc.addClaim();
+				} catch (NetWorkException e) {
+				}
+				input_start = (TextView) a
+						.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateTextView);
+				input_end = (TextView) a
+						.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimEndingDateTextView);
+				final View decorView11 = a.getWindow().getDecorView();
+				// test text view: createClaimStartingDateEditText
+				ViewAsserts.assertOnScreen(decorView11, input_start);
+				assertNotNull(input_start.getVisibility());
+				// test textView: createClaimEndDateEditText
+				ViewAsserts.assertOnScreen(decorView11, input_end);
+				assertNotNull(input_end.getVisibility());
+
+				int count2 = u.getClaimList().size() - 1;
+				assertEquals("count2 = count1", count2, count1);
+				
+				/*
+				 * Test for US 01.01.01 Basic Flow 12
+				 */	
+				// choose date
+				final String start_date = "2014-01-01";
+				final String end_date = "2014-02-01";
+				claimant_starting_date = ((EditText) a
+						.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateEditText));
+				claimant_ending_date = ((EditText) a
+						.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimEndDateEditText));
+			
+				a.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						claimant_starting_date.setText(start_date);
+						claimant_ending_date.setText(end_date);
+					}
+				});
+				a.finish();
 			}
 		});
-
-
- 
  
 
 	}
 }
-
-
-
-     
