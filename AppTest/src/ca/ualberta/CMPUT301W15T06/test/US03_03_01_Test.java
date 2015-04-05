@@ -182,16 +182,32 @@ public class US03_03_01_Test extends
 			 * Test for US03.02.01 Basic Flow 2,3,4
 			 */
 				// Click the menu option
-				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantTagListActivity.class.getName(), null, false);
+				int count_be = u.getClaimList().size();
+				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
 				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.filter, 1);
-				ClaimantTagListActivity thirdActivity = (ClaimantTagListActivity) getInstrumentation().waitForMonitorWithTimeout(am,10000);
-				assertNotNull(thirdActivity);
 				
-				
-				
+			/*
+			 * Test for US03.02.01 Basic Flow 2,3,4
+			 */				
+				AlertDialog d = (AlertDialog) nextActivity.getDialog();
+				assertNotNull(d);
+				//"Filter Model" button
+				Button positiveButton = d.getButton(DialogInterface.BUTTON_POSITIVE);
+				assertNotNull(positiveButton);
+				positiveButton.performClick();
+
+				//"show all model" button
+				Button negativeButton = d.getButton(DialogInterface.BUTTON_NEGATIVE);
+				assertNotNull(negativeButton);
+				negativeButton.performClick();
+				int count_all = u.getClaimList().size();
+				assertEquals(count_be, count_all);
+
+				//finish activity
+				nextActivity.finish();				
 			}
 		});
-		
+		activity.finish();
 	}
 	
 }
