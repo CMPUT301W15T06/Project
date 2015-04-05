@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.text.InputType;
@@ -60,6 +61,8 @@ import android.widget.ListView;
  */
 public class ClaimantTagListActivity extends Activity {
 
+	private Dialog dialog;
+	
 	private static final int DELETE = 1;
 	private static final int EDIT = 0;
 	private ClaimantTagListController ctlc=null;
@@ -171,5 +174,16 @@ public class ClaimantTagListActivity extends Activity {
 			throw new RuntimeException(e);
 		}	
 		addView.setText("");
+	}
+	
+	public Dialog getDialog() {
+		return dialog;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
+		super.onPrepareDialog(id, dialog, args);
+		this.dialog = dialog;
 	}
 }
