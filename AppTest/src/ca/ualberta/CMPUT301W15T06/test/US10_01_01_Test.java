@@ -134,33 +134,11 @@ public class US10_01_01_Test extends
 				//test opening a dialog
 		    	// access the alert dialog using the getDialog() method created in the activity
 				AlertDialog d = (AlertDialog) activity.getDialog();
-
-				// check layout
-		    	assertTrue(d.isShowing());
-		    	
-		    	Button p = d.getButton(AlertDialog.BUTTON_POSITIVE);
-		    	Button n = d.getButton(AlertDialog.BUTTON_NEGATIVE);
-		    	
-		    	final View decorView = activity.getWindow().getDecorView();
-				ViewAsserts.assertOnScreen(decorView, p);
-				ViewAsserts.assertOnScreen(decorView, n);
-				
-
-				// set text
-				EditText et = activity.getInputField();
-				assertNotNull(et);
-				
-				et.setText("NewUser");
-				
-				assertTrue(p.performClick());
-
 				
 			}	
 		});
 
-		/*
-		* Test for US10.01.01 Basic Flow 1
-		*/
+
 		//click "Claimant" button and create next activity
 		final Button button = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		activity.runOnUiThread(new Runnable() {
@@ -175,6 +153,9 @@ public class US10_01_01_Test extends
 				// next activity is opened and captured.
 				assertNotNull(nextActivity);
 				
+				/*
+				 * Test for US10.01.01 Basic Flow 1
+				 */
 
 				// view which is expected to be present on the screen
 				// test claim list layout
@@ -212,18 +193,26 @@ public class US10_01_01_Test extends
 						ca.ualberta.CMPUT301W15T06.R.id.set_home_location, 1);
 				ShowLocationActivity aaa = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 				assertNotNull(aaa);
+				
 				/*
-				* Test for US10.01.01 Basic Flow 5,6,7
-				*/
+				 * Test for US10.01.01 Basic Flow 5
+				 */
 				ImageView image=(ImageView)aaa.findViewById(ca.ualberta.CMPUT301W15T06.R.drawable.worldmap);
 				assertNotNull(image);
 				// get space for recording location
 				TextView tv=(TextView)aaa.findViewById(ca.ualberta.CMPUT301W15T06.R.id.llTextView);
 				assertNotNull(tv);
+				
+				/*
+				 * Test for US10.01.01 Basic Flow 6
+				 */
 				// test click on map
 				boolean clickMap = image.performClick();
 				assertTrue(clickMap);
 
+				/*
+				 * Test for US10.01.01 Basic Flow 7
+				 */
 				Location location=AppSingleton.getInstance().getLocation();
 				tv.setText("Lat: " + location.getLatitude()
 				+ "\nLong: " + location.getLongitude());
