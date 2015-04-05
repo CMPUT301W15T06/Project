@@ -1,3 +1,4 @@
+package ca.ualberta.CMPUT301W15T06.test;
 //package ca.ualberta.CMPUT301W15T06.test;
 //
 //import android.app.Activity;
@@ -19,12 +20,12 @@
 //import ca.ualberta.CMPUT301W15T06.MainActivity;
 //import ca.ualberta.CMPUT301W15T06.StatusException;
 //
-//public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActivity>{
+//public class US07_03_01_UiTest extends ActivityInstrumentationTestCase2<MainActivity>{
 //
-//	public US07_04_01_UiTest() {
+//	public US07_03_01_UiTest() {
 //		super(MainActivity.class);
 //	}
-//
+//	
 //	Button ClaimantButton;
 //	Instrumentation instrumentation;
 //	Activity activity;
@@ -41,11 +42,11 @@
 //		setActivityInitialTouchMode(false);
 //
 //	}
-//
+//	
 //	public void testClaimList() throws StatusException{
-//		
+//	
 //		/*
-//		 * Test for US07.04.01 Basic Flow 1
+//		 * Test for US07.03.01 Basic Flow 1
 //		 */
 //		
 //		// test if the button can create next activity
@@ -63,7 +64,11 @@
 //
 //		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 //		// next activity is opened and captured.
-//		assertNotNull(nextActivity);
+//		assertNotNull(nextActivity);		
+//		
+//		/*
+//		 * Test for US07.03.01 Basic Flow 2
+//		 */
 //		
 //    	// view which is expected to be present on the screen
 //		final View decorView = nextActivity.getWindow().getDecorView();	  
@@ -79,11 +84,6 @@
 //	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
 //	    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
 //	    
-//		
-//		/*
-//		 * Test for US07.04.01 Basic Flow 2
-//		 */
-//	    
 //		// start ClaimantClaimListActivity
 //		nextActivity.runOnUiThread(new Runnable() {
 //			@Override
@@ -94,7 +94,7 @@
 //				// add new claim, position: index 0
 //				cacc.addClaim("test", "2014-12-11", "2015-01-05");
 //				Claim claim =  new Claim("test");
-//				assertTrue("can be submmit",claim.getStatus().toString().equals("Approved"));
+//				assertTrue("can be submmit",claim.getStatus().toString().equals("Returned"));
 //				assertTrue("editable?", claim.getEdiable()==false);
 //				
 //				// long click new claim
@@ -105,7 +105,7 @@
 //		// nextActivity.finish();
 //		
 //		/*
-//		 * Test for US07.04.01 Basic Flow 3
+//		 * Test for US07.03.01 Basic Flow 3
 //		 */
 //		
 //		// restart ClaimantClaimListActivity
@@ -118,7 +118,7 @@
 //				// add new claim, position: index 0
 //				cacc.addClaim("test", "2014-12-11", "2015-01-05");
 //				Claim claim =  new Claim("test");
-//				assertTrue("can be submmit",claim.getStatus().toString().equals("Approved"));
+//				assertTrue("can be submmit",claim.getStatus().toString().equals("Returned"));
 //				assertTrue("editable?", claim.getEdiable()==false);
 //				
 //				// long click new claim
@@ -147,8 +147,9 @@
 //		// ClaimantClaimListActivity finishes
 //		// nextActivity.finish();
 //
+//
 //		/*
-//		 * Test for US07.04.01 Basic Flow 4
+//		 * Test for US07.03.01 Basic Flow 4
 //		 */
 //		
 //		nextActivity.runOnUiThread(new Runnable() {
@@ -160,7 +161,7 @@
 //				// add new claim, position: index 0
 //				cacc.addClaim("test", "2014-12-11", "2015-01-05");
 //				Claim claim =  new Claim("test");
-//				assertTrue("can be submmit",claim.getStatus().toString().equals("Approved"));
+//				assertTrue("can be submmit",claim.getStatus().toString().equals("Returned"));
 //				assertTrue("editable?", claim.getEdiable()==false);
 //				
 //				// long click new claim
@@ -173,28 +174,13 @@
 //            	assertNotNull(contextMenu.performClick());
 //            }
 //        });
-//
 //		
-//		/*
-//		 * Test for US07.04.01 Basic Flow 5
-//		 */
-//		
-//    	// view which is expected to be present on the screen
-//		final View decorView2 = nextActivity.getWindow().getDecorView();	  
-//	    ListView updatedclaimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-//	    
-//	    // check if claim list is on screen
-//	    ViewAsserts.assertOnScreen(decorView2, updatedclaimList);
-//	    
-//		// check whether the Button object's width and height attributes match the expected values
-//	    final ViewGroup.LayoutParams layoutParams2 = updatedclaimList.getLayoutParams();
-//	    
-//	    assertNotNull(layoutParams2);
-//	    assertEquals(layoutParams2.width, WindowManager.LayoutParams.MATCH_PARENT);
-//	    assertEquals(layoutParams2.height, WindowManager.LayoutParams.WRAP_CONTENT);
-//	    
+//	    // finish activities
 //	    nextActivity.finish();
+//	    
+//	    // MainActivity finishes
 //	    activity.finish();
 //	}
 //	
+//
 //}
