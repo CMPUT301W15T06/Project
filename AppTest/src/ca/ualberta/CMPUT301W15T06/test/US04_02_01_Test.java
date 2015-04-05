@@ -28,7 +28,7 @@ import android.widget.TextView;
 import android.widget.ListView;
 
 @SuppressLint("CutPasteId")
-public class US04_02_01_Test<Final> extends
+public class US04_02_01_Test extends
 			ActivityInstrumentationTestCase2<MainActivity> {
 
 	Button ApproverButton;
