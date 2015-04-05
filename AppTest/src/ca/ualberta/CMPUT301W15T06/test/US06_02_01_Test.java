@@ -75,7 +75,7 @@ public class US06_02_01_Test extends
 		cclc = new ClaimantClaimListController(u);
 	}
 
-	public void test040101() {
+	public void test060201() {
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -121,9 +121,7 @@ public class US06_02_01_Test extends
 				WindowManager.LayoutParams.WRAP_CONTENT);
 		final ListView claimList = (ListView) nextActivity
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		/*
-		 * Test for US 06.02.01 Basic Flow 1
-		 */
+
 		// get next activity
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
@@ -132,20 +130,31 @@ public class US06_02_01_Test extends
 				ActivityMonitor am = getInstrumentation().addMonitor(
 						ClaimantItemListActivity.class.getName(), null, false);
 				claimList.getChildAt(0).performClick();
+				
+				// start claimant item list activity
 				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation()
 						.waitForMonitorWithTimeout(am, 10000);
+				
+				// check if activity is started
 				assertNotNull(thirdActivity);
-
+				
+				/*
+				 * Test for US 06.02.01 Basic Flow 1
+				 */
+				// get decorview
 				final View decorView2 = nextActivity.getWindow().getDecorView();
+				// get list view layout
 				ListView ilv = (ListView) thirdActivity
 						.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				// check if it is on screen
 				ViewAsserts.assertOnScreen(decorView2, ilv);
+				
 				/*
 				 * Test for US 06.02.01 Basic Flow 2
 				 */
 				final ListView itemlist = (ListView) thirdActivity
 						.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
+				// perform click on item
 				thirdActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
@@ -154,22 +163,35 @@ public class US06_02_01_Test extends
 				});
 				
 				/*
-				 * Test for US 06.01.01 Basic Flow 3,4
+				 * Test for US 06.02.01 Basic Flow 3,4
 				 */
-				// check click
+				// check dialogue
 				AlertDialog d = (AlertDialog) thirdActivity.getDialog();
+				// check if dialogue is returned form activity
 				assertNotNull(d);
+				
+				// get option array list
 				ListView choose = (ListView) ilv
 						.findViewById(ca.ualberta.CMPUT301W15T06.R.array.item_dialog_array);
 				assertNotNull(choose);
+				
+				// perform click on option list
 				choose.getChildAt(1).performClick();
 				
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantReceiptActivity.class.getName(), null, false);
+				// start claimant receipt activity
 				ClaimantReceiptActivity ccc = (ClaimantReceiptActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 				assertNotNull(ccc);
 				
+				// get image view
 				ImageView iv = (ImageView) ccc.findViewById(ca.ualberta.CMPUT301W15T06.R.id.photoReciptImageView);
+				
+				// check if the view exist
 				assertNotNull(iv);
+				
+				// check if receipt is on screen
+				final View decorView3 = nextActivity.getWindow().getDecorView();
+				ViewAsserts.assertOnScreen(decorView3, iv);
 				
 
 				ccc.finish();

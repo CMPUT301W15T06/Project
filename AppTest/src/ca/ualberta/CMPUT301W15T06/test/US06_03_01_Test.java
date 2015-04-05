@@ -75,7 +75,7 @@ public class US06_03_01_Test extends
 		cclc = new ClaimantClaimListController(u);
 	}
 
-	public void test040101() {
+	public void test060301() {
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -121,9 +121,7 @@ public class US06_03_01_Test extends
 				WindowManager.LayoutParams.WRAP_CONTENT);
 		final ListView claimList = (ListView) nextActivity
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		/*
-		 * Test for US 06.01.01 Basic Flow 1
-		 */
+
 		// get next activity
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
@@ -131,19 +129,30 @@ public class US06_03_01_Test extends
 				// click the list open next activity.
 				ActivityMonitor am = getInstrumentation().addMonitor(
 						ClaimantItemListActivity.class.getName(), null, false);
+				// perform click on claim
 				claimList.getChildAt(0).performClick();
+				// start claimant item list activity
+				// to view the item list of this claim
 				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation()
 						.waitForMonitorWithTimeout(am, 10000);
+				// check if the activity is started
 				assertNotNull(thirdActivity);
-
+				
+				/*
+				 * Test for US 06.03.01 Basic Flow 1
+				 */
+				// get decorview
 				final View decorView2 = nextActivity.getWindow().getDecorView();
+				// get item list view
 				ListView ilv = (ListView) thirdActivity
 						.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				// check if it is on screen
 				ViewAsserts.assertOnScreen(decorView2, ilv);
+				
 				/*
-				 * Test for US 06.01.01 Basic Flow 2
+				 * Test for US 06.03.01 Basic Flow 2
 				 */
+				// perform click on one item
 				final ListView itemlist = (ListView) thirdActivity
 						.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				thirdActivity.runOnUiThread(new Runnable() {
@@ -154,38 +163,47 @@ public class US06_03_01_Test extends
 				});
 				
 				/*
-				 * Test for US 06.01.01 Basic Flow 3,4
+				 * Test for US 06.03.01 Basic Flow 3,4
 				 */
-				// check click
+				// check alert dialogue
 				AlertDialog d = (AlertDialog) thirdActivity.getDialog();
+				// check if the dialogue is returned by activity
 				assertNotNull(d);
+				// get option array list
 				ListView choose = (ListView) ilv
 						.findViewById(ca.ualberta.CMPUT301W15T06.R.array.item_dialog_array);
+				// array list is not null
 				assertNotNull(choose);
+				
+				// perform click on option list
 				choose.getChildAt(1).performClick();
 				
+				// start claimant receipt activity
+				// to view the receipt of item
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantReceiptActivity.class.getName(), null, false);
 				ClaimantReceiptActivity ccc = (ClaimantReceiptActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 				assertNotNull(ccc);
 				
 				/*
-				 * Test for US 06.01.01 Basic Flow 5
+				 * Test for US 06.03.01 Basic Flow 5
 				 */
+				// get space for receipt
 				ImageView iv = (ImageView) ccc.findViewById(ca.ualberta.CMPUT301W15T06.R.id.photoReciptImageView);
 				assertNotNull(iv);
 				
 				/*
-				 * Test for US 06.01.01 Basic Flow 6,7,8
+				 * Test for US 06.03.01 Basic Flow 6,7,8
 				 */
 				ActivityMonitor mmm = getInstrumentation().addMonitor(ClaimantReceiptActivity.class.getName(), null, false);
+				
 				// Click the menu option
-
 				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.deletePhoto, 1);
-
+				
+				// start another activity
 				Activity a = getInstrumentation().waitForMonitorWithTimeout(am,10000);
 				assertNotNull(a);
 				/*
-				 * Test for US 06.01.01 Basic Flow 9
+				 * Test for US 06.03.01 Basic Flow 9
 				 */
 				a.finish();
 			
