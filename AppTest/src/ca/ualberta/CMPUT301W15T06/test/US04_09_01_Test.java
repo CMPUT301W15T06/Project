@@ -103,10 +103,7 @@ public class US04_09_01_Test extends
 		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
-		
-		/*
-		 * Test for US 04.09.01 Basic Flow 1
-		 */
+
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();
 		// layout of claim list
@@ -131,10 +128,15 @@ public class US04_09_01_Test extends
 				claimList.getChildAt(0).performClick();
 				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
 				assertNotNull(thirdActivity);
-	
+				
+				/*
+				 * Test for US 04.09.01 Basic Flow 1
+				 */
+				// get decorview
 				final View decorView2 = nextActivity.getWindow().getDecorView();
+				// get item list layout
 				ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
-				// check if it is on screen
+				// check if item list view is on screen
 				ViewAsserts.assertOnScreen(decorView2, ilv);
 				
 				/*
@@ -144,6 +146,7 @@ public class US04_09_01_Test extends
 				thirdActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
+						// perform click on item
 						itemlist.getChildAt(0).performClick();		
 					}
 				});
@@ -154,34 +157,39 @@ public class US04_09_01_Test extends
 				//check click
 				AlertDialog d = (AlertDialog) thirdActivity.getDialog();
 				assertNotNull(d);
-				
+
 				ListView choose = (ListView) ilv.findViewById(ca.ualberta.CMPUT301W15T06.R.array.item_dialog_array);
 				assertNotNull(choose);
 				
 				/*
 				 * Test for US 04.09.01 Basic Flow 4
-				 * 
 				 */
+				// click "Attach a geolocation"
+				assertTrue(choose.getChildAt(3).performClick());
 				
-				
-				choose.getChildAt(3).performClick();
 				/*
 				 * Test for US 04.09.01 Basic Flow 5
 				 */
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ShowLocationActivity.class.getName(), null, false);
-
+				// start show location activity
 				ShowLocationActivity aaa = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+				// check if the activity is started
 				assertNotNull(aaa);
+				
 				/*
-				* test US01.07.01 Basic Flow 6
-				*/
+				 * test US01.07.01 Basic Flow 6
+				 */
+				// get map
 				ImageView image=(ImageView)aaa.findViewById(ca.ualberta.CMPUT301W15T06.R.drawable.worldmap);
 				assertNotNull(image);
+				// get space for recording location
 				TextView tv=(TextView)aaa.findViewById(ca.ualberta.CMPUT301W15T06.R.id.llTextView);
 				assertNotNull(tv);
 
+				// test click on map
 				boolean clickMap = image.performClick();
 				assertTrue(clickMap);
+				
 				/*
 				* test US01.07.01 Basic Flow 7
 				*/

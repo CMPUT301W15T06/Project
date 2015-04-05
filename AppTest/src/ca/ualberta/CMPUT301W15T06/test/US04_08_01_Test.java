@@ -68,35 +68,118 @@ public class US04_08_01_Test extends
 		cclc = new ClaimantClaimListController(u);
 	}
 	
-	/*
-	 * Test for US 04.08_01 Basic Flow 1,2,3,4,5
-	 */
-	public void test040701() {
 
+	public void test040801() {
+
+
+		/*
+		 * Test for US04.08.01 Basic Flow 1
+		 */
+		// test button exists
+		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
+		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
+		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton));
+ 
+		//test "Approver" button layout
+		final View decorView = activity.getWindow().getDecorView();
+
+		ViewAsserts.assertOnScreen(decorView, ApproverButton);
+
+		final ViewGroup.LayoutParams layoutParams =
+				ApproverButton.getLayoutParams();
+		assertNotNull(layoutParams);
+		assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
+   
+		Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+		assertEquals("Incorrect label of the button", "Approver", view.getText());
+		
+		//test "Claimant" button layout
+		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
+
+		final ViewGroup.LayoutParams layoutParams1 =
+				ClaimantButton.getLayoutParams();
+		assertNotNull(layoutParams1);
+		assertEquals(layoutParams1.width, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertEquals(layoutParams1.height, WindowManager.LayoutParams.WRAP_CONTENT);
+   
+		Button view1 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		assertEquals("Incorrect label of the button", "Claimant", view1.getText());
+		
+		//test "Change User" button layout
+		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
+
+		final ViewGroup.LayoutParams layoutParams2 =
+				UserButton.getLayoutParams();
+		assertNotNull(layoutParams1);
+		assertEquals(layoutParams1.width, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertEquals(layoutParams1.height, WindowManager.LayoutParams.WRAP_CONTENT);
+   
+		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
+		assertEquals("Incorrect label of the button", "Change User", view2.getText());
+
+		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
+		
+		//User click "Change User"
 		activity.runOnUiThread(new Runnable(){
 
 			@Override
 			public void run() {
-				// click user button
-				assertTrue(UserButton.performClick());	
+				
 
+				/*
+				* Test for US 04.08.01 Basic Flow 2
+				*/
+				// click button to start another activity
+				assertTrue(UserButton.performClick());	
+				
+				/*
+				 * Test for US 04.08.01 Basic Flow 3
+				 */
+				//test opening a dialog
+		    	// access the alert dialog using the getDialog() method created in the activity
+				AlertDialog d = (AlertDialog) activity.getDialog();
+
+				// check layout
+		    	assertTrue(d.isShowing());
+		    	
+		    	Button p = d.getButton(AlertDialog.BUTTON_POSITIVE);
+		    	Button n = d.getButton(AlertDialog.BUTTON_NEGATIVE);
+		    	
+		    	final View decorView = activity.getWindow().getDecorView();
+				ViewAsserts.assertOnScreen(decorView, p);
+				ViewAsserts.assertOnScreen(decorView, n);
+				
+				/*
+				 * Test for US 04.08.01 Basic Flow 4 
+				 */
+				// set text
+				EditText et = activity.getInputField();
+				assertNotNull(et);
+				
+				et.setText("NewUser");
+				
+				assertTrue(p.performClick());
+
+				
 			}	
 		});
 
-
-		// click "Claimant" button and create next activity
-		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
-		
 		
 		/*
-		 * Test for US 04.08_01 Basic Flow 6
+		 * Test for US 04.08.01 Basic Flow 5
 		 */
 		// get current activity			
 		MainActivity myActivity = getActivity();
+		
+		/*
+		 * Test for US 04.08.01 Basic Flow 6
+		 */
 		final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		myActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
+
 				// click button and open next activity.
 				button.performClick();
 			}
