@@ -74,47 +74,7 @@ public class US03_02_01_Test extends
 	* Test for US03.02.01 Basic Flow 1
 	*/
 	// test button exists
-	public void testLayout() {
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton));
- 
-		//test "Approver" button layout
-		final View decorView = activity.getWindow().getDecorView();
-
-		ViewAsserts.assertOnScreen(decorView, ApproverButton);
-
-		final ViewGroup.LayoutParams layoutParams =ApproverButton.getLayoutParams();
-		assertNotNull(layoutParams);
-		assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-		assertEquals("Incorrect label of the button", "Approver", view.getText());
-		
-		//test "Claimant" button layout
-		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
-
-		final ViewGroup.LayoutParams layoutParams1 =
-				ClaimantButton.getLayoutParams();
-		assertNotNull(layoutParams1);
-		assertEquals(layoutParams1.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams1.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view1 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-		assertEquals("Incorrect label of the button", "Claimant", view1.getText());
-		
-		//test "Change User" button layout
-		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
-
-		final ViewGroup.LayoutParams layoutParams2 =
-				UserButton.getLayoutParams();
-		assertNotNull(layoutParams1);
-		assertEquals(layoutParams2.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams2.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
-		assertEquals("Incorrect label of the button", "Change User", view2.getText());
+	public void test030201() {
 
 		//User click "Change User"
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
@@ -128,34 +88,15 @@ public class US03_02_01_Test extends
 				//test opening a dialog
 		    	// access the alert dialog using the getDialog() method created in the activity
 				AlertDialog d = (AlertDialog) activity.getDialog();
-//		    	assertNotNull(d);
-//
-//		    	assertTrue(d.isShowing());
-//		    	
-//		    	Button p = d.getButton(AlertDialog.BUTTON_POSITIVE);
-//		    	Button n = d.getButton(AlertDialog.BUTTON_NEGATIVE);
-//		    	
-//		    	final View decorView = activity.getWindow().getDecorView();
-//				ViewAsserts.assertOnScreen(decorView, p);
-//				ViewAsserts.assertOnScreen(decorView, n);
-//				
-//				EditText et = activity.getInputField();
-//				assertNotNull(et);
-//				
-//				et.setText("NewUser1");
-//				
-//				p.performClick();
-//				assertTrue(p.performClick());
-//				assertTrue(n.performClick());
 				
 			}	
 		});
 		
 
-		//click "Claimant" button and create next activity
-		//open current activity			
-		MainActivity myActivity = getActivity();
 
+		// get current activity			
+		MainActivity myActivity = getActivity();
+		// click "Claimant" button and create next activity
 		myActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -166,9 +107,12 @@ public class US03_02_01_Test extends
 				// next activity is opened and captured.
 				assertNotNull(nextActivity);
 				
+				/*
+				 * Test for US03.02.01 Basic Flow 1
+				 */
 				// view which is expected to be present on the screen			
 				final View decorView1 = nextActivity.getWindow().getDecorView();
-				 
+				// layout of claim list
 				listView = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 				// check if it is on screen
 				ViewAsserts.assertOnScreen(decorView1, listView);
@@ -178,31 +122,40 @@ public class US03_02_01_Test extends
 				assertEquals(layoutParams11.width, WindowManager.LayoutParams.MATCH_PARENT);
 				assertEquals(layoutParams11.height, WindowManager.LayoutParams.WRAP_CONTENT);	
 				
-			/*
-			 * Test for US03.02.01 Basic Flow 2,3
-			 */
+				/*
+				 * Test for US03.02.01 Basic Flow 2,3,4
+				 */
 				// Click the menu option
 				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantTagListActivity.class.getName(), null, false);
 				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.manage_tag, 1);
+				
+				/*
+				 * Test for US03.02.01 Basic Flow 5
+				 */	
+				// open tag list page
 				ClaimantTagListActivity thirdActivity = (ClaimantTagListActivity) getInstrumentation().waitForMonitorWithTimeout(am,10000);
 				assertNotNull(thirdActivity);
 				
-			/*
-			 * Test for US03.02.01 Basic Flow 4
-			 */	
+				// view which is expected to be present on the screen			
+				final View decorView2 = nextActivity.getWindow().getDecorView();
+				// layout of tag list
 				final ListView itemlv = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
 				// check if it is on screen
-				ViewAsserts.assertOnScreen(decorView1, itemlv);
+				ViewAsserts.assertOnScreen(decorView2, itemlv);
+				
 				// check whether the Button object's width and height attributes match the expected values
 				final ViewGroup.LayoutParams lp = listView.getLayoutParams();
 				/*assertNotNull(layoutParams);*/
 				assertEquals(lp.width, WindowManager.LayoutParams.MATCH_PARENT);
 				assertEquals(lp.height, WindowManager.LayoutParams.WRAP_CONTENT);
 
-			/*
-			 * Test for US03.02.01 Basic Flow 5
-			 */	
-				//test "add" button layout
+				/*
+				 * Test for US03.02.01 Basic Flow 5
+				 */	
+				
+				/*
+				 *  5a: test "add" button layout
+				 */
 				final Button add = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addTagButton);
 				assertNotNull(add);
 				final View dv = thirdActivity.getWindow().getDecorView();
@@ -214,10 +167,13 @@ public class US03_02_01_Test extends
 				assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
 				assertEquals("Incorrect label of the button", "Add", add.getText());
 				
-				//"Add" button activity
+				// "Add" button activity
+				// set tag
 				final String tag = "a";
 				EditText add_tag_text = ((EditText) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addTagEditText));
 				add_tag_text.setText(tag);
+				
+				// check if the tag is saved
 				final int count_before = u.getTagList().size();
 				thirdActivity.runOnUiThread(new Runnable() {
 					//test add button works
@@ -225,11 +181,14 @@ public class US03_02_01_Test extends
 					public void run() {
 						add.performClick();
 						int count_after = u.getTagList().size();
+						// length of tag list should increase by 1
 						assertEquals(count_before,count_after-1);
 					}
 				});
 				
-				//test rename function
+				/*
+				 * 5b: test rename function
+				 */
 				//click item on item list
 				thirdActivity.runOnUiThread(new Runnable() {
 					//test add button works
@@ -242,21 +201,26 @@ public class US03_02_01_Test extends
 					}
 				});
 				
+				// test alert dialog layout
 				AlertDialog d = (AlertDialog) thirdActivity.getDialog();
 				assertNotNull(d);
+				
 				//OK button
 				Button positiveButton = d.getButton(DialogInterface.BUTTON_POSITIVE);
 				assertNotNull(positiveButton);
 				positiveButton.performClick();
 				int count_re = u.getTagList().size();
 				assertEquals(count_before,count_re);
+				
 				//cancel button
 				Button negativeButton = d.getButton(DialogInterface.BUTTON_NEGATIVE);
 				assertNotNull(negativeButton);
 				negativeButton.performClick();
 				assertNotNull(thirdActivity);
 				
-				//test delete function
+				/*
+				 * 5c: test delete function
+				 */
 				thirdActivity.runOnUiThread(new Runnable() {
 					//test add button works
 					@Override
@@ -266,6 +230,8 @@ public class US03_02_01_Test extends
 						assertNotNull(tagArray);
 						tagArray.getChildAt(1).performClick();	
 						int count_d = u.getTagList().size();
+						
+						// length of tag list should decrease by 1
 						assertEquals(count_before,count_d-1);
 						
 					}
