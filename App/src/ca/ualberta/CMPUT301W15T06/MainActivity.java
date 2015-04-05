@@ -30,6 +30,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -65,6 +66,8 @@ public class MainActivity extends Activity {
 	private ProgressDialog pg;
 	private User user;
 	private TextView userName;
+	
+	private Dialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -145,8 +148,8 @@ public class MainActivity extends Activity {
 				
 			}
 		});
-		builder.create();  
-		builder.show();
+		final AlertDialog dialog =builder.create();  
+		dialog.show();
 		
 	}
 	
@@ -204,4 +207,14 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public Dialog getDialog() {
+		return dialog;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
+		super.onPrepareDialog(id, dialog, args);
+		this.dialog = dialog;
+	}
 }
