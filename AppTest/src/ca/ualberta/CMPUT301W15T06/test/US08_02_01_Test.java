@@ -69,7 +69,7 @@ public class US08_02_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 	public void test080201() {
 		
 		/*
-		 * Test for US 08.01.01 Basic Flow 1
+		 * Test for US 08.02.01 Basic Flow 1
 		 */
 		//test "Approver" button layout
 		final View decorView = activity.getWindow().getDecorView();
@@ -82,7 +82,7 @@ public class US08_02_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
 
 		/*
-		 * Test for US 08.01.01 Basic Flow 2
+		 * Test for US 08.02.01 Basic Flow 2
 		 */
 		//click "Approver" button and create next activity
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
@@ -99,6 +99,9 @@ public class US08_02_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
 		
+		/*
+		 * Test for US 08.02.01 Basic Flow 3
+		 */
 		ListView al =  (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		final View decorView1 = nextActivity.getWindow().getDecorView();
 		ViewAsserts.assertOnScreen(decorView1, al);
