@@ -1,201 +1,198 @@
 package ca.ualberta.CMPUT301W15T06.test;
-//package ca.ualberta.CMPUT301W15T06.test;
-//
-//import android.app.Activity;
-//import android.app.Instrumentation;
-//import android.app.Instrumentation.ActivityMonitor;
-//import android.test.ActivityInstrumentationTestCase2;
-//import android.test.ViewAsserts;
-//import android.view.View;
-//import android.view.ViewGroup;
-//import android.view.WindowManager;
-//import android.widget.Button;
-//import android.widget.EditText;
-//import android.widget.GridView;
-//import android.widget.ListView;
-//import ca.ualberta.CMPUT301W15T06.Claim;
-//import ca.ualberta.CMPUT301W15T06.User;
-//import ca.ualberta.CMPUT301W15T06.ClaimantAddClaimController;
-//import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
-//import ca.ualberta.CMPUT301W15T06.MainActivity;
-//import ca.ualberta.CMPUT301W15T06.StatusException;
-//
-//public class US07_04_01_UiTest extends ActivityInstrumentationTestCase2<MainActivity>{
-//
-//	public US07_04_01_UiTest() {
-//		super(MainActivity.class);
-//	}
-//
-//	Button ClaimantButton;
-//	Instrumentation instrumentation;
-//	Activity activity;
-//	EditText textInput;
-//	ListView gv;
-//
-//	//set up
-//	protected void setUp() throws Exception {
-//		
-//		super.setUp();
-//		instrumentation = getInstrumentation();
-//		activity = getActivity();
-//		ClaimantButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-//		setActivityInitialTouchMode(false);
-//
-//	}
-//
-//	public void testClaimList() throws StatusException{
-//		
-//		/*
-//		 * Test for US07.04.01 Basic Flow 1
-//		 */
-//		
-//		// test if the button can create next activity
-//		// register next activity that need to be monitored.
-//		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
-//
-//		// open current activity.
-//		activity.runOnUiThread(new Runnable() {
-//			@Override
-//			public void run() {
-//			  // click button and open next activity.
-//			  ClaimantButton.performClick();
-//		  }
-//		});
-//
-//		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
-//		// next activity is opened and captured.
-//		assertNotNull(nextActivity);
-//		
-//    	// view which is expected to be present on the screen
-//		final View decorView = nextActivity.getWindow().getDecorView();	  
-//	    final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-//	    
-//	    // check if claim list is on screen
-//	    ViewAsserts.assertOnScreen(decorView, claimList);
-//	    
-//		// check whether the Button object's width and height attributes match the expected values
-//	    final ViewGroup.LayoutParams layoutParams = claimList.getLayoutParams();
-//	    
-//	    assertNotNull(layoutParams);
-//	    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
-//	    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-//	    
-//		
-//		/*
-//		 * Test for US07.04.01 Basic Flow 2
-//		 */
-//	    
-//		// start ClaimantClaimListActivity
-//		nextActivity.runOnUiThread(new Runnable() {
-//			@Override
-//			public void run() {
-//				// build controller
-//				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new User());
-//				
-//				// add new claim, position: index 0
-//				cacc.addClaim("test", "2014-12-11", "2015-01-05");
-//				Claim claim =  new Claim("test");
-//				assertTrue("can be submmit",claim.getStatus().toString().equals("Approved"));
-//				assertTrue("editable?", claim.getEdiable()==false);
-//				
-//				// long click new claim
-//				assertNotNull(claimList.getChildAt(0).performLongClick());
-//			}
-//		});
-//		// ClaimantClaimListActivity finishes
-//		// nextActivity.finish();
-//		
-//		/*
-//		 * Test for US07.04.01 Basic Flow 3
-//		 */
-//		
-//		// restart ClaimantClaimListActivity
-//		nextActivity.runOnUiThread(new Runnable() {
-//			@Override
-//			public void run() {
-//				// build controller
-//				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new User());
-//				
-//				// add new claim, position: index 0
-//				cacc.addClaim("test", "2014-12-11", "2015-01-05");
-//				Claim claim =  new Claim("test");
-//				assertTrue("can be submmit",claim.getStatus().toString().equals("Approved"));
-//				assertTrue("editable?", claim.getEdiable()==false);
-//				
-//				// long click new claim
-//				assertNotNull(claimList.getChildAt(0).performLongClick());
-//				
-//				// get contextMenu
-//				final GridView contextMenu = (GridView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
-//				
-//				// get decorView on ClaimantClaimListActivity
-//				final View decorView = nextActivity.getWindow().getDecorView();	
-//				
-//				// check if the context menu is on screen
-//			    ViewAsserts.assertOnScreen(decorView, contextMenu);
-//			    
-//			    // get layout parameters of the list view
-//			    final ViewGroup.LayoutParams layoutParams = claimList.getLayoutParams();
-//			    
-//			    // check if the paremeter exists
-//			    assertNotNull(layoutParams);
-//			    
-//			    // check if the claim list view is shown directly
-//			    assertEquals(layoutParams.width, WindowManager.LayoutParams.MATCH_PARENT);
-//			    assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-//			}
-//		});
-//		// ClaimantClaimListActivity finishes
-//		// nextActivity.finish();
-//
-//		/*
-//		 * Test for US07.04.01 Basic Flow 4
-//		 */
-//		
-//		nextActivity.runOnUiThread(new Runnable() {
-//			@Override
-//			public void run() {
-//				// build controller
-//				ClaimantAddClaimController  cacc = new ClaimantAddClaimController(new User());
-//				
-//				// add new claim, position: index 0
-//				cacc.addClaim("test", "2014-12-11", "2015-01-05");
-//				Claim claim =  new Claim("test");
-//				assertTrue("can be submmit",claim.getStatus().toString().equals("Approved"));
-//				assertTrue("editable?", claim.getEdiable()==false);
-//				
-//				// long click new claim
-//				assertNotNull(claimList.getChildAt(0).performLongClick());
-//				
-//				// get contextMenu
-//				final GridView contextMenu = (GridView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
-//
-//				// check if user can click this context menu
-//            	assertNotNull(contextMenu.performClick());
-//            }
-//        });
-//
-//		
-//		/*
-//		 * Test for US07.04.01 Basic Flow 5
-//		 */
-//		
-//    	// view which is expected to be present on the screen
-//		final View decorView2 = nextActivity.getWindow().getDecorView();	  
-//	    ListView updatedclaimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-//	    
-//	    // check if claim list is on screen
-//	    ViewAsserts.assertOnScreen(decorView2, updatedclaimList);
-//	    
-//		// check whether the Button object's width and height attributes match the expected values
-//	    final ViewGroup.LayoutParams layoutParams2 = updatedclaimList.getLayoutParams();
-//	    
-//	    assertNotNull(layoutParams2);
-//	    assertEquals(layoutParams2.width, WindowManager.LayoutParams.MATCH_PARENT);
-//	    assertEquals(layoutParams2.height, WindowManager.LayoutParams.WRAP_CONTENT);
-//	    
-//	    nextActivity.finish();
-//	    activity.finish();
-//	}
-//	
-//}
+
+import ca.ualberta.CMPUT301W15T06.Claim;
+import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
+import ca.ualberta.CMPUT301W15T06.ClaimantEditDestinationActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantEditItemActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
+import ca.ualberta.CMPUT301W15T06.MainActivity;
+import ca.ualberta.CMPUT301W15T06.User;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Instrumentation;
+import android.app.Instrumentation.ActivityMonitor;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.test.ActivityInstrumentationTestCase2;
+import android.test.ViewAsserts;
+import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.ListView;
+
+@SuppressLint("CutPasteId")
+public class US07_04_01_Test extends
+			ActivityInstrumentationTestCase2<MainActivity> {
+
+	Button ApproverButton;
+	Button ClaimantButton;
+	Button UserButton;
+	Instrumentation instrumentation;
+	MainActivity activity;
+	EditText textInput;
+	Intent intent;
+	TextView input_name;
+	TextView input_start;
+	TextView input_end;
+	ListView listView;
+	Menu menu;
+	View View1;
+	EditText claimant_name;
+	EditText claimant_starting_date;
+	EditText claimant_ending_date;
+	Button FinishButton;
+	ClaimantClaimListController cclc;
+	User u;
+
+
+	public US07_04_01_Test() {
+		super(MainActivity.class);
+	}
+
+	//set up
+	protected void setUp() throws Exception {
+		super.setUp();
+	instrumentation = getInstrumentation();
+	activity = getActivity();
+	setActivityInitialTouchMode(false);
+	ApproverButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+	ClaimantButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+	UserButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
+	intent = new Intent(getInstrumentation().getTargetContext(), MainActivity.class);	
+	u = new User("t");
+	cclc = new ClaimantClaimListController(u);
+	}
+	
+	public void test040101() {
+
+		activity.runOnUiThread(new Runnable(){
+
+			@Override
+			public void run() {
+				// click user button
+				assertTrue(UserButton.performClick());	
+
+			}	
+		});
+
+
+		// click "Claimant" button and create next activity
+		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
+		
+		// get current activity			
+		MainActivity myActivity = getActivity();
+		final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		myActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				// click button and open next activity.
+				button.performClick();
+			}
+		});
+
+		// start next activity
+		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+		// next activity is opened and captured.
+		assertNotNull(nextActivity);
+		
+		/*
+		 * Test for US 07.04.01 Basic Flow 1,2,3
+		 */
+		// view which is expected to be present on the screen			
+		final View decorView1 = nextActivity.getWindow().getDecorView();
+		// layout of claim list
+		listView = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
+		// check if it is on screen
+		ViewAsserts.assertOnScreen(decorView1, listView);
+		
+		// check whether the Button object's width and height attributes match the expected values
+		final ViewGroup.LayoutParams layoutParams11 = listView.getLayoutParams();
+		assertEquals(layoutParams11.width, WindowManager.LayoutParams.MATCH_PARENT);
+		assertEquals(layoutParams11.height, WindowManager.LayoutParams.WRAP_CONTENT);	 
+		
+		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
+		
+		//get next activity
+		nextActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+
+				// click the list open next activity.
+				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
+				claimList.getChildAt(0).performClick();
+				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
+				assertNotNull(thirdActivity);
+					
+				// Click the menu option
+				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.submit, 1);
+				Activity a = getInstrumentation().waitForMonitorWithTimeout(am,10000);
+				assertNotNull(a);
+				
+				AlertDialog d = (AlertDialog) thirdActivity.getDialog();
+				assertNotNull(d);
+				
+				//submit button
+				Button positiveButton = d.getButton(DialogInterface.BUTTON_POSITIVE);
+				assertNotNull(positiveButton);
+				positiveButton.performClick();
+
+				//cancel button
+				Button negativeButton = d.getButton(DialogInterface.BUTTON_NEGATIVE);
+				assertNotNull(negativeButton);
+				negativeButton.performClick();
+				assertNotNull(thirdActivity);
+	
+				/*
+				 * Test for US 07.04.01 Basic Flow 3
+				 */
+				a.finish();
+				ListView itemView = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
+				// check if it is on screen
+				ViewAsserts.assertOnScreen(decorView1, itemView);
+				
+				/*
+				 * Test for US 07.04.01 Basic Flow 4,5
+				 */
+				//count list item number
+				Claim claim = new Claim();
+				int count_before = claim.getItemList().size();
+
+				//refuse add
+				final Button addItem = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addItemButton);
+				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
+				nextActivity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						addItem.performClick();	
+					}
+				});
+				ClaimantEditItemActivity forthActivity = (ClaimantEditItemActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+				assertNull(forthActivity);
+					
+				//refuse edit
+				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.edit, 1);
+				Activity qqq = getInstrumentation().waitForMonitorWithTimeout(am,10000);
+				assertNotNull(qqq);
+				int count_e = claim.getItemList().size();
+				assertEquals(count_e,count_before);
+				
+				//refuse delete
+				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.delete, 1);
+				Activity zzz = getInstrumentation().waitForMonitorWithTimeout(am,10000);
+				assertNotNull(zzz);
+				int count_d = claim.getItemList().size();
+				assertEquals(count_d,count_before);
+								
+				thirdActivity.finish();
+			}
+		});
+		nextActivity.finish();
+		activity.finish();
+	}
+}
