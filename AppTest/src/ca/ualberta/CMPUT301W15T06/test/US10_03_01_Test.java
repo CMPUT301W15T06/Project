@@ -74,7 +74,7 @@ public class US10_03_01_Test extends
 	}
 
 
-	public void testUS010101() {
+	public void testUS100301() {
 
 
 		// test button exists
@@ -134,26 +134,6 @@ public class US10_03_01_Test extends
 				//test opening a dialog
 		    	// access the alert dialog using the getDialog() method created in the activity
 				AlertDialog d = (AlertDialog) activity.getDialog();
-
-				// check layout
-		    	assertTrue(d.isShowing());
-		    	
-		    	Button p = d.getButton(AlertDialog.BUTTON_POSITIVE);
-		    	Button n = d.getButton(AlertDialog.BUTTON_NEGATIVE);
-		    	
-		    	final View decorView = activity.getWindow().getDecorView();
-				ViewAsserts.assertOnScreen(decorView, p);
-				ViewAsserts.assertOnScreen(decorView, n);
-				
-
-				// set text
-				EditText et = activity.getInputField();
-				assertNotNull(et);
-				
-				et.setText("NewUser");
-				
-				assertTrue(p.performClick());
-
 				
 			}	
 		});

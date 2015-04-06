@@ -74,7 +74,7 @@ public class US10_01_01_Test extends
 	}
 
 
-	public void testUS010101() {
+	public void testUS100101() {
 
 
 		// test button exists

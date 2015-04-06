@@ -71,7 +71,7 @@ public class US09_01_01_Test extends
 	}
 
 
-	public void testUS010101() {
+	public void testUS090101() {
 
 		/*
 		* Test for US09.01.01 Basic Flow 1,2
@@ -126,17 +126,10 @@ public class US09_01_01_Test extends
 
 			@Override
 			public void run() {
-				
 
-				/*
-				* Test for US 01.01.01 Basic Flow 2
-				*/
 				// click button to start another activity
 				assertTrue(UserButton.performClick());	
-				
-				/*
-				 * Test for US 01.01.01 Basic Flow 3
-				 */
+
 				//test opening a dialog
 		    	// access the alert dialog using the getDialog() method created in the activity
 				AlertDialog d = (AlertDialog) activity.getDialog();
@@ -164,9 +157,6 @@ public class US09_01_01_Test extends
 			}	
 		});
 
-		/*
-		 * Test for US 01.01.01 Basic Flow 5
-		 */
 		//click "Claimant" button and create next activity
 		final Button button = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		activity.runOnUiThread(new Runnable() {

@@ -1,13 +1,5 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
-import ca.ualberta.CMPUT301W15T06.Claim;
-import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
-import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
-import ca.ualberta.CMPUT301W15T06.ClaimantEditDestinationActivity;
-import ca.ualberta.CMPUT301W15T06.ClaimantEditItemActivity;
-import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
-import ca.ualberta.CMPUT301W15T06.MainActivity;
-import ca.ualberta.CMPUT301W15T06.User;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,8 +15,13 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.ListView;
+import android.widget.TextView;
+import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
+import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
+import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
+import ca.ualberta.CMPUT301W15T06.MainActivity;
+import ca.ualberta.CMPUT301W15T06.User;
 
 @SuppressLint("CutPasteId")
 public class US07_03_01_Test extends
@@ -55,18 +52,22 @@ public class US07_03_01_Test extends
 		super(MainActivity.class);
 	}
 
-	//set up
+	// set up
 	protected void setUp() throws Exception {
 		super.setUp();
-	instrumentation = getInstrumentation();
-	activity = getActivity();
-	setActivityInitialTouchMode(false);
-	ApproverButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-	ClaimantButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-	UserButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
-	intent = new Intent(getInstrumentation().getTargetContext(), MainActivity.class);	
-	u = new User("t");
-	cclc = new ClaimantClaimListController(u);
+		instrumentation = getInstrumentation();
+		activity = getActivity();
+		setActivityInitialTouchMode(false);
+		ApproverButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+		ClaimantButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		UserButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
+		intent = new Intent(getInstrumentation().getTargetContext(),
+				MainActivity.class);
+		u = new User("t");
+		cclc = new ClaimantClaimListController(u);
 	}
 	
 	public void test040101() {

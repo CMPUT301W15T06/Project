@@ -125,7 +125,7 @@ public class US07_02_01_Test extends
 			public void run() {
 				
 				/*
-				 * Test for US 07.01.01 Basic Flow 3,4,5
+				 * Test for US 07.02.01 Basic Flow 3
 				 */
 				// click the list open next activity.
 				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
@@ -133,10 +133,16 @@ public class US07_02_01_Test extends
 				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
 				assertNotNull(thirdActivity);
 				
+				/*
+				 * Test for US 07.02.01 Basic Flow 4
+				 */
 				// Click the menu option
 				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.submit, 1);
 				Activity a = getInstrumentation().waitForMonitorWithTimeout(am,10000);
 				
+				/*
+				 * Test for US 07.02.01 Basic Flow 5
+				 */
 				AlertDialog d = (AlertDialog) thirdActivity.getDialog();
 				assertNotNull(d);
 				
