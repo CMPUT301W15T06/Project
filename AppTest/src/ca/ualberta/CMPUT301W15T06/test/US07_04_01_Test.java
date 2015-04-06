@@ -166,7 +166,7 @@ public class US07_04_01_Test extends
 				//refuse add
 				final Button addItem = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addItemButton);
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
-				nextActivity.runOnUiThread(new Runnable() {
+				thirdActivity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
 						addItem.performClick();	
@@ -176,14 +176,14 @@ public class US07_04_01_Test extends
 				assertNull(forthActivity);
 					
 				//refuse edit
-				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.edit, 1);
+				getInstrumentation().invokeMenuActionSync(thirdActivity,ca.ualberta.CMPUT301W15T06.R.id.edit, 1);
 				Activity qqq = getInstrumentation().waitForMonitorWithTimeout(am,10000);
 				assertNotNull(qqq);
 				int count_e = claim.getItemList().size();
 				assertEquals(count_e,count_before);
 				
 				//refuse delete
-				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.delete, 1);
+				getInstrumentation().invokeMenuActionSync(thirdActivity,ca.ualberta.CMPUT301W15T06.R.id.delete, 1);
 				Activity zzz = getInstrumentation().waitForMonitorWithTimeout(am,10000);
 				assertNotNull(zzz);
 				int count_d = claim.getItemList().size();
