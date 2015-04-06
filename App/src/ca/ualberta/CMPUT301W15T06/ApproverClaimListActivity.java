@@ -32,6 +32,7 @@ import java.util.Comparator;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.method.DigitsKeyListener;
@@ -61,6 +62,7 @@ import android.widget.AdapterView.OnItemClickListener;
 */
 public class ApproverClaimListActivity extends Activity {
 
+	private Dialog dialog;
 	private static final int APPROVE = 4;
 	private static final int RETURN = 3;
 	private static final int COMMENT = 2;
@@ -259,6 +261,22 @@ public class ApproverClaimListActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		return false;
+	}
+	
+	public Dialog getDialog() {
+		return dialog;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog, Bundle args){
+		super.onPrepareDialog(id, dialog, args);
+		this.dialog = dialog;
+	}
+	
+	public ArrayList<Claim> getApproverClaimList(){
+		return list;
+		
 	}
 
 }
