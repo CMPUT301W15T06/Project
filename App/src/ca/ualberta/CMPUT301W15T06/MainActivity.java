@@ -150,7 +150,7 @@ public class MainActivity extends Activity {
 				
 			}
 		});
-		final AlertDialog dialog =builder.create();  
+		AlertDialog dialog =builder.create();  
 		dialog.show();
 		
 	}
