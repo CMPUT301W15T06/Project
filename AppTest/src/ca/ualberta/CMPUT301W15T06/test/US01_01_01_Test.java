@@ -267,9 +267,10 @@ public class US01_01_01_Test extends
 					}
 				});
 				a.finish();
+				nextActivity.finish();
 			}
 		});
- 
+		activity.finish();
 
 	}
 }
