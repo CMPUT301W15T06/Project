@@ -52,9 +52,7 @@ public class US05_01_01_Test extends
 	}
  
 	public void testUS010301() {
-		/*
-		 * Test for US05.01.01 Basic Flow 1
-		 */
+
 		// test button layouts
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
@@ -107,10 +105,7 @@ public class US05_01_01_Test extends
 			public void run() {
 				// click button to start another activity
 				assertTrue(UserButton.performClick());	
-				
-				//test opening a dialog
-		    	// access the alert dialog using the getDialog() method created in the activity
-				AlertDialog d = (AlertDialog) activity.getDialog();
+
 
 				}	
 		});
