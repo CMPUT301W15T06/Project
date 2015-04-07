@@ -98,71 +98,73 @@ ActivityInstrumentationTestCase2<MainActivity> {
 		 * Test for US01.04.01 Basic Flow 2
 		 */
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
 		//get next activity
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				// click the list open next activity.
-				claimList.performItemClick(claimList, 0, 0);
+				claimList.performClick();
+
+				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
+				ClaimantItemListActivity a = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
+				assertNotNull(a);
+				
+				/*
+				 * Test for US01.04.01 Basic Flow 3
+				 */	
+				ListView ilv = (ListView) a.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
+				// check if it is on screen
+				ViewAsserts.assertOnScreen(decorView1, ilv);
+								
+				/*
+				 * Test for US01.04.01 Basic Flow 4,5,6
+				 */	
+				// Click the menu option;
+				ActivityMonitor ma = getInstrumentation().addMonitor(ClaimantEditClaimActivity.class.getName(), null, false);
+				// Click the menu option
+				getInstrumentation().invokeMenuActionSync(a,ca.ualberta.CMPUT301W15T06.R.id.edit, 1);
+				Activity b = getInstrumentation().waitForMonitorWithTimeout(ma,10000);
+				assertNotNull(b);
+
+				/*
+				 * Test for US01.04.01 Basic Flow 7
+				 */
+				EditText claimant_starting_date = ((EditText) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateEditText));
+				EditText claimant_ending_date = ((EditText) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimEndDateEditText));
+				TextView input_start = (TextView) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateTextView);
+				TextView input_end = (TextView) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimEndingDateTextView);
+				
+
+				// test text view: createClaimNameEditText
+				final View decorView = b.getWindow().getDecorView();;
+				// test text view: createClaimStartingDateEditText
+				ViewAsserts.assertOnScreen(decorView, input_start);
+				assertNotNull(claimant_starting_date);
+				// test text view: createClaimEndDateEditText
+				ViewAsserts.assertOnScreen(decorView, input_end);
+				assertNotNull(claimant_ending_date);
+
+				/*
+				 * Test for US01.04.01 Basic Flow 8
+				 */
+				String claimantStartingDate = "2015-03-04";
+				String itemEndingDate = "2015-03-05";
+				claimant_starting_date.setText(claimantStartingDate);
+				claimant_ending_date.setText(itemEndingDate);
+
+				/*
+				 * Test for US01.04.01 Basic Flow 9
+				 */
+				b.finish();
+				ListView ilv_up = (ListView) a.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
+				// check if it is on screen
+				ViewAsserts.assertOnScreen(decorView1, ilv_up);
+				// finish activity
+
+				a.finish();
 			}
 		});
-		ClaimantItemListActivity a = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
-		assertNotNull(a);
-		
-		/*
-		 * Test for US01.04.01 Basic Flow 3
-		 */	
-		ListView ilv = (ListView) a.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
-		// check if it is on screen
-		ViewAsserts.assertOnScreen(decorView1, ilv);
-						
-		/*
-		 * Test for US01.04.01 Basic Flow 4,5,6
-		 */	
-		// Click the menu option;
-		ActivityMonitor ma = getInstrumentation().addMonitor(ClaimantEditClaimActivity.class.getName(), null, false);
-		// Click the menu option
-		getInstrumentation().invokeMenuActionSync(a,ca.ualberta.CMPUT301W15T06.R.id.edit, 1);
-		Activity b = getInstrumentation().waitForMonitorWithTimeout(ma,10000);
-		assertNotNull(b);
 
-		/*
-		 * Test for US01.04.01 Basic Flow 7
-		 */
-		EditText claimant_starting_date = ((EditText) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateEditText));
-		EditText claimant_ending_date = ((EditText) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimEndDateEditText));
-		TextView input_start = (TextView) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateTextView);
-		TextView input_end = (TextView) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimEndingDateTextView);
-		
-
-		// test text view: createClaimNameEditText
-		final View decorView = b.getWindow().getDecorView();;
-		// test text view: createClaimStartingDateEditText
-		ViewAsserts.assertOnScreen(decorView, input_start);
-		assertNotNull(claimant_starting_date);
-		// test text view: createClaimEndDateEditText
-		ViewAsserts.assertOnScreen(decorView, input_end);
-		assertNotNull(claimant_ending_date);
-
-		/*
-		 * Test for US01.04.01 Basic Flow 8
-		 */
-		String claimantStartingDate = "2015-03-04";
-		String itemEndingDate = "2015-03-05";
-		claimant_starting_date.setText(claimantStartingDate);
-		claimant_ending_date.setText(itemEndingDate);
-
-		/*
-		 * Test for US01.04.01 Basic Flow 9
-		 */
-		b.finish();
-		ListView ilv_up = (ListView) a.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
-		// check if it is on screen
-		ViewAsserts.assertOnScreen(decorView1, ilv_up);
-		// finish activity
-
-		a.finish();
 		nextActivity.finish();
 		activity.finish();		
 	}
