@@ -204,5 +204,10 @@ public class US01_06_01_Test extends
 
 		int count2 = u.getClaimList().size() - 1;
 		assertEquals("count2 = count1", count2, count1);
+		
+		a.finish();
+		nextActivity.finish();
+		activity.finish();
+		
 	}	
 }

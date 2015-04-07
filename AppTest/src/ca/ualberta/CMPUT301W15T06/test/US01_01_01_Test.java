@@ -226,13 +226,6 @@ public class US01_01_01_Test extends
 		 claimant_starting_date = ((EditText) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateEditText));
 		 claimant_ending_date = ((EditText) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimEndDateEditText));
 
-		 b.runOnUiThread(new Runnable() {
-			 @Override
-			 public void run() {
-				 claimant_starting_date.setText(start_date);
-				 claimant_ending_date.setText(end_date);
-			 }
-		 });
 		 b.finish();
 		 a.finish();
 

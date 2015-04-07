@@ -1,7 +1,10 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import java.lang.reflect.Array;
+
 import ca.ualberta.CMPUT301W15T06.AppSingleton;
 import ca.ualberta.CMPUT301W15T06.Claim;
+import ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.ClaimantEditDestinationActivity;
@@ -78,28 +81,6 @@ public class US01_07_01_Test<Final> extends
 
 	public void testUS010701() {
 		
-		//User click "Change User"
-		activity.runOnUiThread(new Runnable(){
-
-			@Override
-			public void run() {
-
-				/*
-				* Test for US 01.02.01 Basic Flow 2
-				*/
-				// click button to start another activity
-				assertTrue(UserButton.performClick());	
-				
-				/*
-				 * Test for US 01.02.01 Basic Flow 3
-				 */
-				//test opening a dialog
-		    	// access the alert dialog using the getDialog() method created in the activity
-				AlertDialog d = (AlertDialog) activity.getDialog();
-				
-				}	
-		});
-
 		//click "Claimant" button and create next activity
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
 		//open current activity			
@@ -117,9 +98,8 @@ public class US01_07_01_Test<Final> extends
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
 		
-
 		/*
-		 * Test Case for US01.02.01 Basic Flow 7	
+		 * Test Case for US01.07.01 Basic Flow 1
 		 */
 		
 		// view which is expected to be present on the screen			
@@ -136,146 +116,130 @@ public class US01_07_01_Test<Final> extends
 		
 
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		
+
+		/*
+		 * Test for US 01.07.01 Basic Flow 2
+		 */
+		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
 		//get next activity
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				// click the list open next activity.
-				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
-				claimList.getChildAt(0).performClick();
-				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
-				assertNotNull(thirdActivity);
-	
-				/*
-				 * Test for US 01.07.01 Basic Flow 1
-				 */
-				ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
-				// check if it is on screen
-				ViewAsserts.assertOnScreen(decorView1, ilv);
-
-				// Click the menu option;
-				getInstrumentation().invokeMenuActionSync(thirdActivity,ca.ualberta.CMPUT301W15T06.R.id.detail, 1);
-				//open the forth activity
-				Activity forthActivity =   getInstrumentation().waitForMonitorWithTimeout(am, 10000);
-				assertNotNull(forthActivity);
-				
-				/*
-				 * Test for US 01.07.01 Basic Flow 2
-				 */			
-				//test 'Add a Destination' button layout
-				Button addDestination = (Button) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);
-				final View dv = forthActivity.getWindow().getDecorView();
-				ViewAsserts.assertOnScreen(dv, addDestination);
-				final ViewGroup.LayoutParams lp =addDestination.getLayoutParams();
-				assertNotNull(lp);
-				assertEquals(lp.width, WindowManager.LayoutParams.WRAP_CONTENT);
-				assertEquals(lp.height, WindowManager.LayoutParams.WRAP_CONTENT);
-			
-				assertEquals("Incorrect label of the button", "Add a destination", addDestination.getText());
-				
-				Claim claim = new Claim();
-				int count1 = claim.getDestinationList().size();
-				
-				//test click "Add a Destination" button						
-				// open next activity.
-				final Button desButton = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);
-				forthActivity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						ActivityMonitor activityMonitor1 = getInstrumentation().addMonitor(ClaimantEditDestinationActivity.class.getName(), null, false);
-						// click button and open next activity.
-						desButton.performClick();
-						// next activity is opened and captured.
-						ClaimantEditDestinationActivity fifthActivity = (ClaimantEditDestinationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor1, 1000);
-						assertNotNull(fifthActivity);
-						
-						
-						/*
-						 * Test for US 01.07.01 Basic Flow 3
-						 */
-						//test interface
-						EditText claimant_des = ((EditText) fifthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.DestinationEditText));
-						EditText claimant_reason = ((EditText) fifthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.ReasonEditText));
-	
-						final View dv1 = fifthActivity.getWindow().getDecorView();
-						ViewAsserts.assertOnScreen(dv1, claimant_des);
-						assertTrue(View.GONE == claimant_des.getVisibility());
-	
-						ViewAsserts.assertOnScreen(dv1, claimant_reason);
-						assertTrue(View.GONE == claimant_reason.getVisibility());	
-						
-						/*
-						 * Test for US 01.07.01 Basic Flow 4
-						 */
-						//fill blank
-						String claimantDes = "a";
-						String claimantReason = "b";
-						claimant_des.setText(claimantDes);
-						claimant_reason.setText(claimantReason);
-
-						//finish the activity and go back
-						fifthActivity.finish();
-					}
-				});
-				
-				/*
-				 * Test for US 01.07.01 Basic Flow 5
-				 */
-				int count2 = claim.getDestinationList().size();
-				assertEquals(count1,count2-1);
-
-				final ListView detailListView = (ListView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.detailListView);
-				forthActivity.runOnUiThread(new Runnable() {
-					//test add button works
-					@Override
-					public void run() {
-						
-						/*
-						 * test US01.07.01 Basic Flow 6
-						 */
-						ListView geoArray = (ListView) detailListView.findViewById(ca.ualberta.CMPUT301W15T06.R.array.dest_dialog_array);
-						assertNotNull(geoArray);
-						geoArray.getChildAt(0).performClick();
-						
-						/*
-						 * test US01.07.01 Basic Flow 7
-						 */
-						ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ShowLocationActivity.class.getName(), null, false);
-						
-						/*
-						 * test US01.07.01 Basic Flow 8
-						 */
-						ShowLocationActivity aaa = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
-						assertNotNull(aaa);
-						
-						/*
-						 * test US01.07.01 Basic Flow 9
-						 */
-						ImageView image=(ImageView)aaa.findViewById(R.drawable.worldmap);
-						assertNotNull(image);
-						
-						TextView tv=(TextView)aaa.findViewById(R.id.llTextView);
-						assertNotNull(tv);
-						
-						
-						/*
-						 * test US01.07.01 Basic Flow 10
-						 */
-						boolean clickMap = image.performClick();
-						assertTrue(clickMap);
-						
-						/*
-						 * test US01.07.01 Basic Flow 11
-						 */
-						Location location=AppSingleton.getInstance().getLocation();
-						tv.setText("Lat: " + location.getLatitude()
-								+ "\nLong: " + location.getLongitude());
-					}
-				});
-				
+				claimList.performItemClick(claimList, 0, 0);
 			}
 		});
+		ClaimantItemListActivity a = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
+		assertNotNull(a);
+		
+	
+		ListView ilv = (ListView) a.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
+		// check if it is on screen
+		ViewAsserts.assertOnScreen(decorView1, ilv);
+				
+
+		// Click the menu option;
+		ActivityMonitor aamm = getInstrumentation().addMonitor(ClaimantClaimDetailActivity.class.getName(), null, false);
+		// Click the menu option
+		getInstrumentation().invokeMenuActionSync(a,ca.ualberta.CMPUT301W15T06.R.id.detail, 1);
+		Activity b = getInstrumentation().waitForMonitorWithTimeout(aamm,10000);
+		assertNotNull(b);
+		
+
+		//test 'Add a Destination' button layout
+		Button addDestination = (Button) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);
+		final View dv = b.getWindow().getDecorView();
+		ViewAsserts.assertOnScreen(dv, addDestination);
+		final ViewGroup.LayoutParams lp =addDestination.getLayoutParams();
+		assertNotNull(lp);
+		assertEquals(lp.width, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertEquals(lp.height, WindowManager.LayoutParams.WRAP_CONTENT);
+			
+		assertEquals("Incorrect label of the button", "Add a destination", addDestination.getText());
+		
+		/*
+		 * Test for US 01.07.01 Basic Flow 3
+		 */	
+		//test click "Add a Destination" button						
+		// open next activity.
+		ActivityMonitor amam = getInstrumentation().addMonitor(ClaimantEditDestinationActivity.class.getName(), null, false);
+		final Button desButton = (Button) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);
+		b.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				// click button and open next activity.
+				desButton.performClick();
+			}
+		});
+		// next activity is opened and captured.
+		ClaimantEditDestinationActivity c = (ClaimantEditDestinationActivity) getInstrumentation().waitForMonitorWithTimeout(amam, 1000);
+		assertNotNull(c);
+
+		/*
+		 * test US01.02.01 Basic Flow 3,4
+		 */
+		// test interface
+		EditText claimant_des = ((EditText) c.findViewById(ca.ualberta.CMPUT301W15T06.R.id.DestinationEditText));
+		EditText claimant_reason = ((EditText) c.findViewById(ca.ualberta.CMPUT301W15T06.R.id.ReasonEditText));
+	
+		final View dv1 = c.getWindow().getDecorView();
+		ViewAsserts.assertOnScreen(dv1, claimant_des);
+		assertNotNull(claimant_des);
+	
+		ViewAsserts.assertOnScreen(dv1, claimant_reason);
+		assertNotNull(claimant_reason);
+
+		final ListView detailListView = (ListView) c.findViewById(ca.ualberta.CMPUT301W15T06.R.id.detailListView);
+		c.runOnUiThread(new Runnable() {
+			//test add button works
+			@Override
+			public void run() {
+						
+			/*
+			 * test US01.07.01 Basic Flow 6
+			 */		
+			final ListView geoArray = (ListView) detailListView.findViewById(ca.ualberta.CMPUT301W15T06.R.array.dest_dialog_array);
+			geoArray.getChildAt(0).performClick();
+
+						
+		/*
+		 * test US01.07.01 Basic Flow 7
+		 */
+		ActivityMonitor amamam = getInstrumentation().addMonitor(ShowLocationActivity.class.getName(), null, false);
+						
+		/*
+		 * test US01.07.01 Basic Flow 8
+		 */
+		ShowLocationActivity aaa = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(amamam, 10000);
+		assertNotNull(aaa);
+						
+		/*
+		 * test US01.07.01 Basic Flow 9
+		 */
+		ImageView image=(ImageView)aaa.findViewById(R.drawable.worldmap);
+		assertNotNull(image);
+						
+		TextView tv=(TextView)aaa.findViewById(R.id.llTextView);
+		assertNotNull(tv);
+						
+						
+		/*
+		 * test US01.07.01 Basic Flow 10
+		 */
+		boolean clickMap = image.performClick();
+		assertTrue(clickMap);
+						
+		/*
+		 * test US01.07.01 Basic Flow 11
+		 */
+		Location location=AppSingleton.getInstance().getLocation();
+						tv.setText("Lat: " + location.getLatitude()
+								+ "\nLong: " + location.getLongitude());
+			}
+		});
+
+				
+
 
 	}
 }
