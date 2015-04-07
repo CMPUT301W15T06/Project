@@ -63,6 +63,11 @@ public abstract class AppModel{
 		modelListeners=new ArrayList<Listener>();
 	}
 	
+	/**
+	 * This method set the two ArrayList listeners and modelListeners to the AppModel object of the application.
+	 * 
+	 * @param app  an AppModel parameter that contains controls all the changes in the application.
+	 */
 	public AppModel(AppModel app) {
 		// TODO Auto-generated constructor stub
 		listeners=app.getListeners();
@@ -72,7 +77,7 @@ public abstract class AppModel{
 	/**
 	 * This method allows user to add a Listener to the ArrayList listeners
 	 * 
-	 * @param l  a observer that watches all the updates of objects
+	 * @param l  an observer that watches all the updates of objects
 	 */
 	public void addListener(Listener l){
 		if (!getListeners().contains(l)){
@@ -83,7 +88,7 @@ public abstract class AppModel{
 	/**
 	 * This method allows user to remove a Listener from the listeners ArrayList.
 	 * 
-	 * @param l  a observer that watches all the updates of objects
+	 * @param l  an observer that watches all the updates of objects
 	 */
 	public void removeListener(Listener l){
 		getListeners().remove(l);
@@ -124,6 +129,11 @@ public abstract class AppModel{
 		
 	}
 	
+	/**
+	 * This method will save the changes to both local and online. If there is a network issue, it will throw the exception.
+	 * 
+	 * @throws NetWorkException
+	 */
 	private void save() throws NetWorkException{
 		if(AppSingleton.getInstance().iscMod()){
 			ClaimListManager.getInstance().save(AppSingleton.getInstance().getUserName());
@@ -140,7 +150,7 @@ public abstract class AppModel{
 	/**
 	 * This method allows user to add a Listener to the modelListeners if the model does not contains a Listener l
 	 * 
-	 * @param l  a observer that watches all the updates of objects
+	 * @param l  an observer that watches all the updates of objects
 	 */
 	public void addModelListener(Listener l){
 		if (!getModelListeners().contains(l)){
@@ -151,7 +161,7 @@ public abstract class AppModel{
 	/**
 	 * This method is designed to remove a Listener from the modelListeners ArrayList
 	 * 
-	 * @param l  a observer that watches all the updates of objects
+	 * @param l  an observer that watches all the updates of objects
 	 */
 	public void removeModelListener(Listener l){
 		getModelListeners().remove(l);
