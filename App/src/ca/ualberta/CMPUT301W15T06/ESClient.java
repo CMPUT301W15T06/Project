@@ -81,9 +81,9 @@ import com.google.gson.reflect.TypeToken;
  *
  */
 public class ESClient {
-	private static final String USER_LIST = "http://cmput301.softwareprocess.es:8080/testing/usrlist/usrlist";
+	private String USER_LIST ;
 
-	private static final String USER = "http://cmput301.softwareprocess.es:8080/testing/usr/";
+	private String USER ;
 
 	// Http Connector
 	private HttpClient httpclient = new DefaultHttpClient();
@@ -100,6 +100,15 @@ public class ESClient {
 	    .registerTypeAdapter(Destination.class, new GsonAdapter<Destination>())
 	    .registerTypeAdapter(Receipt.class, new GsonAdapter<Receipt>())
 	    .create();
+		if(AppSingleton.getInstance().isTest()){
+			USER_LIST = "http://cmput301.softwareprocess.es:8080/testing/usrlist/usrlist";
+
+			USER = "http://cmput301.softwareprocess.es:8080/testing/usr/";
+		}else{
+			USER_LIST = "http://cmput301.softwareprocess.es:8080/cmput301w15t06/usrlist/usrlist";
+
+			USER = "http://cmput301.softwareprocess.es:8080/cmput301w15t06/usr/";
+		}
 	}
 	/**
 	 * Consumes the POST/Insert operation of the service

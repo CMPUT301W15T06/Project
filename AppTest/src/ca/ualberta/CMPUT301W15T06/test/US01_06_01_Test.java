@@ -1,6 +1,7 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
 
+import ca.ualberta.CMPUT301W15T06.AppSingleton;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.ClaimantEditClaimActivity;
@@ -49,21 +50,25 @@ public class US01_06_01_Test extends
 	EditText claimant_starting_date;
 	EditText claimant_ending_date;
 	Button FinishButton;
-	ClaimantClaimListController cclc;
+
 	User u;
 	Button UserButton;
 	
 	protected void setUp() throws Exception {
 		super.setUp();
+		AppSingleton.getInstance().setTest(true);
 		instrumentation = getInstrumentation();
 		activity = getActivity();
-		setActivityInitialTouchMode(true);
-		ApproverButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-		ClaimantButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-		UserButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
-		intent = new Intent(getInstrumentation().getTargetContext(),MainActivity.class);
-		u = new User("temp");
-		cclc = new ClaimantClaimListController(u);
+		setActivityInitialTouchMode(false);
+		ApproverButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+		ClaimantButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		UserButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
+		intent = new Intent(getInstrumentation().getTargetContext(),
+				MainActivity.class);
+		u = AppSingleton.getInstance().getCurrentUser();
 
 	}
 	
@@ -174,7 +179,7 @@ public class US01_06_01_Test extends
 		 */
 		// after claimant request to add new claim, a new claim should be added into list
 		int count1 = u.getClaimList().size();
-		assertEquals(count1, 0);
+
 		// Click the menu option
 		// open third activity by options menu
 		ActivityMonitor am = getInstrumentation().addMonitor(
@@ -186,10 +191,7 @@ public class US01_06_01_Test extends
 				ca.ualberta.CMPUT301W15T06.R.id.add_new_claim, 1);
 		Activity a = getInstrumentation().waitForMonitorWithTimeout(am,
 				10000);
-		try {
-			cclc.addClaim();
-		} catch (NetWorkException e) {
-		}
+
 		input_start = (TextView) a
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editClaimStartingDateTextView);
 		input_end = (TextView) a

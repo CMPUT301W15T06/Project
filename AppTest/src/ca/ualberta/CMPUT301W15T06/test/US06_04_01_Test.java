@@ -1,5 +1,6 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import ca.ualberta.CMPUT301W15T06.AppSingleton;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
@@ -46,12 +47,12 @@ public class US06_04_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 	EditText claimant_starting_date;
 	EditText claimant_ending_date;
 	Button FinishButton;
-	ClaimantClaimListController cclc;
 	User u;
 
 	// set up
 	protected void setUp() throws Exception {
 		super.setUp();
+		AppSingleton.getInstance().setTest(true);
 		instrumentation = getInstrumentation();
 		activity = getActivity();
 		setActivityInitialTouchMode(false);
@@ -63,8 +64,8 @@ public class US06_04_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
 		intent = new Intent(getInstrumentation().getTargetContext(),
 				MainActivity.class);
-		u = new User("t");
-		cclc = new ClaimantClaimListController(u);
+		u = AppSingleton.getInstance().getCurrentUser();
+
 	}
 
 	@SuppressLint("CutPasteId")

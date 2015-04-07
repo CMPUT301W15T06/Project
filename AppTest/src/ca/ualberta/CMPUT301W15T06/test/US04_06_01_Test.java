@@ -1,5 +1,6 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import ca.ualberta.CMPUT301W15T06.AppSingleton;
 import ca.ualberta.CMPUT301W15T06.Claim;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
@@ -46,7 +47,6 @@ public class US04_06_01_Test extends
 	EditText claimant_starting_date;
 	EditText claimant_ending_date;
 	Button FinishButton;
-	ClaimantClaimListController cclc;
 	User u;
 
 
@@ -57,15 +57,20 @@ public class US04_06_01_Test extends
 	//set up
 	protected void setUp() throws Exception {
 		super.setUp();
-	instrumentation = getInstrumentation();
-	activity = getActivity();
-	setActivityInitialTouchMode(false);
-	ApproverButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-	ClaimantButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-	UserButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
-	intent = new Intent(getInstrumentation().getTargetContext(), MainActivity.class);	
-	u = new User("t");
-	cclc = new ClaimantClaimListController(u);
+		AppSingleton.getInstance().setTest(true);
+		instrumentation = getInstrumentation();
+		activity = getActivity();
+		setActivityInitialTouchMode(false);
+		ApproverButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+		ClaimantButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		UserButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
+		intent = new Intent(getInstrumentation().getTargetContext(),
+				MainActivity.class);
+		u = AppSingleton.getInstance().getCurrentUser();
+
 	}
 	
 	public void test040601() {

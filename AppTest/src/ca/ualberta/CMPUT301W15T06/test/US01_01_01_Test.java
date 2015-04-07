@@ -59,6 +59,7 @@ public class US01_01_01_Test extends
 	// set up
 	protected void setUp() throws Exception {
 		super.setUp();
+		AppSingleton.getInstance().setTest(true);
 		instrumentation = getInstrumentation();
 		activity = getActivity();
 		setActivityInitialTouchMode(false);
@@ -71,7 +72,6 @@ public class US01_01_01_Test extends
 		intent = new Intent(getInstrumentation().getTargetContext(),
 				MainActivity.class);
 
-//		cclc = new ClaimantClaimListController(u);
 	}
 
 	public void testUS010101() {

@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import ca.ualberta.CMPUT301W15T06.AppSingleton;
 import ca.ualberta.CMPUT301W15T06.ApproverClaimDetailListActivity;
 import ca.ualberta.CMPUT301W15T06.ApproverClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
@@ -48,13 +49,13 @@ public class US08_03_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 	EditText claimant_starting_date;
 	EditText claimant_ending_date;
 	Button FinishButton;
-	ClaimantClaimListController cclc;
 	User u;
-	ApproverClaimListActivity cl;
+
 	
 	//set up
 	protected void setUp() throws Exception {
 		super.setUp();
+		AppSingleton.getInstance().setTest(true);
 		instrumentation = getInstrumentation();
 		activity = getActivity();
 		setActivityInitialTouchMode(false);
@@ -66,9 +67,8 @@ public class US08_03_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
 		intent = new Intent(getInstrumentation().getTargetContext(),
 				MainActivity.class);
-		u = new User("temp");
-		cclc = new ClaimantClaimListController(u);
-		cl = new ApproverClaimListActivity();
+		u = AppSingleton.getInstance().getCurrentUser();
+
 	}
 
 	public void test080301() {

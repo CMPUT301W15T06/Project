@@ -126,12 +126,14 @@ public class AppSingleton {
 	 */
 	private boolean suc;
     
+	
+	private boolean test;
     
     	/**
      	 * General constructor. 
      	 */
     	private AppSingleton() {  
-    	
+    		test=false;  	
     	}  
     
     	/**
@@ -510,6 +512,15 @@ public class AppSingleton {
 	 */
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+
+	public boolean isTest() {
+		// TODO Auto-generated method stub
+		return test;
+	}
+
+	public void setTest(boolean test) {
+		this.test = test;
 	}
 
     

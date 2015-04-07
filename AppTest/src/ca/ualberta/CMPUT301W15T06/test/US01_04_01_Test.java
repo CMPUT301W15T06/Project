@@ -1,10 +1,12 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import ca.ualberta.CMPUT301W15T06.AppSingleton;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantEditClaimActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantItemListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
+import ca.ualberta.CMPUT301W15T06.User;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -38,6 +40,7 @@ ActivityInstrumentationTestCase2<MainActivity> {
 	TextView beginView;
 	TextView endView;
 	ListView listView;
+	User u; 
 
 	public US01_04_01_Test() {
 		super(MainActivity.class);
@@ -47,17 +50,21 @@ ActivityInstrumentationTestCase2<MainActivity> {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-
+		AppSingleton.getInstance().setTest(true);
 		instrumentation = getInstrumentation();
 		activity = getActivity();
-		setActivityInitialTouchMode(true);
-		ApproverButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-		ClaimantButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-		AddDestination = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);
-		UserButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
-		intent = new Intent(getInstrumentation().getTargetContext(),MainActivity.class);
-	}
+		setActivityInitialTouchMode(false);
+		ApproverButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+		ClaimantButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		UserButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
+		intent = new Intent(getInstrumentation().getTargetContext(),
+				MainActivity.class);
+		u = AppSingleton.getInstance().getCurrentUser();
 
+	}
 
 	public void testUS010401() {
 		

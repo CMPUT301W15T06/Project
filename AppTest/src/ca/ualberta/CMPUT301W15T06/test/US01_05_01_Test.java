@@ -1,5 +1,6 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import ca.ualberta.CMPUT301W15T06.AppSingleton;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.ClaimantEditClaimActivity;
@@ -51,17 +52,20 @@ ActivityInstrumentationTestCase2<MainActivity> {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-
+		AppSingleton.getInstance().setTest(true);
 		instrumentation = getInstrumentation();
 		activity = getActivity();
-		setActivityInitialTouchMode(true);
-		ApproverButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-		ClaimantButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-		AddDestination = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);
-		UserButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
-		intent = new Intent(getInstrumentation().getTargetContext(),MainActivity.class);
-		u = new User("temp");
-		cclc = new ClaimantClaimListController(u);
+		setActivityInitialTouchMode(false);
+		ApproverButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+		ClaimantButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		UserButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
+		intent = new Intent(getInstrumentation().getTargetContext(),
+				MainActivity.class);
+		u = AppSingleton.getInstance().getCurrentUser();
+
 	}
 
 
@@ -142,7 +146,7 @@ ActivityInstrumentationTestCase2<MainActivity> {
 		assertNotNull(ilv_up);
 		
 		int count2 = u.getClaimList().size();
-		assertEquals("count2 = count1", count2, count1);
+		assertEquals("count2 = count1", count2+1, count1);
 		
 		// finish activity		
 		b.finish();
