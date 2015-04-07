@@ -147,7 +147,7 @@ public class US01_01_01_Test extends
 		});
 
 		 /*
-		 * Test for US 01.01.01 Basic Flow 5
+		 * Test for US 01.01.01 Basic Flow 5,6
 		 */
 		 //click "Claimant" button and create next activity		
 		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);

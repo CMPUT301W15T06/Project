@@ -148,10 +148,10 @@ ActivityInstrumentationTestCase2<MainActivity> {
 		/*
 		 * Test for US01.04.01 Basic Flow 8
 		 */
-		//String claimantStartingDate = "2015-03-04";
-		//String itemEndingDate = "2015-03-05";
-		//claimant_starting_date.setText(claimantStartingDate);
-		//claimant_ending_date.setText(itemEndingDate);
+		String claimantStartingDate = "2015-03-04";
+		String itemEndingDate = "2015-03-05";
+		claimant_starting_date.setText(claimantStartingDate);
+		claimant_ending_date.setText(itemEndingDate);
 
 		/*
 		 * Test for US01.04.01 Basic Flow 9

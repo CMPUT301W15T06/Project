@@ -98,10 +98,6 @@ public class US01_07_01_Test<Final> extends
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
 		
-		/*
-		 * Test Case for US01.07.01 Basic Flow 1
-		 */
-		
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();
 	 
@@ -117,9 +113,6 @@ public class US01_07_01_Test<Final> extends
 
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 
-		/*
-		 * Test for US 01.07.01 Basic Flow 2
-		 */
 		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
 		//get next activity
 		nextActivity.runOnUiThread(new Runnable() {
@@ -145,6 +138,9 @@ public class US01_07_01_Test<Final> extends
 		Activity b = getInstrumentation().waitForMonitorWithTimeout(aamm,10000);
 		assertNotNull(b);
 		
+		/*
+		 * Test Case for US01.07.01 Basic Flow 1
+		 */
 
 		//test 'Add a Destination' button layout
 		Button addDestination = (Button) b.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addDestinationButton);
@@ -158,7 +154,7 @@ public class US01_07_01_Test<Final> extends
 		assertEquals("Incorrect label of the button", "Add a destination", addDestination.getText());
 		
 		/*
-		 * Test for US 01.07.01 Basic Flow 3
+		 * Test for US 01.07.01 Basic Flow 2
 		 */	
 		//test click "Add a Destination" button						
 		// open next activity.
@@ -176,7 +172,7 @@ public class US01_07_01_Test<Final> extends
 		assertNotNull(c);
 
 		/*
-		 * test US01.02.01 Basic Flow 3,4
+		 * test US01.07.01 Basic Flow 3,4
 		 */
 		// test interface
 		EditText claimant_des = ((EditText) c.findViewById(ca.ualberta.CMPUT301W15T06.R.id.DestinationEditText));
@@ -189,6 +185,9 @@ public class US01_07_01_Test<Final> extends
 		ViewAsserts.assertOnScreen(dv1, claimant_reason);
 		assertNotNull(claimant_reason);
 
+		/*
+		 * Test Case for US01.07.01 Basic Flow 5
+		 */
 		final ListView detailListView = (ListView) c.findViewById(ca.ualberta.CMPUT301W15T06.R.id.detailListView);
 		c.runOnUiThread(new Runnable() {
 			//test add button works
@@ -202,44 +201,39 @@ public class US01_07_01_Test<Final> extends
 			geoArray.getChildAt(0).performClick();
 
 						
-		/*
-		 * test US01.07.01 Basic Flow 7
-		 */
-		ActivityMonitor amamam = getInstrumentation().addMonitor(ShowLocationActivity.class.getName(), null, false);
+			/*
+			 * test US01.07.01 Basic Flow 7
+			 */
+			ActivityMonitor amamam = getInstrumentation().addMonitor(ShowLocationActivity.class.getName(), null, false);
+			
+			/*
+			 * test US01.07.01 Basic Flow 8
+			 */
+			ShowLocationActivity aaa = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(amamam, 10000);
+			assertNotNull(aaa);
 						
-		/*
-		 * test US01.07.01 Basic Flow 8
-		 */
-		ShowLocationActivity aaa = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(amamam, 10000);
-		assertNotNull(aaa);
+			/*
+			 * test US01.07.01 Basic Flow 9
+			 */
+			ImageView image=(ImageView)aaa.findViewById(R.drawable.worldmap);
+			assertNotNull(image);
 						
-		/*
-		 * test US01.07.01 Basic Flow 9
-		 */
-		ImageView image=(ImageView)aaa.findViewById(R.drawable.worldmap);
-		assertNotNull(image);
-						
-		TextView tv=(TextView)aaa.findViewById(R.id.llTextView);
-		assertNotNull(tv);
+			TextView tv=(TextView)aaa.findViewById(R.id.llTextView);
+			assertNotNull(tv);
 						
 						
-		/*
-		 * test US01.07.01 Basic Flow 10
-		 */
-		boolean clickMap = image.performClick();
-		assertTrue(clickMap);
+			/*
+			 * test US01.07.01 Basic Flow 10
+			 */
+			boolean clickMap = image.performClick();
+			assertTrue(clickMap);
 						
-		/*
-		 * test US01.07.01 Basic Flow 11
-		 */
-		Location location=AppSingleton.getInstance().getLocation();
-						tv.setText("Lat: " + location.getLatitude()
-								+ "\nLong: " + location.getLongitude());
+			/*
+			 * test US01.07.01 Basic Flow 11
+			 */
+			Location location=AppSingleton.getInstance().getLocation();tv.setText("Lat: " + location.getLatitude() + "\nLong: " + location.getLongitude());
+			
 			}
 		});
-
-				
-
-
 	}
 }
