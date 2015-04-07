@@ -51,16 +51,33 @@ import android.widget.AdapterView.OnItemClickListener;
  * the <code>Item</code> list. 
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
+ * @see java.util.ArrayList;
  * @see android.os.Bundle
  * @see android.app.Activity
  * @see android.view.Menu
+ * @see android.app.AlertDialog
+ * @see android.app.AlertDialog.Builder
+ * @see android.content.DialogInterface
+ * @see android.content.Intent 
+ * @see android.view.View
+ * @see android.widget.AdapterView
+ * @see android.widget.ArrayAdapter
+ * @see android.widget.ListView
+ * @see android.widget.Toast
+ * @see android.widget.AdapterView.OnItemClickListener
  */
 public class ApproverItemListActivity extends Activity {
-	
+	/**
+	 * Set an unchangeable integer variable PHOTO_RECEIPT to 0.
+	 * Set an unchangeable integer variable LOCATION to 1.
+	 */
+	 */
 	private static final int PHOTO_RECEIPT = 0;
 	private static final int LOCATION = 1;
-
+	/**
+	 * Set a <code>Claim</code> object claim which contains all the detail of a claim.
+	 */
 	private Claim claim;
 
 	@Override
@@ -98,6 +115,11 @@ public class ApproverItemListActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * This method will gives user options to choose for further functions.
+	 * 
+	 * @param which  a integer from 0 and 1 with coresponding options
+	 */
 	public void itemChoice(Builder builder){
 		builder.setItems(R.array.approver_item_dialog_array, new DialogInterface.OnClickListener() {
 			
@@ -111,6 +133,9 @@ public class ApproverItemListActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * This method will allows approver to get a photo receipt or the location of the expense item after choosing an option.
+	 */
 	private void click(int which) {
 		if (which==PHOTO_RECEIPT){
 			Intent intent =new Intent(ApproverItemListActivity.this,ClaimantReceiptActivity.class);
