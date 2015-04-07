@@ -156,5 +156,7 @@ public class US02_03_01_Test<Final> extends
 		assertEquals(layoutParams11.width,WindowManager.LayoutParams.MATCH_PARENT);
 		assertEquals(layoutParams11.height,WindowManager.LayoutParams.WRAP_CONTENT);
 
+		nextActivity.finish();
+		activity.finish();
 	}
 }

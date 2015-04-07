@@ -83,9 +83,7 @@ public class US03_03_01_Test extends
 
 				// opening a dialog
 		    	// access the alert dialog using the getDialog() method created in the activity
-				AlertDialog d = (AlertDialog) activity.getDialog();
-
-				
+				AlertDialog d = (AlertDialog) activity.getDialog();				
 			}	
 		});
 		

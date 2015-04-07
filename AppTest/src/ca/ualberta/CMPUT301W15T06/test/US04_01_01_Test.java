@@ -117,124 +117,120 @@ public class US04_01_01_Test<Final> extends
 		assertEquals(layoutParams11.height, WindowManager.LayoutParams.WRAP_CONTENT);	 
 		
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		
+		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
 		//get next activity
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				
-				/*
-				 * Test for US 04.01.01 Basic Flow 2
-				 */
-				// click the list open next activity.
-				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
-				claimList.getChildAt(0).performClick();
-				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
-				assertNotNull(thirdActivity);
-
-				/*
-				 * Test for US 04.01.01 Basic Flow 3
-				 */		
-				final View decorView2 = nextActivity.getWindow().getDecorView();
-				ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
-				// check if it is on screen
-				ViewAsserts.assertOnScreen(decorView2, ilv);
-				
-				/*
-				 * Test for US 04.01.01 Basic Flow 4
-				 */		
-				//test "Add an item" button layout
-				final Button addItem = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addItemButton);
-				assertNotNull(addItem);
-				final View decorView = thirdActivity.getWindow().getDecorView();
-				ViewAsserts.assertOnScreen(decorView, addItem);
-				final ViewGroup.LayoutParams layoutParams =addItem.getLayoutParams();
-				assertNotNull(layoutParams);
-				assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
-				assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-				Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-				assertEquals("Incorrect label of the button", "Add a New Item", view.getText());
-
-				Claim claim = new Claim();
-				int count_before = claim.getItemList().size();
-				
-				//test button activity
-				thirdActivity.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						addItem.performClick();	
-						ActivityMonitor activityMonitor = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
-						ClaimantEditItemActivity forthActivity = (ClaimantEditItemActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
-						assertNotNull(forthActivity);
-					
-						
-						/*
-						 * Test for US 04.01.01 Basic Flow 5
-						 */
-						//test TextView
-						final View ddvv = forthActivity.getWindow().getDecorView();
-						TextView Date = (TextView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemDateTextView);
-						ViewAsserts.assertOnScreen(ddvv, Date);
-						assertNotNull(Date.getVisibility());
-						
-						TextView Cate = (TextView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemCategoryTextView);
-						ViewAsserts.assertOnScreen(ddvv, Cate);
-						assertNotNull(Date.getVisibility());
-						
-						TextView des = (TextView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemDescriptionTextView);
-						ViewAsserts.assertOnScreen(ddvv, des);
-						assertNotNull(des.getVisibility());
-						
-						TextView Amount = (TextView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemAmountTextView);
-						ViewAsserts.assertOnScreen(ddvv, Amount);
-						assertNotNull(Amount.getVisibility());
-						
-						TextView currency = (TextView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemCurrencyTextView);
-						ViewAsserts.assertOnScreen(ddvv, currency);
-						assertNotNull(currency.getVisibility());
-						
-						//test EditView
-						EditText da = ((EditText) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemDateEditText));
-						assertNotNull(da);
-						
-						EditText de = ((EditText) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemDescriptionEditText));
-						assertNotNull(de);
-						
-						EditText am = ((EditText) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemAmountEditText));
-						assertNotNull(am);
-						
-						/*
-						 * Test for US 04.01.01 Basic Flow 6
-						 */
-						//fill blank
-						//test spinner
-						Spinner spinner = (Spinner) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editCategorySpinner);
-						assertNotNull(spinner);
-						spinner.setSelection(0,true);
-						
-						Spinner spinner1 = (Spinner) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editCurrencySpinner);
-						assertNotNull(spinner1);
-						spinner1.setSelection(0,true);
-
-						final String date1 = "2014-01-01";
-						final String des1 = "b";
-						final int amount1 = 111;
-						da.setText(date1);
-						de.setText(des1);
-						am.setText(amount1);
-
-						forthActivity.finish();	
-					}				
-				});
-				
-				/*
-				 * Test for US 04.01.01 Basic Flow 7
-				 */
-				int count_after = claim.getItemList().size();
-				assertEquals(count_before,count_after-1);
-			
+			/*
+			 * Test for US 04.01.01 Basic Flow 2
+			 */
+			// click the list open next activity.
+			claimList.performItemClick(claimList, 0, 0);
 			}
 		});
+		ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
+		assertNotNull(thirdActivity);
+
+		/*
+		 * Test for US 04.01.01 Basic Flow 3
+		 */		
+		final View decorView2 = nextActivity.getWindow().getDecorView();
+		ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
+		// check if it is on screen
+		ViewAsserts.assertOnScreen(decorView2, ilv);
+				
+		/*
+		 * Test for US 04.01.01 Basic Flow 4
+		 */		
+		//test "Add an item" button layout
+		Button addItem = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addItemButton);
+		assertNotNull(addItem);
+		final View decorView = thirdActivity.getWindow().getDecorView();
+		ViewAsserts.assertOnScreen(decorView, addItem);
+		final ViewGroup.LayoutParams layoutParams =addItem.getLayoutParams();
+		assertNotNull(layoutParams);
+		assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
+		Button view = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addItemButton);
+		assertEquals("Incorrect label of the button", "Add a new Item", view.getText());
+
+		//Claim claim = new Claim();
+		//int count_before = claim.getItemList().size();
+		final Button ai = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addItemButton);
+		//test button activity
+		thirdActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				ai.performClick();	
+				}
+			});
+		ClaimantEditItemActivity forthActivity = (ClaimantEditItemActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+		assertNotNull(forthActivity);
+					
+	
+		/*		
+		 * Test for US 04.01.01 Basic Flow 5
+		 */
+		//test TextView
+		final View ddvv = forthActivity.getWindow().getDecorView();
+		TextView Date = (TextView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemDateTextView);
+		ViewAsserts.assertOnScreen(ddvv, Date);
+		assertNotNull(Date.getVisibility());
+						
+		TextView Cate = (TextView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemCategoryTextView);
+		ViewAsserts.assertOnScreen(ddvv, Cate);
+		assertNotNull(Date.getVisibility());
+						
+		TextView des = (TextView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemDescriptionTextView);
+		ViewAsserts.assertOnScreen(ddvv, des);
+		assertNotNull(des.getVisibility());
+						
+		TextView Amount = (TextView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemAmountTextView);
+		ViewAsserts.assertOnScreen(ddvv, Amount);
+		assertNotNull(Amount.getVisibility());
+						
+		TextView currency = (TextView) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemCurrencyTextView);
+		ViewAsserts.assertOnScreen(ddvv, currency);
+		assertNotNull(currency.getVisibility());
+						
+		//test EditView
+		EditText da = ((EditText) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemDateEditText));
+		assertNotNull(da);
+						
+		EditText de = ((EditText) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemDescriptionEditText));
+		assertNotNull(de);
+						
+		EditText am1 = ((EditText) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editItemAmountEditText));
+		assertNotNull(am1);
+						
+		/*
+		 * Test for US 04.01.01 Basic Flow 6,7
+		 */
+		//fill blank
+		//test spinner
+		Spinner spinner = (Spinner) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editCategorySpinner);
+		assertNotNull(spinner);
+		spinner.setSelection(0,true);
+						
+		Spinner spinner1 = (Spinner) forthActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.editCurrencySpinner);
+		assertNotNull(spinner1);
+		spinner1.setSelection(0,true);
+
+		final String date1 = "2014-01-01";
+		final String des1 = "b";
+		final int amount1 = 111;
+		da.setText(date1);
+		de.setText(des1);
+		am1.setText(amount1);
+
+		forthActivity.finish();	
+
+				
+		/*
+		 * Test for US 04.01.01 Basic Flow 7
+		 */
 
 	}
 }
