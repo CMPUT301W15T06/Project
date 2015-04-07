@@ -61,20 +61,23 @@ public class US08_01_01_Test extends
 	//set up
 	protected void setUp() throws Exception {
 		super.setUp();
-	instrumentation = getInstrumentation();
-	activity = getActivity();
-	setActivityInitialTouchMode(false);
-	ApproverButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-	ClaimantButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-	UserButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
-	intent = new Intent(getInstrumentation().getTargetContext(), MainActivity.class);	
-	u = new User("temp");
-	cclc = new ClaimantClaimListController(u);
-	cl = new ApproverClaimListActivity();
+		instrumentation = getInstrumentation();
+		activity = getActivity();
+		setActivityInitialTouchMode(false);
+		ApproverButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+		ClaimantButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		UserButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
+		intent = new Intent(getInstrumentation().getTargetContext(),
+				MainActivity.class);
+		u = new User("temp");
+		cclc = new ClaimantClaimListController(u);
+		cl = new ApproverClaimListActivity();
 	}
 
-
-	public void testUS010101() {
+	public void testUS080101() {
 
 		/*
 		* Test for US08.01.01 Basic Flow 1

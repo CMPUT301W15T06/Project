@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import ca.ualberta.CMPUT301W15T06.ApproverClaimDetailListActivity;
 import ca.ualberta.CMPUT301W15T06.ApproverClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
@@ -117,15 +118,31 @@ public class US08_03_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 			@Override
 			public void run() {
 				al.performClick();
+				
+				
+				/*
+				 * Test for US 08.03.01 Basic Flow 5
+				 */
+				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
+				ApproverClaimListActivity nActivity = (ApproverClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+				View d = nActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
+				assertNotNull(d);
+				
+				/*
+				 * Test for US 08.03.01 Basic Flow 6
+				 */
+				d.performClick();
+
+				/*
+				 * Test for US 08.03.01 Basic Flow 7
+				 */
+				ActivityMonitor activityMonitor2 = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
+				ApproverClaimDetailListActivity dActivity = (ApproverClaimDetailListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor2, 10000);
+			
+				assertNotNull(dActivity);
 			}
 		});
-		
-		/*
-		 * Test for US 08.03.01 Basic Flow 5
-		 */
-		View d = nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
-		assertNotNull(d);
-		
-		
+
+	
 	}
 }
