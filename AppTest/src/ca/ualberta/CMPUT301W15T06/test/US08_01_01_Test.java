@@ -143,17 +143,16 @@ public class US08_01_01_Test extends
 		// next activity is opened and captured.
 		 assertNotNull(nextActivity);
 
-				
 		/*
-		 * Test Case for US08.01.01 Basic Flow 7
+		 * Test Case for US08.01.01 Basic Flow 3
 		 */
 		// view which is expected to be present on the screen
+		 final View decorView1 = nextActivity.getWindow().getDecorView();
 		// test claim list layout
-		final View decorView1 = nextActivity.getWindow().getDecorView();
-
-		listView = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
+		 listView = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		// check if it is on screen
-		ViewAsserts.assertOnScreen(decorView1, listView);
+		 ViewAsserts.assertOnScreen(decorView1, listView);
+		 
 		// check whether the Button object's width and height attributes
 		// match the expected values
 		final ViewGroup.LayoutParams layoutParams11 = listView.getLayoutParams();
@@ -161,37 +160,10 @@ public class US08_01_01_Test extends
 		assertEquals(layoutParams11.width,WindowManager.LayoutParams.MATCH_PARENT);
 		assertEquals(layoutParams11.height,
 		WindowManager.LayoutParams.WRAP_CONTENT);
-				
-		/*
-		 * Test Case for US08.01.01 Basic Flow 8,9,10
-		 */
-		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
-				
-		int count1 = cl.getApproverClaimList().size();
-		//get next activity
-		nextActivity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-			// click the list open next activity.
-				claimList.getChildAt(0).performClick();
-				}
-			});
-				
-		AlertDialog d = (AlertDialog) nextActivity.getDialog();
-		assertNotNull(d);
-		ListView choose = (ListView) claimList.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
-		assertNotNull(choose);
 
-		// perform click option
-		choose.getChildAt(3).performClick();
-		int count2 = cl.getApproverClaimList().size();
-		assertEquals(count1, count2-1);
-		nextActivity.finish();
 
-		activity.finish();
-		}
 	}
-
+}
 
 
 					
