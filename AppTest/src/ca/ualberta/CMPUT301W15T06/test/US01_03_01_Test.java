@@ -1,5 +1,6 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import ca.ualberta.CMPUT301W15T06.AppSingleton;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimDetailActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
@@ -63,7 +64,7 @@ public class US01_03_01_Test<Final> extends
 	ClaimantButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 	UserButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
 	intent = new Intent(getInstrumentation().getTargetContext(), MainActivity.class);	
-	u = new User("t");
+	u =AppSingleton.getInstance().getCurrentUser();
 	cclc = new ClaimantClaimListController(u);
 
 
