@@ -55,24 +55,48 @@ import android.widget.AdapterView.OnItemClickListener;
 * the <code>User</code> .
 * 
 * @author CMPUT301W15T06
-* @version 03/16/2015
+* @version 04/07/2015
 * @see android.os.Bundle
 * @see android.app.Activity
 * @see android.view.Menu
 */
 public class ApproverClaimListActivity extends Activity {
-
+	
+	/**
+	 * Set a <code>Dialog</code> object to create a Dialog window that uses the default dialog frame style.
+	 */
 	private Dialog dialog;
+	/**
+	 * Set an unchangeable integer variable APPROVE to 4.
+	 * Set an unchangeable integer variable RETURN to 3.
+	 * Set an unchangeable integer variable COMMENT to 2.
+	 * Set an unchangeable integer variable ITEM_LIST to 1.
+	 * Set an unchangeable integer variable DETAIL_DESTINATION to 0.
+	 */
 	private static final int APPROVE = 4;
 	private static final int RETURN = 3;
 	private static final int COMMENT = 2;
 	private static final int ITEM_LIST = 1;
 	private static final int DETAIL_DESTINATION = 0;
-
+	/**
+	 * Set an ApproverClaimListController object aclc with initial deault value of null to represent this class.
+	 */
 	private ApproverClaimListController aclc=null;
+	/**
+	 * Set an User object user with initial deault value of null to represent the user of this application
+	 */
 	private User user=null;
+	/**
+	 * Set a Claim object claim with initial deault value of null to represent the claim in the claim list
+	 */
 	private Claim claim=null;
+	/**
+	 * Set an ArrayList list to contain all the claims that user created.
+	 */
 	private ArrayList<Claim> list;
+	/**
+	 * Set an ArrayAdapter adapter to adapt all the claim in the claim list.
+	 */
 	private ArrayAdapter<Claim> adapter;
 	
 	@Override
@@ -138,6 +162,11 @@ public class ApproverClaimListActivity extends Activity {
 		});
 	}
 
+	/**
+	 * This method will return and display a list of claim sorted by date of travel.
+	 * 
+	 * @return a sorted claim list
+	 */
 	private Comparator<? super Claim> sortClaim() {
 		// TODO Auto-generated method stub
 		return new Comparator<Claim>() {
@@ -151,7 +180,11 @@ public class ApproverClaimListActivity extends Activity {
 		};
 	}
 
-
+	/**
+	 * This method will gives user options to choose for further functions.
+	 * 
+	 * @param which  a integer from 0 to 4 with coresponding options
+	 */
 	private void itemChoice(int which){
 		if (which ==DETAIL_DESTINATION){
 			Intent intent =new Intent(ApproverClaimListActivity.this,ApproverClaimDetailListActivity.class);
@@ -168,6 +201,12 @@ public class ApproverClaimListActivity extends Activity {
 		}
 	}
 	
+	/**
+	 * This will stop user from approving their own claim and check other errors as approver. Throws exceptions if necessary.
+	 * 
+	 * @throws NetWorkException
+	 * @throws WrongApproverException
+	 */
 	private void approve() {
 		// TODO Auto-generated method stub
 		if(user.getUserName().equals(claim.getName())){
@@ -186,7 +225,13 @@ public class ApproverClaimListActivity extends Activity {
 			}
 		}
 	}
-
+	
+	/**
+	 * This will stop user from returning their own claim and check other errors as approver. Throws exceptions if necessary.
+	 * 
+	 * @throws NetWorkException
+	 * @throws WrongApproverException
+	 */
 	private void returnClaim() {
 		// TODO Auto-generated method stub
 		if(user.getUserName().equals(claim.getName())){
@@ -206,6 +251,10 @@ public class ApproverClaimListActivity extends Activity {
 		}
 	}
 
+	/**
+	 * This will stop user from adding comment to their own claim. It will ask approver to add comment when it is finished.
+	 * 
+	 */
 	private void comment() {
 		// TODO Auto-generated method stub
 		if(user.getUserName().equals(claim.getName())){
@@ -221,6 +270,9 @@ public class ApproverClaimListActivity extends Activity {
 		}
 	}
 
+	/**
+	 * This will allow approver to add comments to the claim to explain the decision ("Approve" or "Return")
+	 */
 	private void addComment() {
 		// TODO Auto-generated method stub
 		AlertDialog.Builder builder = new AlertDialog.Builder(ApproverClaimListActivity.this);
@@ -246,7 +298,13 @@ public class ApproverClaimListActivity extends Activity {
 		builder.create();  
 		builder.show();
 	}
-
+	
+	/**
+ 	 * This method will create a editable text area to allow user enter text for comment. Throws exceptions if necessary.
+ 	 * 
+ 	 * @param input  record input text for comment (like "Incomplete Claim Information")
+ 	 * @throws NetWorkException
+ 	 */
 	private void comment(EditText input) {
 		// TODO Auto-generated method stub
 		try {
@@ -263,6 +321,11 @@ public class ApproverClaimListActivity extends Activity {
 		return false;
 	}
 	
+	/**
+	 * This method will return a dialog window for display. 
+	 * 
+	 * @return a Dialog window that uses the default dialog frame style
+	 */
 	public Dialog getDialog() {
 		return dialog;
 	}
@@ -274,6 +337,11 @@ public class ApproverClaimListActivity extends Activity {
 		this.dialog = dialog;
 	}
 	
+	/**
+	 * This method will return the claim list for approver for further use or display
+	 * 
+	 * @return a list of claim for approver
+	 */
 	public ArrayList<Claim> getApproverClaimList(){
 		return list;
 		
