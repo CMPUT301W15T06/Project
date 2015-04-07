@@ -64,7 +64,8 @@ public class ClaimantItemListController {
 	}
 
 	/**
-	 * 
+	 * This method will submit the item along with the claim and notify all the 
+	 * Listener in the listeners and modelListeners. 
 	 * 
 	 * @throws StatusException
 	 * @throws NetWorkException
@@ -84,7 +85,8 @@ public class ClaimantItemListController {
 	}
 
 	/**
-	 * 
+	 * This method will delete the item in the claim and notify all the 
+	 * Listener in the listeners and modelListeners. 
 	 * 
 	 * @throws StatusException
 	 * @throws NetWorkException
@@ -100,7 +102,8 @@ public class ClaimantItemListController {
 	}
 
 	/**
-	 * 
+	 * This method will add the item along in claim and notify all the 
+	 * Listener in the listeners and modelListeners. 
 	 * 
 	 * @throws StatusException
 	 * @throws NetWorkException
@@ -127,7 +130,8 @@ public class ClaimantItemListController {
 	}
 
 	/**
-	 * 
+	 * This method will add a tag by using tagID to the item and notify all the 
+	 * Listener in the listeners and modelListeners. 
 	 * 
 	 * @param id
 	 * @throws NetWorkException
@@ -140,6 +144,8 @@ public class ClaimantItemListController {
 
 	/**
 	 * 
+	 * This method will remove a tag by using tagID to the item and notify all the 
+	 * Listener in the listeners and modelListeners. 
 	 * 
 	 * @param id
 	 * @throws NetWorkException
