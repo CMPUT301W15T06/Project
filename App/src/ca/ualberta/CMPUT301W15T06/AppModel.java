@@ -38,7 +38,7 @@ import java.util.ArrayList;
  * <p>
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  * @see java.util.ArrayList
  * @see java.util.HashSet
  * @see java.util.Set
@@ -170,7 +170,7 @@ public abstract class AppModel{
 	/**
 	 * This method will create a new ArrayList modelListeners if there's none and return the new modelListeners
 	 * 
-	 * @return modelListners  an ArrayList contains all the listeners to check all model objects
+	 * @return an ArrayList contains all the listeners to check all model objects
 	 */
 	protected ArrayList<Listener> getModelListeners(){
 		if (modelListeners==null){
