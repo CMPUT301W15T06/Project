@@ -59,8 +59,8 @@ import android.widget.Toast;
  * @author CMPUT301W15T06
  * @version 04/07/2015
  * @see java.io.File
- * @see import java.io.FileNotFoundException
- * @see import java.io.IOException
+ * @see java.io.FileNotFoundException
+ * @see java.io.IOException
  * @see android.net.Uri
  * @see android.os.Bundle
  * @see android.app.Activity

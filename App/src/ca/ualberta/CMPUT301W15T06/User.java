@@ -40,7 +40,7 @@ import android.location.Location;
  * <code>Tag</code> and <code>TagList</code> for searching by Tag names.
  * 
  * @author CMPUT301W15T06
- * @version 03/07/2015
+ * @version 04/07/2015
  * @see java.util.ArrayList
  */
 public class User extends AppModel{

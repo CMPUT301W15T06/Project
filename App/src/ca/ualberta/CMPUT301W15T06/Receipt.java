@@ -35,28 +35,35 @@ package ca.ualberta.CMPUT301W15T06;
  */
 public class Receipt extends AppModel {
 	
-//	/**
-//	 * Set a private field photo String.
-//	 */
+	/**
+	 * Set a private field photoStr String as null
+	 */
 	protected String photoStr=null;
 	
-	
+	/**
+	 * Call super class.
+	 */
 	public Receipt(){
 		super();
 		
 	}
 	
+	/**
+	 * General constructor.
+	 * 
+	 * @param receipt  a Receipt object
+	 */
 	public Receipt(Receipt receipt){
 		super(receipt);
 		photoStr=receipt.getPhotoStr();
 	}
 	
-//	/**
-//	 * This method will return a photo <code>Receipt</code> for display or 
-//	 * further use.
-//	 * 
-//	 * @return 0  an integer variable
-//	 */
+	/**
+	 * This method will return a photo <code>Receipt</code> for display or 
+	 * further use.
+	 * 
+	 * @return photoStr an String variable
+	 */
 	public String getPhotoStr(){
 		return photoStr;
 	}
@@ -67,6 +74,12 @@ public class Receipt extends AppModel {
 		return photoStr==null;
 	}
 	
+	/**
+	 * This method will set the photo receipt to the item.
+	 * 
+	 * @param photo a string object
+	 * @throws NetWorkException 
+	 */
 	public void setPhotoStr(String photo) throws StatusException, NetWorkException {
 	}
 

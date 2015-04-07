@@ -69,8 +69,6 @@ public class ClaimantClaimDetailController {
 	 * the <code>Claim</code> and <code>Destination</code>. It also gonna 
 	 * notify all Listener in listeners list about this update.
 	 * 
-	 * @param dest  a String variable
-	 * @param reason  a String variable
 	 * @throws StatusException
 	 * @throws NetWorkException 
 	 * @see java.text.DateFormat
