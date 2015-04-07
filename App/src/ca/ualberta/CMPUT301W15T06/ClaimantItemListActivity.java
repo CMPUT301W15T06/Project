@@ -151,9 +151,11 @@ public class ClaimantItemListActivity extends Activity {
 	}
 	
 	/**
+	 * This method will gives user options to choose using a prompt dialog.
 	 * 
-	 * 
-	 * @param builder
+	 * @param builder  a dialog interface of setting item
+	 * @see android.app.AlertDialog
+	 * @see android.app.AlertDialog.Builder
 	 */
 	public void itemChoice(Builder builder){
 		builder.setItems(R.array.item_dialog_array, new DialogInterface.OnClickListener() {
@@ -192,7 +194,7 @@ public class ClaimantItemListActivity extends Activity {
 	}
 	
 	/**
-	 * 
+	 * Set the location of expense item and check for warnings to prevent program crush.
 	 */
 	private void setLocation() {
 		// TODO Auto-generated method stub
@@ -209,7 +211,10 @@ public class ClaimantItemListActivity extends Activity {
 	}
 
 	/**
+	 * Change the flag of the item and check for warnings to prevent program crush.
 	 * 
+	 * @throws StatusException
+	 * @throws NetWorkException
 	 */
 	public void changeFlag(){
 		try {
@@ -231,10 +236,12 @@ public class ClaimantItemListActivity extends Activity {
 	
 	/**
 	 * Add a new item to the <code>ItemList</code> by calling the 
-	 * <code>ClaimantAddItemActivity</code> class and set a new intent.
+	 * <code>ClaimantItemListActivity</code> class and set a new intent.
 	 * 
-	 * @param v  a View object
+	 * @param v  the basic building block for user interface components
 	 * @see android.content.Intent
+	 * @throws StatusException
+	 * @throws RuntimeException
 	 */
 	public void addItem(View v){
 		try {
@@ -250,14 +257,20 @@ public class ClaimantItemListActivity extends Activity {
 		}	
 	}
 	
+	/**
+	 * This methods calls <code>ClaimantItemListActivity</code> to display te detail of the item list.
+	 * 
+	 * @param m  interface for direct access to a previously created menu item
+	 */
 	public void detail(MenuItem m){
 		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantClaimDetailActivity.class);
 		startActivity(intent);
 	}
 	
 	/**
+	 * This method will display the submission screen and print warning message if the information is not complete.
 	 * 
-	 * @param m
+	 * @param m  interface for direct access to a previously created menu item
 	 */
 	public void submitClaim(MenuItem m){
 		if (claim.getMissValue()){
@@ -284,7 +297,10 @@ public class ClaimantItemListActivity extends Activity {
 	}
 
 	/**
+	 * Set the claim as unchangeable after submit and print warning message if the claimant try to modify a submitted claim.
 	 * 
+	 * @throws StatusException
+	 * @throws NetWorkException
 	 */
 	public void sureSubmit(){
 		
@@ -302,8 +318,9 @@ public class ClaimantItemListActivity extends Activity {
 	}
 	
 	/**
+	 * Set the claim as unchangeable after submit and print warning message if the claimant try to edit a submitted claim.
 	 * 
-	 * @param m
+	 * @param m  interface for direct access to a previously created menu item
 	 */
 	public void editClaim(MenuItem m){
 		if (!AppSingleton.getInstance().isEditable()){
@@ -316,8 +333,9 @@ public class ClaimantItemListActivity extends Activity {
 	}
 	
 	/**
+	 * Set the claim as unchangeable after submit and print warning message if the claimant try to delete a submitted claim.
 	 * 
-	 * @param m
+	 * @param m  interface for direct access to a previously created menu item
 	 */
 	public void deleteClaim(MenuItem m){
 		try {
@@ -334,8 +352,9 @@ public class ClaimantItemListActivity extends Activity {
 	}
 	
 	/**
+	 * This method will dispaly the interface of changing the tag by tag id or choose an existing tag.
 	 * 
-	 * @param m
+	 * @param m  interface for direct access to a previously created menu item
 	 */
 	public void changeTag(MenuItem m){
 		final User user=AppSingleton.getInstance().getCurrentUser();
@@ -365,8 +384,10 @@ public class ClaimantItemListActivity extends Activity {
 	}
 	
 	/**
+	 * This method will display the approver information by calling 
+	 * <code>ClaimantItemListActivity</code> and <code>ClaimantApproverInfoActivity</code>.
 	 * 
-	 * @param m
+	 * @param m  interface for direct access to a previously created menu item
 	 */
 	public void approverInfo(MenuItem m){
 		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantApproverInfoActivity.class);
@@ -374,8 +395,9 @@ public class ClaimantItemListActivity extends Activity {
 	}
 	
 	/**
+	 * Return the dialog window of display reason.
 	 * 
-	 * @return
+	 * @return the dialog window for display uses
 	 */
 	public Dialog getDialog() {
 		return dialog;
