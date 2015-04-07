@@ -1,6 +1,8 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
 import android.content.Intent;
@@ -14,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import ca.ualberta.CMPUT301W15T06.ApproverClaimDetailListActivity;
 import ca.ualberta.CMPUT301W15T06.ApproverClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
@@ -67,77 +68,110 @@ public class US08_04_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		cl = new ApproverClaimListActivity();
 	}
 
+	@SuppressLint("CutPasteId")
 	public void test080401() {
 		
 		/*
 		 * Test for US 08.03.01 Basic Flow 1
 		 */
+		// test button layouts
+		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
+		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
+		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton));
+ 
 		//test "Approver" button layout
 		final View decorView = activity.getWindow().getDecorView();
+
 		ViewAsserts.assertOnScreen(decorView, ApproverButton);
-		
+
 		final ViewGroup.LayoutParams layoutParams =
 				ApproverButton.getLayoutParams();
 		assertNotNull(layoutParams);
 		assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
 		assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
+   
+		Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+		assertEquals("Incorrect label of the button", "Approver", view.getText());
+		
+		//test "Claimant" button layout
+		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
 
+		final ViewGroup.LayoutParams layoutParams1 =
+				ClaimantButton.getLayoutParams();
+		assertNotNull(layoutParams1);
+		assertEquals(layoutParams1.width, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertEquals(layoutParams1.height, WindowManager.LayoutParams.WRAP_CONTENT);
+   
+		Button view1 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		assertEquals("Incorrect label of the button", "Claimant", view1.getText());
+		
+		//test "Change User" button layout
+		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
+
+		final ViewGroup.LayoutParams layoutParams2 =
+				UserButton.getLayoutParams();
+		assertNotNull(layoutParams1);
+		assertEquals(layoutParams2.width, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertEquals(layoutParams2.height, WindowManager.LayoutParams.WRAP_CONTENT);
+   
+		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
+		assertEquals("Incorrect label of the button", "Change User", view2.getText());
+		
 		/*
 		 * Test for US 08.04.01 Basic Flow 2
 		 */
-		//click "Approver" button and create next activity
-		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
-		MainActivity myActivity = getActivity();
-		final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-		myActivity.runOnUiThread(new Runnable() {
+		//click "Change User" button to change user name
+		final Button button = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
+		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				// click button and open next activity.
 				button.performClick();
+				
+				/*
+				 * Test for US 08.04.01 Basic Flow 3,4
+				 */
+				MainActivity ma = getActivity();
+				Dialog d = ma.getDialog();
+				
+			}
+		});
+
+		/*
+		 * Test for US 08.04.01 Basic Flow 5
+		 */
+		//click "Approver" button and create next activity
+		MainActivity myActivity = getActivity();
+		assertNotNull(myActivity);
+		
+		/*
+		 * Test for US 08.04.01 Basic Flow 6
+		 */
+		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
+		final Button abutton = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+		myActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				// click button and open next activity.
+				abutton.performClick();
 			}
 		});
 		ApproverClaimListActivity nextActivity = (ApproverClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
-		
 		/*
-		 * Test for US 08.04.01 Basic Flow 3
+		 * Test for US 08.04.01 Basic Flow 7
 		 */
 		final ListView al =  (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		final View decorView1 = nextActivity.getWindow().getDecorView();
-		ViewAsserts.assertOnScreen(decorView1, al);
-		
-		/*
-		 * Test for US 08.04.01 Basic Flow 4
-		 */
-		nextActivity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				al.performClick();
-				
-				
-				/*
-				 * Test for US 08.04.01 Basic Flow 5
-				 */
-				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
-				ApproverClaimListActivity nActivity = (ApproverClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
-				View d = nActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
-				assertNotNull(d);
-				
-				/*
-				 * Test for US 08.04.01 Basic Flow 6
-				 */
-				d.performClick();
+		final View decorView2 = nextActivity.getWindow().getDecorView();
+		ViewAsserts.assertOnScreen(decorView2, al);
 
-				/*
-				 * Test for US 08.04.01 Basic Flow 7
-				 */
-				ActivityMonitor activityMonitor2 = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
-				ApproverClaimDetailListActivity dActivity = (ApproverClaimDetailListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor2, 10000);
-			
-				assertNotNull(dActivity);
-			}
-		});
+		final ViewGroup.LayoutParams layoutParams3 =
+				ClaimantButton.getLayoutParams();
+		assertNotNull(layoutParams3);
+		assertEquals(layoutParams3.width, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertEquals(layoutParams3.height, WindowManager.LayoutParams.WRAP_CONTENT);
+
 
 	
 	}

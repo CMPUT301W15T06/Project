@@ -86,25 +86,30 @@ public class US08_05_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
 
+		// get claim list view
 		final ListView al =  (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
+		// get decorview
 		final View decorView1 = nextActivity.getWindow().getDecorView();
+		// make sure list is on screen
 		ViewAsserts.assertOnScreen(decorView1, al);
 
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
+				// click claim
 				al.performClick();
 
+				// get dialogue
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
 				ApproverClaimListActivity nActivity = (ApproverClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 				View d = nActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
 				assertNotNull(d);
 
+				// click option in dialogue
 				d.performClick();
 
 				ActivityMonitor activityMonitor2 = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
 				ApproverClaimDetailListActivity dActivity = (ApproverClaimDetailListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor2, 10000);
-			
 				assertNotNull(dActivity);
 				
 				ActivityMonitor activityMonitor3 = getInstrumentation().addMonitor(ApproverItemListActivity.class.getName(), null, false);
@@ -113,8 +118,10 @@ public class US08_05_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				/*
 				 * Test for US 08.05.01 Basic Flow 1
 				 */
+				// get list in approver page
 				final View ail = aila.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverItemListView);
 				View decorView = aila.getWindow().getDecorView();
+				// make sure list is on screen
 				ViewAsserts.assertOnScreen(decorView, ail);
 				
 				/*
@@ -128,6 +135,7 @@ public class US08_05_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 						/*
 						 * Test for US 08.05.01 Basic Flow 3
 						 */
+						// get dialogue
 						ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ApproverItemListActivity.class.getName(), null, false);
 						ApproverItemListActivity nActivity = (ApproverItemListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 						View d = nActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.approver_item_dialog_array);
@@ -138,6 +146,7 @@ public class US08_05_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 						/*
 						 * Test for US 08.05.01 Basic Flow 4
 						 */
+						// click option in dialogue
 						d.performClick();
 						
 						/*

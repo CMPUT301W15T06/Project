@@ -56,26 +56,29 @@ public class US09_01_01_Test extends
 		super(MainActivity.class);
 	}
 
-	//set up
+	// set up
 	protected void setUp() throws Exception {
 		super.setUp();
-	instrumentation = getInstrumentation();
-	activity = getActivity();
-	setActivityInitialTouchMode(false);
-	ApproverButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-	ClaimantButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-	UserButton = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
-	intent = new Intent(getInstrumentation().getTargetContext(), MainActivity.class);	
-	u = new User("temp");
-	cclc = new ClaimantClaimListController(u);
+		instrumentation = getInstrumentation();
+		activity = getActivity();
+		setActivityInitialTouchMode(false);
+		ApproverButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
+		ClaimantButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+		UserButton = (Button) activity
+				.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
+		intent = new Intent(getInstrumentation().getTargetContext(),
+				MainActivity.class);
+		u = new User("temp");
+		cclc = new ClaimantClaimListController(u);
 	}
-
 
 	public void testUS090101() {
 
 		/*
-		* Test for US09.01.01 Basic Flow 1,2
-		*/
+		 * Test for US09.01.01 Basic Flow 1,2
+		 */
 		// test button exists
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
@@ -112,15 +115,13 @@ public class US09_01_01_Test extends
 
 		final ViewGroup.LayoutParams layoutParams2 =
 				UserButton.getLayoutParams();
-		assertNotNull(layoutParams1);
-		assertEquals(layoutParams1.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams1.height, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertNotNull(layoutParams2);
+		assertEquals(layoutParams2.width, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertEquals(layoutParams2.height, WindowManager.LayoutParams.WRAP_CONTENT);
    
 		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
 		assertEquals("Incorrect label of the button", "Change User", view2.getText());
 
-		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
-		
 		//User click "Change User"
 		activity.runOnUiThread(new Runnable(){
 

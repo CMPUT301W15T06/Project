@@ -118,9 +118,9 @@ public class US08_01_01_Test extends
 
 		final ViewGroup.LayoutParams layoutParams2 =
 				UserButton.getLayoutParams();
-		assertNotNull(layoutParams1);
-		assertEquals(layoutParams1.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams1.height, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertNotNull(layoutParams2);
+		assertEquals(layoutParams2.width, WindowManager.LayoutParams.WRAP_CONTENT);
+		assertEquals(layoutParams2.height, WindowManager.LayoutParams.WRAP_CONTENT);
    
 		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
 		assertEquals("Incorrect label of the button", "Change User", view2.getText());
@@ -140,26 +140,26 @@ public class US08_01_01_Test extends
 				}
 			});
 		 ApproverClaimListActivity nextActivity = (ApproverClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
-		// next activity is opened and captured.
+		 // next activity is opened and captured.
 		 assertNotNull(nextActivity);
 
-		/*
-		 * Test Case for US08.01.01 Basic Flow 3
-		 */
-		// view which is expected to be present on the screen
+		 /*
+		  * Test Case for US08.01.01 Basic Flow 3
+		  */
+		 // view which is expected to be present on the screen
 		 final View decorView1 = nextActivity.getWindow().getDecorView();
-		// test claim list layout
+		 // test claim list layout
 		 listView = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		// check if it is on screen
+		 // check if it is on screen
 		 ViewAsserts.assertOnScreen(decorView1, listView);
 		 
-		// check whether the Button object's width and height attributes
-		// match the expected values
-		final ViewGroup.LayoutParams layoutParams11 = listView.getLayoutParams();
-		assertNotNull(layoutParams11); 
-		assertEquals(layoutParams11.width,WindowManager.LayoutParams.MATCH_PARENT);
-		assertEquals(layoutParams11.height,
-		WindowManager.LayoutParams.WRAP_CONTENT);
+		 // check whether the Button object's width and height attributes
+		 // match the expected values
+		 final ViewGroup.LayoutParams layoutParams11 = listView.getLayoutParams();
+		 assertNotNull(layoutParams11); 
+		 assertEquals(layoutParams11.width,WindowManager.LayoutParams.MATCH_PARENT);
+		 assertEquals(layoutParams11.height,
+		 WindowManager.LayoutParams.WRAP_CONTENT);
 
 
 	}

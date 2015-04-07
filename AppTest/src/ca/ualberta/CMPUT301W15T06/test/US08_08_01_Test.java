@@ -12,9 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import ca.ualberta.CMPUT301W15T06.ApproverClaimDetailListActivity;
 import ca.ualberta.CMPUT301W15T06.ApproverClaimListActivity;
-import ca.ualberta.CMPUT301W15T06.ApproverItemListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
 import ca.ualberta.CMPUT301W15T06.User;
@@ -90,64 +88,36 @@ public class US08_08_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
+				
+				/*
+				 * Test for US 08.08.01 Basic Flow 1
+				 */
+				// click on claim
 				al.performClick();
 
+				/*
+				 * Test for US 08.08.01 Basic Flow 2
+				 */
+				// get dialogue
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
 				ApproverClaimListActivity nActivity = (ApproverClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 				View d = nActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
 				assertNotNull(d);
 
+				/*
+				 * Test for US 08.08.01 Basic Flow 3
+				 */
+				// click option in dialogue
 				d.performClick();
 
-				ActivityMonitor activityMonitor2 = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
-				ApproverClaimDetailListActivity dActivity = (ApproverClaimDetailListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor2, 10000);
-			
-				assertNotNull(dActivity);
-				
-				ActivityMonitor activityMonitor3 = getInstrumentation().addMonitor(ApproverItemListActivity.class.getName(), null, false);
-				ApproverItemListActivity aila = (ApproverItemListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor3, 10000);
-				
 				/*
-				 * Test for US 08.08.01 Basic Flow 1
-				 */
-				final View ail = aila.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverItemListView);
-				View decorView = aila.getWindow().getDecorView();
-				ViewAsserts.assertOnScreen(decorView, ail);
-				
-				/*
-				 * Test for US 08.08.01 Basic Flow 2
-				 */
-				aila.runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						ail.performClick();
-						
-						/*
-						 * Test for US 08.08.01 Basic Flow 3
-						 */
-						ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ApproverItemListActivity.class.getName(), null, false);
-						ApproverItemListActivity nActivity = (ApproverItemListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
-						View d = nActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.approver_item_dialog_array);
-						assertNotNull(d);
-						View decorView = nActivity.getWindow().getDecorView();
-						ViewAsserts.assertOnScreen(decorView, d);
-						
-						/*
-						 * Test for US 08.08.01 Basic Flow 4
-						 */
-						
-						d.performClick();
-
-					}
-				});
-				
-				/*
-				 * Test for US 08.08.01 Basic Flow 5
+				 * Test for US 08.08.01 Basic Flow 4
 				 */
 				final ListView al =  (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 				final View decorView1 = nextActivity.getWindow().getDecorView();
 				ViewAsserts.assertOnScreen(decorView1, al);
 			}
+
 		});
 	
 	}

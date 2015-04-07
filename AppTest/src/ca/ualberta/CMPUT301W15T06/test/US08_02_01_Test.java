@@ -95,8 +95,9 @@ public class US08_02_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				button.performClick();
 			}
 		});
-		ApproverClaimListActivity nextActivity = (ApproverClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+		
 		// next activity is opened and captured.
+		ApproverClaimListActivity nextActivity = (ApproverClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		assertNotNull(nextActivity);
 		
 		/*

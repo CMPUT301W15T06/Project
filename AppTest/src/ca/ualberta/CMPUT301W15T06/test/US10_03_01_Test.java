@@ -1,23 +1,15 @@
 package ca.ualberta.CMPUT301W15T06.test;
 
-import ca.ualberta.CMPUT301W15T06.AppSingleton;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListActivity;
 import ca.ualberta.CMPUT301W15T06.ClaimantClaimListController;
 import ca.ualberta.CMPUT301W15T06.ClaimantEditClaimActivity;
 import ca.ualberta.CMPUT301W15T06.MainActivity;
-import ca.ualberta.CMPUT301W15T06.NetWorkException;
 import ca.ualberta.CMPUT301W15T06.ShowLocationActivity;
 import ca.ualberta.CMPUT301W15T06.User;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
 import android.view.Menu;
@@ -76,52 +68,6 @@ public class US10_03_01_Test extends
 
 	public void testUS100301() {
 
-
-		// test button exists
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
-		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton));
- 
-		//test "Approver" button layout
-		final View decorView = activity.getWindow().getDecorView();
-
-		ViewAsserts.assertOnScreen(decorView, ApproverButton);
-
-		final ViewGroup.LayoutParams layoutParams =
-				ApproverButton.getLayoutParams();
-		assertNotNull(layoutParams);
-		assertEquals(layoutParams.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton);
-		assertEquals("Incorrect label of the button", "Approver", view.getText());
-		
-		//test "Claimant" button layout
-		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
-
-		final ViewGroup.LayoutParams layoutParams1 =
-				ClaimantButton.getLayoutParams();
-		assertNotNull(layoutParams1);
-		assertEquals(layoutParams1.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams1.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view1 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
-		assertEquals("Incorrect label of the button", "Claimant", view1.getText());
-		
-		//test "Change User" button layout
-		ViewAsserts.assertOnScreen(decorView, ClaimantButton);
-
-		final ViewGroup.LayoutParams layoutParams2 =
-				UserButton.getLayoutParams();
-		assertNotNull(layoutParams1);
-		assertEquals(layoutParams1.width, WindowManager.LayoutParams.WRAP_CONTENT);
-		assertEquals(layoutParams1.height, WindowManager.LayoutParams.WRAP_CONTENT);
-   
-		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
-		assertEquals("Incorrect label of the button", "Change User", view2.getText());
-
-		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
-		
 		//User click "Change User"
 		activity.runOnUiThread(new Runnable(){
 
@@ -130,11 +76,6 @@ public class US10_03_01_Test extends
 				
 				// click button to start another activity
 				assertTrue(UserButton.performClick());	
-				
-				//test opening a dialog
-		    	// access the alert dialog using the getDialog() method created in the activity
-				AlertDialog d = (AlertDialog) activity.getDialog();
-				
 			}	
 		});
 
@@ -143,7 +84,6 @@ public class US10_03_01_Test extends
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				
 
 				// click button and open next activity.
 				button.performClick();
@@ -187,7 +127,7 @@ public class US10_03_01_Test extends
 				// getInstrumentation().sendKeyDownUpSync(KeyEvent.KEYCODE_MENU);
 				getInstrumentation().invokeMenuActionSync(nextActivity,
 						ca.ualberta.CMPUT301W15T06.R.id.show_home_location, 1);
-				ShowLocationActivity aaa = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+				ShowLocationActivity aaa = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
 				assertNotNull(aaa);
 
 				ImageView image=(ImageView)aaa.findViewById(ca.ualberta.CMPUT301W15T06.R.drawable.worldmap);
@@ -198,7 +138,7 @@ public class US10_03_01_Test extends
 				
 				getInstrumentation().invokeMenuActionSync(nextActivity,
 						ca.ualberta.CMPUT301W15T06.R.id.set_home_location, 1);
-				ShowLocationActivity qqq = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+				ShowLocationActivity qqq = (ShowLocationActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
 				assertNotNull(qqq);
 
 				ImageView ii=(ImageView)aaa.findViewById(ca.ualberta.CMPUT301W15T06.R.drawable.worldmap);

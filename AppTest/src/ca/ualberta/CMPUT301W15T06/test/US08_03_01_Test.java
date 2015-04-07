@@ -107,8 +107,11 @@ public class US08_03_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 		/*
 		 * Test for US 08.03.01 Basic Flow 3
 		 */
+		// get submitted claim list view
 		final ListView al =  (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
+		// get decorview
 		final View decorView1 = nextActivity.getWindow().getDecorView();
+		// check if list is shown on screen
 		ViewAsserts.assertOnScreen(decorView1, al);
 		
 		/*
@@ -125,12 +128,14 @@ public class US08_03_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				 */
 				ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ApproverClaimListActivity.class.getName(), null, false);
 				ApproverClaimListActivity nActivity = (ApproverClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+				// get dialogue
 				View d = nActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.array.claim_dialog_array);
 				assertNotNull(d);
 				
 				/*
 				 * Test for US 08.03.01 Basic Flow 6
 				 */
+				// click option
 				d.performClick();
 
 				/*
