@@ -51,7 +51,7 @@ public class US05_01_01_Test extends
 		intent = new Intent(getInstrumentation().getTargetContext(),MainActivity.class);
 	}
  
-	public void testUS010301() {
+	public void testUS050101() {
 
 		// test button layouts
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));

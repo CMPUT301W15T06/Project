@@ -71,10 +71,6 @@ public class US04_08_01_Test extends
 
 	public void test040801() {
 
-
-		/*
-		 * Test for US04.08.01 Basic Flow 1
-		 */
 		// test button exists
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton));
 		assertNotNull(activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverButton));
@@ -117,81 +113,28 @@ public class US04_08_01_Test extends
    
 		Button view2 = (Button) activity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.userButton);
 		assertEquals("Incorrect label of the button", "Change User", view2.getText());
-
-		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(MainActivity.class.getName(), null, false);
-		
-		//User click "Change User"
-		activity.runOnUiThread(new Runnable(){
-
-			@Override
-			public void run() {
-				
-
-				/*
-				* Test for US 04.08.01 Basic Flow 2
-				*/
-				// click button to start another activity
-				assertTrue(UserButton.performClick());	
-				
-				/*
-				 * Test for US 04.08.01 Basic Flow 3
-				 */
-				//test opening a dialog
-		    	// access the alert dialog using the getDialog() method created in the activity
-				AlertDialog d = (AlertDialog) activity.getDialog();
-
-				// check layout
-		    	assertTrue(d.isShowing());
-		    	
-		    	Button p = d.getButton(AlertDialog.BUTTON_POSITIVE);
-		    	Button n = d.getButton(AlertDialog.BUTTON_NEGATIVE);
-		    	
-		    	final View decorView = activity.getWindow().getDecorView();
-				ViewAsserts.assertOnScreen(decorView, p);
-				ViewAsserts.assertOnScreen(decorView, n);
-				
-				/*
-				 * Test for US 04.08.01 Basic Flow 4 
-				 */
-				// set text
-				EditText et = activity.getInputField();
-				assertNotNull(et);
-				
-				et.setText("NewUser");
-				
-				assertTrue(p.performClick());
-
-				
-			}	
-		});
-
 		
 		/*
-		 * Test for US 04.08.01 Basic Flow 5
+		 * Test for US04.08.01 Basic Flow 1
 		 */
 		// get current activity			
 		MainActivity myActivity = getActivity();
-		
-		/*
-		 * Test for US 04.08.01 Basic Flow 6
-		 */
-		final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
+
+		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
+
+		final Button cbutton = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		myActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-
 				// click button and open next activity.
-				button.performClick();
-			}
-		});
-
-		// start next activity
-		final ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+				cbutton.performClick();
+				}
+			});
+		ClaimantClaimListActivity nextActivity = (ClaimantClaimListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
 		// next activity is opened and captured.
 		assertNotNull(nextActivity);
-		
 		/*
-		 * Test for US 04.08_01 Basic Flow 7
+		 * Test for US 04.08_01 Basic Flow 2
 		 */
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();
@@ -208,32 +151,32 @@ public class US04_08_01_Test extends
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
 		
 		/*
-		 * Test for US 04.08_01 Basic Flow 8
+		 * Test for US 04.08_01 Basic Flow 3
 		 */
 		
 		//get next activity
+		ActivityMonitor amam = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				
 				// click the list open next activity.
-				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
-				claimList.getChildAt(0).performClick();
-				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
-				assertNotNull(thirdActivity);
-				
-				/*
-				 * Test for US 04.08_01 Basic Flow 9
-				 */
-				final View decorView2 = nextActivity.getWindow().getDecorView();
-				ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
-				// check if it is on screen
-				ViewAsserts.assertOnScreen(decorView2, ilv);
-				
-				thirdActivity.finish();
-				
+				claimList.performItemClick(claimList, 0, 0);
 			}
 		});
+		ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(amam, 10000);
+		assertNotNull(thirdActivity);
+				
+		/*
+		 * Test for US 04.08_01 Basic Flow 4
+		 */
+		final View decorView2 = nextActivity.getWindow().getDecorView();
+		ListView ilv = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.itemListView);
+		// check if it is on screen
+		ViewAsserts.assertOnScreen(decorView2, ilv);
+				
+		thirdActivity.finish();
+				
+
 		nextActivity.finish();
 		activity.finish();
 	}

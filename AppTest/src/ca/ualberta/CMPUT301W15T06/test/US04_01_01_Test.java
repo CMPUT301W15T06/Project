@@ -157,6 +157,7 @@ public class US04_01_01_Test<Final> extends
 
 		//Claim claim = new Claim();
 		//int count_before = claim.getItemList().size();
+		ActivityMonitor amma = getInstrumentation().addMonitor(ClaimantEditItemActivity.class.getName(), null, false);
 		final Button ai = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addItemButton);
 		//test button activity
 		thirdActivity.runOnUiThread(new Runnable() {
@@ -165,7 +166,7 @@ public class US04_01_01_Test<Final> extends
 				ai.performClick();	
 				}
 			});
-		ClaimantEditItemActivity forthActivity = (ClaimantEditItemActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
+		ClaimantEditItemActivity forthActivity = (ClaimantEditItemActivity) getInstrumentation().waitForMonitorWithTimeout(amma, 10000);
 		assertNotNull(forthActivity);
 					
 	
@@ -220,16 +221,13 @@ public class US04_01_01_Test<Final> extends
 		final String date1 = "2014-01-01";
 		final String des1 = "b";
 		final int amount1 = 111;
-		da.setText(date1);
-		de.setText(des1);
-		am1.setText(amount1);
+
 
 		forthActivity.finish();	
+		thirdActivity.finish();
+		nextActivity.finish();
+		activity.finish();
 
-				
-		/*
-		 * Test for US 04.01.01 Basic Flow 7
-		 */
 
 	}
 }
