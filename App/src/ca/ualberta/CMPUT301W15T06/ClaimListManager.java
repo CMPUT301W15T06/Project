@@ -49,8 +49,12 @@ import com.google.gson.reflect.TypeToken;
  * @see java.io.InputStreamReader
  * @see java.io.OutputStreamWriter
  * @see java.lang.reflect.Type
+ * @see java.util.ArrayList
+ * @see java.util.Date
  * @see android.content.Context
+ * @see android.util.Log
  * @see com.google.gson.Gson
+ * @see com.google.gson.GsonBuilder
  * @see com.google.gson.JsonIOException
  * @see com.google.gson.reflect.TypeToken
  */
@@ -71,16 +75,19 @@ public class ClaimListManager {
 	 * @see android.content.Context
 	 */
 	private Context context=null;
+	/**
+	 *  Set a Gson object which is a Java library that can be used to convert Java Objects into their JSON representation
+	 */
 	private Gson gson;
 	
-//	
-//	/**
-//	 * General construction. Set a Context context as the context that user
-//	 * entered.
-//	 * 
-//	 * @param context  a Context object
-//	 * @see android.content.Context
-//	 */
+	
+	/**
+	 * General construction. Set a Context context as the context that user ntered using Gson Adapter.
+	 * 
+	 * @param context  a Context object
+	 * @see android.content.Context
+	 * @see com.google.gson.Gson
+	 */
 	private ClaimListManager(Context context){
 		this.context=context;
 		gson = new GsonBuilder()
@@ -121,6 +128,7 @@ public class ClaimListManager {
 	 * This method will load the ClamList and return it for further
 	 * use or display. It also checks exceptions to prevent crush.
 	 * 
+	 * @param name  a String that is the full name of the user.
 	 * @exception FileNotFoundException
 	 * @exception IOException
 	 * @throws RuntimeException
@@ -131,7 +139,7 @@ public class ClaimListManager {
 	 * @see java.io.IOException
 	 * @see java.io.InputStreamReader
 	 * @see java.io.OutputStreamWriter
-	 * @return cl  a User object
+	 * @return the user that is currenly using the application
 	 */
 	public User load(String name){
 		
@@ -208,6 +216,11 @@ public class ClaimListManager {
 	
 	}
 
+	/**
+	 * This method will push the changes online and save it remotely.
+	 * 
+	 * @param uesr  the user that is currenly using the application
+	 */
 	private void pushOL(User user) {
 		// TODO Auto-generated method stub
 		 try {
@@ -228,6 +241,14 @@ public class ClaimListManager {
         }
 	}
 
+	/**
+	 * This method will save the changes of the program locally. Throws exception if it is necessary.
+	 * 
+	 * @param user  the user that is currenly using the application
+	 * @throws FileNotFoundException
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
 	public void saveLocal(User user){		
 		try {
 			FileOutputStream fos = context.openFileOutput(USER_FILE+user.getUserName(), 0);
@@ -244,7 +265,11 @@ public class ClaimListManager {
 		}
 	}
 	
-	
+	/**
+	 * This method will save a list of users who are using the application.
+	 * 
+	 * @param user  the user that is using the application
+	 */
 	private void saveUserList(final User user) {
 		Thread thread = new Thread(new Runnable(){
 		    @Override
@@ -255,6 +280,11 @@ public class ClaimListManager {
 		thread.start();		
 	}
 
+	/**
+	 * Set a online copy of the list of user who are using the application.
+	 * 
+	 * @param user  the user that is using the application
+	 */
 	private void usrlistOL(User user) {
 		// TODO Auto-generated method stub
 		try {
@@ -272,6 +302,13 @@ public class ClaimListManager {
 		}
 	}
 
+	/**
+	 * Load the list of user from online to local. Throw error exceptions if necessary.
+	 * 
+	 * @return the list of users who are using the application
+	 * @see FileNotFoundException
+	 * @see IOException
+	 */
 	public UserList loadUserList(){		
 		UserList userList=null;
 		try {
@@ -290,6 +327,9 @@ public class ClaimListManager {
 		
 	}
 	
+	/**
+	 * This method will syncs the data between online and local. 
+	 */
 	private void syn() {
 		// TODO Auto-generated method stub
 		for (String name:AppSingleton.getInstance().getUserList().getUserList()){
@@ -299,7 +339,12 @@ public class ClaimListManager {
 			}
 		}
 	}
-
+	
+	/**
+	 * This method will create a new thread for syncs purpose. 
+	 * 
+	 * @param user  the user that is using the application
+	 */
 	private void threadRunSyn(final User user) {
 		// TODO Auto-generated method stub
 		Thread thread = new Thread(new Runnable(){
@@ -316,6 +361,9 @@ public class ClaimListManager {
 		thread.start();
 	}
 
+	/**
+	 * Save all the users to a ArrayList and syncs it by calling <code>setNeedSynSimple()</code>
+	 */
 	public void saveUsers(ArrayList<User> ul) {
 		// TODO Auto-generated method stub
 		for(User user:ul){
@@ -324,6 +372,14 @@ public class ClaimListManager {
 		}
 	}
 
+	/**
+	 * Save the list of user locally by calling <code>AppSingleton</code> class. Throw error exceptions if necessary.
+	 * 
+	 * @see com.google.gson.Gson
+	 * @throws FileNotFoundException
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
 	public void saveUserListLocal() {
 		// TODO Auto-generated method stub
 		
@@ -343,6 +399,12 @@ public class ClaimListManager {
 		}
 	}
 
+	/**
+	 * Save the approving status by creating a new thread. Throw error exceptions if necessary.
+	 * 
+	 * @throws InterruptedException
+	 * @throws RuntimeException
+	 */
 	public void approverSave() {
 		// TODO Auto-generated method stub
 		Thread thread = new Thread(new Runnable(){
