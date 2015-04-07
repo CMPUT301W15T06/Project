@@ -57,17 +57,48 @@ import android.widget.Toast;
  * the <code>Receipt</code>.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
+ * @see java.io.File
+ * @see import java.io.FileNotFoundException
+ * @see import java.io.IOException
+ * @see android.net.Uri
  * @see android.os.Bundle
  * @see android.app.Activity
+ * @see android.os.Environment
+ * @see android.provider.MediaStore
+ * @see android.content.Intent
+ * @see android.graphics.Bitmap
+ * @see android.graphics.BitmapFactory
+ * @see android.graphics.drawable.BitmapDrawable
+ * @see android.graphics.drawable.Drawable
  * @see android.view.Menu
+ * @see android.view.MenuItem
+ * @see android.widget.ImageButton
+ * @see android.widget.ImageView
+ * @see android.widget.TextView
+ * @see android.widget.Toast
  */
 public class ClaimantReceiptActivity extends Activity {
-
+	
+	/**
+	 * Set an unchangeable integer variable ADD_PHOTO_RQ to 22.
+	 */
 	private static final int ADD_PHOTO_RQ = 22;
+	/**
+	 * Set an Uri object imageFileUri to add and remove a photo by their uri address
+	 */
 	private Uri imageFileUri;
+	/**
+	 * Set a ClaimantReceiptController object crc (the controller of this class) to a default value null.
+	 */
 	private ClaimantReceiptController crc=null;
+	/**
+	 * Set a Receipt object receipt (an image) with default value null.
+	 */
 	private Receipt receipt=null;
+	/**
+	 * a ImageView imageView to displays an arbitrary image, such as an icon. The default value is set to null.
+	 */
 	private ImageView imageView=null;
 	
 	@Override
@@ -111,6 +142,11 @@ public class ClaimantReceiptActivity extends Activity {
 	}
 	
 	//https://eclass.srv.ualberta.ca/mod/resource/view.php?id=1314790 Author:Unknow
+	/**
+	 * This method allows user to add a receipt photo by their uri address.
+	 * 
+	 * @param m  Interface for direct access to a previously created menu item
+	 */
 	public void addPhoto(MenuItem m) {
 		if(!AppSingleton.getInstance().isEditable()){
 			Toast.makeText(getApplicationContext(), "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();
@@ -132,7 +168,13 @@ public class ClaimantReceiptActivity extends Activity {
 		}
         
     }
-	
+	/**
+	 * This method allows user to delete a receipt photo by their uri address.
+	 * 
+	 * @param m  Interface for direct access to a previously created menu item
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 */
 	public void deletePhoto(MenuItem m){
 		try {
 			crc.deletePhoto();
@@ -147,6 +189,14 @@ public class ClaimantReceiptActivity extends Activity {
 	}
 	
 	//https://eclass.srv.ualberta.ca/mod/resource/view.php?id=1314790 Author:Unknow
+	/**
+	 * This method will check if the photo taken successfully. Check for warnings to prevent crush.
+	 * 
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ADD_PHOTO_RQ) {
             if (resultCode == RESULT_OK) {       
