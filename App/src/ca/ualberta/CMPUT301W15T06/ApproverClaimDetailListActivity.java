@@ -51,13 +51,16 @@ import android.widget.AdapterView.OnItemClickListener;
 * <code>Claim</code> detail. 
 * 
 * @author CMPUT301W15T06
-* @version 03/16/2015
+* @version 04/07/2015
 * @see android.os.Bundle
 * @see android.app.Activity
 * @see android.view.Menu
 */
 public class ApproverClaimDetailListActivity extends Activity {
 
+	/**
+	 * Set a <code>Claim</code> object claim which contains all the detail of a claim.
+	 */
 	private Claim claim;
 
 	@Override
@@ -94,7 +97,9 @@ public class ApproverClaimDetailListActivity extends Activity {
 		
 	}
 
-	
+	/**
+	 * This method will display the location of the destination in the claim.
+	 */
 	public void showLocation(){
 		if(AppSingleton.getInstance().getCurrentDestination().getLocation()==null){
 			Toast.makeText( ApproverClaimDetailListActivity.this, "This destination doesn't have geolocation!", Toast.LENGTH_LONG).show();		
