@@ -39,7 +39,7 @@ public class ClaimantItemListController {
 	 * General construction. Set up the claim of the ClaimantItemListController 
 	 * with an existing claim.
 	 * 
-	 * @param currentItem  an Item object
+	 * @param claim  an Claim object
 	 */
 	public ClaimantItemListController(Claim claim) {
 		// TODO Auto-generated constructor stub

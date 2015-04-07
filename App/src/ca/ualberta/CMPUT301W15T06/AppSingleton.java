@@ -508,7 +508,7 @@ public class AppSingleton {
 	/**
 	 * This method will set up a location for the destination in the claim.
 	 * 
-	 * @return the location of a destination within a claim
+	 * @param location the location of a destination within a claim
 	 */
 	public void setLocation(Location location) {
 		this.location = location;

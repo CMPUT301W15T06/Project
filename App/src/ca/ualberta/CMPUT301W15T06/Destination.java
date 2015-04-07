@@ -53,8 +53,6 @@ public class Destination extends AppModel{
 	/**
 	 * General constructor. This public method sets up a 
 	 * Destination object with name.
-	 * 
-	 * @param name  a String variable
 	 */
 	public Destination(){
 		super();

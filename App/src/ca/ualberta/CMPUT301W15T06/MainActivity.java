@@ -53,7 +53,7 @@ import android.widget.Toast;
  * claimant.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  * @see android.os.Bundle
  * @see android.app.Activity
  * @see android.content.Intent
@@ -104,6 +104,9 @@ public class MainActivity extends Activity {
 		userName.setText(user.getUserName());
 	}
 
+	/**
+	 * This method will load a new thread to the application.
+	 */
 	private void threadLoad() {
 		// TODO Auto-generated method stub
 		AppSingleton.getInstance().setUserList();
@@ -124,7 +127,11 @@ public class MainActivity extends Activity {
 	}
 	
 	
-	
+	/**
+	 * This method will be used when there's a need to change user of the application.
+	 * 
+	 * @param v  the basic building block for user interface components
+	 */
 	public void changeUser(View v){
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -159,7 +166,7 @@ public class MainActivity extends Activity {
 	 * This method will allows user to start and enter the application
 	 * as a claimant.
 	 * 
-	 * @param v  a View object
+	 * @param v  the basic building block for user interface components
 	 * @see android.view.View
 	 * @see android.content.Intent
 	 */
@@ -169,7 +176,14 @@ public class MainActivity extends Activity {
 		AppSingleton.getInstance().setcMod(true);
 	}
 	
-	
+	/**
+	 * This method will allows user to start and enter the application
+	 * as a approver.
+	 * 
+	 * @param v  the basic building block for user interface components
+	 * @see android.view.View
+	 * @see android.content.Intent
+	 */
 	public void startApprover(View v){
 		
 		checkInternet();
@@ -185,6 +199,9 @@ public class MainActivity extends Activity {
 
 	}
 
+	/**
+	 * This method will call <code>ESClient</code> to check if the Internet is available.
+	 */
 	private void checkInternet() {
 		// TODO Auto-generated method stub
 		Thread thread = new Thread(new Runnable(){
@@ -209,6 +226,11 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	/**
+	 * This method will return a dialog window for the interface.
+	 * 
+	 * @return a dialog window
+	 */
 	public Dialog getDialog() {
 		return dialog;
 	}
@@ -220,6 +242,11 @@ public class MainActivity extends Activity {
 		this.dialog = dialog;
 	}
 	
+	/**
+	 * This method will return a edit text object for editing text.
+	 * 
+	 * @return the input text
+	 */
 	public EditText getInputField() {
 		return inputET;
 	}
