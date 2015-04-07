@@ -72,7 +72,7 @@ public class ApproverItemListActivity extends Activity {
 	 * Set an unchangeable integer variable PHOTO_RECEIPT to 0.
 	 * Set an unchangeable integer variable LOCATION to 1.
 	 */
-	 */
+
 	private static final int PHOTO_RECEIPT = 0;
 	private static final int LOCATION = 1;
 	/**
