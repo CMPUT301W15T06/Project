@@ -111,9 +111,24 @@ public class US08_06_01_Test extends ActivityInstrumentationTestCase2<MainActivi
 				 * Test for US 08.06.01 Basic Flow 4
 				 */
 				d.performClick();
+				
+				/*
+				 * Test for US 08.06.01 Basic Flow 5
+				 */
 				View decorView1 = nActivity.getWindow().getDecorView();
 				Dialog v = nActivity.getDialog();
 				assertNotNull(v);
+				
+				/*
+				 * Test for US 08.06.01 Basic Flow 6,7
+				 */
+				nActivity.runOnUiThread(new Runnable() {
+
+					@Override
+					public void run() {
+					}
+					
+				});
 				
 			}
 		});
