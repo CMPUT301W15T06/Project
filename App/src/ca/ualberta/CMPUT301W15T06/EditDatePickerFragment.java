@@ -48,7 +48,7 @@ import android.widget.Toast;
  * will be called when user need to enter a date. 
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  * @see java.text.SimpleDateFormat
  * @see java.util.Calendar
  * @see java.util.Date

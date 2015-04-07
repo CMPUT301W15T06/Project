@@ -1,3 +1,20 @@
+/*
+UA CMPUT 301 Project Group: CMPUT301W15T06
+Copyright {2015} {Jingjiao Ni
+              Tianqi Xiao
+              Jiafeng Wu
+              Xinyi Pan 
+              Xinyi Wu
+              Han Wang}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+Unless required by applicable law or agreed to in writing, software distributed under 
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF 
+ANY KIND, either express or implied. See the License for the specific language 
+governing permissions and limitations under the License.
+ */
+
 package ca.ualberta.CMPUT301W15T06;
 
 import java.io.BufferedReader;
@@ -31,6 +48,38 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 //https://github.com/joshua2ua/AndroidElasticSearch Author: Joshua Campbell
+/**
+ * This method is the elastic search of the application. It will use Gson adapter to commplish the search.
+ * 
+ * @author CMPUT301W15T06
+ * @version 04/07/2015
+ * @see java.io.BufferedReader
+ * @see java.io.IOException
+ * @see java.io.InputStream
+ * @see java.io.InputStreamReader
+ * @see java.io.UnsupportedEncodingException
+ * @see java.lang.reflect.Type
+ * @see java.util.ArrayList
+ * @see java.util.List
+ * @see org.apache.http.HttpEntity
+ * @see org.apache.http.HttpResponse
+ * @see org.apache.http.client.ClientProtocolException
+ * @see org.apache.http.client.HttpClient
+ * @see org.apache.http.client.entity.UrlEncodedFormEntity
+ * @see org.apache.http.client.methods.HttpDelete
+ * @see org.apache.http.client.methods.HttpGet
+ * @see org.apache.http.client.methods.HttpPost
+ * @see org.apache.http.entity.StringEntity
+ * @see org.apache.http.impl.client.DefaultHttpClient
+ * @see org.apache.http.util.EntityUtils
+ * @see android.util.Log
+ * @see com.google.gson.Gson
+ * @see com.google.gson.GsonBuilder
+ * @see com.google.gson.JsonIOException
+ * @see com.google.gson.JsonSyntaxException
+ * @see com.google.gson.reflect.TypeToken
+ *
+ */
 public class ESClient {
 	private static final String USER_LIST = "http://cmput301.softwareprocess.es:8080/testing/usrlist/usrlist";
 

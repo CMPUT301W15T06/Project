@@ -41,7 +41,7 @@ import com.google.gson.reflect.TypeToken;
  * By calling this class, the claimList can be loaded and saved.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  * @see java.io.FileInputStream
  * @see java.io.FileNotFoundException
  * @see java.io.FileOutputStream

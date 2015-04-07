@@ -37,7 +37,7 @@ import android.location.Location;
  * description and amount), call <code>receipt</code> class to create a receipt.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  * @see java.util.Date
  */
 public class Item extends AppModel{
@@ -78,9 +78,16 @@ public class Item extends AppModel{
 	 * The initial default value is false.
 	 */
 	protected boolean flag=false;
+	/**
+	 * Set a Location variable location to the item.
+	 */
 	protected Location location;
 	
 
+	/**
+	 * General constructor. Set initial receipt, date, category, currency, description and 
+	 * location of the item.
+	 */
 	public Item() {
 		super();
 		receipt=new ModifiableReceipt();;
@@ -94,6 +101,12 @@ public class Item extends AppModel{
 		location=null;
 	}
 	
+	/**
+	 * Change the receipt, date, category, currency, description and 
+	 * location of the item by allowing user to input values.
+	 * 
+	 * @param item  an item object contain all the information of the expenses item
+	 */
 	public Item(Item item) {
 		// TODO Auto-generated constructor stub
 		super(item);
@@ -111,7 +124,7 @@ public class Item extends AppModel{
 	 * Return the Date object date. This method will be used when other 
 	 * class need to use or display the date of <code>Item</code> expenses. 
 	 * 
-	 * @return date  a Date object
+	 * @return date  a Date object indicate the date of the expense item (like "15-Mar-2015")
 	 * @see java.util.Date
 	 */
 	public Date getDate() {
@@ -122,7 +135,7 @@ public class Item extends AppModel{
 	 * Return the String variable category. This method will be used when other 
 	 * class need to use or display the category of <code>Item</code> expenses. 
 	 * 
-	 * @return category  a String variable
+	 * @return category  a String variable indicate the category of the expense item (like "air fare")
 	 */
 	public String getCategory() {
 		return category;
@@ -132,7 +145,7 @@ public class Item extends AppModel{
 	 * Return the String variable description. This method will be used when other 
 	 * class need to use or display the description of <code>Item</code> expenses. 
 	 * 
-	 * @return description  a String variable
+	 * @return description  a String variable indicate the description of the expense item (like "office use")
 	 */
 	public String getDescription() {
 		return description;
@@ -142,7 +155,7 @@ public class Item extends AppModel{
 	 * Return the Double variable amount. This method will be used when other 
 	 * class need to use or display the amount of <code>Item</code> expenses. 
 	 * 
-	 * @return amount  a Double variable
+	 * @return amount  a Double variable indicate the amount of the expense item (like "150.23")
 	 */
 	public Double getAmount() {
 		return amount;
@@ -153,7 +166,7 @@ public class Item extends AppModel{
 	 * class need to use or display the currency of <code>Item</code> 
 	 * expenses amount.
 	 * 
-	 * @return currency  a String variable
+	 * @return currency  a String variable indicate the currency of the expense item (like "CAD")
 	 */
 	public String getCurrency() {
 		return currency;
@@ -163,7 +176,7 @@ public class Item extends AppModel{
 	 * Return the boolean variable flag. This method will be used when other 
 	 * class need to use or display the flag of <code>Item</code> expenses.
 	 * 
-	 * @return b  a boolean variable
+	 * @return b  a boolean variable ("True" or "False")
 	 */
 	public boolean getFlag() {
 		return flag;
@@ -189,14 +202,16 @@ public class Item extends AppModel{
 	 * will be used when other class need to use or display the receipt of 
 	 * <code>Item</code> expenses.
 	 * 
-	 * @return null  a Receipt object
+	 * @return null  a Receipt object which is a image of the expense item 
 	 */
 	public Receipt getRecipt() {
 		return receipt;
 	}
 	
 	/**
+	 * This method allows the program to add a listener to the listers to watch the changes of the item for the receipt.
 	 * 
+	 * @param l  a Listener object that will update all the changes of the program
 	 */
 	public void addListener(Listener l){
 		if (!getListeners().contains(l)){
@@ -206,6 +221,11 @@ public class Item extends AppModel{
 		receipt.addListener(l);
 	}
 	
+	/**
+	 * This method allows the program to add a modelListeners to the listers to watch the changes of the item for the receipt.
+	 * 
+	 * @param l  a Listener object that will update all the changes of the program
+	 */
 	public void addModelListener(Listener l){
 		if (!getModelListeners().contains(l)){
 			getModelListeners().add(l);
@@ -233,32 +253,84 @@ public class Item extends AppModel{
 			
 		return result;	
 	}
+	
+	/**
+	 * Return the Location object location. This method will be used when 
+	 * other class need to use or display the reason. 
+	 * 
+	 * @return location  the location of the item (like "Edmonton")
+	 */
 	public Location getLocation() {
 		return location;
 	}
 	
+	/**
+	 * Set a new location of the item. Check for warnings to prevent crush.
+	 * 
+	 * @param location  the location of the item (like "Edmonton")
+	 * @throws NetWorkException
+	 * @throws StatusException
+	 */
 	public void setLocation(Location location) throws NetWorkException, StatusException {
 	}
 	
+	/**
+	 * Set a new date of the item. Check for warnings to prevent crush.
+	 * 
+	 * @param itemDate  a Date object indicate the date of the expense item (like "15-Mar-2015")
+	 * @throws NetWorkException
+	 * @throws StatusException
+	 */
 	public void setDate(Date itemDate) throws StatusException, NetWorkException {
 	}
 
-
+	/**
+	 * Set a new category of the item. Check for warnings to prevent crush.
+	 * 
+	 * @param category  a String variable indicate the category of the expense item (like "air fare")
+	 * @throws NetWorkException
+	 * @throws StatusException
+	 */
 	public  void setCategory(String category) throws StatusException, NetWorkException {
 	}
 
-
+	/**
+	 * Set a new description of the item. Check for warnings to prevent crush.
+	 * 
+	 * @param description  a String variable indicate the description of the expense item (like "office use")
+	 * @throws NetWorkException
+	 * @throws StatusException
+	 */
 	public  void setDescription(String description) throws StatusException, NetWorkException {
 	}
 
-
+	/**
+	 * Set a new amount of the item. Check for warnings to prevent crush.
+	 * 
+	 * @param amount  a Double variable indicate the amount of the expense item (like "150.23")
+	 * @throws NetWorkException
+	 * @throws StatusException
+	 */
 	public  void setAmount(Double amount) throws StatusException, NetWorkException {
 	}
 
-
+	/**
+	 * Set a new currency of the item. Check for warnings to prevent crush.
+	 * 
+	 * @param currency  a String variable indicate the currency of the expense item (like "CAD")
+	 * @throws NetWorkException
+	 * @throws StatusException
+	 */
 	public  void setCurrency(String currency) throws StatusException, NetWorkException {
 	}
 
+	/**
+	 * Set a new location of the destination. Check for warnings to prevent crush.
+	 * 
+	 * @param b  a boolean variable ("True" or "False")
+	 * @throws NetWorkException
+	 * @throws StatusException
+	 */
 	public  void setFlag(boolean b) throws StatusException, NetWorkException {
 	}
 	

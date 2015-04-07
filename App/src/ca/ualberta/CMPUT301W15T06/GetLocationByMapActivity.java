@@ -1,3 +1,29 @@
+/*
+UA CMPUT 301 Project Group: CMPUT301W15T06
+
+Copyright {2015} {Jingjiao Ni
+
+              Tianqi Xiao
+
+              Jiafeng Wu
+
+              Xinyi Pan 
+
+              Xinyi Wu
+
+              Han Wang}
+Licensed under the Apache License, Version 2.0 (the "License");
+
+you may not use this file except in compliance with the License.
+
+You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+Unless required by applicable law or agreed to in writing, software distributed under 
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF 
+ANY KIND, either express or implied. See the License for the specific language 
+governing permissions and limitations under the License.
+
+ */
+
 package ca.ualberta.CMPUT301W15T06;
 
 import android.location.Location;
@@ -20,6 +46,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * The <code>Destination</code> class is an sub-class of <code>AppModel</code>.
+ * This class can set up a <code>Destination</code> with a name and a reason. 
+ * This method will be called when users need to add a <code>Destination</code>,
+ * edit a <code>Destination</code> or access to <code>Destination</code> detail.
+ * 
+ * @author CMPUT301W15T06
+ * @version 004/07/2015
+ */
 public class GetLocationByMapActivity extends Activity {
 
 	private int width;
@@ -99,6 +134,12 @@ public class GetLocationByMapActivity extends Activity {
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, listener);
 	}
 
+	/**
+	 * Set the x axis of the map
+	 * 
+	 * @param x  a float which used as x axis number of map
+	 * @return x axis of the map
+	 */
 	private double transYToLoc(float x) {
 		// TODO Auto-generated method stub
 		double y= ((((height/2)-x)/(height/2))*Math.PI);
@@ -106,6 +147,12 @@ public class GetLocationByMapActivity extends Activity {
 		return (((((Math.atan(Math.pow(Math.E, y)))/Math.PI)*180)-45)*2);
 	}
 	
+	/**
+	 * Set the y axis of the map
+	 * 
+	 * @param y  a float which used as y axis number of map
+	 * @return y axis of the map
+	 */
 	private double transXToLoc(float x) {
 		// TODO Auto-generated method stub
 		return (((width/2)-x)/(width/2))*180;
@@ -116,6 +163,10 @@ public class GetLocationByMapActivity extends Activity {
 		return false;
 	}
 	
+	/**
+	 * This method will notify all the Listener in both listeners and modelListener about adding a new location. If can not 
+	 * process successfully, a warning message will print on the screen.
+	 */
 	private final LocationListener listener = new LocationListener() {
 		public void onLocationChanged (Location location) {
 

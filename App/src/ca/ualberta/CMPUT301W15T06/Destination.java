@@ -35,7 +35,7 @@ import android.location.Location;
  * edit a <code>Destination</code> or access to <code>Destination</code> detail.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  */
 public class Destination extends AppModel{
 	
@@ -51,7 +51,7 @@ public class Destination extends AppModel{
 	
 	protected Location location;
 	/**
-	 * General construction. This public method sets up a 
+	 * General constructor. This public method sets up a 
 	 * Destination object with name.
 	 * 
 	 * @param name  a String variable
@@ -63,6 +63,12 @@ public class Destination extends AppModel{
 		location=null;
 	}
 	
+	/**
+	 * This method will call <code>getName()</code>, <code>getReason()</code>, 
+	 * and <code>getLocation()</code> to complete the destination information.
+	 * 
+	 * @param dest  the Destination object which contains the name, reason and location of a certain travel destination
+	 */
 	public Destination(Destination dest) {
 		// TODO Auto-generated constructor stub
 		super(dest);
@@ -76,7 +82,7 @@ public class Destination extends AppModel{
 	 * Return the string variable name. This method will be used when 
 	 * other class need to use or display the name. 
 	 * 
-	 * @return name  a String variable
+	 * @return name  the name of the destination (like "Trip1")
 	 */
 	public String getName(){		
 		return name;
@@ -86,7 +92,7 @@ public class Destination extends AppModel{
 	 * Return the string variable reason. This method will be used when 
 	 * other class need to use or display the reason. 
 	 * 
-	 * @return reason  a String variable
+	 * @return reason  the reason of the destination (like "Business")
 	 */
 	public String getReason(){		
 		return reason;
@@ -96,12 +102,22 @@ public class Destination extends AppModel{
 	 * This method will combine the name and the reason of the destination to
 	 * one big String.
 	 * 
-	 * @return ""  a String variable
+	 * @return a conversion to string for display
 	 */
 	public String toString(){
 		return name+'\n'+reason;
 	}
-
+	
+	/**
+	 * Return the Location object location. This method will be used when 
+	 * other class need to use or display the reason. 
+	 * 
+	 * @return location  the location of the destination (like "Edmonton")
+	 */
+	public Location getLocation() {
+		return location;
+	}
+	
 	@Override
 	public boolean getMissValue() {
 		// TODO Auto-generated method stub
@@ -111,18 +127,33 @@ public class Destination extends AppModel{
 		return false;
 	}
 
-	
+	/**
+	 * Set a new name of the destination. Check for warnings to prevent crush.
+	 * 
+	 * @param name  the name of the destination (like "Trip1")
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 */
 	public void setName(String name) throws StatusException, NetWorkException {
 	}
 
-
+	/**
+	 * Set a new reason of the destination. Check for warnings to prevent crush.
+	 * 
+	 * @param reason  the reason of the destination (like "Business")
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 */
 	public void setReason(String reason) throws StatusException, NetWorkException {
 	}
 
-	public Location getLocation() {
-		return location;
-	}
-	
+	/**
+	 * Set a new location of the destination. Check for warnings to prevent crush.
+	 * 
+	 * @param location  the location of the destination (like "Edmonton")
+	 * @throws NetWorkException
+	 * @throws StatusException
+	 */
 	public void setLocation(Location location) throws NetWorkException, StatusException {
 	}
 }
