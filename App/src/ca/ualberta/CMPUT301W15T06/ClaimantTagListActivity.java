@@ -54,18 +54,40 @@ import android.widget.ListView;
  * the <code>TagList</code>.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  * @see android.os.Bundle
  * @see android.app.Activity
  * @see android.view.Menu
+ * @see android.app.AlertDialog
+ * @see android.app.Dialog
+ * @see android.app.AlertDialog.Builder
+ * @see android.content.DialogInterface
+ * @see android.text.InputType
+ * @see android.text.method.DigitsKeyListener
+ * @see android.view.View
+ * @see android.view.View.OnClickListener
+ * @see android.widget.AdapterView
+ * @see android.widget.AdapterView.OnItemClickListener
+ * @see android.widget.ArrayAdapter
+ * @see android.widget.EditText
+ * @see android.widget.ListView
  */
 public class ClaimantTagListActivity extends Activity {
-
+	/**
+	 * Set a Dialog object dialog as the dialog window.
+	 */
 	private Dialog dialog;
-	
+	/**
+	 * Set an unchangeable integer variable DELETE to 1.
+	 * Set an unchangeable integer variable EDIT to 0.
+	 */
 	private static final int DELETE = 1;
 	private static final int EDIT = 0;
+	/**
+	 * Set a ClaimantTagListController (the controller of this class) ctlc with default value null.
+	 */
 	private ClaimantTagListController ctlc=null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -104,6 +126,13 @@ public class ClaimantTagListActivity extends Activity {
 		});
 	}
 
+	/**
+	 * This method will set tag to the item. Catch exceptions to prevent program crushing.
+	 * 
+	 * @param builder  a Builder object
+	 * @param list  an ArrayList that contains all the tags.
+	 * @param position  the position index in the tag list.
+	 */
 	private void setItem(Builder builder, final ArrayList<Tag> list, final int position) {
 		// TODO Auto-generated method stub
 		builder.setItems(R.array.tag_dialog_array, new DialogInterface.OnClickListener() {
@@ -126,6 +155,12 @@ public class ClaimantTagListActivity extends Activity {
 	});
 	}
 
+	/**
+	 * This method will edit tag in the item. Catch exceptions to prevent program crushing.
+	 * 
+	 * @param list  an ArrayList that contains all the tags.
+	 * @param position  the position index in the tag list.
+	 */
 	private void edit(final ArrayList<Tag> list, final int position) {
 		// TODO Auto-generated method stub
 		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantTagListActivity.this);
@@ -164,7 +199,13 @@ public class ClaimantTagListActivity extends Activity {
 		return false;
 	}
 
-	
+	/**
+	 * This method will add tag in the item. Catch exceptions to prevent program crushing.
+	 * 
+	 * @param v  the basic building block for user interface components
+	 * @throws NetWorkException
+	 * @throws RuntimeException
+	 */
 	public void addTag(View v){
 		EditText addView=(EditText)findViewById(R.id.addTagEditText);
 		try {
@@ -176,6 +217,9 @@ public class ClaimantTagListActivity extends Activity {
 		addView.setText("");
 	}
 	
+	/**
+	 * This method will set a dialog window to the interface.
+	 */
 	public Dialog getDialog() {
 		return dialog;
 	}
