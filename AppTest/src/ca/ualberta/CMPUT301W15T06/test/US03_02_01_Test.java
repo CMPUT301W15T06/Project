@@ -70,10 +70,6 @@ public class US03_02_01_Test extends
 	}
 
 
-	/*
-	* Test for US03.02.01 Basic Flow 1
-	*/
-	// test button exists
 	public void test030201() {
 		// get current activity			
 		MainActivity myActivity = getActivity();
@@ -118,7 +114,7 @@ public class US03_02_01_Test extends
 		// open tag list page
 		ClaimantTagListActivity thirdActivity = (ClaimantTagListActivity) getInstrumentation().waitForMonitorWithTimeout(am,10000);
 		assertNotNull(thirdActivity);
-		thirdActivity.finish();
+		
 		
 		// layout of tag list
 		final ListView clv = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
@@ -132,11 +128,11 @@ public class US03_02_01_Test extends
 		assertEquals(lp.height, WindowManager.LayoutParams.WRAP_CONTENT);
 
 		/*
-		 * Test for US03.02.01 Basic Flow 5
+		 * Test for US03.02.01 Basic Flow 6
 		 */	
 				
 		/*
-		 *  5a: test "add" button layout
+		 *  6a: test "add" button layout
 		 */
 		final Button add = (Button) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.addTagButton);
 		assertNotNull(add);
@@ -169,7 +165,7 @@ public class US03_02_01_Test extends
 				});	
 
 		/*
-		 * 5b: test rename function
+		 * 6b: test rename function
 		 */
 		//click item on item list
 		thirdActivity.runOnUiThread(new Runnable() {
@@ -188,7 +184,7 @@ public class US03_02_01_Test extends
 		assertNotNull(thirdActivity);
 				
 		/*
-		 * 5c: test delete function
+		 * 6c: test delete function
 		 */
 		thirdActivity.runOnUiThread(new Runnable() {
 			//test add button works
@@ -203,8 +199,13 @@ public class US03_02_01_Test extends
 			assertEquals(count_before,count_d-1);					
 			}
 		});
-			
+		
+		/*
+		 * Test for US03.02.01 Basic Flow 7
+		 */	
 		//finish activity
+		ListView ls = (ListView) thirdActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.tagListView);
+		assertNotNull(ls);
 		thirdActivity.finish();
 		nextActivity.finish();
 

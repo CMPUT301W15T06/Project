@@ -65,9 +65,6 @@ public class US02_02_01_Test<Final> extends
 		cclc = new ClaimantClaimListController(u);
 	}
 
-	/*
-	 * Test for US02.02.01 Basic Flow 1
-	 */
 	// test button exists
 	public void test020201() {
 		/*
@@ -122,7 +119,7 @@ public class US02_02_01_Test<Final> extends
 		 });
 
 		/*
-		 * Test for US 02.02.01 Basic Flow 5
+		 * Test for US 02.02.01 Basic Flow 3
 		 */
 		// click "Claimant" button and create next activity
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
@@ -130,9 +127,6 @@ public class US02_02_01_Test<Final> extends
 		MainActivity myActivity = getActivity();
 		final Button button = (Button) myActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimantButton);
 		
-		/*
-		 * Test for US 02.02.01 Basic Flow 6
-		 */
 		myActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -146,7 +140,7 @@ public class US02_02_01_Test<Final> extends
 		assertNotNull(nextActivity);
 
 		/*
-		 * Test for US 02.02.01 Basic Flow 7
+		 * Test for US 02.02.01 Basic Flow 4
 		 */
 		// view which is expected to be present on the screen
 		final View decorView1 = nextActivity.getWindow().getDecorView();
