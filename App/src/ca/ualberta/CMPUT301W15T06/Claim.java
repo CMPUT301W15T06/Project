@@ -46,9 +46,11 @@ import android.location.Location;
  * <p>
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  * @see java.util.ArrayList
  * @see java.util.Date
+ * @see java.util.Calendar
+ * @see android.location.Location
  */
 public class Claim extends AppModel{
 
@@ -58,9 +60,13 @@ public class Claim extends AppModel{
 	 *  @see java.util.Date
 	 */
 	protected Date beginDate;
-	
+	/**
+	 * Set a String variable name to record the name of the claimant
+	 */
 	protected String name;
-	
+	/**
+	 * Set a Date object to record the ending date of the claimed travel
+	 */
 	protected Date endDate;
 	/**
 	 * Set protected String status to track whether the Claim travel status and the default value is "In progress".
@@ -85,7 +91,7 @@ public class Claim extends AppModel{
 	
 
 	/**
-	 * General construction.
+	 * General constructor.
 	 */	
 	public Claim(){
 		super();
@@ -113,10 +119,10 @@ public class Claim extends AppModel{
 	}
 	
 	/**
-	 * This method 
+	 * This method will switch the subclass and re-record all the informations.
 	 * 
-	 * @param oldClaim
-	 * @param status
+	 * @param oldClaim  an old claim with out-of-date information
+	 * @param status  the current status of the claim ("In progress" or "Submitted")
 	 */
 	public Claim(Claim oldClaim,String status) {
 		super(oldClaim);
@@ -252,8 +258,12 @@ public class Claim extends AppModel{
 		return sameReturn()+"Tag(s) : "+tag+'\n'+"Distance to first Destionation:"+"\n    "+colorDistance();
 	}
 
-
-
+	/**
+	 * This method will ask user to set a home location and travel location and return the distance between home and 
+	 * destination for further use or display.
+	 * 
+	 * @return the distance between the home location and first destination in meters (like "1000 meters")
+	 */
 	private String colorDistance() {
 		// TODO Auto-generated method stub
 		if(AppSingleton.getInstance().getCurrentUser().getHomeLocation()==null){
@@ -270,11 +280,20 @@ public class Claim extends AppModel{
 
 	}
 	
+	/**
+	 * This method will return the location of the first travel distination for further use or dispaly.
+	 * 
+	 * @return the first travel destination (like "Calgary")
+	 */
 	private Location getFirstDestLoca() {
 		// TODO Auto-generated method stub
 		return destinationList.get(0).getLocation();
 	}
-	
+	/**
+	 * This method will return a boolean variable to check if there's a first destination.
+	 * 
+	 * @return a boolean variable shows whether or not there is at least one destination in the destination list
+	 */
 	private boolean hasFirstDestLoca() {
 		// TODO Auto-generated method stub
 		if(destinationList.size()==0){
@@ -285,12 +304,22 @@ public class Claim extends AppModel{
 		return true;
 	}
 	
+	/**
+	 * Return the Claim in string type for further use or display
+	 * 
+	 * @return a string of claim information
+	 */
 	private String sameReturn(){
 		return "Starting Date: "+AppSingleton.formatDate(beginDate)+'\n'+"Destination(s): "+destToString()+'\n'
 				+"Status: "+status+'\n'+getCM("CAD")+'\n'+getCM("USD")+'\n'+getCM("EUR")+'\n'
 				+getCM("GBP")+'\n'+getCM("CHF")+'\n'+getCM("JPY")+'\n'+getCM("CNY")+'\n';
 	}
 	
+	/**
+	 * Return the destination as a string variable for further use or display
+	 * 
+	 * @return a string variable destination in the destination list
+	 */
 	private String destToString(){
 		String dest="";
 		for (Destination d:destinationList){
@@ -438,21 +467,43 @@ public class Claim extends AppModel{
 
 
 	/**
+	 * Set the status of the claim.
 	 * 
+	 * @param string  a string as status ("In progress" or "Submitted")
 	 */
 	public void setStatusSimple(String string) {
 		// TODO Auto-generated method stub
 		this.status=string;
 	}
-
+	
+	/**
+	 * Return the comment of the claim for further use or display.
+	 * 
+	 * @return the comment of the claim by the approver (like "Incomplete Claim Information")
+	 */
 	public Comments getComments() {
 		return comments;
 	}
 
-
+	/**
+	 * Set the begining date of the travel. Throw exceptions if necessary.
+	 * 
+	 * @param beginDate  the date of when the travel started (like "15-Mar-2015")
+	 * @throws WrongEndDateException
+	 * @throws NetWorkException
+	 * @throws StatusException
+	 */
 	public void setBeginDate(Date beginDate) throws WrongEndDateException, NetWorkException, StatusException {
 	}
 
+	/**
+	 * Set the ending date of the travel. Throw exceptions if necessary.
+	 * 
+	 * @param endDate  the date of when the travel ended (like "31-Mar-2015")
+	 * @throws WrongEndDateException
+	 * @throws NetWorkException
+	 * @throws StatusException
+	 */
 	public void setEndDate(Date endDate) throws StatusException, WrongEndDateException, NetWorkException {
 	}
 
