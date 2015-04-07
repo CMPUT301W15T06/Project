@@ -34,13 +34,15 @@ import android.location.LocationListener;
  * detail to the claimList.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  * @see java.text.DateFormat
  * @see java.text.ParseException
  * @see java.text.SimpleDateFormat
  * @see java.util.ArrayList
  * @see java.util.Date
  * @see java.util.Locale
+ * @see android.location.Location
+ * @see android.location.LocationListener
  */
 public class ClaimantClaimDetailController {
 	

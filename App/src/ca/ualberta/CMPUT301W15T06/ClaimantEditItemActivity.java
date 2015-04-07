@@ -52,14 +52,20 @@ import android.widget.Toast;
  * detail.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  * @see android.app.Activity
  * @see android.app.DialogFragment
+ * @see android.text.Editable
+ * @see android.text.TextWatcher
  * @see android.os.Bundle
  * @see android.view.Menu
  * @see android.view.View
+ * @see android.view.View.OnClickListener
  * @see android.widget.EditText
  * @see android.widget.Toast
+ * @see android.widget.AdapterView
+ * @see android.widget.AdapterView.OnItemClickListener
+ * @see android.widget.AdapterView.OnItemSelectedListener
  * @see android.widget.ArrayAdapter
  * @see android.widget.Spinner
  */
@@ -77,7 +83,9 @@ public class ClaimantEditItemActivity extends Activity {
 	 * default value null.
 	 */
 	private ClaimantEditItemController ceic=null;
-
+	/**
+	 * Set a Item object item to represent an expense item in the claim with default value as null.
+	 */
 	private Item item=null;
 	
 	@Override
@@ -293,20 +301,23 @@ public class ClaimantEditItemActivity extends Activity {
 		return 0;
 	}
 	
+	/**
+	 * This method will display a list of item category for user to choose.
+	 * 
+	 * @param i  an integer that represent the index in the list of option category
+	 * @return one of the category in the listed category
+	 */
 	private String getCategory(int i){
 		String [] list={"air fare", "ground transport", "vehicle rental", "private automobile", "fuel", "parking",
 				"registration", "accommodation", "meal","supplies"};
 		return list[i];
 	}
 
-	//used to check the integer position of the input currency
 	/**
-	 * This method get the currency of a item. It will choose a category from 
-	 * a String List, and return the number of the position of the desired 
-	 * currency in the list.
+	 * This method used to check the integer position of the input currency.
 	 * 
-	 * @param currency
-	 * @return an integer variable
+	 * @param currency  the currency of the expense amount (like "CAD")
+	 * @return the index integer. If fail the check, return 0.
 	 */
 	private int getCurrencyPosition(String currency){
 		String [] list={"CAD","USD", "EUR", "GBP","CHF","JPY","CNY"};
@@ -318,6 +329,12 @@ public class ClaimantEditItemActivity extends Activity {
 		return 0;
 	}
 	
+	/**
+	 * This method will display a list of the currency of the expense amount for user to choose.
+	 * 
+	 * @param i  an integer that represent the index in the list of option currency
+	 * @return one of the category in the listed currency
+	 */
 	private String getCurrency(int i){
 		String [] list={"CAD","USD", "EUR", "GBP","CHF","JPY","CNY"};
 		return list[i];

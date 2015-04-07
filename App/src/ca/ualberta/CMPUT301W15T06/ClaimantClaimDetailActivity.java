@@ -59,26 +59,50 @@ import android.widget.AdapterView.OnItemClickListener;
 * The associated class including <code>Claim</code> and <code>Destination</code>.
 * 
 * @author CMPUT301W15T06
-* @version 03/16/2015
+* @version 04/07/2015
 * @see java.util.ArrayList
+* @see android.location.Location
+* @see android.location.LocationListener
+* @see android.location.LocationManager
 * @see android.os.Bundle
 * @see android.app.Activity
+* @see android.app.Activity
+* @see android.app.AlertDialog
+* @see android.app.AlertDialog.Builder
+* @see android.content.Context
+* @see android.content.DialogInterface
+* @see android.content.DialogInterface.OnClickListener
 * @see android.content.Intent
 * @see android.view.Menu
 * @see android.view.View
+* @see android.widget.AdapterView
 * @see android.widget.ArrayAdapter
 * @see android.widget.EditText
 * @see android.widget.ListView
 * @see android.widget.TextView
+* @see android.widget.Toast
+* @see android.widget.AdapterView.OnItemClickListener
 */
 public class ClaimantClaimDetailActivity extends Activity {
 
-	
+	/**
+	 * Set an unchangeable integer variable SHOW_LOCATION to 1.
+	 * Set an unchangeable integer variable SET_LOCATION to 0.
+	 */
 	private static final int SHOW_LOCATION = 1;
-
 	private static final int SET_LOCATION = 0;
+	
+	/**
+	 * Set a ClaimantClaimDetailController object ccdc as the controller of this activity class.
+	 */
 	private ClaimantClaimDetailController ccdc=null;
+	/**
+	 * Set a Claim object claim which represent a travel claim added by a claimant.
+	 */
 	private Claim claim;
+	/**
+	 * Set an ArrayList object list to contain all the Destination of the claim.
+	 */
 	private ArrayList<Destination> list;
 	
 	@Override
@@ -129,7 +153,13 @@ public class ClaimantClaimDetailActivity extends Activity {
 		
 	}
 
-	
+	/**
+	 * This method will gives user options to choose by calling <code>click</code> method.
+	 * 
+	 * @param builder  a dialog interface of setting item
+	 * @see android.app.AlertDialog
+	 * @see android.app.AlertDialog.Builder
+	 */
 	private void itemChoice(Builder builder) {
 		// TODO Auto-generated method stub
 		builder.setItems(R.array.dest_dialog_array, new DialogInterface.OnClickListener() {
@@ -142,7 +172,11 @@ public class ClaimantClaimDetailActivity extends Activity {
 		});
 	}
 	
-	
+	/**
+	 * This method will gives user options to choose to set location or to show location. 
+	 * 
+	 * @param which a integer from 0 and 1 with corresponding options
+	 */
 	private void click(int which) {
 		// TODO Auto-generated method stub
 		if (which==SET_LOCATION){
@@ -163,6 +197,13 @@ public class ClaimantClaimDetailActivity extends Activity {
 	}
 
 
+	/**
+	 * This method allows user to set a location on the map by calling <code>setMapController</code>.
+	 * 
+	 * @see android.location.Location
+	 * @see android.location.LocationListener
+	 * @see android.location.LocationManager
+	 */
 	private void setLocation() {
 		// TODO Auto-generated method stub
 		AppSingleton.getInstance().setMapController(new MapController() {

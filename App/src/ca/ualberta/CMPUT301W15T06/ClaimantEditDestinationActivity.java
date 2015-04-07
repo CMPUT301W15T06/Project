@@ -42,9 +42,11 @@ import android.widget.Toast;
 * and finishBbutton. 
 * 
 * @author CMPUT301W15T06
-* @version 03/16/2015
+* @version 04/07/2015
 * @see android.os.Bundle
 * @see android.app.Activity
+* @see android.text.Editable
+* @see android.text.TextWatcher
 * @see android.view.Menu
 * @see android.view.View
 * @see android.widget.EditText

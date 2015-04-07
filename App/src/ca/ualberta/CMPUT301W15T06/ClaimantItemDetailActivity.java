@@ -44,7 +44,7 @@ import android.widget.Toast;
 * asks to access to the <code>Item</code> detail.
 * 
 * @author CMPUT301W15T06
-* @version 03/16/2015
+* @version 04/07/2015
 * @see android.os.Bundle
 * @see android.app.Activity
 * @see android.content.Intent
@@ -57,7 +57,7 @@ import android.widget.Toast;
 public class ClaimantItemDetailActivity extends Activity {
 
 	/**
-	 * Set a ClaimantClaimListController object cdic with initial 
+	 * Set a ClaimantDeleteItemController object cdic with initial 
 	 * default value null.
 	 */
 	private ClaimantDeleteItemController cdic=null;
@@ -109,7 +109,7 @@ public class ClaimantItemDetailActivity extends Activity {
 	 * <code>AppSingleton</code> class. It also checks the 
 	 * <code>StatusException</code> warnings and errors.
 	 * 
-	 * @param v  a View object
+	 * @param v  the basic building block for user interface components
 	 * @see android.widget.TextView
 	 * @see android.widget.Toast
 	 * @exception StatusException
@@ -130,7 +130,7 @@ public class ClaimantItemDetailActivity extends Activity {
 	 * Edit an item in the <code>ItemList</code> by calling the 
 	 * <code>ClaimantEditItemActivity</code> class and set a new intent.
 	 * 
-	 * @param v  a View object
+	 * @param v  the basic building block for user interface components
 	 * @see android.content.Intent
 	 */
 	public void editItem(View v){

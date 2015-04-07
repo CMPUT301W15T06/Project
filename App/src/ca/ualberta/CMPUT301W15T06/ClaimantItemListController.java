@@ -18,25 +18,26 @@ governing permissions and limitations under the License.
 package ca.ualberta.CMPUT301W15T06;
 
 /**
- * This <code>FlagController</code> is a controller class
- * of flag of <code>Item</code>. By calling this class, 
+ * This <code>ClaimantItemListControllerr</code> is a controller class
+ * of <code>Item</code> and <code>ClaimantItemListActivity</code>. By calling this class, 
  * user(claimant) can add a new flag or change a existing 
- * flag to an <code>Item</code>.
+ * flag to an <code>Item</code>, add and delete an <code>Item</code>, add and remove tags 
+ * of an <code>Item</code>.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  */
 public class ClaimantItemListController {
 
 	/**
-	 * Set a Item object item with a default value of null.
+	 * Set a Claim object claim with a default value of null.
 	 */
 	private Claim claim=null;
 	
 	
 	/**
-	 * General construction. Set up the FlagController by 
-	 * creating a new item with currentItem 
+	 * General construction. Set up the claim of the ClaimantItemListController 
+	 * with an existing claim.
 	 * 
 	 * @param currentItem  an Item object
 	 */
@@ -62,6 +63,12 @@ public class ClaimantItemListController {
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 */
 	public void sumbmit() throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		if (!AppSingleton.getInstance().isEditable()){
@@ -76,6 +83,12 @@ public class ClaimantItemListController {
 		
 	}
 
+	/**
+	 * 
+	 * 
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 */
 	public void delete() throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		if (!AppSingleton.getInstance().isEditable()){
@@ -86,6 +99,12 @@ public class ClaimantItemListController {
 		user.notifyListeners();
 	}
 
+	/**
+	 * 
+	 * 
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 */
 	public void addItem() throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		if (!AppSingleton.getInstance().isEditable()){
@@ -107,12 +126,24 @@ public class ClaimantItemListController {
 		AppSingleton.getInstance().setCurrentItem(item);
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param id
+	 * @throws NetWorkException
+	 */
 	public void addTag(long id) throws NetWorkException {
 		// TODO Auto-generated method stub
 		claim.getTagIDList().add(id);
 		claim.notifyListeners();
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param id
+	 * @throws NetWorkException
+	 */
 	public void removeTag(long id) throws NetWorkException {
 		// TODO Auto-generated method stub
 		claim.getTagIDList().remove(id);

@@ -54,14 +54,17 @@ import android.widget.AdapterView.OnItemClickListener;
  * It associated with class <code>FlagController</code>.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
+ * @see android.location.Location
  * @see java.util.ArrayList
  * @see android.os.Bundle
  * @see android.app.Activity
  * @see android.app.AlertDialog
  * @see android.content.Intent
  * @see android.content.DialogInterface
+ * @see android.content.DialogInterface.OnClickListener
  * @see android.view.Menu
+ * @see android.view.MenuItem
  * @see android.view.View
  * @see android.widget.AdapterView
  * @see android.widget.ArrayAdapter
@@ -71,18 +74,30 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class ClaimantItemListActivity extends Activity {
 
+	/**
+	 * Set a <code>Dialog</code> object to create a Dialog window that uses the default dialog frame style.
+	 */
 	private Dialog dialog;
 	
+	/**
+	 * Set an unchangeable integer variable PHOTO_RECEIPT to 1.
+	 * Set an unchangeable integer variable ITEM_DETAIL to 2.
+	 * Set an unchangeable integer variable CHANGE_FLAG to 0.
+	 * Set an unchangeable integer variable SET_LOCATION to 3.
+	 * Set an unchangeable integer variable SHOW_LOCATION to 4.
+	 */
 	private static final int PHOTO_RECEIPT = 1;
 	private static final int ITEM_DETAIL = 2;
 	private static final int CHANGE_FLAG = 0;
 	protected static final int SET_LOCATION = 3;
 	protected static final int SHOW_LOCATION = 4;
-//	/**
-//	 * Set a FlagController object 
-//	 * default value of null.
-//	 */
+	/**
+	 * Set an ClaimantItemListController object cilc with initial default value of null to represent this class.
+	 */
 	private ClaimantItemListController cilc=null;
+	/**
+	 * Set a Claim object claim with initial default value of null to represent the claim in the claim list
+	 */
 	private Claim claim=null;
 	
 	@Override
@@ -135,7 +150,11 @@ public class ClaimantItemListActivity extends Activity {
 		});
 	}
 	
-	
+	/**
+	 * 
+	 * 
+	 * @param builder
+	 */
 	public void itemChoice(Builder builder){
 		builder.setItems(R.array.item_dialog_array, new DialogInterface.OnClickListener() {
 			
@@ -172,6 +191,9 @@ public class ClaimantItemListActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * 
+	 */
 	private void setLocation() {
 		// TODO Auto-generated method stub
 		AppSingleton.getInstance().setMapController(new MapController() {
@@ -186,7 +208,9 @@ public class ClaimantItemListActivity extends Activity {
 		startActivity(intent);
 	}
 
-
+	/**
+	 * 
+	 */
 	public void changeFlag(){
 		try {
 			cilc.changeFlag();
@@ -231,6 +255,10 @@ public class ClaimantItemListActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	/**
+	 * 
+	 * @param m
+	 */
 	public void submitClaim(MenuItem m){
 		if (claim.getMissValue()){
 			AlertDialog.Builder adb = new AlertDialog.Builder(ClaimantItemListActivity.this);
@@ -255,7 +283,9 @@ public class ClaimantItemListActivity extends Activity {
 
 	}
 
-
+	/**
+	 * 
+	 */
 	public void sureSubmit(){
 		
 		try {
@@ -270,7 +300,11 @@ public class ClaimantItemListActivity extends Activity {
 		}	
 	
 	}
-		
+	
+	/**
+	 * 
+	 * @param m
+	 */
 	public void editClaim(MenuItem m){
 		if (!AppSingleton.getInstance().isEditable()){
 			Toast.makeText(ClaimantItemListActivity.this, "Can't make change to a 'Submitted' or 'Approved' claim!", Toast.LENGTH_LONG).show();			
@@ -280,6 +314,11 @@ public class ClaimantItemListActivity extends Activity {
 		}
 		
 	}
+	
+	/**
+	 * 
+	 * @param m
+	 */
 	public void deleteClaim(MenuItem m){
 		try {
 			cilc.delete();
@@ -293,6 +332,11 @@ public class ClaimantItemListActivity extends Activity {
 		}	
 	
 	}
+	
+	/**
+	 * 
+	 * @param m
+	 */
 	public void changeTag(MenuItem m){
 		final User user=AppSingleton.getInstance().getCurrentUser();
 		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantItemListActivity.this);
@@ -319,11 +363,20 @@ public class ClaimantItemListActivity extends Activity {
 		builder.show();
 	
 	}
+	
+	/**
+	 * 
+	 * @param m
+	 */
 	public void approverInfo(MenuItem m){
 		Intent intent =new Intent(ClaimantItemListActivity.this,ClaimantApproverInfoActivity.class);
 		startActivity(intent);
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Dialog getDialog() {
 		return dialog;
 	}

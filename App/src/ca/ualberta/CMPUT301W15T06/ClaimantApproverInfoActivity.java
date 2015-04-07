@@ -44,13 +44,20 @@ import android.widget.ListView;
 * the information detail of approval status.
 * 
 * @author CMPUT301W15T06
-* @version 03/16/2015
+* @version 04/07/2015
+* @see java.util.ArrayList
+* @see java.util.Comparator
 * @see android.os.Bundle
 * @see android.app.Activity
 * @see android.view.Menu
+* @see android.widget.ArrayAdapter
+* @see android.widget.ListView
 */
 public class ClaimantApproverInfoActivity extends Activity {
 
+	/**
+	 * Set a Comments object comments that records the comments that approver added to the claim.
+	 */
 	private Comments comments;
 
 	@Override
@@ -70,6 +77,12 @@ public class ClaimantApproverInfoActivity extends Activity {
 		listView.setAdapter(adapter);
 	}
 
+	/**
+	 * This method will compare all the comments and sort them with their created date.
+	 * 
+	 * @return a sorted list of comments
+	 * @see java.util.Comparator
+	 */
 	private Comparator<? super Comment> sortComments() {
 		// TODO Auto-generated method stub
 		return new Comparator<Comment>() {

@@ -31,12 +31,13 @@ import android.util.Log;
  * the detail information of a <code>Claim</code>.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  * @see java.text.DateFormat
  * @see java.text.ParseException
  * @see java.text.SimpleDateFormat
  * @see java.util.Date
  * @see java.util.Locale
+ * @see android.util.Log
  */
 public class ClaimantEditClaimController {
 
@@ -51,7 +52,7 @@ public class ClaimantEditClaimController {
 	 * General construction. This method will create a Claim object 
 	 * currentClaim for other classes and methods to use.
 	 * 
-	 * @param currentClaim  a Claim object
+	 * @param currentClaim  which represented the currently claim that the user is working on
 	 */
 	public ClaimantEditClaimController(Claim currentClaim) {
 		// TODO Auto-generated constructor stub
@@ -59,13 +60,10 @@ public class ClaimantEditClaimController {
 	}
 
 	/**
-	 * This class will allows claimants edit the detail information
-	 * of the claim, including name, begin date and end date. It will
-	 * also checks <code>StatusException()</code> warning to prevent
-	 * crush.
+	 * This class will allows claimants edit the end date. It will
+	 * also checks warnings to prevent crush.
 	 * 
-	 * @param name  a String variable
-	 * @param begin  a String variable
+	 * @param end  the end date of the travel (like "31-Mar-2015")
 	 * @throws StatusException
 	 * @throws WrongEndDateException 
 	 * @throws NetWorkException 
@@ -90,6 +88,15 @@ public class ClaimantEditClaimController {
 		
 	}
 
+	/**
+	 * This class will allows claimants edit the begin date. It will
+	 * also checks warnings to prevent crush.
+	 * 
+	 * @param begin  the begin date of the travel (like "15-Mar-2015")
+	 * @throws StatusException
+	 * @throws WrongEndDateException
+	 * @throws NetWorkException
+	 */
 	public void editBegin(String begin) throws StatusException, WrongEndDateException, NetWorkException {
 		// TODO Auto-generated method stub
 		Date beginDate = null;

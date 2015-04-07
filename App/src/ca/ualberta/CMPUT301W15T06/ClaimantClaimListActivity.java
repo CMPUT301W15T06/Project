@@ -63,19 +63,30 @@ import android.widget.Toast;
  * asks to access to the <code>User</code>.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
+ * @see java.io.IOException
  * @see java.util.ArrayList
  * @see java.util.Comparator
+ * @see android.location.Location
  * @see android.os.Bundle
  * @see android.app.Activity
  * @see android.app.AlertDialog
+ * @see android.app.AlertDialog.Builder
  * @see android.app.Dialog
  * @see android.content.DialogInterface
  * @see android.content.DialogInterface.OnClickListener
  * @see android.content.Intent
+ * @see android.content.Loader
+ * @see android.graphics.Color
+ * @see android.graphics.Typeface
+ * @see android.text.Html
+ * @see android.text.method.DigitsKeyListener
+ * @see android.text.style.BulletSpan
+ * @see android.util.Log
  * @see android.view.Menu
  * @see android.view.MenuItem
  * @see android.view.View
+ * @see android.view.ViewGroup
  * @see android.view.View.OnLongClickListener
  * @see android.widget.AdapterView
  * @see android.widget.AdapterView.OnItemClickListener
@@ -101,8 +112,9 @@ public class ClaimantClaimListActivity extends Activity {
 	 * @see android.content.DialogInterface.OnClickListener
 	 */
 	private Dialog dialog;
-	
-	
+	/**
+	 * Set a ArrayList list which contains all the claims with default value of null.
+	 */
 	private ArrayList<Claim> list=null;
 	
 	@Override
@@ -174,6 +186,12 @@ public class ClaimantClaimListActivity extends Activity {
 		
 	}
 
+	/**
+	 * This method is for creating and converting color integers for the count.
+	 * 
+	 * @param count  an integer which record the number of claims.
+	 * @return a packed integers
+	 */
 	private String getColor(int count) {
 		// TODO Auto-generated method stub
 		if(count==0){
@@ -201,6 +219,10 @@ public class ClaimantClaimListActivity extends Activity {
 		return hex;
 	}
 
+	/**
+	 * Set an ArrayList list which contains all the Claims with tag list and display on the screen. 
+	 * If there's no claim, it then added a new one. 
+	 */
 	private void setList() {
 		// TODO Auto-generated method stub
 		list=new ArrayList<Claim>();
@@ -269,9 +291,13 @@ public class ClaimantClaimListActivity extends Activity {
 		startActivity(intent);
 	}
 
-
-	
-	
+	/**
+	 * This method will filter all the models and shows all of them. 
+	 * 
+	 * @param m  a MenuItem that provide direct access to a previously created menu item
+	 * @see android.app.AlertDialog
+	 * @see android.app.AlertDialog.Builder
+	 */
 	public void filter(MenuItem m){
 		final AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimListActivity.this);
 		builder.setTitle(user.isFilter()?"Filter Model":"Show All Model");
@@ -326,8 +352,13 @@ public class ClaimantClaimListActivity extends Activity {
 		});
 	}
 	
-	
-	
+	/**
+	 * This method will display a dialog interface with different options allows user to choose.
+	 * 
+	 * @param builder  a dialog interface of setting item
+	 * @see android.app.AlertDialog
+	 * @see android.app.AlertDialog.Builder
+	 */
 	private void setMutiChoice(Builder builder) {
 		// TODO Auto-generated method stub
 		builder.setMultiChoiceItems(user.toTagList(),user.toCheckArray(),new DialogInterface.OnMultiChoiceClickListener() {
@@ -349,11 +380,21 @@ public class ClaimantClaimListActivity extends Activity {
 		});	
 	}
 
+	/**
+	 * This method will display the tag list of claim and a menu item allows user to edit it.
+	 * 
+	 * @param m  a MenuItem that provide direct access to a previously created menu item
+	 */
 	public void manageTag(MenuItem m){
 		Intent intent =new Intent(ClaimantClaimListActivity.this,ClaimantTagListActivity.class);
 		startActivity(intent);	
 	}
 
+	/**
+	 * This method will ask user to set a home location by calling <code>MapController()</code>.
+	 * 
+	 * @param m  a MenuItem that provide direct access to a previously created menu item
+	 */
 	public void setHomeLocation(MenuItem m){
 		AppSingleton.getInstance().setMapController(new MapController() {
 			
@@ -367,6 +408,13 @@ public class ClaimantClaimListActivity extends Activity {
 		startActivity(intent);					
 
 	}
+	
+	/**
+	 * This method will display the home location on the screen. If there's no home location, it will 
+	 * print a error message.
+	 * 
+	 * @param m  a MenuItem that provide direct access to a previously created menu item
+	 */
 	public void showHomeLocation(MenuItem m){
 		if(user.getHomeLocation()==null){
 			Toast.makeText( ClaimantClaimListActivity.this, "You haven't set home geolocation yet!", Toast.LENGTH_LONG).show();		

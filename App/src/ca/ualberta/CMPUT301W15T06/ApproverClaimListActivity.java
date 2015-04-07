@@ -56,9 +56,24 @@ import android.widget.AdapterView.OnItemClickListener;
 * 
 * @author CMPUT301W15T06
 * @version 04/07/2015
+* @see java.util.ArrayList
+* @see java.util.Comparator
 * @see android.os.Bundle
 * @see android.app.Activity
 * @see android.view.Menu
+* @see android.app.AlertDialog
+* @see android.app.Dialog
+* @see android.content.DialogInterface
+* @see android.content.Intent
+* @see android.text.method.DigitsKeyListener
+* @see android.view.InputEvent
+* @see android.view.View
+* @see android.widget.AdapterView
+* @see android.widget.ArrayAdapter
+* @see android.widget.EditText
+* @see android.widget.ListView
+* @see android.widget.Toast
+* @see android.widget.AdapterView.OnItemClickListener
 */
 public class ApproverClaimListActivity extends Activity {
 	
@@ -79,15 +94,15 @@ public class ApproverClaimListActivity extends Activity {
 	private static final int ITEM_LIST = 1;
 	private static final int DETAIL_DESTINATION = 0;
 	/**
-	 * Set an ApproverClaimListController object aclc with initial deault value of null to represent this class.
+	 * Set an ApproverClaimListController object aclc with initial default value of null to represent this class.
 	 */
 	private ApproverClaimListController aclc=null;
 	/**
-	 * Set an User object user with initial deault value of null to represent the user of this application
+	 * Set an User object user with initial default value of null to represent the user of this application
 	 */
 	private User user=null;
 	/**
-	 * Set a Claim object claim with initial deault value of null to represent the claim in the claim list
+	 * Set a Claim object claim with initial default value of null to represent the claim in the claim list
 	 */
 	private Claim claim=null;
 	/**
@@ -166,6 +181,7 @@ public class ApproverClaimListActivity extends Activity {
 	 * This method will return and display a list of claim sorted by date of travel.
 	 * 
 	 * @return a sorted claim list
+	 * @see java.util.Comparator
 	 */
 	private Comparator<? super Claim> sortClaim() {
 		// TODO Auto-generated method stub
@@ -183,7 +199,7 @@ public class ApproverClaimListActivity extends Activity {
 	/**
 	 * This method will gives user options to choose for further functions.
 	 * 
-	 * @param which  a integer from 0 to 4 with coresponding options
+	 * @param which  a integer from 0 to 4 with corresponding options
 	 */
 	private void itemChoice(int which){
 		if (which ==DETAIL_DESTINATION){
@@ -300,10 +316,11 @@ public class ApproverClaimListActivity extends Activity {
 	}
 	
 	/**
- 	 * This method will create a editable text area to allow user enter text for comment. Throws exceptions if necessary.
+ 	 * This method will create a edible text area to allow user enter text for comment. Throws exceptions if necessary.
  	 * 
  	 * @param input  record input text for comment (like "Incomplete Claim Information")
  	 * @throws NetWorkException
+ 	 * @see android.widget.EditText
  	 */
 	private void comment(EditText input) {
 		// TODO Auto-generated method stub

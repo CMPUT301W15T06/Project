@@ -24,7 +24,7 @@ package ca.ualberta.CMPUT301W15T06;
 * <code>Claim</code>. 
 * 
 * @author CMPUT301W15T06
-* @version 03/16/2015
+* @version 04/07/2015
 */
 public class ClaimantDeleteItemController {
 	

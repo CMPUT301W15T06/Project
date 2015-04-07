@@ -37,10 +37,12 @@ import android.widget.Toast;
 * detail.
 * 
 * @author CMPUT301W15T06
-* @version 03/16/2015
+* @version 04/07/2015
 * @see android.app.Activity
 * @see android.app.DialogFragment
 * @see android.os.Bundle
+* @see android.text.Editable
+* @see android.text.TextWatcher
 * @see android.view.Menu
 * @see android.view.MenuItem
 * @see android.view.View
@@ -176,7 +178,7 @@ public class ClaimantEditClaimActivity extends Activity {
 	 * Create a DatePickerDialog object to help user(claimant) to enter 
 	 * the starting date of the travel.
 	 * 
-	 * @param v  a View object
+	 * @param v  the basic building block for user interface components
 	 * @see android.view.View
 	 * @see android.widget.EditText
 	 * @see android.widget.DatePicker
@@ -193,7 +195,7 @@ public class ClaimantEditClaimActivity extends Activity {
 	 * Create a DatePickerDialog object to help user(claimant) to enter 
 	 * the ending date of the travel.
 	 * 
-	 * @param v  a View object
+	 * @param v  the basic building block for user interface components
 	 * @see android.view.View
 	 * @see android.widget.EditText
 	 * @see android.widget.DatePicker

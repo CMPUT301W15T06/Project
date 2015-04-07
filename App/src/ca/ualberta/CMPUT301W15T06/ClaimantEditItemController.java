@@ -29,7 +29,7 @@ import java.util.Locale;
  * the detail information of a <code>Item</code>.
  * 
  * @author CMPUT301W15T06
- * @version 03/16/2015
+ * @version 04/07/2015
  * @see java.text.DateFormat
  * @see java.text.ParseException
  * @see java.text.SimpleDateFormat
@@ -49,13 +49,19 @@ public class ClaimantEditItemController {
 	 * General construction. This method will create a Item object 
 	 * item for other classes and methods to use.
 	 * 
-	 * @param item a Item object
+	 * @param item a Item object to represent an expense item in the claim
 	 */
 	public ClaimantEditItemController(Item item){
 		this.item=item;
 	}
 	
-
+	/**
+	 * This method will set the date of the expense item and check warnings to prevent crush. 
+	 * 
+	 * @param string  the date of the travel expense (like "15-Mar-2015")
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 */
 	public void editDate(String string) throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		Date date = null;	
@@ -67,21 +73,50 @@ public class ClaimantEditItemController {
 		item.setDate(date);
 	}
 
+	/**
+	 * This method will set the description of the expense item and check warnings to prevent crush. 
+	 * 
+	 * @param description  the description of the travel expense
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 */
 	public void editDescription(String description) throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		item.setDescription(description);
 	}
 
+	/**
+	 * This method will set the expense amount of the expense item and check warnings to prevent crush. 
+	 * 
+	 * @param amount  the amount of the travel expense (like "150")
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 */
 	public void editAmount(Double amount) throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		item.setAmount(amount);
 	}
 
+	/**
+	 * This method will set the currency of the expense amount of the expense item and 
+	 * check warnings to prevent crush. 
+	 * 
+	 * @param currency  the currency of the travel expense amount (like "CAD")
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 */
 	public void editCurrency(String currency) throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		item.setCurrency(currency);
 	}
 
+	/**
+	 * This method will set the category of the expense item and check warnings to prevent crush.
+	 * 
+	 * @param category  the category of the travel expense (like "air fare")
+	 * @throws StatusException
+	 * @throws NetWorkException
+	 */
 	public void editCategory(String category) throws StatusException, NetWorkException {
 		// TODO Auto-generated method stub
 		item.setCategory(category);

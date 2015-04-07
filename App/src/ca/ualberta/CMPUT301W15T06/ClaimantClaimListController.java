@@ -31,8 +31,10 @@ import com.google.gson.JsonElement;
 * claimant asks to access to the <code>User</code>.
 * 
 * @author CMPUT301W15T06
-* @version 03/16/2015
+* @version 04/07/2015
 * @see java.io.IOException
+* @see java.text.ParseException
+* @see java.util.Date
 * @see com.google.gson.JsonElement
 */
 public class ClaimantClaimListController {
@@ -54,9 +56,11 @@ public class ClaimantClaimListController {
 		this.user=user;
 	}
 
-
-
-
+	/**
+	 * This method will add a edible claim to claim list and notify all the Listener in the listeners and modelListener list.
+	 * 
+	 * @throws NetWorkException
+	 */
 	public void addClaim() throws NetWorkException {
 		// TODO Auto-generated method stub
 		ModifiableClaim claim=new ModifiableClaim(user.getUserName());
@@ -74,35 +78,45 @@ public class ClaimantClaimListController {
 		AppSingleton.getInstance().setCurrentClaim(claim);
 	}
 
-
-
-
+	/**
+	 * Add a tag with its id number to the claim and notify all the Listener in the listeners and modelListener list.
+	 * 
+	 * @param id  a long variable that represent the id of the tag
+	 * @throws NetWorkException
+	 */
 	public void addTag(long id) throws NetWorkException {
 		// TODO Auto-generated method stub
 		user.getFilterTagIDList().add(id);
 		user.notifyListeners();
 	}
 
-
-
-
+	/**
+	 * Remove a tag with its id number to the claim and notify all the Listener in the listeners and modelListener list.
+	 * 
+	 * @param id  a long variable that represent the id of the tag
+	 * @throws NetWorkException
+	 */
 	public void removeTag(long id) throws NetWorkException {
 		// TODO Auto-generated method stub
 		user.getFilterTagIDList().remove(id);
 		user.notifyListeners();
 	}
 
-
-
-
+	/**
+	 * Set a filter to the claim list by calling <code>setFilter()</code>.
+	 * 
+	 * @throws NetWorkException
+	 */
 	public void filter() throws NetWorkException {
 		// TODO Auto-generated method stub
 		user.setFilter(true);
 	}
 
-
-
-
+	/**
+	 * Show all the information in claim list by calling <code>setFilter()</code>.
+	 * 
+	 * @throws NetWorkException
+	 */
 	public void showAll() throws NetWorkException {
 		// TODO Auto-generated method stub
 		user.setFilter(false);
