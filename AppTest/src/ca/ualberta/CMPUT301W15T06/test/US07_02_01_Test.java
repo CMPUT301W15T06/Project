@@ -103,7 +103,7 @@ public class US07_02_01_Test extends
 		assertNotNull(nextActivity);
 		
 		/*
-		 * Test for US 07.01.01 Basic Flow 1,2
+		 * Test for US 07.02.01 Basic Flow 1,2
 		 */
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();

@@ -81,7 +81,6 @@ public class US04_01_01_Test<Final> extends
 			}	
 		});
 
-
 		// click "Claimant" button and create next activity
 		ActivityMonitor activityMonitor = getInstrumentation().addMonitor(ClaimantClaimListActivity.class.getName(), null, false);
 		
@@ -169,7 +168,6 @@ public class US04_01_01_Test<Final> extends
 		ClaimantEditItemActivity forthActivity = (ClaimantEditItemActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 		assertNotNull(forthActivity);
 					
-	
 		/*		
 		 * Test for US 04.01.01 Basic Flow 5
 		 */
@@ -227,11 +225,9 @@ public class US04_01_01_Test<Final> extends
 
 		forthActivity.finish();	
 
-				
-		/*
-		 * Test for US 04.01.01 Basic Flow 7
-		 */
-
+		thirdActivity.finish();
+		nextActivity.finish();
+		activity.finish();
 	}
 }
 

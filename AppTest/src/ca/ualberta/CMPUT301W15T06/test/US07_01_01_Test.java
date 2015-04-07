@@ -117,34 +117,31 @@ public class US07_01_01_Test extends
 		assertEquals(layoutParams11.height, WindowManager.LayoutParams.WRAP_CONTENT);	 
 		
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		
+		ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
 		//get next activity
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				
 				/*
 				 * Test for US 07.01.01 Basic Flow 3
 				 */
-				// click the list open next activity.
-				ActivityMonitor am = getInstrumentation().addMonitor(ClaimantItemListActivity.class.getName(), null, false);
- 
-				claimList.getChildAt(0).performClick();
-				ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
-				assertNotNull(thirdActivity);
-				
-				/*
-				 * Test for US 07.01.01 Basic Flow 4,5
-				 */
-				// Click the menu option
-				getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.submit, 1);
-				Activity a = getInstrumentation().waitForMonitorWithTimeout(am,10000);
-				assertNotNull(a);
-				
-				a.finish();
-				thirdActivity.finish();
+				// click the list open next activity
+				claimList.performItemClick(claimList, 0, 0);
 			}
 		});
+		ClaimantItemListActivity thirdActivity = (ClaimantItemListActivity) getInstrumentation().waitForMonitorWithTimeout(am, 10000);
+		assertNotNull(thirdActivity);
+				
+		/*
+		 * Test for US 07.01.01 Basic Flow 4,5
+		 */
+		// Click the menu option
+		getInstrumentation().invokeMenuActionSync(nextActivity,ca.ualberta.CMPUT301W15T06.R.id.submit, 1);
+		Activity a = getInstrumentation().waitForMonitorWithTimeout(am,10000);
+		assertNotNull(a);
+				
+		a.finish();
+		thirdActivity.finish();
 		nextActivity.finish();
 		activity.finish();
 	}

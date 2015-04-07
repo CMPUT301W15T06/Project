@@ -70,7 +70,7 @@ public class US07_05_01_Test extends
 	cclc = new ClaimantClaimListController(u);
 	}
 	
-	public void test040101() {
+	public void test070501() {
 
 		activity.runOnUiThread(new Runnable(){
 
@@ -103,7 +103,7 @@ public class US07_05_01_Test extends
 		assertNotNull(nextActivity);
 		
 		/*
-		 * Test for US 07.04.01 Basic Flow 1,2,3
+		 * Test for US 07.05.01 Basic Flow 1 & 2  
 		 */
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();
@@ -172,15 +172,15 @@ public class US07_05_01_Test extends
 						ClaimantApproverInfoActivity lala = (ClaimantApproverInfoActivity) getInstrumentation().waitForMonitorWithTimeout(activityMonitor, 10000);
 						assertNotNull(lala);
 						ListView alist = (ListView) lala.findViewById(ca.ualberta.CMPUT301W15T06.R.id.approverListView);
+						
+						/*
+						 * Test for US 07.05.01 Basic Flow 6
+						 */
 						assertNotNull(alist);
 						lala.finish();				
 					}
 				});
 
-				
-				/*
-				 * Test for US 07.05.01 Basic Flow 6
-				 */
 				
 				thirdActivity.finish();
 			}

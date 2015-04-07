@@ -69,7 +69,7 @@ public class US07_04_01_Test extends
 	cclc = new ClaimantClaimListController(u);
 	}
 	
-	public void test040101() {
+	public void test070401() {
 
 		activity.runOnUiThread(new Runnable(){
 
@@ -77,7 +77,6 @@ public class US07_04_01_Test extends
 			public void run() {
 				// click user button
 				assertTrue(UserButton.performClick());	
-
 			}	
 		});
 
@@ -102,7 +101,7 @@ public class US07_04_01_Test extends
 		assertNotNull(nextActivity);
 		
 		/*
-		 * Test for US 07.04.01 Basic Flow 1,2,3
+		 * Test for US 07.04.01 Basic Flow 1
 		 */
 		// view which is expected to be present on the screen			
 		final View decorView1 = nextActivity.getWindow().getDecorView();
@@ -117,7 +116,9 @@ public class US07_04_01_Test extends
 		assertEquals(layoutParams11.height, WindowManager.LayoutParams.WRAP_CONTENT);	 
 		
 		final ListView claimList = (ListView) nextActivity.findViewById(ca.ualberta.CMPUT301W15T06.R.id.claimListView);
-		
+		/*
+		 * Test for US 07.04.01 Basic Flow 2
+		 */
 		//get next activity
 		nextActivity.runOnUiThread(new Runnable() {
 			@Override

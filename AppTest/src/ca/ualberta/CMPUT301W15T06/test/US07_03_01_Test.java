@@ -70,7 +70,7 @@ public class US07_03_01_Test extends
 		cclc = new ClaimantClaimListController(u);
 	}
 	
-	public void test040101() {
+	public void test070301() {
 
 		activity.runOnUiThread(new Runnable(){
 

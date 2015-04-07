@@ -177,7 +177,7 @@ public class US04_09_01_Test extends
 				assertNotNull(aaa);
 				
 				/*
-				 * test US01.07.01 Basic Flow 6
+				 * test US01.07.01 Basic Flow 6 & 7
 				 */
 				// get map
 				ImageView image=(ImageView)aaa.findViewById(ca.ualberta.CMPUT301W15T06.R.drawable.worldmap);
@@ -191,15 +191,12 @@ public class US04_09_01_Test extends
 				assertTrue(clickMap);
 				
 				/*
-				* test US01.07.01 Basic Flow 7
+				* test US01.07.01 Basic Flow 8 & 9
 				*/
 				Location location=AppSingleton.getInstance().getLocation();
 				tv.setText("Lat: " + location.getLatitude()
 				+ "\nLong: " + location.getLongitude());
 				
-				/*
-				* test US01.07.01 Basic Flow 8,9
-				*/
 				aaa.finish();
 			}
 		});

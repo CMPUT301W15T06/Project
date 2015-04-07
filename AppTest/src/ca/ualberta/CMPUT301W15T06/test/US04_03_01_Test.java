@@ -178,7 +178,7 @@ public class US04_03_01_Test extends
 												.getName(), null, false);
 						
 						/*
-						 * Test for US 04.01.01 Basic Flow 1
+						 * Test for US 04.03.01 Basic Flow 1
 						 */
 						// start claimant edit item activity
 						ClaimantEditItemActivity ccc = (ClaimantEditItemActivity) getInstrumentation()
@@ -234,7 +234,7 @@ public class US04_03_01_Test extends
 						spinner1.setSelection(0, true);
 
 						/*
-						 * Test for US 04.01.01 Basic Flow 3,4
+						 * Test for US 04.03.01 Basic Flow 3,4
 						 */
 						final String date1 = "2014-01-01";
 						final String des1 = "b";
@@ -248,7 +248,7 @@ public class US04_03_01_Test extends
 				});
 
 				/*
-				 * Test for US 04.01.01 Basic Flow 5
+				 * Test for US 04.03.01 Basic Flow 5
 				 */
 				int count_after = claim.getItemList().size();
 				assertEquals(count_before, count_after);
